@@ -24,3 +24,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/admin', function () {
     return view('admin.index');
 });
+
+//Login
+Route::post('login', [LoginController::class, 'authenticate'])->name('loginUI');
+Route::get('login', [LoginController::class, 'showLoginUI'])->name('login');
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
