@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kurir;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreKurirRequest;
-use App\Http\Requests\UpdateKurirRequest;
+use Illuminate\Http\Request;
 
 class KurirController extends Controller
 {
@@ -32,10 +31,10 @@ class KurirController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreKurirRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreKurirRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -65,11 +64,11 @@ class KurirController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateKurirRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Kurir  $kurir
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateKurirRequest $request, Kurir $kurir)
+    public function update(Request $request, Kurir $kurir)
     {
         //
     }

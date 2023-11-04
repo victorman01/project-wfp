@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produk;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreProdukRequest;
-use App\Http\Requests\UpdateProdukRequest;
+use Illuminate\Http\Request;
 
 class ProdukController extends Controller
 {
@@ -32,10 +31,10 @@ class ProdukController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreProdukRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProdukRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -65,11 +64,11 @@ class ProdukController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateProdukRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Produk  $produk
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProdukRequest $request, Produk $produk)
+    public function update(Request $request, Produk $produk)
     {
         //
     }

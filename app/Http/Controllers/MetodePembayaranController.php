@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MetodePembayaran;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreMetodePembayaranRequest;
-use App\Http\Requests\UpdateMetodePembayaranRequest;
+use Illuminate\Http\Request;
 
 class MetodePembayaranController extends Controller
 {
@@ -32,10 +31,10 @@ class MetodePembayaranController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreMetodePembayaranRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMetodePembayaranRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -65,11 +64,11 @@ class MetodePembayaranController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateMetodePembayaranRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\MetodePembayaran  $metodePembayaran
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMetodePembayaranRequest $request, MetodePembayaran $metodePembayaran)
+    public function update(Request $request, MetodePembayaran $metodePembayaran)
     {
         //
     }

@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gambar;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreGambarRequest;
-use App\Http\Requests\UpdateGambarRequest;
+use Illuminate\Http\Request;
 
 class GambarController extends Controller
 {
@@ -32,10 +31,10 @@ class GambarController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreGambarRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreGambarRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -65,11 +64,11 @@ class GambarController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateGambarRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Gambar  $gambar
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateGambarRequest $request, Gambar $gambar)
+    public function update(Request $request, Gambar $gambar)
     {
         //
     }

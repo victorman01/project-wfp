@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JenisPengiriman;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreJenisPengirimanRequest;
-use App\Http\Requests\UpdateJenisPengirimanRequest;
+use Illuminate\Http\Request;
 
 class JenisPengirimanController extends Controller
 {
@@ -32,10 +31,10 @@ class JenisPengirimanController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreJenisPengirimanRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreJenisPengirimanRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -65,11 +64,11 @@ class JenisPengirimanController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateJenisPengirimanRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\JenisPengiriman  $jenisPengiriman
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateJenisPengirimanRequest $request, JenisPengiriman $jenisPengiriman)
+    public function update(Request $request, JenisPengiriman $jenisPengiriman)
     {
         //
     }

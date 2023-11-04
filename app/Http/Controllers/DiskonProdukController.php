@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DiskonProduk;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreDiskonProdukRequest;
-use App\Http\Requests\UpdateDiskonProdukRequest;
+use Illuminate\Http\Request;
 
 class DiskonProdukController extends Controller
 {
@@ -32,10 +31,10 @@ class DiskonProdukController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreDiskonProdukRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDiskonProdukRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -65,11 +64,11 @@ class DiskonProdukController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateDiskonProdukRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\DiskonProduk  $diskonProduk
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDiskonProdukRequest $request, DiskonProduk $diskonProduk)
+    public function update(Request $request, DiskonProduk $diskonProduk)
     {
         //
     }

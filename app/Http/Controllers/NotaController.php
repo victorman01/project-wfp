@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Nota;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreNotaRequest;
-use App\Http\Requests\UpdateNotaRequest;
+use Illuminate\Http\Request;
 
 class NotaController extends Controller
 {
@@ -32,10 +31,10 @@ class NotaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreNotaRequest  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNotaRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -65,11 +64,11 @@ class NotaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateNotaRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Nota  $nota
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateNotaRequest $request, Nota $nota)
+    public function update(Request $request, Nota $nota)
     {
         //
     }

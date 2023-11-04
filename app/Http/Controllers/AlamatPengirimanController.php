@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AlamatPengiriman;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreAlamatPengirimanRequest;
-use App\Http\Requests\UpdateAlamatPengirimanRequest;
+use Illuminate\Http\Request;
 
 class AlamatPengirimanController extends Controller
 {
@@ -32,10 +31,10 @@ class AlamatPengirimanController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreAlamatPengirimanRequest  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAlamatPengirimanRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -65,11 +64,11 @@ class AlamatPengirimanController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateAlamatPengirimanRequest  $request
+     * @param  \Illuminate\Http\Request   $request
      * @param  \App\Models\AlamatPengiriman  $alamatPengiriman
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAlamatPengirimanRequest $request, AlamatPengiriman $alamatPengiriman)
+    public function update(Request $request, AlamatPengiriman $alamatPengiriman)
     {
         //
     }
