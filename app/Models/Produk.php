@@ -33,7 +33,7 @@ class Produk extends Model
         return $this->belongsTo(Brand::class, 'brand_id');
     }
     public function gambar(){
-        return $this->hasMany(Gambar::class, 'produk_id');
+        return $this->hasMany(Gambar::class);
     }
     public function diskonProduk(){
         return $this->hasMany(DiskonProduk::class, 'diskon_produk_id');

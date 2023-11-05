@@ -15,7 +15,9 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.brand.index',[
+            'brands' => Brand::all(),
+        ]);
     }
 
     /**
@@ -25,7 +27,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.brand.add');
     }
 
     /**
@@ -36,7 +38,11 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required'
+        ]);
+        Brand::create($validatedData);
+        return redirect('/admin/brands')->with('success', 'New brand has been added!');
     }
 
     /**
@@ -58,7 +64,9 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        return view('admin.brand.edit',[
+            'brand'=>$brand
+        ]);
     }
 
     /**
@@ -70,7 +78,11 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required'
+        ]);
+        $brand->update($validatedData);
+        return redirect('/admin/brands')->with('success', 'New brand has been edited!');
     }
 
     /**
@@ -81,6 +93,7 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();
+        return redirect('/admin/brands')->with('success', 'New brand has been deleted!');
     }
 }

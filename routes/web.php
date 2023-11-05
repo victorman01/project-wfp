@@ -1,6 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +30,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/admin', function () {
     return view('admin.index');
 });
+
+//Admin - Brand
+Route::resource('admin/brands', BrandController::class);
+Route::resource('admin/kategoris', KategoriController::class);
+Route::resource('admin/produks', ProdukController::class);
 
 //Login
 Route::post('login', [LoginController::class, 'authenticate'])->name('loginUI');

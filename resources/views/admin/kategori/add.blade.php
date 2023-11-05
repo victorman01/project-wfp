@@ -2,8 +2,7 @@
 
 @section('content')
     <h2>Add New Kategori</h2>
-
-    <form method="post" action="{{ route('kategori.store') }}">
+    <form method="post" action="/admin/kategoris">
         @csrf
         <div class="form-group">
             <label for="nama">Nama Kategori</label>

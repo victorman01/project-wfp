@@ -1,81 +1,101 @@
 @extends('layouts.admin.main')
 @section('content')
-<div class="container">
-    <h2>Produk table</h2>
-    <p>The table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
-    <a href="#" onclick="showInfo()"><i class="icon-bulb"></a></i>
-    <div id='showInfo'></div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nama Produk</th>
-                <th scope="col">Spesifikasi Produk</th>
-                <th scope="col">Informasi Produk</th>
-                <th scope="col">Harga Produk</th>
-                <th scope="col">Stok Produk</th>
-                <th scope="col">Brand Produk</th>
-                <th scope="col">Jenis Produk</th>
-                <th scope="col">Created At</th>
-                <th scope="col">Updated At</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($queryBuilder as $d)
+    <div class="container">
+        <h2>Produk table</h2>
+        <p>The table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
+        <p><a href="/admin/produks/create">Create New Produk</a></p>
+        @if (session()->has('success'))
+            <div class="alert alert-success col-lg-8" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session()->has('error'))
+            <div class="alert alert-danger col-lg-8" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>{{ $d->id }}</td>
-                    <td>{{ $d->nama }}</td>
-                    <td>{{ $d->spesifikasi }}</td>
-                    <td>{{ $d->informasi }}</td>
-                    <td>{{ $d->harga }}</td>
-                    <td>{{ $d->stok }}</td>
-                    <td>{{ $d->brand_id }}</td>
-                    <td>{{ $d->jenis_id }}</td>
-                    <td>{{ $d->created_at }}</td>
-                    <td>{{ $d->updated_at }}</td>
-                    <td>
-                        <a class="btn btn-default" href="#showphoto_{{ $d->id }}"
-                            data-toggle="modal">{{ $d->nama }}</a>
-                        <div class="modal fade" id="showphoto_{{ $d->id }}" tabindex="-1" role="basic"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">{{ $d->nama }}</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <img src="{{ asset('images/' . $d->image) }}" height='200px' />
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default"
-                                            data-dismiss="modal">Close</button>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nama Produk</th>
+                    <th scope="col">Spesifikasi Produk</th>
+                    <th scope="col">Informasi Produk</th>
+                    <th scope="col">Harga Produk</th>
+                    <th scope="col">Stok Produk</th>
+                    <th scope="col">Brand Produk</th>
+                    <th scope="col">Created At</th>
+                    <th scope="col">Updated At</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($produks as $p)
+                    <tr>
+                        <td>{{ $p->id }}</td>
+                        <td>{{ $p->nama }}</td>
+                        <td>{{ $p->spesifikasi }}</td>
+                        <td>{{ $p->informasi }}</td>
+                        <td>{{ $p->harga }}</td>
+                        <td>{{ $p->stok }}</td>
+                        <td>{{ $p->brand_id }}</td>
+                        <td>{{ $p->created_at }}</td>
+                        <td>{{ $p->updated_at }}</td>
+                        <td>
+                            <p><a class="btn btn-default" href="/admin/produks/{{ $p->id }}/edit">Edit</a></p>
+                            <form action="/admin/produks/{{ $p->id }}" method="POST" class='d-inline'>
+                                @method('DELETE')
+                                @csrf
+                                <button class="btn btn-default" type="submit"
+                                    onclick="return confirm('Are you sure?')">Delete</button>
+                            </form>
+                            <a class="btn btn-default" href="#showphoto_{{ $p->id }}"
+                                data-toggle="modal">{{ $p->nama }}</a>
+                            <div class="modal fade" id="showphoto_{{ $p->id }}" tabindex="-1" role="basic"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">{{ $p->nama }}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            @foreach ($p->gambar as $gambar)
+                                                @if ($gambar->path)
+                                                    <img src="{{ asset('storage/' . $gambar->path) }}" height='200px' />
+                                                @else
+                                                    <img src="" height='200px' />
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default"
+                                                data-dismiss="modal">Close</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection
 
-@section('jss')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    function showInfo() {
-        $.ajax({
-            type: 'POST',
-            url: '{{ route('produk.showInfo') }}',
-            data: {
-                '_token': '<?php echo csrf_token(); ?>'
-            },
-            success: function(data) {
-                $('#showInfo').html(data.msg);
-            }
-        });
-    }
-</script>
+@section('scripts')
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function showInfo() {
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('produk.showInfo') }}',
+                data: {
+                    '_token': '<?php echo csrf_token(); ?>'
+                },
+                success: function(data) {
+                    $('#showInfo').html(data.msg);
+                }
+            });
+        }
+    </script> --}}
 @endsection

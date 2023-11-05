@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Gambar;
 use App\Models\Produk;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class ProdukController extends Controller
 {
@@ -15,7 +18,9 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.produk.index',[
+            'produks'=>Produk::all()
+        ]);
     }
 
     /**
@@ -25,7 +30,9 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.produk.add',[
+            'brands'=>Brand::all()
+        ]);
     }
 
     /**
@@ -36,7 +43,25 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama'=>'required',
+            'spesifikasi'=>'required',
+            'informasi'=>'required',
+            'harga'=>'required|numeric',
+            'stok'=>'required|numeric',
+            'brand_id'=>'required'
+        ]);
+        $produk = Produk::create($validatedData);
+        if($request->file('image')){
+            $idProduk = $produk->id;
+            $image_path=$request->file('image')->store('post-images');
+            Gambar::create([
+                'nama'=>$request->nama,
+                'path'=>$image_path,
+                'produk_id'=>$idProduk,
+            ]);
+        };
+        return redirect('/admin/produks')->with('success', 'New produk has been added!');
     }
 
     /**
@@ -58,7 +83,10 @@ class ProdukController extends Controller
      */
     public function edit(Produk $produk)
     {
-        //
+        return view('admin.produk.edit',[
+            'brands'=>Brand::all(),
+            'produk'=>$produk
+        ]);
     }
 
     /**
@@ -70,7 +98,25 @@ class ProdukController extends Controller
      */
     public function update(Request $request, Produk $produk)
     {
-        //
+        $validatedData = $request->validate([
+            'nama'=>'required',
+            'spesifikasi'=>'required',
+            'informasi'=>'required',
+            'harga'=>'required|numeric',
+            'stok'=>'required|numeric',
+            'brand_id'=>'required'
+        ]);
+        $produk->update($validatedData);
+        if($request->file('image')){
+            $idProduk = $produk->id;
+            $image_path=$request->file('image')->store('post-images');
+            Gambar::create([
+                'nama'=>$request->nama,
+                'path'=>$image_path,
+                'produk_id'=>$idProduk,
+            ]);
+        };
+        return redirect('/admin/produks')->with('success', 'New produk has been edited!');
     }
 
     /**
@@ -81,6 +127,11 @@ class ProdukController extends Controller
      */
     public function destroy(Produk $produk)
     {
-        //
+        foreach ($produk->gambar as $gambar) {
+            Storage::delete($gambar->path);
+            $gambar->delete();
+        }
+        $produk->delete();
+        return redirect('/admin/produks')->with('success', 'Product has been deleted!');
     }
 }

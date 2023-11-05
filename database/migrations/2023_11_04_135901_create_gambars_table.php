@@ -16,7 +16,7 @@ class CreateGambarsTable extends Migration
         Schema::create('gambars', function (Blueprint $table) {
             $table->id();
             $table->string('nama', 45);
-            $table->string('path', 45);
+            $table->text('path');
             $table->foreignId('produk_id')->constrained();
             $table->timestamps();
         });

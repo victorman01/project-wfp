@@ -3,7 +3,7 @@
 @section('content')
     <h2>Edit Kategori</h2>
 
-    <form method="post" action="{{ route('kategori.update', $kategori->id) }}">
+    <form method="post" action="/admin/kategoris/{{ $kategori->id }}">
         @csrf
         @method('put')
         <div class="form-group">
