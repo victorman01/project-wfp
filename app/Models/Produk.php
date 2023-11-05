@@ -21,7 +21,7 @@ class Produk extends Model
         return $this->belongsToMany(User::class, 'keranjangs','produk_id','user_id');
     }
     public function favorit(){
-        return $this->belongsToMany(User::class, 'favorits','produk_id','user_id');
+        return $this->belongsToMany(User::class, 'favorits','produk_id','user_id')->withTimestamps();;
     }
     public function kategori(){
         return $this->belongsToMany(Kategori::class, 'kategoris_produks', 'produk_id','kategori_id');

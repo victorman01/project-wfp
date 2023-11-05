@@ -21,7 +21,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Produk::class, 'keranjangs','user_id','produk_id');
     }
     public function favorit(){
-        return $this->belongsToMany(Produk::class, 'favorits','user_id','produk_id');
+        return $this->belongsToMany(Produk::class, 'favorits','user_id','produk_id')->withTimestamps();;
     }
     public function alamatPengiriman(){
         return $this->hasMany(AlamatPengiriman::class,'user_id');

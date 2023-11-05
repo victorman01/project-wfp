@@ -3,6 +3,7 @@
 use App\Models\Produk;
 use App\Models\Kategori;
 use App\Http\Requests\Request;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -35,6 +36,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // Route::get('/home', [App\Http\Controllers\ProdukController::class, 'show'])->name('home');
 
+//User: Product
+Route::get('/produk-detail/{produkId}', [App\Http\Controllers\ProdukController::class, 'produkDetail'])->name('produk-detail');
+
 Route::get('/admin', function () {
     return view('admin.index');
 });
@@ -49,3 +53,6 @@ Auth::routes();
 Route::post('login', [LoginController::class, 'authenticate'])->name('loginUI');
 Route::get('login', [LoginController::class, 'showLoginUI'])->name('login');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+//User
+Route::get('/favorit/{produkId}', [UserController::class, 'addOrDeleteFavorite'])->name('favorit');

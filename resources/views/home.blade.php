@@ -84,6 +84,72 @@
                         <div class="card-img-overlay">
                             <h4 class="card-title">{{ $k->nama }}</h4>
                             <a href="#" class="btn btn-primary">Show</a>
+            {{-- @foreach ($kategori as $k)
+                <div class="col-md-4 mb-4">
+                    <div class="card product-card shadow">
+                        <img src="https://picsum.photos/200" class="card-img-top" alt="Product 1">
+                        <div class="card-img-overlay">
+                            <h4 class="card-title">{{ $k->nama }}</h4>
+                            <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+                            <a href="#" class="btn btn-primary">Show</a> --}}
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
+            {{-- CARD 1 --}}
+            {{-- <div class="col-md-4 mb-4">
+                <div class="card product-card shadow">
+                    <img src="https://picsum.photos/200" class="card-img-top" alt="Product 1">
+                    <div class="card-img-overlay">
+                        <h4 class="card-title">Category 1</h4>
+                        <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+                        <a href="#" class="btn btn-primary">Show</a>
+                    </div>
+                </div>
+            </div> --}}
+
+            {{-- CARD 2 --}}
+            {{-- <div class="col-md-4 mb-4">
+                <div class="card border-dark product-card">
+                    <img src="https://picsum.photos/200" class="card-img-top" alt="Product 1">
+                    <div class="card-img-overlay">
+                        <h4 class="card-title">Category 1</h4>
+                        <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+                        <a href="#" class="btn btn-primary">Show</a>
+                    </div>
+                </div>
+            </div> --}}
+
+            {{-- CARD 3 --}}
+            {{-- <div class="col-md-4 mb-4">
+                <div class="card border-dark product-card">
+                    <img src="https://picsum.photos/200" class="card-img-top" alt="Product 1">
+                    <div class="card-img-overlay">
+                        <h4 class="card-title">Category 1</h4>
+                        <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+                        <a href="#" class="btn btn-primary">Show</a>
+                    </div>
+                </div>
+            </div> --}}
+        </div>
+    </div>
+
+    {{-- LIST PRODUCT --}}
+    <div class="container">
+        <h3 class="mt-4">List Product</h3>
+
+        <div class="row mt-4">
+            @foreach ($produk as $p)
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="{{ isset($p->gambar[0]->path) ? asset('storage/' . $p->gambar[0]->path) : "https://picsum.photos/100" }}" 
+                            alt="{{ isset($p->gambar[0]->nama) ? $p->gambar[0]->nama : 'Produk' . $p->id }}">
+                        <div class="card-body">
+                            <p class="card-title">{{ $p->nama }}</p>
+                            <p class="card-text">{{ $p->spesifikasi }}</p>
+                            <p class="card-text"><b>Rp {{ $p->harga }}</b></p>
+                            <a href="{{ route('produk-detail', ['produkId' => $p->id ]) }}" class="btn btn-primary">Show</a>
                         </div>
                     </div>
                 </div>

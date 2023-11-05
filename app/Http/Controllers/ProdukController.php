@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Gambar;
 use App\Models\Produk;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -73,6 +74,20 @@ class ProdukController extends Controller
     public function show(Produk $produk)
     {
         // 
+        // $product = Produk::get();
+        // $kategori = Kategori::get();
+        // return view('home', [
+        //     'produk' => $product,
+        //     'kategori' => $kategori
+        // ]);
+    }
+
+    public function produkDetail(Request $request, $produkId){
+        $produkDetail = Produk::find($produkId);
+        // dd($produkDetail->gambar);
+        return view('produk-detail', [
+            'produk' => $produkDetail
+        ]);
     }
 
     /**
