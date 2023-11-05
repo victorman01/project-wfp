@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('nama', 45);
             $table->string('email', 45)->unique();
-            $table->string('password', 45);
+            $table->text('password');
             $table->string('nomor_handphone', 45);
             $table->timestamp('tgl_lahir');
             $table->integer('point');
