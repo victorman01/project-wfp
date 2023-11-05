@@ -7,6 +7,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Requests\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,7 @@ Route::resource('admin/kategoris', KategoriController::class);
 Route::resource('admin/produks', ProdukController::class);
 
 //Login
+Auth::routes();
 Route::post('login', [LoginController::class, 'authenticate'])->name('loginUI');
 Route::get('login', [LoginController::class, 'showLoginUI'])->name('login');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');

@@ -15,7 +15,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
     protected $guarded = ['id'];
     protected $hidden = ['password'];
-    protected $table = 'user';
+    protected $table = 'users';
 
     public function keranjang(){
         return $this->belongsToMany(Produk::class, 'keranjangs','user_id','produk_id');
