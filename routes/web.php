@@ -32,7 +32,7 @@ Route::get('/',function(){
 });
 
 Route::get('/product-detail', function () {
-    return view('product.index');
+    return view('product.detail');
 })->name('product.detail');
 
 

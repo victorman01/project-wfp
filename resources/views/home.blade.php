@@ -197,7 +197,7 @@
                                 <p class="card-title">{{ $p->nama }}</p>
                                 <p class="card-text">{{ $p->spesifikasi }}</p>
                                 <p class="card-text"><b>Rp {{ $p->harga }}</b></p>
-                                <a href="#" class="btn btn-primary">Show</a>
+                                <a href="{{route('produk-detail', ['produkId' => $p->id ])}}" class="btn btn-primary">Show</a>
                             </div>
                         </div>
                     </div>

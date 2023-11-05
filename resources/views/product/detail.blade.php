@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('layouts.home')
 
 @section('title')
     <title>Product Detail</title>
@@ -12,7 +12,6 @@
             </div>
             <div class="col-md-8 product-container">
                 <h1>Product Name</h1>
-
                 <div class="card my-2 border-dark">
                     <div class="card-body">
                         <p>Description:</p>
@@ -27,7 +26,7 @@
 
                 <div class="card my-2 border-dark">
                     <div class="card-body">
-                        <p>Price:<b>$99.99</b> </p>
+                        <p>Harga:<b>{{ $produk->harga }}</b> </p>
                         <p>Availability: <span class="text-success"><b>In stock</b></span></p>
                     </div>
                 </div>
