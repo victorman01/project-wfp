@@ -11,7 +11,7 @@ class JenisPengiriman extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $table = 'jenis_pengiriman';
+    protected $table = 'jenis_pengirimans';
 
     public function kurir(){
         return $this->belongsTo(Kurir::class, 'kurir_id');

@@ -11,7 +11,7 @@ class AlamatPengiriman extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $table = 'alamat_pengiriman';
+    protected $table = 'alamat_pengirimans';
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id');

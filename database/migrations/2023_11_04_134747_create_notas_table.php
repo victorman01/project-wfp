@@ -18,9 +18,9 @@ class CreateNotasTable extends Migration
             $table->double('total_pembayaran');
             $table->enum('status_pengiriman', ['Menunggu Pembayaran', 'Diproses', 'Dikirim', 'Diterima']);
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('alamat_pengiriman_id')->constrained();
             $table->foreignId('metode_pembayaran_id')->constrained();
-            $table->foreignId('jenis_pengiriman_id')->constrained();
+            $table->foreignId('alamat_pengiriman_id')->constrained('alamat_pengirimans');
+            $table->foreignId('jenis_pengiriman_id')->constrained('jenis_pengirimans');
             $table->timestamps();
         });
     }

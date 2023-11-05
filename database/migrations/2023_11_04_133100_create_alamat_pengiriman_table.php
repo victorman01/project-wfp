@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAlamatPengirimenTable extends Migration
+class CreateAlamatPengirimanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAlamatPengirimenTable extends Migration
      */
     public function up()
     {
-        Schema::create('alamat_pengiriman', function (Blueprint $table) {
+        Schema::create('alamat_pengirimans', function (Blueprint $table) {
             $table->id();   
             $table->longtext('alamat');
             $table->string('nama_penerima', 45);
@@ -35,6 +35,6 @@ class CreateAlamatPengirimenTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('alamat_pengirimen');
+        Schema::dropIfExists('alamat_pengirimans');
     }
 }
