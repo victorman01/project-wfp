@@ -31,11 +31,11 @@
                     <td>{{ $k->created_at }}</td>
                     <td>{{ $k->updated_at }}</td>
                     <td>
-                        <p><a href="/admin/kategoris/{{ $k->id }}/edit">Edit</a></p>
+                        <p><a class="btn btn-primary btn-block" href="/admin/kategoris/{{ $k->id }}/edit">Edit <i class="fa fa-edit"></i></a></p>
                         <form action="/admin/kategoris/{{ $k->id }}" method="POST" class='d-inline'>
                             @method('DELETE')
                             @csrf
-                            <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                            <button class="btn btn-danger btn-block" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
                         </form>
                     </td>
                 </tr>

@@ -511,7 +511,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="layout_sidebar_fixed.html">
+                                <a href="{{ route('kategoris.index') }}">
                                     <i class="icon-anchor"></i>
                                     List Kategori</a>
                             </li>
@@ -520,13 +520,13 @@ License: You must have a valid license purchased only from themeforest(the above
                     <li>
                         <a href="javascript:;">
                             <i class="icon-present"></i>
-                            <span class="title">Sub-Kategori</span>
+                            <span class="title">Brand</span>
                             <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="ui_general.html">
-                                    List Sub-Kategori</a>
+                                <a href="{{ route('brands.index') }}">
+                                    List Brand</a>
                             </li>
                             <li>
                                 <a href="ui_buttons.html">
@@ -590,7 +590,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="form_controls.html">
+                                <a href="{{ route('produks.index') }}">
                                     List Produk</a>
                             </li>
                             <li>

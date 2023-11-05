@@ -12,7 +12,7 @@
             {{ session('error') }}
         </div>
     @endif
-    <p><a href="/admin/brands/create">Create New Brand</a></p>
+    <p><a href="/admin/brands/create">Add New Brand</a></p>
     <table class="table">
         <thead>
             <tr>
@@ -31,11 +31,11 @@
                     <td>{{ $b->created_at }}</td>
                     <td>{{ $b->updated_at }}</td>
                     <td>
-                        <p><a href="/admin/brands/{{ $b->id }}/edit">Edit</a></p>
+                        <p><a class="btn btn-primary btn-block" href="/admin/brands/{{ $b->id }}/edit">Edit <i class="fa fa-edit"></i></a></p>
                         <form action="/admin/brands/{{ $b->id }}" method="POST" class='d-inline'>
                             @method('DELETE')
                             @csrf
-                            <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                            <button class="btn btn-danger btn-block" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
                         </form>
                     </td>
                 </tr>

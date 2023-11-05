@@ -932,6 +932,11 @@ Page title
   color: #888;
 }
 
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Adjust the gap value as needed for the desired spacing */
+}
 /***
 Page breadcrumb
 ***/
