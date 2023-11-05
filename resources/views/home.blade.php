@@ -120,8 +120,23 @@
         <h3 class="mt-4">List Product</h3>
 
         <div class="row mt-4">
+            @foreach ($produk as $p)
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="{{ isset($p->gambar->path) ? asset('images/' . $p->gambar->path) : "https://picsum.photos/100" }}" 
+                            alt="{{ isset($p->gambar->nama) ? $p->gambar->nama : 'Produk' . $p->id }}">
+                        <div class="card-body">
+                            <p class="card-title">{{ $p->nama }}</p>
+                            <p class="card-text">{{ $p->spesifikasi }}</p>
+                            <p class="card-text"><b>Rp {{ $p->harga }}</b></p>
+                            <a href="#" class="btn btn-primary">Show</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
             {{-- CARD 1 --}}
-            <div class="col-md-3 mb-4">
+            {{-- <div class="col-md-3 mb-4">
                 <div class="card shadow">
                     <img src="https://picsum.photos/100" alt="Product 1">
                     <div class="card-body">
@@ -131,10 +146,10 @@
                         <a href="#" class="btn btn-primary">Show</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- CARD 2 --}}
-            <div class="col-md-3 mb-4">
+            {{-- <div class="col-md-3 mb-4">
                 <div class="card shadow">
                     <img src="https://picsum.photos/100" alt="Product 2">
                     <div class="card-body">
@@ -144,10 +159,10 @@
                         <a href="#" class="btn btn-primary">Show</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- CARD 3 --}}
-            <div class="col-md-3 mb-4">
+            {{-- <div class="col-md-3 mb-4">
                 <div class="card shadow">
                     <img src="https://picsum.photos/100" alt="Product 3">
                     <div class="card-body">
@@ -157,10 +172,10 @@
                         <a href="#" class="btn btn-primary">Show</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             
             {{-- CARD 4--}}
-            <div class="col-md-3 mb-4">
+            {{-- <div class="col-md-3 mb-4">
                 <div class="card shadow">
                     <img src="https://picsum.photos/100" alt="Product 3">
                     <div class="card-body">
@@ -170,7 +185,7 @@
                         <a href="#" class="btn btn-primary">Show</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 

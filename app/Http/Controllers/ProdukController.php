@@ -72,7 +72,10 @@ class ProdukController extends Controller
      */
     public function show(Produk $produk)
     {
-        //
+        $product = Produk::get();
+        return view('home', [
+            'produk' => $product
+        ]);
     }
 
     /**

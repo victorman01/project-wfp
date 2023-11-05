@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Brand;
 use Illuminate\Database\Seeder;
 
 class BrandSeeder extends Seeder
@@ -13,6 +14,14 @@ class BrandSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Brand::create([
+            'nama'=>'TOTO',
+        ]);
+        Brand::create([
+            'nama'=>'SOSO',
+        ]);
+        Brand::create([
+            'nama'=>'BOBO',
+        ]);
     }
 }
