@@ -10,3 +10,45 @@ footer {
     bottom: 0;
     left: 0;
 }
+
+/* Card Category */
+
+.product-card {
+    position: relative;
+    overflow: hidden;
+    margin: 0 0.5em;
+    box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+    border: none;
+}
+
+.card-img-overlay {
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: Center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+}
+
+.product-card .img-wrapper {
+    max-width: 100%;
+    height: 13em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-card img {
+    max-height: 100%;
+}
+
+@media (max-width: 767px) {
+    .product-card .img-wrapper {
+        height: 17em;
+    }
+}

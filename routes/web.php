@@ -31,6 +31,11 @@ Route::get('/',function(){
     ]);
 });
 
+Route::get('/product-detail', function () {
+    return view('product.index');
+})->name('product.detail');
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -8,7 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'E-Commerce') }}</title>
+    @yield('title')
+
 
     <!-- Styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -27,11 +28,12 @@
     <link rel="mask-icon" href="https://getbootstrap.com//docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
     <link rel="icon" href="https://getbootstrap.com//docs/5.2/assets/img/favicons/favicon.ico">
     <meta name="theme-color" content="#712cf9">
+
 </head>
 
 <body >
-    <div id="app">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow px-4 py-2">
+    <div id="app" >
+        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow px-4 py-4 z-1">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     <img src="https://getbootstrap.com//docs/5.3/assets/brand/bootstrap-logo.svg" alt="Bootstrap"
@@ -60,14 +62,14 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <div class="py-4">
             @yield('content')
-        </main>
+        </div>
     </div>
 
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <div class="col-md-4 d-flex align-items-center ps-4">
-            <span class="mb-3 mb-md-0 text-muted">© 2022 Ace Hardware, Inc</span>
+            <span class="mb-3 mb-md-0 text-muted">© 2022 E-Commerce, Inc</span>
         </div>
     </footer>
 
