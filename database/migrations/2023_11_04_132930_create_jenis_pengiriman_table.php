@@ -13,7 +13,7 @@ class CreateJenisPengirimenTable extends Migration
      */
     public function up()
     {
-        Schema::create('jenis_pengirimen', function (Blueprint $table) {
+        Schema::create('jenis_pengiriman', function (Blueprint $table) {
             $table->id();
             $table->string('nama', 45);
             $table->foreignId('kurir_id')->constrained();
@@ -28,6 +28,6 @@ class CreateJenisPengirimenTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jenis_pengirimen');
+        Schema::dropIfExists('jenis_pengiriman');
     }
 }

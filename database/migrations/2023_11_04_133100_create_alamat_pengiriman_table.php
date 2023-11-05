@@ -13,8 +13,8 @@ class CreateAlamatPengirimenTable extends Migration
      */
     public function up()
     {
-        Schema::create('alamat_pengirimen', function (Blueprint $table) {
-            $table->id();
+        Schema::create('alamat_pengiriman', function (Blueprint $table) {
+            $table->id();   
             $table->longtext('alamat');
             $table->string('nama_penerima', 45);
             $table->string('nomor_handphone', 45);

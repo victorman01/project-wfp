@@ -62,8 +62,8 @@
         }
 
         /* .card img {
-                max-height: 100%;
-            } */
+                                                            max-height: 100%;
+                                                        } */
 
         @media (max-width: 767px) {
             .card .img-wrapper {
@@ -75,68 +75,48 @@
     {{-- PRODUCT CATEGORY --}}
     <div class="container">
         <h1 class="mt-4 text-center">Product Category</h1>
-
         <div class="row mt-4">
-            {{-- CARD 1 --}}
-            <div class="col-md-4 mb-4">
-                <div class="card product-card shadow">
-                    <img src="https://picsum.photos/200" class="card-img-top" alt="Product 1">
-                    <div class="card-img-overlay">
-                        <h4 class="card-title">Category 1</h4>
-                        <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-                        <a href="#" class="btn btn-primary">Show</a>
-                    </div>
-                </div>
-            </div>
-
-            {{-- CARD 2 --}}
-            <div class="col-md-4 mb-4">
-                <div class="card border-dark product-card">
-                    <img src="https://picsum.photos/200" class="card-img-top" alt="Product 1">
-                    <div class="card-img-overlay">
-                        <h4 class="card-title">Category 1</h4>
-                        <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-                        <a href="#" class="btn btn-primary">Show</a>
-                    </div>
-                </div>
-            </div>
-
-            {{-- CARD 3 --}}
-            <div class="col-md-4 mb-4">
-                <div class="card border-dark product-card">
-                    <img src="https://picsum.photos/200" class="card-img-top" alt="Product 1">
-                    <div class="card-img-overlay">
-                        <h4 class="card-title">Category 1</h4>
-                        <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-                        <a href="#" class="btn btn-primary">Show</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- LIST PRODUCT --}}
-    <div class="container">
-        <h3 class="mt-4">List Product</h3>
-
-        <div class="row mt-4">
-            @foreach ($produk as $p)
-                <div class="col-md-3 mb-4">
-                    <div class="card shadow-sm">
-                        <img src="{{ isset($p->gambar->path) ? asset('images/' . $p->gambar->path) : "https://picsum.photos/100" }}" 
-                            alt="{{ isset($p->gambar->nama) ? $p->gambar->nama : 'Produk' . $p->id }}">
-                        <div class="card-body">
-                            <p class="card-title">{{ $p->nama }}</p>
-                            <p class="card-text">{{ $p->spesifikasi }}</p>
-                            <p class="card-text"><b>Rp {{ $p->harga }}</b></p>
+            @foreach ($kategoris as $k)
+                <div class="col-md-4 mb-4">
+                    <div class="card product-card shadow">
+                        <img src="{{ str_replace(' ', '+', 'https://source.unsplash.com/500x400?' . $k->nama) }}"
+                            class="card-img-top" alt="Product 1">
+                        <div class="card-img-overlay">
+                            <h4 class="card-title">{{ $k->nama }}</h4>
                             <a href="#" class="btn btn-primary">Show</a>
                         </div>
                     </div>
                 </div>
             @endforeach
+        </div>
 
-            {{-- CARD 1 --}}
-            {{-- <div class="col-md-3 mb-4">
+        {{-- LIST PRODUCT --}}
+        <div class="container">
+            <h3 class="mt-4">List Product</h3>
+
+            <div class="row mt-4">
+                @foreach ($produk as $p)
+                    <div class="col-md-3 mb-4">
+                        <div class="card shadow-sm">
+                            @foreach ($p->gambar as $gambar)
+                                @if ($gambar->path)
+                                    <img src="{{ asset('storage/' . $gambar->path) }}" height='200px' />
+                                @else
+                                    <img src="" height='200px' />
+                                @endif
+                            @endforeach
+                            <div class="card-body">
+                                <p class="card-title">{{ $p->nama }}</p>
+                                <p class="card-text">{{ $p->spesifikasi }}</p>
+                                <p class="card-text"><b>Rp {{ $p->harga }}</b></p>
+                                <a href="#" class="btn btn-primary">Show</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+                {{-- CARD 1 --}}
+                {{-- <div class="col-md-3 mb-4">
                 <div class="card shadow">
                     <img src="https://picsum.photos/100" alt="Product 1">
                     <div class="card-body">
@@ -148,8 +128,8 @@
                 </div>
             </div> --}}
 
-            {{-- CARD 2 --}}
-            {{-- <div class="col-md-3 mb-4">
+                {{-- CARD 2 --}}
+                {{-- <div class="col-md-3 mb-4">
                 <div class="card shadow">
                     <img src="https://picsum.photos/100" alt="Product 2">
                     <div class="card-body">
@@ -161,8 +141,8 @@
                 </div>
             </div> --}}
 
-            {{-- CARD 3 --}}
-            {{-- <div class="col-md-3 mb-4">
+                {{-- CARD 3 --}}
+                {{-- <div class="col-md-3 mb-4">
                 <div class="card shadow">
                     <img src="https://picsum.photos/100" alt="Product 3">
                     <div class="card-body">
@@ -173,24 +153,24 @@
                     </div>
                 </div>
             </div> --}}
-            
-            {{-- CARD 4--}}
-            {{-- <div class="col-md-3 mb-4">
-                <div class="card shadow">
-                    <img src="https://picsum.photos/100" alt="Product 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 3</h5>
-                        <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-                        <p class="card-text"><b>Rp400.000</b></p>
-                        <a href="#" class="btn btn-primary">Show</a>
-                    </div>
-                </div>
-            </div> --}}
-        </div>
-    </div>
 
-    {{-- CAROUSEL TEST --}}
-    {{-- <div id="carouselExampleControls" class="carousel">
+                {{-- CARD 4 --}}
+                {{-- <div class="col-md-3 mb-4">
+                <div class="card shadow">
+                    <img src="https://picsum.photos/100" alt="Product 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Product 3</h5>
+                        <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+                        <p class="card-text"><b>Rp400.000</b></p>
+                        <a href="#" class="btn btn-primary">Show</a>
+                    </div>
+                </div>
+            </div> --}}
+            </div>
+        </div>
+
+        {{-- CAROUSEL TEST --}}
+        {{-- <div id="carouselExampleControls" class="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="card">
@@ -303,4 +283,4 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div> --}}
-@endsection
+    @endsection

@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Produk;
+use App\Models\Kategori;
+use App\Http\Requests\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -7,7 +10,6 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Requests\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,14 +22,18 @@ use App\Http\Requests\Request;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
+// Route::get('/', [HomeController::class,'showHome']);
+Route::get('/',function(){
+    return view('home',[
+        'produk'=> Produk::all(),
+        'kategoris'=>Kategori::all()
+    ]);
 });
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home', [App\Http\Controllers\ProdukController::class, 'show'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\ProdukController::class, 'show'])->name('home');
 
 Route::get('/admin', function () {
     return view('admin.index');
