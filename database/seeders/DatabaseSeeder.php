@@ -1,7 +1,9 @@
 <?php
 
 namespace Database\Seeders;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Database\Seeders\AdminSeeder;
 use Database\Seeders\BrandSeeder;
 use Database\Seeders\KurirSeeder;
 use Database\Seeders\ProdukSeeder;
@@ -19,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BrandSeeder::class);
         $this->call(KurirSeeder::class);
         $this->call(ProdukSeeder::class);
+        $this->call(AdminSeeder::class);
     }
 }

@@ -3,10 +3,11 @@
 use App\Models\Produk;
 use App\Models\Kategori;
 use App\Http\Requests\Request;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriController;
@@ -52,6 +53,7 @@ Route::get('/admin', function () {
 Route::resource('admin/brands', BrandController::class);
 Route::resource('admin/kategoris', KategoriController::class);
 Route::resource('admin/produks', ProdukController::class);
+Route::resource('admin/admins', AdminController::class);
 
 //Login
 Auth::routes();

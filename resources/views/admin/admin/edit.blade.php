@@ -12,15 +12,13 @@
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{ $admin->email }}" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="email" class="form-control" id="email" name="email" value="{{ $admin->email }}"
+                    required>
             </div>
             <div class="form-group">
                 <label for="tgl_lahir">Tanggal Lahir</label>
-                <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" value="{{ $admin->tgl_lahir }}" required>
+                <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir"
+                    value="{{ \Carbon\Carbon::parse($admin->tgl_lahir)->format('Y-m-d') }}" required>
             </div>
             <div class="form-group">
                 <label for="jenis_kelamin">Jenis Kelamin</label>

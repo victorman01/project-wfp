@@ -15,7 +15,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.admin.index',[
+            'admins'=>Admin::all()
+        ]);
     }
 
     /**
@@ -25,7 +27,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.admin.add');
     }
 
     /**
@@ -36,7 +38,17 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama'=>'required|string',
+            'email'=>'required|email|string',
+            'password'=>'required|string',
+            'tgl_lahir'=>'required',
+            'jenis_kelamin'=>'required|string',
+            'alamat'=>'required|string',
+        ]);
+        $validatedData['tanggal_lahir']=$validatedData['tgl_lahir'];
+        Admin::create($validatedData);
+        return redirect('/admin/admins')->with('success','Penambahan data admin berhasil!');
     }
 
     /**
@@ -58,7 +70,9 @@ class AdminController extends Controller
      */
     public function edit(Admin $admin)
     {
-        //
+        return view('admin.admin.edit',[
+            'admin'=>$admin,
+        ]);
     }
 
     /**
@@ -70,7 +84,16 @@ class AdminController extends Controller
      */
     public function update(Request $request, Admin $admin)
     {
-        //
+        $validatedData = $request->validate([
+            'nama'=>'required|string',
+            'email'=>'required|email|string',
+            'tgl_lahir'=>'required',
+            'jenis_kelamin'=>'required|string',
+            'alamat'=>'required|string',
+        ]);
+        $validatedData['tanggal_lahir']=$validatedData['tgl_lahir'];
+        $admin->update($validatedData);
+        return redirect('/admin/admins')->with('success','Modifikasi data admin berhasil!');
     }
 
     /**
@@ -81,6 +104,7 @@ class AdminController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        //
+        $admin->delete();
+        return redirect('/admin/admins')->with('success','Penghapusan data admin berhasil!');
     }
 }

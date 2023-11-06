@@ -17,8 +17,8 @@ class CreateAdminsTable extends Migration
             $table->id();
             $table->string('nama',45);
             $table->string('email',45)->unique();
-            $table->string('password',45);
-            $table->timestamp('tgl_lahir');
+            $table->string('password');
+            $table->datetime('tgl_lahir');
             $table->enum('jenis_kelamin',['L','P']);
             $table->longText('alamat');
             $table->timestamps();
