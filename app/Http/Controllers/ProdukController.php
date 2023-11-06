@@ -85,7 +85,7 @@ class ProdukController extends Controller
     public function produkDetail(Request $request, $produkId){
         $produkDetail = Produk::find($produkId);
         // dd($produkDetail->gambar);
-        return view('produk-detail', [
+        return view('produk.detail', [
             'produk' => $produkDetail
         ]);
     }
