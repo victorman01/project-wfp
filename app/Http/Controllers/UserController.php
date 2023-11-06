@@ -28,7 +28,6 @@ class UserController extends Controller
         //Add or Delete Favorit for user
         if(!$statusFavorit){
             $user->favorit()->attach([$produkId]);
-            $user->favorit()->sync([$produkId]);
             return back()->with('pesan', 'Tambah Favorit Berhasil');
         } else {
             $user->favorit()->detach([$produkId]);

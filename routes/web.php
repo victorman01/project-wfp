@@ -59,5 +59,10 @@ Route::post('login', [LoginController::class, 'authenticate'])->name('loginUI');
 Route::get('login', [LoginController::class, 'showLoginUI'])->name('login');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
+
 //User
 Route::get('/favorit/{produkId}', [UserController::class, 'addOrDeleteFavorite'])->name('favorit');
+
+Route::get('/favorit-page', function () {
+    return view('favorit');
+})->name('favorite.page');
