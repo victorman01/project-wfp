@@ -52,6 +52,7 @@
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end">
                             <li><a class="dropdown-item" href="#">Action</a></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="{{route('favorite.page')}}">Favorit</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
