@@ -21,23 +21,26 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://getbootstrap.com//docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="https://getbootstrap.com//docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="https://getbootstrap.com//docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="https://getbootstrap.com//docs/5.2/assets/img/favicons/apple-touch-icon.png"
+        sizes="180x180">
+    <link rel="icon" href="https://getbootstrap.com//docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32"
+        type="image/png">
+    <link rel="icon" href="https://getbootstrap.com//docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16"
+        type="image/png">
     <link rel="manifest" href="https://getbootstrap.com//docs/5.2/assets/img/favicons/manifest.json">
-    <link rel="mask-icon" href="https://getbootstrap.com//docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
+    <link rel="mask-icon" href="https://getbootstrap.com//docs/5.2/assets/img/favicons/safari-pinned-tab.svg"
+        color="#712cf9">
     <link rel="icon" href="https://getbootstrap.com//docs/5.2/assets/img/favicons/favicon.ico">
     <meta name="theme-color" content="#712cf9">
-
 </head>
 
-<body >
-    <div id="app" >
-        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow px-4 py-4 z-1">
+<body>
+    <div id="app ">
+        <nav class="navbar navbar-expand-lg sticky-top bg-white px-4 py-4 z-3 text-white">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <img src="https://getbootstrap.com//docs/5.3/assets/brand/bootstrap-logo.svg" alt="Bootstrap"
-                        class="d-inline-block align-text-top" width="30" height="24">
+                <a class="navbar-brand text-white" href="#">
+                    {{-- <img src="https://getbootstrap.com//docs/5.3/assets/brand/bootstrap-logo.svg" alt="Bootstrap"
+                        class="d-inline-block align-text-top" width="30" height="24"> --}}
                     E-Commerce
                 </a>
 
@@ -52,7 +55,7 @@
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end">
                             <li><a class="dropdown-item" href="#">Action</a></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="{{route('favorite.page')}}">Favorit</a></li>
+                            <li><a class="dropdown-item" href="{{ route('favorite.page') }}">Favorit</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -63,7 +66,7 @@
             </div>
         </nav>
 
-        <div class="py-4">
+        <div>
             @yield('content')
         </div>
     </div>

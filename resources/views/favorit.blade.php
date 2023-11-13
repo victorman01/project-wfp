@@ -2,79 +2,38 @@
 
 @section('content')
     {{-- LIST PRODUCT --}}
-    <section class="bg-light">
+       {{-- LIST PRODUCT --}}
+       <section class="bg-white">
 
         <div class="container py-2">
-            <h3 class="mt-4">Produk Favorit</h3>
+            <h3 class="mt-4">List Favorite Product(s)</h3>
 
-            <div class="row mt-4 justify-content-center">
-                {{-- CARD 1 --}}
-                <div class="col-md-3 mb-4">
-                    <div class="card shadow-sm">
-                        {{-- IMG TEST --}}
-                        <img class="card-img-top" src="https://picsum.photos/100" height='200px' />
+            <div class="row mt-4 justify-content-start">
+                @foreach ($favProducts as $p)
+                    {{-- CARD 1 --}}
+                    <div class="col-md-3 mb-4">
+                        <div class="card shadow-sm">
+                            @foreach ($p->gambar as $gambar)
+                                @if ($gambar->path)
+                                    <img src="{{ asset('storage/' . $gambar->path) }}" height='200px' />
+                                @else
+                                    <img src="https://picsum.photos/100" height='200px' />
+                                @endif
 
-                        <div class="card-body">
-                            <p class="card-title">Produk 1</p>
-                            <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae quod odio
-                                id doloribus consequuntur eveniet eligendi? Eos, tenetur enim ducimus rem maiores, qui illo
-                                nam fuga consectetur quia repudiandae voluptatibus?</p>
-                            <p class="card-text"><b>Rp 10.000</b></p>
-                            <a href="" class="btn btn-primary">Show</a>
+                            @endforeach
+
+                            {{-- IMG TEST --}}
+                            <img class="card-img-top" src="https://picsum.photos/100" height='200px' />
+
+                            <div class="card-body">
+                                <p class="card-title">{{ $p->nama }}</p>
+                                <p class="card-text">{{ $p->spesifikasi }}</p>
+                                <p class="card-text"><b>Rp {{ $p->harga }}</b></p>
+                                <a href="{{route('produk-detail', ['produkId' => $p->id ])}}" class="btn btn-primary">Show</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                {{-- CARD 2 --}}
-                <div class="col-md-3 mb-4">
-                    <div class="card shadow-sm">
-                        {{-- IMG TEST --}}
-                        <img class="card-img-top" src="https://picsum.photos/100" height='200px' />
-
-                        <div class="card-body">
-                            <p class="card-title">Produk 1</p>
-                            <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae quod odio
-                                id doloribus consequuntur eveniet eligendi? Eos, tenetur enim ducimus rem maiores, qui illo
-                                nam fuga consectetur quia repudiandae voluptatibus?</p>
-                            <p class="card-text"><b>Rp 10.000</b></p>
-                            <a href="" class="btn btn-primary">Show</a>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- CARD 3 --}}
-                <div class="col-md-3 mb-4">
-                    <div class="card shadow-sm">
-                        {{-- IMG TEST --}}
-                        <img class="card-img-top" src="https://picsum.photos/100" height='200px' />
-
-                        <div class="card-body">
-                            <p class="card-title">Produk 1</p>
-                            <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae quod odio
-                                id doloribus consequuntur eveniet eligendi? Eos, tenetur enim ducimus rem maiores, qui illo
-                                nam fuga consectetur quia repudiandae voluptatibus?</p>
-                            <p class="card-text"><b>Rp 10.000</b></p>
-                            <a href="" class="btn btn-primary">Show</a>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- CARD 4 --}}
-                <div class="col-md-3 mb-4">
-                    <div class="card shadow-sm">
-                        {{-- IMG TEST --}}
-                        <img class="card-img-top" src="https://picsum.photos/100" height='200px' />
-
-                        <div class="card-body">
-                            <p class="card-title">Produk 1</p>
-                            <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae quod odio
-                                id doloribus consequuntur eveniet eligendi? Eos, tenetur enim ducimus rem maiores, qui illo
-                                nam fuga consectetur quia repudiandae voluptatibus?</p>
-                            <p class="card-text"><b>Rp 10.000</b></p>
-                            <a href="" class="btn btn-primary">Show</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
     </section>
 @endsection

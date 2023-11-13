@@ -65,6 +65,8 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 //User
 Route::get('/favorit/{produkId}', [UserController::class, 'addOrDeleteFavorite'])->name('favorit');
 
-Route::get('/favorit-page', function () {
-    return view('favorit');
-})->name('favorite.page');
+// Route::get('/favorit-page', function () {
+//     return view('favorit');
+// })->name('favorite.page');
+
+Route::get('/favorit-page', [UserController::class, 'showFavoriteProducts'] )->name('favorite.page');

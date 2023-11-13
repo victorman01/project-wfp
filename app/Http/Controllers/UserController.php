@@ -50,4 +50,15 @@ class UserController extends Controller
             'alamat' => $alamatPengiriman
         ]);
     }
+
+    //Show Favorite product
+    public function showFavoriteProducts(){
+        $user = Auth::user();
+
+        $favProducts = $user->favorit()->get();
+
+        return view('favorit', [
+            'favProducts' => $favProducts
+        ]);
+    }
 }

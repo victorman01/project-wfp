@@ -6,8 +6,8 @@
 
 @section('content')
     {{-- PRODUCT BANNER --}}
-    <section class="bg-white">
-        <div class="container">
+    <section class="py-4">
+        <div class="container z-n1">
             <div id="carouselExample" class="carousel slide ">
                 <div class="carousel-inner border rounded-4">
                     <div class="carousel-item active">
@@ -176,7 +176,7 @@
         <div class="container py-2">
             <h3 class="mt-4">List Product</h3>
 
-            <div class="row mt-4 justify-content-center">
+            <div class="row mt-4 justify-content-start">
                 @foreach ($produk as $p)
                     {{-- CARD 1 --}}
                     <div class="col-md-3 mb-4">
