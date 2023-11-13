@@ -15,6 +15,7 @@ class CreateAlamatPengirimanTable extends Migration
     {
         Schema::create('alamat_pengirimans', function (Blueprint $table) {
             $table->id();   
+            $table->string('nama', 30);
             $table->longtext('alamat');
             $table->string('nama_penerima', 45);
             $table->string('nomor_handphone', 45);
@@ -23,6 +24,7 @@ class CreateAlamatPengirimanTable extends Migration
             $table->string('kecamatan', 45);
             $table->string('kelurahan_kode_pos', 45);
             $table->tinyInteger('alamat_utama');
+            $table->tinyInteger('status_hapus');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

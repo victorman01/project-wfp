@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AlamatPengiriman;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AlamatPengirimanController extends Controller
 {
@@ -15,7 +16,13 @@ class AlamatPengirimanController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+
+        $alamatPengiriman = isset($user->alamatPengiriman) ? $user->alamatPengiriman : null;
+
+        return view('user-list-alamat', [
+            'alamat' => $alamatPengiriman
+        ]);
     }
 
     /**
@@ -25,7 +32,7 @@ class AlamatPengirimanController extends Controller
      */
     public function create()
     {
-        //
+        return view('user-insert-alamat');
     }
 
     /**
@@ -47,7 +54,7 @@ class AlamatPengirimanController extends Controller
      */
     public function show(AlamatPengiriman $alamatPengiriman)
     {
-        //
+        dd($alamatPengiriman);
     }
 
     /**
@@ -58,7 +65,9 @@ class AlamatPengirimanController extends Controller
      */
     public function edit(AlamatPengiriman $alamatPengiriman)
     {
-        //
+        return view('user-update-alamat', [
+            'alamatPengiriman' => $alamatPengiriman
+        ]);
     }
 
     /**
@@ -70,7 +79,27 @@ class AlamatPengirimanController extends Controller
      */
     public function update(Request $request, AlamatPengiriman $alamatPengiriman)
     {
-        //
+        $validation = $request->validate([
+            'nama' => 'required|string',
+            'alamat' => 'required|string',
+            'nama_penerima' => 'required|string',
+            'nomor_handphone' => 'required|numeric',
+            'provinsi' => 'required|string',
+            'kota' => 'required|string',
+            'kecamatan' => 'required|string',
+            'kelurahan_kode_pos' => 'required|string',
+            'alamat_utama' => 'required'
+        ]);
+
+        if($request->alamat_utama){
+            $validation['alamat_utama'] = 1;
+        } else{
+            $validation['alamat_utama'] = 0;
+        }
+
+        $alamatPengiriman->update($validation);
+
+        return redirect()->route('alamatPengiriman.index')->with('msg','Sukses Update Data');
     }
 
     /**
@@ -81,6 +110,9 @@ class AlamatPengirimanController extends Controller
      */
     public function destroy(AlamatPengiriman $alamatPengiriman)
     {
-        //
+        $alamatPengiriman->status_hapus = 1;
+        $alamatPengiriman->save();
+
+        return redirect()->route('alamatPengiriman.index')->with('msg','Sukses Hapus Data'); 
     }
 }

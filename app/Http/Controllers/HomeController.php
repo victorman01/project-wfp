@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,6 +27,9 @@ class HomeController extends Controller
     
     public function index()
     {
-        return view('home');
+        return view('home', [
+            'produk'=> Produk::all(),
+            'kategoris'=>Kategori::all()
+        ]);
     }
 }
