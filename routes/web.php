@@ -9,9 +9,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\GambarController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DiskonProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,10 +52,14 @@ Route::get('/admin', function () {
 });
 
 //Admin - Brand
-Route::resource('admin/brands', BrandController::class);
-Route::resource('admin/kategoris', KategoriController::class);
-Route::resource('admin/produks', ProdukController::class);
-Route::resource('admin/admins', AdminController::class);
+Route::prefix('admin')->group(function () {
+    Route::resource('brands', BrandController::class);
+    Route::resource('kategoris', KategoriController::class);
+    Route::resource('produks', ProdukController::class);
+    Route::resource('admins', AdminController::class);
+    Route::resource('diskon-produks', DiskonProdukController::class);
+    Route::resource('gambars', GambarController::class)->except('create,store,show');
+});
 
 //Login
 Auth::routes();

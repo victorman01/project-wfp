@@ -10,7 +10,7 @@ class DiskonProduk extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $table = 'diskon_produk';
+    protected $table = 'diskon_produks';
 
     public function produk(){
         return $this->belongsTo(Produk::class, 'produk_id');

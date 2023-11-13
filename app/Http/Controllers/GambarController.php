@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gambar;
-use App\Http\Controllers\Controller;
+use App\Models\Produk;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class GambarController extends Controller
 {
@@ -15,7 +16,9 @@ class GambarController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.gambar.index',[
+            'gambars'=>Gambar::all()
+        ]);
     }
 
     /**
@@ -25,7 +28,7 @@ class GambarController extends Controller
      */
     public function create()
     {
-        //
+        // 
     }
 
     /**
@@ -36,7 +39,7 @@ class GambarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 
     }
 
     /**
@@ -58,7 +61,9 @@ class GambarController extends Controller
      */
     public function edit(Gambar $gambar)
     {
-        //
+        return view('admin.gambar.edit',[
+            'gambar_produk'=>$gambar
+        ]);
     }
 
     /**
@@ -70,7 +75,16 @@ class GambarController extends Controller
      */
     public function update(Request $request, Gambar $gambar)
     {
-        //
+        $validatedData = $request->validate([
+            'nama'=>'required|string',
+            'produk_id'=>'required|exists:produks,id'
+        ]);
+
+        if($request->hasFile('path')){
+            $validatedData['path'] = $request->file('path')->store('post-images');
+        }
+        $gambar->update($validatedData);
+        return redirect('/admin/gambars')->with('success', 'Data gambar updated succesfully');
     }
 
     /**
@@ -81,6 +95,12 @@ class GambarController extends Controller
      */
     public function destroy(Gambar $gambar)
     {
-        //
+        if(!$gambar->produk){
+            $gambar->delete();
+            return redirect('/admin/gambars')->with('success', 'Data gambar deleted succesfully');
+        }
+        else{
+            return redirect('/admin/gambars')->with('error', 'Data gambar deleted unsuccessful');
+        }
     }
 }

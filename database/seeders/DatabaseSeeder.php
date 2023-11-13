@@ -6,7 +6,9 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\AdminSeeder;
 use Database\Seeders\BrandSeeder;
 use Database\Seeders\KurirSeeder;
+use Database\Seeders\GambarSeeder;
 use Database\Seeders\ProdukSeeder;
+use Database\Seeders\DiskonProdukSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,5 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(KurirSeeder::class);
         $this->call(ProdukSeeder::class);
         $this->call(AdminSeeder::class);
+        $this->call(DiskonProdukSeeder::class);
+        $this->call(GambarSeeder::class);
     }
 }
