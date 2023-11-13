@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlamatPengirimanController;
 use App\Models\Produk;
 use App\Models\Kategori;
 use App\Http\Requests\Request;
@@ -65,8 +66,13 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 //User
 Route::get('/favorit/{produkId}', [UserController::class, 'addOrDeleteFavorite'])->name('favorit');
 
-// Route::get('/favorit-page', function () {
-//     return view('favorit');
-// })->name('favorite.page');
-
+Route::get('/favorit-page', function () {
+    return view('favorit');
+})->name('favorite.page');
 Route::get('/favorit-page', [UserController::class, 'showFavoriteProducts'] )->name('favorite.page');
+Route::resource('user/alamatPengiriman', AlamatPengirimanController::class);
+
+Route::post('/beli-barang/{produkId}', [UserController::class, 'beliBarang'])->name('beliBarang');
+Route::get('/alamat-list', [UserController::class, 'listAlamat'])->name('listAlamat');
+Route::get('/alamat-edit/{alamatId}', [UserController::class, 'editAlamat'])->name('editAlamat');
+Route::post('/alamat-insert', [UserController::class, 'insertAlamat'])->name('insertAlamat');

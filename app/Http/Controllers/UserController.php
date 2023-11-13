@@ -42,13 +42,17 @@ class UserController extends Controller
 
     //Show List Alamat
     public function listAlamat(Request $request){
-        $user = Auth::user();
+        // $user = Auth::user();
 
-        $alamatPengiriman = isset($user->alamatPengiriman) ? $user->alamatPengiriman : null;
+        // $alamatPengiriman = isset($user->alamatPengiriman) ? $user->alamatPengiriman : null;
 
-        return view('user-list-alamat', [
-            'alamat' => $alamatPengiriman
-        ]);
+        // return view('user-list-alamat', [
+        //     'alamat' => $alamatPengiriman
+        // ]);
+    }
+
+    public function editAlamat(Request $request, $alamatId){
+
     }
 
     //Show Favorite product
