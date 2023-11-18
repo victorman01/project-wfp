@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.user.main')
 
 @section('content')
     {{-- LIST PRODUCT --}}

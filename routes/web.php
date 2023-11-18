@@ -27,7 +27,6 @@ use App\Http\Controllers\DiskonProdukController;
 |
 */
 
-// Route::get('/', [HomeController::class,'showHome']);
 Route::get('/',function(){
     return view('home',[
         'produk'=> Produk::all(),
@@ -82,3 +81,9 @@ Route::post('/beli-barang/{produkId}', [UserController::class, 'beliBarang'])->n
 Route::get('/alamat-list', [UserController::class, 'listAlamat'])->name('listAlamat');
 Route::get('/alamat-edit/{alamatId}', [UserController::class, 'editAlamat'])->name('editAlamat');
 Route::post('/alamat-insert', [UserController::class, 'insertAlamat'])->name('insertAlamat');
+
+
+// TEST ROUTE 
+Route::get('/home-test',function(){
+    return view('home-test');
+});
