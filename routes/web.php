@@ -12,6 +12,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\GambarController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\NotaController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DiskonProdukController;
@@ -59,6 +60,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('admins', AdminController::class);
     Route::resource('diskon-produks', DiskonProdukController::class);
     Route::resource('gambars', GambarController::class)->except('create,store,show');
+    Route::resource('notas', NotaController::class);
 });
 
 //Login

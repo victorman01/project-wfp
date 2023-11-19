@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlamatPengiriman;
+use App\Models\JenisPengiriman;
+use App\Models\MetodePembayaran;
 use App\Models\Nota;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class NotaController extends Controller
@@ -15,7 +19,9 @@ class NotaController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.nota.index',[
+            'notas'=>Nota::all()
+        ]);
     }
 
     /**
@@ -25,7 +31,12 @@ class NotaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.nota.add',[
+            'users' =>User::all(),
+            'metode_pembayarans'=>MetodePembayaran::all(),
+            'alamat_pengirimans'=>AlamatPengiriman::all(),
+            'jenis_pengirimans'=>JenisPengiriman::all()
+        ]);
     }
 
     /**
@@ -36,7 +47,16 @@ class NotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'total_pembayaran'=>'required|numeric',
+            'status_pengiriman'=>'required',
+            'user_id'=>'required',
+            'metode_pembayaran_id'=>'required',
+            'alamat_pengiriman_id'=>'required',
+            'jenis_pengiriman_id'=>'required'
+        ]);
+        $nota = Nota::create($validatedData);
+        return redirect('/admin/notas')->with('success', 'New nota has been added!');
     }
 
     /**
@@ -58,7 +78,13 @@ class NotaController extends Controller
      */
     public function edit(Nota $nota)
     {
-        //
+        return view('admin.nota.edit',[
+            'users' =>User::all(),
+            'metode_pembayarans'=>MetodePembayaran::all(),
+            'alamat_pengirimans'=>AlamatPengiriman::all(),
+            'jenis_pengirimans'=>JenisPengiriman::all(),
+            'nota' =>$nota
+        ]);
     }
 
     /**
@@ -70,7 +96,17 @@ class NotaController extends Controller
      */
     public function update(Request $request, Nota $nota)
     {
-        //
+        $validatedData = $request->validate([
+            'total_pembayaran'=>'required|numeric',
+            'status_pengiriman'=>'required',
+            'user_id'=>'required',
+            'metode_pembayaran_id'=>'required',
+            'alamat_pengiriman_id'=>'required',
+            'jenis_pengiriman_id'=>'required'
+        ]);
+        $nota = Nota::create($validatedData);
+        return redirect('/admin/notas')->with('success', 'Nota has been updated!');
+
     }
 
     /**
@@ -81,6 +117,7 @@ class NotaController extends Controller
      */
     public function destroy(Nota $nota)
     {
-        //
+        $nota->delete();
+        return redirect('/admin/notas')->with('success', 'Nota has been deleted!');
     }
 }

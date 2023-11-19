@@ -14,7 +14,7 @@
                 <input type="number" class="form-control" id="sub_total" name="sub_total" required>
             </div>
             <div class="form-group">
-                <label for="produk_id">Produk</label>
+                <label for="produk_id">Produk ID</label>
                 <select name="produk_id" class="form-control">
                     @foreach ($produks as $produk)
                         <option value="{{ $produk->id }}">{{ $produk->nama }}</option>
@@ -22,7 +22,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="nota_id">Transaction Note</label>
+                <label for="nota_id">Nota ID</label>
                 <select name="nota_id" class="form-control">
                     @foreach ($notas as $nota)
                         <option value="{{ $nota->id }}">Transaction ID: {{ $nota->id }}</option>
