@@ -87,5 +87,8 @@ Route::post('/alamat-insert', [UserController::class, 'insertAlamat'])->name('in
 
 // TEST ROUTE 
 Route::get('/home-test',function(){
-    return view('home-test');
+    return view('home-test',[
+        'produk'=> Produk::all(),
+        'kategoris'=>Kategori::all()])
+    ;
 });
