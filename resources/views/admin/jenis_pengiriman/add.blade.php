@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h2>Add New Jenis Pengiriman</h2>
-        <form method="post" action="/admin/jenis_pengirimans">
+        <form method="post" action="/admin/jenis-pengirimans">
             @csrf
             <div class="form-group">
                 <label for="nama">Jenis Pengiriman Name</label>

@@ -16,6 +16,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DiskonProdukController;
+use App\Http\Controllers\JenisPengirimanController;
 use App\Http\Controllers\AlamatPengirimanController;
 use App\Http\Controllers\MetodePembayaranController;
 
@@ -65,6 +66,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('notas', NotaController::class);
     Route::resource('kurirs', KurirController::class);
     Route::resource('metode-pembayarans', MetodePembayaranController::class);
+    Route::resource('jenis-pengirimans', JenisPengirimanController::class);
 });
 
 //Login

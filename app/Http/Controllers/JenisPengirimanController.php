@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kurir;
+use Illuminate\Http\Request;
 use App\Models\JenisPengiriman;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class JenisPengirimanController extends Controller
 {
@@ -15,7 +16,9 @@ class JenisPengirimanController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.jenis_pengiriman.index',[
+            'jenisPengirimans'=>JenisPengiriman::all()
+        ]);
     }
 
     /**
@@ -25,7 +28,9 @@ class JenisPengirimanController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.jenis_pengiriman.add',[
+            'kurirs'=>Kurir::all()
+        ]);
     }
 
     /**
@@ -36,7 +41,12 @@ class JenisPengirimanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama'=>'required|string',
+            'kurir_id'=>'required'
+        ]);
+        JenisPengiriman::create($validatedData);
+        return redirect('/admin/jenis-pengirimans')->with('success','Data jenis pengiriman telah disimpan!');
     }
 
     /**
@@ -58,7 +68,10 @@ class JenisPengirimanController extends Controller
      */
     public function edit(JenisPengiriman $jenisPengiriman)
     {
-        //
+        return view('admin.jenis_pengiriman.edit',[
+            'jenis_pengiriman'=>$jenisPengiriman,
+            'kurirs'=>$kurir
+        ]);
     }
 
     /**
@@ -70,7 +83,12 @@ class JenisPengirimanController extends Controller
      */
     public function update(Request $request, JenisPengiriman $jenisPengiriman)
     {
-        //
+        $validatedData = $request->validate([
+            'nama'=>'required|string',
+            'kurir_id'=>'required'
+        ]);
+        $jenisPengiriman->update($validatedData);
+        return redirect('/admin/jenis-pengirimans')->with('success','Modifikasi data jenis pengiriman telah disimpan!');
     }
 
     /**
@@ -81,6 +99,7 @@ class JenisPengirimanController extends Controller
      */
     public function destroy(JenisPengiriman $jenisPengiriman)
     {
-        //
+        $jenisPengiriman->delete();
+        return redirect('/admin/jenis-pengirimans')->with('success','Data jenis pengiriman telah terhapus!');
     }
 }

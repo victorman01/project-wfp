@@ -4,7 +4,7 @@
 <div class="container">
     <h2>Jenis Pengiriman table</h2>
     <p>The table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
-    <p><a href="/admin/jenis_pengirimans/create">Create New Jenis Pengiriman</a></p>
+    <p><a href="/admin/jenis-pengirimans/create">Create New Jenis Pengiriman</a></p>
     @if (session()->has('success'))
         <div class="alert alert-success col-lg-8" role="alert">
             {{ session('success') }}
@@ -35,8 +35,8 @@
                     <td>{{ $jenisPengiriman->created_at }}</td>
                     <td>{{ $jenisPengiriman->updated_at }}</td>
                     <td>
-                        <p><a class="btn btn-primary btn-block" href="/admin/jenis_pengirimans/{{ $jenisPengiriman->id }}/edit">Edit <i class="fa fa-edit"></i></a></p>
-                        <form action="/admin/jenis_pengirimans/{{ $jenisPengiriman->id }}" method="POST" class='d-inline'>
+                        <p><a class="btn btn-primary btn-block" href="/admin/jenis-pengirimans/{{ $jenisPengiriman->id }}/edit">Edit <i class="fa fa-edit"></i></a></p>
+                        <form action="/admin/jenis-pengirimans/{{ $jenisPengiriman->id }}" method="POST" class='d-inline'>
                             @method('DELETE')
                             @csrf
                             <button class="btn btn-danger btn-block" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
