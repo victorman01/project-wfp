@@ -15,7 +15,9 @@ class MetodePembayaranController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.metode_pembayaran.index',[
+            'metode_pembayarans'=>MetodePembayaran::all()
+        ]);
     }
 
     /**
@@ -25,7 +27,7 @@ class MetodePembayaranController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.metode_pembayaran.add');
     }
 
     /**
@@ -36,7 +38,11 @@ class MetodePembayaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama'=>'required|string'
+        ]);
+        MetodePembayaran::create($validatedData);
+        return redirect('/admin/metode-pembayarans')->with('success','Data metode pembayaran baru telah tersimpan!');
     }
 
     /**
@@ -58,7 +64,9 @@ class MetodePembayaranController extends Controller
      */
     public function edit(MetodePembayaran $metodePembayaran)
     {
-        //
+        return view('admin.metode_pembayaran.edit',[
+            'metodePembayaran'=>$metodePembayaran
+        ]);
     }
 
     /**
@@ -70,7 +78,11 @@ class MetodePembayaranController extends Controller
      */
     public function update(Request $request, MetodePembayaran $metodePembayaran)
     {
-        //
+        $validatedData = $request->validate([
+            'nama'=>'required|string'
+        ]);
+        $metodePembayaran->update($validatedData);
+        return redirect('/admin/metode-pembayarans')->with('success','Modifikasi data metode pembayaran telah tersimpan!');
     }
 
     /**
@@ -81,6 +93,7 @@ class MetodePembayaranController extends Controller
      */
     public function destroy(MetodePembayaran $metodePembayaran)
     {
-        //
+        $metodePembayaran->delete();
+        return redirect('/admin/metode-pembayarans')->with('success','Data metode pembayaran telah terhapus!');
     }
 }
