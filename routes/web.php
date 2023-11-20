@@ -1,21 +1,22 @@
 <?php
 
-use App\Http\Controllers\AlamatPengirimanController;
 use App\Models\Produk;
 use App\Models\Kategori;
 use App\Http\Requests\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NotaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\KurirController;
 use App\Http\Controllers\GambarController;
 use App\Http\Controllers\ProdukController;
-use App\Http\Controllers\NotaController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DiskonProdukController;
+use App\Http\Controllers\AlamatPengirimanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('diskon-produks', DiskonProdukController::class);
     Route::resource('gambars', GambarController::class)->except('create,store,show');
     Route::resource('notas', NotaController::class);
+    Route::resource('kurirs', KurirController::class);
 });
 
 //Login

@@ -15,7 +15,9 @@ class KurirController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.kurir.index',[
+            'kurirs'=>Kurir::all()
+        ]);
     }
 
     /**
@@ -25,7 +27,7 @@ class KurirController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.kurir.add');
     }
 
     /**
@@ -36,7 +38,11 @@ class KurirController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|string',
+        ]);
+        Kurir::create($validatedData);
+        return redirect('/admin/kurirs')->with('success','Data kurir telah tersimpan!');
     }
 
     /**
@@ -58,7 +64,9 @@ class KurirController extends Controller
      */
     public function edit(Kurir $kurir)
     {
-        //
+        return view('admin.kurir.edit',[
+            'kurir'=>$kurir
+        ]);
     }
 
     /**
@@ -70,7 +78,11 @@ class KurirController extends Controller
      */
     public function update(Request $request, Kurir $kurir)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|string',
+        ]);
+        $kurir->update($validatedData);
+        return redirect('/admin/kurirs')->with('success','Modifikasi data kurir berhasil!');
     }
 
     /**
@@ -81,6 +93,7 @@ class KurirController extends Controller
      */
     public function destroy(Kurir $kurir)
     {
-        //
+        $kurir->delete();
+        return redirect('/admin/kurirs')->with('success','Data kurir telah terhapus!');
     }
 }
