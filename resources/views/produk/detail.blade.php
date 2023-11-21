@@ -36,18 +36,21 @@
                 </div>
 
                 <div class="row">
-                    <div class="col">
-                        <div class="d-flex align-items-center mt-2">
-                            <label for="quantity" class="me-2">Quantity:</label>
-                            <input type="number" id="quantity" class="form-control" value="1" min="1">
+                    <form action="{{ route('keranjang.store') }}" method="POST">
+                        @csrf
+                        <div class="col">
+                            <div class="d-flex align-items-center mt-2">
+                                <label for="quantity" class="me-2">Quantity:</label>
+                                <input type="number" id="quantity" class="form-control" value="1" min="1" name="quantity">
+                                <input type="hidden" name="produkID" value="{{ $produk->id }}">
+                            </div>
+
                         </div>
 
-                    </div>
-
-                    <div class="col text-end">
-                        <button class="btn btn-primary mt-2">Add to Cart</button>
-                    </div>
-
+                        <div class="col text-end">
+                            <button type="submit" class="btn btn-primary mt-2">Add to Cart</button>
+                        </div>
+                    </form>
                 </div>
                 {{-- Should Change with Ajax (SOON) --}}
                 <a href="{{ route('favorit', ['produkId' => $produk->id]) }}">Favorit</a>
@@ -55,6 +58,12 @@
                 @if (session('pesan'))
                     <div class="alert alert-success">
                         {{ session('pesan') }}
+                    </div>
+                @endif
+
+                @if (session('pesanKeranjang'))
+                    <div class="alert alert-success">
+                        {{ session('pesanKeranjang') }}
                     </div>
                 @endif
             </div>

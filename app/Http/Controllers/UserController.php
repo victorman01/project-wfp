@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AlamatPengiriman;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\AlamatPengiriman;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -33,11 +34,6 @@ class UserController extends Controller
             $user->favorit()->detach([$produkId]);
             return back()->with('pesan', 'Favorit dihapus');
         }
-    }
-
-    //Beli barang
-    public function beliBarang(Request $request, $produkId){
-        $user = Auth::user();
     }
 
     //Show List Alamat

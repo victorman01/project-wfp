@@ -18,7 +18,7 @@ class Produk extends Model
     protected $table = 'produks';
 
     public function keranjang(){
-        return $this->belongsToMany(User::class, 'keranjangs','produk_id','user_id');
+        return $this->belongsToMany(User::class, 'keranjangs','produk_id','user_id')->withPivot('jumlah');
     }
     public function favorit(){
         return $this->belongsToMany(User::class, 'favorits','produk_id','user_id')->withTimestamps();;
