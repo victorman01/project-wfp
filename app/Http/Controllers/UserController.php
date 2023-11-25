@@ -57,7 +57,7 @@ class UserController extends Controller
 
         $favProducts = $user->favorit()->get();
 
-        return view('favorit', [
+        return view('produk.favorit', [
             'favProducts' => $favProducts
         ]);
     }

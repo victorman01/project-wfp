@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row my-15">
+        <div class="row">
             <div class="col-md-4">
                 {{-- @foreach ($produk->gambar as $gambar)
                     <img src="{{ asset('storage/' . $gambar->path) }}" alt="">
@@ -41,31 +41,28 @@
                         <div class="col">
                             <div class="d-flex align-items-center mt-2">
                                 <label for="quantity" class="me-2">Quantity:</label>
-                                <input type="number" id="quantity" class="form-control" value="1" min="1"
-                                    name="quantity">
+                                <input type="number" id="quantity" class="form-control" value="1" min="1" name="quantity">
                                 <input type="hidden" name="produkID" value="{{ $produk->id }}">
                             </div>
 
                         </div>
 
                         <div class="col text-end">
-                            {{-- Should Change with Ajax (SOON) --}}
-                            <a class="btn btn-pink mt-2" href="{{ route('favorit', ['produkId' => $produk->id]) }}">Favorit<i class="ms-2 uil uil-heart"></i> </a>
-
                             <button type="submit" class="btn btn-primary mt-2">Add to Cart</button>
                         </div>
                     </form>
                 </div>
-
+                {{-- Should Change with Ajax (SOON) --}}
+                <a href="{{ route('favorit', ['produkId' => $produk->id]) }}">Favorit</a>
 
                 @if (session('pesan'))
-                    <div class="mt-4 alert alert-success">
+                    <div class="alert alert-success">
                         {{ session('pesan') }}
                     </div>
                 @endif
 
                 @if (session('pesanKeranjang'))
-                    <div class="mt-4 alert alert-success">
+                    <div class="alert alert-success">
                         {{ session('pesanKeranjang') }}
                     </div>
                 @endif
