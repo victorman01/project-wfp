@@ -96,3 +96,7 @@ Route::get('/home-test',function(){
         'kategoris'=>Kategori::all()])
     ;
 });
+
+Route::get('/keranjang',function(){
+    return view('produk.keranjang');
+})->name('keranjang');

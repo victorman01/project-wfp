@@ -38,7 +38,7 @@
                             <li class="nav-item"><a class="nav-link" href="{{ route('favorite.page') }}"><i class="uil uil-heart"></i></a></li>
                             
                             {{-- CART --}}
-                            <li class="nav-item"><a class="nav-link" href=""><i class="uil uil-shopping-cart"></i></a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('keranjang') }}"><i class="uil uil-shopping-cart"></i></a></li>
 
                             {{-- IF LOGGED IN --}}
                             <li class="nav-item dropdown">
