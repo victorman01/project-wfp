@@ -81,7 +81,7 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/favorit/{produkId}', [UserController::class, 'addOrDeleteFavorite'])->name('favorit');
 Route::get('/favorit-page', [UserController::class, 'showFavoriteProducts'] )->name('favorite.page');
 Route::resource('user/alamatPengiriman', AlamatPengirimanController::class);
-Route::resource('user/keranjang', KeranjangController::class);
+Route::resource('keranjang', KeranjangController::class);
 
 Route::post('/beli-barang/{produkId}', [UserController::class, 'beliBarang'])->name('beliBarang');
 Route::get('/alamat-list', [UserController::class, 'listAlamat'])->name('listAlamat');
@@ -97,6 +97,6 @@ Route::get('/home-test',function(){
     ;
 });
 
-Route::get('/keranjang',function(){
-    return view('produk.keranjang');
-})->name('keranjang');
+// Route::get('/keranjang',function(){
+//     return view('produk.keranjang');
+// })->name('keranjang');

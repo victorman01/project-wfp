@@ -19,7 +19,7 @@ class KeranjangController extends Controller
 
         $keranjang = $user->keranjang;
 
-        return view('user-index-keranjang', [
+        return view('produk.keranjang', [
             'keranjang' => $keranjang
         ]);
     }
@@ -102,7 +102,21 @@ class KeranjangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = Auth::user();
+
+        $check = DB::table('keranjangs')
+        ->where('produk_id', $request->produkID)
+        ->where('user_id', $user->id)
+        ->get();
+
+        $update = DB::table('keranjangs')
+            ->where('produk_id', $request->produkID)
+            ->where('user_id', $user->id)
+            ->update([
+                'jumlah' => ($check[0]->jumlah + $request->quantity)
+            ]);
+        
+        return back()->with('pesan', 'Update Keranjang Berhasil');
     }
 
     /**

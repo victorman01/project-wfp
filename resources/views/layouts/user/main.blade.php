@@ -38,7 +38,7 @@
                             <li class="nav-item"><a class="nav-link" href="{{ route('favorite.page') }}"><i class="uil uil-heart"></i></a></li>
                             
                             {{-- CART --}}
-                            <li class="nav-item"><a class="nav-link" href="{{ route('keranjang') }}"><i class="uil uil-shopping-cart"></i></a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('keranjang.index') }}"><i class="uil uil-shopping-cart"></i></a></li>
 
                             {{-- IF LOGGED IN --}}
                             <li class="nav-item dropdown">
@@ -52,7 +52,12 @@
                                     <li  class="nav-item">
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li  class="nav-item"><a class="dropdown-item text-danger" href="#">Logout</a></li>
+                                    <li  class="nav-item">
+                                        <form action="{{ route('logout') }}" method="POST">
+                                            @csrf
+                                            <button class="dropdown-item">Logout</button>
+                                        </form>
+                                    </li>
                                 </ul>
                             </li>
 
@@ -158,6 +163,8 @@
     </div>
     <script src="{{ asset('sandbox360/js/plugins.js') }}"></script>
     <script src="{{ asset('sandbox360/js/theme.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.6.1.min.js') }}"></script>
+    @yield('js')
 </body>
 
 </html>

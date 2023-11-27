@@ -28,7 +28,7 @@
                                 <p class="card-title">{{ $k->nama }}</p>
                                 <p class="card-text">{{ $k->spesifikasi }}</p>
                                 <p class="card-text"><b>Rp {{ $k->harga }}</b></p>
-                                <p class="card-text"><b>Qty: {{ $k->pivot->jumlah }}</b></p>
+                                <p class="card-text"><b>Qty: <input type="number" name="jumlah" id="jumlah" value="{{ $k->pivot->jumlah }}"></b></p>
                                 <a href="{{route('produk-detail', ['produkId' => $k->id ])}}" class="btn btn-primary">Show</a>
                                 
                                 <a href="#" class="btn btn-primary">Checkout</a>

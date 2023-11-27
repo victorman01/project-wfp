@@ -18,23 +18,24 @@
 
                             <hr class="dropdown-divider">
 
-                            <div class="d-flex justify-content-start">
-                                <img src="https://picsum.photos/150/150" alt="Product Image" class="img-fluid rounded-4">
+                            @foreach ($keranjang as $k)
+                                {{-- Loops Here --}}
+                                <div class="d-flex justify-content-start">
+                                    <img src="https://picsum.photos/150/150" alt="Product Image" class="img-fluid rounded-4">
 
-                                <div class="row ms-2">
-                                    <h3 class="post-title h3">Coconut
-                                    </h3>
-                                    <p class="text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod
-                                        officiis perspiciatis.</p>
-                                    <p><b>Rp30.000,-</b></p>
-                                </div>
+                                    <div class="row ms-2">
+                                        <h3 class="post-title h3">{{ $k->nama }}</h3>
+                                        <p class="text-muted">{{ $k->spesifikasi }}</p>
+                                        <p><b>Rp {{ $k->harga }}</b></p>
+                                    </div>
 
-                                <div class="d-flex justify-content-evenly align-items-end    ">
-                                    <button class="btn btn-outline-primary btn-sm"><i class="uil uil-minus"></i></button>
-                                    <h3 class="text mx-2">1</h3>
-                                    <button class="btn btn-outline-primary btn-sm"><i class="uil uil-plus"></i></button>
+                                    <div class="d-flex justify-content-evenly align-items-end    ">
+                                        <button class="btn btn-outline-primary btn-sm"><i class="uil uil-minus"></i></button>
+                                        <h3 class="text mx-2">1</h3>
+                                        <button class="btn btn-outline-primary btn-sm"><i class="uil uil-plus"></i></button>
+                                    </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
                         <!--/.card-body -->
                     </div>
