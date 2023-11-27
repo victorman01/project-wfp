@@ -435,7 +435,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                         data-close-others="true">
                         <img alt="" src="/assets/img/avatar3_small.jpg" />
-                        <span class="username username-hide-on-mobile">Nick </span>
+                        <span class="username username-hide-on-mobile">{{ Auth::user()->nama }} </span>
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">
@@ -459,7 +459,14 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li class="divider">
                         </li>
                         <li>
-                            <a href="login.html"><i class="fa fa-key"></i> Log Out</a>
+                            <form id="logoutAdminForm" action="{{ route('logoutAdmin') }}" method="POST"
+                                style="display: none;">
+                                @csrf
+                            </form>
+                            <a href="javascript:void(0);"
+                                onclick="document.getElementById('logoutAdminForm').submit();">
+                                <i class="fa fa-key"></i> Log Out
+                            </a>
                         </li>
                     </ul>
                 </li>
