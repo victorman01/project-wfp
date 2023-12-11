@@ -49,6 +49,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="/assets/css/custom.css" rel="stylesheet" type="text/css" />
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -927,6 +929,14 @@ License: You must have a valid license purchased only from themeforest(the above
             Index.initDashboardDaterange();
             Tasks.initDashboardWidget();
         });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('table').DataTable();
+        })
     </script>
     @yield('scripts')
     <!-- END JAVASCRIPTS -->
