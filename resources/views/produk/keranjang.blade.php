@@ -6,7 +6,7 @@
 
 @section('content')
     {{-- Keranjang --}}
-    <section class="bg-white">
+    <section class="bg-white py-10">
 
         <div class="container py-2 my-5">
             <div class="row">
@@ -20,19 +20,24 @@
 
                             @foreach ($keranjang as $k)
                                 {{-- Loops Here --}}
-                                <div class="d-flex justify-content-start">
+                                <div class="d-flex justify-content-start my-5">
                                     <img src="https://picsum.photos/150/150" alt="Product Image" class="img-fluid rounded-4">
 
-                                    <div class="row ms-2">
-                                        <h3 class="post-title h3">{{ $k->nama }}</h3>
-                                        <p class="text-muted">{{ $k->spesifikasi }}</p>
-                                        <p><b>Rp {{ $k->harga }}</b></p>
+                                    <div class="container py-1">
+                                        <div class="row ms-2">
+                                            <h3 class="post-title h3">{{ $k->nama }}</h3>
+                                            <p class="text-muted">{{ $k->spesifikasi }}</p>
+                                            <p id="harga_total{{ $k->id }}">Rp{{ $k->harga }},-</p>
+                                            <input type="hidden" id="harga_barang{{ $k->id }}"
+                                                value="{{ $k->harga }}">
+                                        </div>
                                     </div>
 
-                                    <div class="d-flex justify-content-evenly align-items-end    ">
-                                        <button class="btn btn-outline-primary btn-sm"><i class="uil uil-minus"></i></button>
-                                        <h3 class="text mx-2">1</h3>
-                                        <button class="btn btn-outline-primary btn-sm"><i class="uil uil-plus"></i></button>
+
+                                    <div class="d-flex flex-column justify-content-between align-items-end">
+                                        <a class="btn btn-sm btn-danger"><i class="uil uil-trash"></i> </a>
+                                        <input class="form-control" id="jum_barang{{ $k->id }}" type="number"
+                                            onchange="setHargaProduk(this.id)" value="1" min="1">
                                     </div>
                                 </div>
                             @endforeach
@@ -54,8 +59,7 @@
                             <hr class="dropdown-divider">
 
                             <div class="d-flex justify-content-end">
-                                <button class="btn btn-outline-success btn-sm">Buy</button>
-
+                                <a class="btn btn-outline-success btn-sm" href="{{ route('checkout') }}">Buy</a>
                             </div>
 
                         </div>
@@ -67,4 +71,26 @@
 
         </div>
     </section>
+@endsection
+
+@section('js')
+    <script>
+        $("[type='number']").keypress(function(evt) {
+            evt.preventDefault();
+        });
+
+        let harga_keseluruhan = 0
+
+        function setHargaProduk(idBarang) {
+            // Get raw ID
+            let rawID = idBarang.replace(/[^0-9]/g, "");
+            let jumBarang = $("#jum_barang" + rawID).val()
+            let hargaBarang = $('#harga_barang' + rawID).val()
+            let hargaTotal = hargaBarang * jumBarang
+
+            $('#harga_total' + rawID).html("Rp" + hargaTotal + ",-");
+
+            // butuh fungsi untuk mengambil harga keseluruhan
+        };
+    </script>
 @endsection

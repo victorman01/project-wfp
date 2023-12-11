@@ -101,13 +101,6 @@ Route::post('/alamat-insert', [UserController::class, 'insertAlamat'])->name('in
 
 
 // TEST ROUTE 
-Route::get('/home-test',function(){
-    return view('home-test',[
-        'produk'=> Produk::all(),
-        'kategoris'=>Kategori::all()])
-    ;
-});
-
-// Route::get('/keranjang',function(){
-//     return view('produk.keranjang');
-// })->name('keranjang');
+Route::get('/checkout',function(){
+    return view('produk.checkout');
+})->name('checkout');
