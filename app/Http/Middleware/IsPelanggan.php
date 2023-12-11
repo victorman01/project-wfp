@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsAdmin
+class IsPelanggan
 {
     /**
      * Handle an incoming request.
@@ -16,17 +16,11 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        // if (auth()->check()) {
-        //     return $next($request);
-        // }else{
-        //     return redirect('/admin/login');
-        // }
-        if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2) {
+        if (auth()->user()->role == 3) {
             return $next($request);
         }else{
-            return redirect('/admin/login');
+            return redirect()->back();
         }
         return abort(404);
-            
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Database\Seeders\RoleSeeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\AdminSeeder;
 use Database\Seeders\BrandSeeder;
@@ -21,12 +22,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        $this->call(UserSeeder::class);
         $this->call(BrandSeeder::class);
         $this->call(KurirSeeder::class);
         $this->call(ProdukSeeder::class);
-        $this->call(AdminSeeder::class);
         $this->call(DiskonProdukSeeder::class);
         $this->call(GambarSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

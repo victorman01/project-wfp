@@ -83,8 +83,8 @@ Route::prefix('admin')->group(function () {
 
 //Login - user
 Auth::routes();
-Route::post('login', [LoginController::class, 'authenticate'])->name('loginUI');
-Route::get('login', [LoginController::class, 'showLoginUI'])->name('login');
+Route::post('login', [LoginController::class, 'authenticate'])->name('login');
+Route::get('login', [LoginController::class, 'showLoginUI'])->name('loginUI');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 

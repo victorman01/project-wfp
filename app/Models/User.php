@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Models\Nota;
+use App\Models\Role;
 use App\Models\Produk;
+use App\Models\Pelanggan;
 use App\Models\AlamatPengiriman;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -28,5 +30,17 @@ class User extends Authenticatable
     }
     public function nota(){
         return $this->hasMany(Nota::class, 'user_id');
+    }
+
+    public function pelanggan(){
+        return $this->hasMany(Pelanggan::class, 'pelanggan_id');
+    }
+
+    public function admin(){
+        return $this->hasMany(Admin::class, 'admin_id');
+    }
+
+    public function role(){
+        return $this->belongsTo(Role::class, 'role_id');
     }
 }

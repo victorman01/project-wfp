@@ -20,11 +20,11 @@ class CreateUsersTable extends Migration
             $table->text('password');
             $table->string('nomor_handphone', 45);
             $table->timestamp('tgl_lahir');
-            $table->integer('point');
             $table->enum('jenis_kelamin', ['L','P']);
             $table->string('provinsi', 45);
             $table->string('kota', 45);
             $table->string('kecamatan', 45);
+            $table->foreignId('role_id')->constrained('roles');
             $table->timestamps();
         });
     }

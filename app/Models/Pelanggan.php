@@ -2,17 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Admin extends Model
+class Pelanggan extends Model
 {
     use HasFactory;
-    protected $guarded = ['admin_id'];
+
+    protected $guarded = ['pelanggan_id'];
     protected $hidden = ['password'];
-    protected $table = 'admins';
+    protected $table = 'pelanggans';
 
     public function user(){
         return $this->belongsTo(User::class, 'admin_id');
