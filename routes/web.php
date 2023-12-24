@@ -22,6 +22,7 @@ use App\Http\Controllers\JenisPengirimanController;
 use App\Http\Controllers\PelangganProdukController;
 use App\Http\Controllers\AlamatPengirimanController;
 use App\Http\Controllers\MetodePembayaranController;
+use App\Models\Brand;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,8 @@ use App\Http\Controllers\MetodePembayaranController;
 Route::get('/',function(){
     return view('home',[
         'produk'=> Produk::all(),
-        'kategoris'=>Kategori::all()
+        'kategoris'=>Kategori::all(),
+        'brands'=>Brand::all()
     ]);
 });
 
