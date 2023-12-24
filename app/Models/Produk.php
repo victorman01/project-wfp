@@ -17,25 +17,17 @@ class Produk extends Model
     protected $guarded = ['id'];
     protected $table = 'produks';
 
-    public function keranjang(){
-        return $this->belongsToMany(User::class, 'keranjangs','produk_id','user_id')->withPivot('jumlah');
-    }
     public function favorit(){
         return $this->belongsToMany(User::class, 'favorits','produk_id','user_id')->withTimestamps();;
     }
     public function kategori(){
         return $this->belongsToMany(Kategori::class, 'kategoris_produks', 'produk_id','kategori_id');
     }
-    public function detailTransaksi(){
-        return $this->belongsToMany(Nota::class, 'detail_transaksis', 'produk_id', 'nota_id');
-    }
+
     public function brand(){
         return $this->belongsTo(Brand::class, 'brand_id');
     }
     public function gambar(){
         return $this->hasMany(Gambar::class);
-    }
-    public function diskonProduk(){
-        return $this->hasMany(DiskonProduk::class, 'diskon_produk_id');
     }
 }

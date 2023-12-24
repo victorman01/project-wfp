@@ -12,7 +12,7 @@ class DiskonProduk extends Model
     protected $guarded = ['id'];
     protected $table = 'diskon_produks';
 
-    public function produk(){
-        return $this->belongsTo(Produk::class, 'produk_id');
+    public function jenis_produk(){
+        return $this->belongsTo(Produk::class, 'jenis_produk_id');
     }
 }

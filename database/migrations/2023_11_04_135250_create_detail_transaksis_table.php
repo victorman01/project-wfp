@@ -17,7 +17,7 @@ class CreateDetailTransaksisTable extends Migration
             $table->id();
             $table->integer('jumlah');
             $table->double('sub_total');
-            $table->foreignId('produk_id')->constrained();
+            $table->foreignId('jenis_produk_id')->constrained();
             $table->foreignId('nota_id')->constrained();
             $table->timestamps();
         });

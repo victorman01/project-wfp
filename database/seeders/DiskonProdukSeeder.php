@@ -19,19 +19,19 @@ class DiskonProdukSeeder extends Seeder
             'diskon' => mt_rand(0, 99),
             'periode_mulai' => Carbon::today(),
             'periode_berakhir' => Carbon::today()->addDays(7),
-            'produk_id' => mt_rand(1, 3),
+            'jenis_produk_id' => mt_rand(1, 3),
         ]);
         DiskonProduk::create([
             'diskon' => mt_rand(0, 99),
             'periode_mulai' => Carbon::today(),
             'periode_berakhir' => Carbon::today()->addDays(7),
-            'produk_id' => mt_rand(1, 3),
+            'jenis_produk_id' => mt_rand(1, 3),
         ]);
         DiskonProduk::create([
             'diskon' => mt_rand(0, 99),
             'periode_mulai' => Carbon::today(),
             'periode_berakhir' => Carbon::today()->addDays(7),
-            'produk_id' => mt_rand(1, 3),
+            'jenis_produk_id' => mt_rand(1, 3),
         ]);
     }
 }

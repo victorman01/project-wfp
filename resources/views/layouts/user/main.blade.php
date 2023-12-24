@@ -64,7 +64,7 @@
                             {{-- IF NOT LOGGED IN --}}
                             <li class="nav-item d-none d-md-block">
                                 {{-- SIGN IN BUTTON --}}
-                                <a href="" class="btn btn-sm btn-primary rounded-pill">Sign In</a>
+                                <a href="{{ route('loginUI') }}" class="btn btn-sm btn-primary rounded-pill">Sign In</a>
                             </li>
                             <li class="nav-item d-lg-none">
                                 <button class="hamburger offcanvas-nav-btn"><span></span></button>

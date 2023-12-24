@@ -29,6 +29,6 @@ class Nota extends Model
         return $this->belongsTo(JenisPengiriman::class, 'jenis_pengiriman_id');
     }
     public function detailTransaksi(){
-        return $this->belongsTo(Produk::class, 'detail_transaksis','nota_id','produk_id');
+        return $this->belongsTo(Produk::class, 'detail_transaksis','nota_id','jenis_produk_id');
     }
 }

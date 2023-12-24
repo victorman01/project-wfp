@@ -18,7 +18,7 @@ class CreateDiskonProduksTable extends Migration
             $table->integer('diskon')->length(3);
             $table->timestamp('periode_mulai')->default(now());
             $table->timestamp('periode_berakhir')->default(now()->addDay());
-            $table->foreignId('produk_id')->constrained();
+            $table->foreignId('jenis_produk_id')->constrained();
             $table->timestamps();
         });
     }

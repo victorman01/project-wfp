@@ -16,11 +16,7 @@ class CreateProduksTable extends Migration
         Schema::create('produks', function (Blueprint $table) {
             $table->id();
             $table->string('nama', 45);
-            $table->longtext('spesifikasi');
             $table->longtext('informasi');
-            $table->double('harga');
-            $table->integer('stok');
-            $table->foreignId('brand_id')->constrained();
             $table->timestamps();
         });
     }

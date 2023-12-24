@@ -11,6 +11,7 @@ use Database\Seeders\KurirSeeder;
 use Database\Seeders\GambarSeeder;
 use Database\Seeders\ProdukSeeder;
 use Database\Seeders\DiskonProdukSeeder;
+use Database\Seeders\JenisProdukSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BrandSeeder::class);
         $this->call(KurirSeeder::class);
         $this->call(ProdukSeeder::class);
+        $this->call(JenisProdukSeeder::class);
         $this->call(DiskonProdukSeeder::class);
         $this->call(GambarSeeder::class);
         $this->call(RoleSeeder::class);
