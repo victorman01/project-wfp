@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Produk;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class JenisProduk extends Model
 {
@@ -21,5 +22,9 @@ class JenisProduk extends Model
 
     public function diskonProduk(){
         return $this->hasMany(DiskonProduk::class, 'diskon_produk_id');
+    }
+
+    public function produk(){
+        return $this->belongsTo(Produk::class, 'produk_id');
     }
 }

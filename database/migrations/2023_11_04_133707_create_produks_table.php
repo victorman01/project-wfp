@@ -17,6 +17,7 @@ class CreateProduksTable extends Migration
             $table->id();
             $table->string('nama', 45);
             $table->longtext('informasi');
+            $table->foreignId('brand_id')->constrained();
             $table->timestamps();
         });
     }

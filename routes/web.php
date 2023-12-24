@@ -19,6 +19,7 @@ use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DiskonProdukController;
 use App\Http\Controllers\JenisPengirimanController;
+use App\Http\Controllers\PelangganProdukController;
 use App\Http\Controllers\AlamatPengirimanController;
 use App\Http\Controllers\MetodePembayaranController;
 
@@ -51,7 +52,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Route::get('/home', [App\Http\Controllers\ProdukController::class, 'show'])->name('home');
 
 //User: Product
-Route::get('/produk-detail/{produkId}', [App\Http\Controllers\ProdukController::class, 'produkDetail'])->name('produk-detail');
+Route::get('/produk-detail/{produkId}', [PelangganProdukController::class, 'produkDetail'])->name('produk-detail');
 
 
 //Admin thigs

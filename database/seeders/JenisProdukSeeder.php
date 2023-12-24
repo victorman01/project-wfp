@@ -19,7 +19,6 @@ class JenisProdukSeeder extends Seeder
             'spesifikasi'=> 'Bahan Bagus',
             'harga'=>100000,
             'stok'=>100,
-            'brand_id'=>mt_rand(1,3),
             'produk_id' => mt_rand(1,3)
         ]);
 
@@ -28,7 +27,6 @@ class JenisProdukSeeder extends Seeder
             'spesifikasi'=> 'Bahan Bagus',
             'harga'=>100000,
             'stok'=>100,
-            'brand_id'=>mt_rand(1,3),
             'produk_id' => mt_rand(1,3)
         ]);
 
@@ -37,7 +35,6 @@ class JenisProdukSeeder extends Seeder
             'spesifikasi'=> 'Bahan Bagus',
             'harga'=>100000,
             'stok'=>100,
-            'brand_id'=>mt_rand(1,3),
             'produk_id' => mt_rand(1,3)
         ]);
     }

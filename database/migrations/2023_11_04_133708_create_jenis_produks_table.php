@@ -19,7 +19,6 @@ class CreateJenisProduksTable extends Migration
             $table->longtext('spesifikasi');
             $table->double('harga');
             $table->integer('stok');
-            $table->foreignId('brand_id')->constrained();
             $table->foreignId('produk_id')->constrained();
             $table->timestamps();
         });

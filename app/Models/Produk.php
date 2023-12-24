@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Brand;
 use App\Models\Gambar;
 use App\Models\Kategori;
+use App\Models\JenisProduk;
 use App\Models\DiskonProduk;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,5 +30,9 @@ class Produk extends Model
     }
     public function gambar(){
         return $this->hasMany(Gambar::class);
+    }
+
+    public function jenis_produk(){
+        return $this->hasMany(JenisProduk::class);
     }
 }

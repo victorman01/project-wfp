@@ -82,14 +82,6 @@ class ProdukController extends Controller
         // ]);
     }
 
-    public function produkDetail(Request $request, $produkId){
-        $produkDetail = Produk::find($produkId);
-        // dd($produkDetail->gambar);
-        return view('produk.detail', [
-            'produk' => $produkDetail
-        ]);
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
