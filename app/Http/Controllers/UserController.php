@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function addOrDeleteFavorite(Request $request, $produkId){
+    public function addOrDeleteFavorite(Request $request){
         $user = Auth::user();
 
         $userFav = isset($user->favorit) ? $user->favorit : null;
@@ -20,7 +20,7 @@ class UserController extends Controller
         //Check if the user already favorite the item or not
         if($userFav != null){
             foreach($userFav as $uf){
-                if($uf->id == $produkId){
+                if($uf->id == $request->produkId){
                     $statusFavorit = true;
                 }
             }
@@ -28,11 +28,23 @@ class UserController extends Controller
 
         //Add or Delete Favorit for user
         if(!$statusFavorit){
-            $user->favorit()->attach([$produkId]);
-            return back()->with('pesan', 'Tambah Favorit Berhasil');
+            $user->favorit()->attach([$request->produkId]);
+            // return back()->with('pesan', 'Tambah Favorit Berhasil');
+            return response()->json(
+                array(
+                    'pesan' => 'Tambah Favorit Berhasil'
+                ),
+                200
+            );
         } else {
-            $user->favorit()->detach([$produkId]);
-            return back()->with('pesan', 'Favorit dihapus');
+            $user->favorit()->detach([$request->produkId]);
+            // return back()->with('pesan', 'Favorit dihapus');
+            return response()->json(
+                array(
+                    'pesan' => 'Favorit dihapus'
+                ),
+                200
+            );
         }
     }
 

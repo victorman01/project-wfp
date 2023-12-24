@@ -29,7 +29,9 @@
                         <label for="brand"><b>Jenis Produk:</b></label>
                         <ul>
                             @foreach ($produk->jenis_produk as $jp)
-                                <li><a href="#" onclick="JenisProdukChange('{{ $jp->spesifikasi }}', '{{ $jp->harga }}', '{{ $jp->stok }}')">{{ $jp->nama_jenis }}</a></li>
+                                <li><a href="#"
+                                        onclick="JenisProdukChange('{{ $jp->spesifikasi }}', '{{ $jp->harga }}', '{{ $jp->stok }}')">{{ $jp->nama_jenis }}</a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
@@ -37,8 +39,10 @@
 
                 <div class="card my-2 border-dark">
                     <div class="card-body">
-                        <p><b>Harga:</b> <span id="harga">{{ number_format($produk->jenis_produk[0]->harga) }}</span></p>
-                        <p><b>Jumlah Stok:</b> <span class="text-success" id="stok"> {{ $produk->jenis_produk[0]->stok }}</span></p>
+                        <p><b>Harga:</b> <span id="harga">{{ number_format($produk->jenis_produk[0]->harga) }}</span>
+                        </p>
+                        <p><b>Jumlah Stok:</b> <span class="text-success" id="stok">
+                                {{ $produk->jenis_produk[0]->stok }}</span></p>
                     </div>
                 </div>
 
@@ -50,15 +54,13 @@
                                 <label for="quantity" class="me-2">Quantity:</label>
                                 <input type="number" id="quantity" class="form-control" value="1" min="1"
                                     name="quantity">
-                                <input type="hidden" name="produkID" value="{{ $produk->id }}">
+                                <input type="hidden" name="produkID" id="produkID" value="{{ $produk->id }}">
                             </div>
 
                         </div>
 
                         <div class="col text-end">
-                            {{-- Should Change with Ajax (SOON) --}}
-                            <a class="btn btn-pink mt-2"
-                                href="{{ route('favorit', ['produkId' => $produk->id]) }}">Favorit<i
+                            <a class="btn mt-2 {{ isset($produk->favorit[0]) ? 'btn-pink' : 'btn-success' }}" onclick="Fav()" id="btn-fav">Favorit<i
                                     class="ms-2 uil uil-heart"></i> </a>
 
                             <button type="submit" class="btn btn-primary mt-2">Add to Cart</button>
@@ -94,6 +96,36 @@
             spesifikasi.innerHTML = spek;
             harga.innerHTML = hargaValue;
             stok.innerHTML = stokValue;
+        }
+
+        function Fav() {
+            var produkID = document.getElementById('produkID').value;
+            var btn_fav = document.getElementById('btn-fav');
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('favorit') }}',
+                data: {
+                    '_token': '<?php echo csrf_token(); ?>',
+                    'produkId': produkID
+                },
+                success: function(data) {
+                    if(data.pesan == 'Tambah Favorit Berhasil'){
+                        btn_fav.classList.remove('btn-success');
+                        btn_fav.classList.add('btn-pink');
+                    } else {
+                        btn_fav.classList.remove('btn-pink');
+                        btn_fav.classList.add('btn-success');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Handle the error response and display the error message
+                    if (jqXHR.responseJSON && jqXHR.responseJSON.error) {
+                        alert(jqXHR.responseJSON.error);
+                    } else {
+                        alert('An error occurred while processing your request.');
+                    }
+                }
+            })
         }
     </script>
 @endsection

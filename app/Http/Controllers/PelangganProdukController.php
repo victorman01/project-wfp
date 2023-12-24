@@ -85,6 +85,7 @@ class PelangganProdukController extends Controller
 
     public function produkDetail(Request $request, $produkId){
         $produkDetail = Produk::find($produkId);
+        // dd(isset($produkDetail->favorit[0]));
         return view('produk.detail', [
             'produk' => $produkDetail
         ]);
