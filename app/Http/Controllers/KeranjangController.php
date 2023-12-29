@@ -17,7 +17,7 @@ class KeranjangController extends Controller
     {
         $user = Auth::user();
 
-        $keranjang = isset($user->keranjang) ? $user->keranjang : null;
+        $keranjang = isset($user->keranjang[0]) ? $user->keranjang : null;
 
         // Calculate total price from keranjang table for a specific user
         $totalPrice = 0;

@@ -59,7 +59,7 @@
                             <h3 class="post-title h3">Total Price: Rp <span id="total_price">{{ $total_price }},-</span>
                             </h3>
 
-                            <h3 class="post-title h3" id="total_item">Total Item(s): {{ count($keranjang) }}</h3>
+                            <h3 class="post-title h3" id="total_item">Total Item(s): {{ $keranjang != null ? count($keranjang) : 0 }}</h3>
 
                             <hr class="dropdown-divider">
 
