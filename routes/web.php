@@ -108,3 +108,9 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('/checkout',function(){
     return view('produk.checkout');
 })->name('checkout');
+Route::get('/histori-transaksi',function(){
+    return view('produk.histori-transaksi');
+})->name('historiTransaksi');
+Route::get('/detail-histori-transaksi',function(){
+    return view('produk.detail-histori-transaksi');
+})->name('detailHistoriTransaksi');

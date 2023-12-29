@@ -50,7 +50,7 @@
                                         {{Auth::user()->nama}}
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li class="nav-item"><a class="dropdown-item" href="#">Action</a></li>
+                                        <li class="nav-item"><a class="dropdown-item" href="{{route('historiTransaksi')}}">Histori Transaksi</a></li>
                                         <li class="nav-item"><a class="dropdown-item" href="#">Another action</a>
                                         </li>
                                         <li class="nav-item">
@@ -59,7 +59,7 @@
                                         <li class="nav-item">
                                             <form action="{{ route('logout') }}" method="POST">
                                                 @csrf
-                                                <button class="dropdown-item">Logout</button>
+                                                <button class="dropdown-item text-danger">Logout</button>
                                             </form>
                                         </li>
                                     </ul>
@@ -92,7 +92,7 @@
     <!-- /.content-wrapper -->
 
     {{-- DIVIDER --}}
-    <section class="wrapper bg-light angled upper-end lower-start"></section>
+    <section class="wrapper bg-light angled upper-end lower-start mt-10"></section>
 
     <footer class="bg-dark text-inverse">
         <div class="container pt-17 pt-md-19 pb-13 pb-md-15">
