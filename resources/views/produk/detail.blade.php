@@ -26,14 +26,22 @@
                         <label for="brand"><b>Brand:</b></label>
                         <p id="brand"> {{ $produk->brand->nama }}</p>
 
+
                         <label for="brand"><b>Jenis Produk:</b></label>
-                        <ul>
+
+                        <div class="row">
                             @foreach ($produk->jenis_produk as $jp)
-                                <li><a href="#"
-                                        onclick="JenisProdukChange('{{ $jp->spesifikasi }}', '{{ $jp->harga }}', '{{ $jp->stok }}')">{{ $jp->nama_jenis }}</a>
-                                </li>
+                                @if ($jp == $produk->jenis_produk->first())
+                                    <button id="{{ $jp->id }}" class="col-2 m-2 btn btn-primary"
+                                        onclick="JenisProdukChange(this.id, '{{ $jp->spesifikasi }}', '{{ $jp->harga }}', '{{ $jp->stok }}')">{{ $jp->nama_jenis }}
+                                    </button>
+                                @else
+                                    <button id="{{ $jp->id }}" class="col-2 m-2 btn btn-outline-primary"
+                                        onclick="JenisProdukChange(this.id, '{{ $jp->spesifikasi }}', '{{ $jp->harga }}', '{{ $jp->stok }}')">{{ $jp->nama_jenis }}
+                                    </button>
+                                @endif
                             @endforeach
-                        </ul>
+                        </div>
                     </div>
                 </div>
 
@@ -60,8 +68,8 @@
                         </div>
 
                         <div class="col text-end">
-                            <a class="btn mt-2 {{ isset($produk->favorit[0]) ? 'btn-pink' : 'btn-success' }}" onclick="Fav()" id="btn-fav">Favorit<i
-                                    class="ms-2 uil uil-heart"></i> </a>
+                            <a class="btn mt-2 {{ isset($produk->favorit[0]) ? 'btn-pink' : 'btn-success' }}"
+                                onclick="Fav()" id="btn-fav">Favorit<i class="ms-2 uil uil-heart"></i> </a>
 
                             <button type="submit" class="btn btn-primary mt-2">Add to Cart</button>
                         </div>
@@ -89,13 +97,26 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        function JenisProdukChange(spek, hargaValue, stokValue) {
+        function JenisProdukChange(eventId, spek, hargaValue, stokValue) {
             var spesifikasi = document.getElementById("spesifikasi");
             var harga = document.getElementById("harga");
             var stok = document.getElementById("stok");
+
             spesifikasi.innerHTML = spek;
             harga.innerHTML = hargaValue;
             stok.innerHTML = stokValue;
+
+            // Mengubah semua class btn jenis produk menjadi outlined
+            let sibling = document.getElementById(eventId).parentNode.firstChild;
+            while (sibling) {
+                sibling.className = "col-2 m-2 btn btn-outline-primary"
+                sibling = sibling.nextSibling;
+            }
+
+            // Mengubah semua class btn jenis produk terpilih menjadi primary
+            document.getElementById(eventId).className = "col-2 m-2 btn btn-primary";
+
+
         }
 
         function Fav() {
@@ -109,7 +130,7 @@
                     'produkId': produkID
                 },
                 success: function(data) {
-                    if(data.pesan == 'Tambah Favorit Berhasil'){
+                    if (data.pesan == 'Tambah Favorit Berhasil') {
                         btn_fav.classList.remove('btn-success');
                         btn_fav.classList.add('btn-pink');
                     } else {

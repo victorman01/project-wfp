@@ -6,6 +6,7 @@ use App\Models\Produk;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 
 class HomeController extends Controller
 {
@@ -29,7 +30,8 @@ class HomeController extends Controller
     {
         return view('home', [
             'produk'=> Produk::all(),
-            'kategoris'=>Kategori::all()
+            'kategoris'=>Kategori::all(),
+            'brands'=>Brand::all()
         ]);
     }
 }

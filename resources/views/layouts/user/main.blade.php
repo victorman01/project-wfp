@@ -33,39 +33,46 @@
                     <!-- /.navbar-collapse -->
                     <div class="navbar-other w-100 d-flex ms-auto">
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
-                            
+
                             {{-- FAVORITE PRODUCT --}}
-                            <li class="nav-item"><a class="nav-link" href="{{ route('favorite.page') }}"><i class="uil uil-heart"></i></a></li>
-                            
+                            <li class="nav-item"><a class="nav-link" href="{{ route('favorite.page') }}"><i
+                                        class="uil uil-heart"></i></a></li>
+
                             {{-- CART --}}
-                            <li class="nav-item"><a class="nav-link" href="{{ route('keranjang.index') }}"><i class="uil uil-shopping-cart"></i></a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('keranjang.index') }}"><i
+                                        class="uil uil-shopping-cart"></i></a></li>
 
-                            {{-- IF LOGGED IN --}}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    John Doe
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li  class="nav-item"><a class="dropdown-item" href="#">Action</a></li>
-                                    <li  class="nav-item"><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li  class="nav-item">
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li  class="nav-item">
-                                        <form action="{{ route('logout') }}" method="POST">
-                                            @csrf
-                                            <button class="dropdown-item">Logout</button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
+                            @if (Auth::check())
+                                {{-- IF LOGGED IN --}}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{Auth::user()->nama}}
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item"><a class="dropdown-item" href="#">Action</a></li>
+                                        <li class="nav-item"><a class="dropdown-item" href="#">Another action</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li class="nav-item">
+                                            <form action="{{ route('logout') }}" method="POST">
+                                                @csrf
+                                                <button class="dropdown-item">Logout</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @else
+                                <li class="nav-item d-none d-md-block">
+                                    {{-- SIGN IN BUTTON --}}
+                                    <a href="{{ route('loginUI') }}" class="btn btn-sm btn-primary rounded-pill">Sign
+                                        In</a>
+                                </li>
+                            @endif
 
-                            {{-- IF NOT LOGGED IN --}}
-                            <li class="nav-item d-none d-md-block">
-                                {{-- SIGN IN BUTTON --}}
-                                <a href="{{ route('loginUI') }}" class="btn btn-sm btn-primary rounded-pill">Sign In</a>
-                            </li>
+
                             <li class="nav-item d-lg-none">
                                 <button class="hamburger offcanvas-nav-btn"><span></span></button>
                             </li>
