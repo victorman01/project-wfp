@@ -90,17 +90,18 @@ Route::post('login', [LoginController::class, 'authenticate'])->name('login');
 Route::get('login', [LoginController::class, 'showLoginUI'])->name('loginUI');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-
-//User
-Route::post('/favorit', [UserController::class, 'addOrDeleteFavorite'])->name('favorit');
-Route::get('/favorit-page', [UserController::class, 'showFavoriteProducts'] )->name('favorite.page');
-Route::resource('user/alamatPengiriman', AlamatPengirimanController::class);
-Route::resource('keranjang', KeranjangController::class);
-
-Route::post('/beli-barang/{produkId}', [UserController::class, 'beliBarang'])->name('beliBarang');
-Route::get('/alamat-list', [UserController::class, 'listAlamat'])->name('listAlamat');
-Route::get('/alamat-edit/{alamatId}', [UserController::class, 'editAlamat'])->name('editAlamat');
-Route::post('/alamat-insert', [UserController::class, 'insertAlamat'])->name('insertAlamat');
+Route::group(['middleware' => ['auth']], function () {
+    //User
+    Route::post('/favorit', [UserController::class, 'addOrDeleteFavorite'])->name('favorit');
+    Route::get('/favorit-page', [UserController::class, 'showFavoriteProducts'] )->name('favorite.page');
+    Route::resource('user/alamatPengiriman', AlamatPengirimanController::class);
+    Route::resource('keranjang', KeranjangController::class);
+    
+    Route::post('/beli-barang/{produkId}', [UserController::class, 'beliBarang'])->name('beliBarang');
+    Route::get('/alamat-list', [UserController::class, 'listAlamat'])->name('listAlamat');
+    Route::get('/alamat-edit/{alamatId}', [UserController::class, 'editAlamat'])->name('editAlamat');
+    Route::post('/alamat-insert', [UserController::class, 'insertAlamat'])->name('insertAlamat');
+});
 
 
 // TEST ROUTE 

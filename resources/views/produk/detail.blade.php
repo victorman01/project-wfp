@@ -33,11 +33,11 @@
                             @foreach ($produk->jenis_produk as $jp)
                                 @if ($jp == $produk->jenis_produk->first())
                                     <button id="{{ $jp->id }}" class="col-2 m-2 btn btn-primary"
-                                        onclick="JenisProdukChange(this.id, '{{ $jp->spesifikasi }}', '{{ $jp->harga }}', '{{ $jp->stok }}')">{{ $jp->nama_jenis }}
+                                        onclick="JenisProdukChange(this.id, '{{ $jp->spesifikasi }}', '{{ $jp->harga }}', '{{ $jp->stok }}', '{{ $jp->id }}')">{{ $jp->nama_jenis }}
                                     </button>
                                 @else
                                     <button id="{{ $jp->id }}" class="col-2 m-2 btn btn-outline-primary"
-                                        onclick="JenisProdukChange(this.id, '{{ $jp->spesifikasi }}', '{{ $jp->harga }}', '{{ $jp->stok }}')">{{ $jp->nama_jenis }}
+                                        onclick="JenisProdukChange(this.id, '{{ $jp->spesifikasi }}', '{{ $jp->harga }}', '{{ $jp->stok }}', '{{ $jp->id }}')">{{ $jp->nama_jenis }}
                                     </button>
                                 @endif
                             @endforeach
@@ -62,7 +62,7 @@
                                 <label for="quantity" class="me-2">Quantity:</label>
                                 <input type="number" id="quantity" class="form-control" value="1" min="1"
                                     name="quantity">
-                                <input type="hidden" name="produkID" id="produkID" value="{{ $produk->id }}">
+                                <input type="hidden" name="jenisProdukID" id="jenisProdukID" value="{{ $produk->jenis_produk[0]->id }}">
                             </div>
 
                         </div>
@@ -97,14 +97,16 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        function JenisProdukChange(eventId, spek, hargaValue, stokValue) {
+        function JenisProdukChange(eventId, spek, hargaValue, stokValue, jenisProdukId) {
             var spesifikasi = document.getElementById("spesifikasi");
             var harga = document.getElementById("harga");
             var stok = document.getElementById("stok");
+            var jenisProduk = document.getElementById("jenisProdukID");
 
             spesifikasi.innerHTML = spek;
             harga.innerHTML = hargaValue;
             stok.innerHTML = stokValue;
+            jenisProduk.value = jenisProdukId;
 
             // Mengubah semua class btn jenis produk menjadi outlined
             let sibling = document.getElementById(eventId).parentNode.firstChild;

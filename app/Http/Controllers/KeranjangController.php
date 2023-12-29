@@ -17,10 +17,18 @@ class KeranjangController extends Controller
     {
         $user = Auth::user();
 
-        $keranjang = $user->keranjang;
+        $keranjang = isset($user->keranjang) ? $user->keranjang : null;
 
+        // Calculate total price from keranjang table for a specific user
+        $totalPrice = 0;
+        if($keranjang != null){
+            foreach($keranjang as $k){
+                $totalPrice += $k->pivot->jumlah * $k->harga;
+            }
+        }
         return view('produk.keranjang', [
-            'keranjang' => $keranjang
+            'keranjang' => $keranjang,
+            'total_price' => $totalPrice,
         ]);
     }
 
@@ -45,13 +53,13 @@ class KeranjangController extends Controller
         $user = Auth::user();
 
         $check = DB::table('keranjangs')
-                ->where('produk_id', $request->produkID)
+                ->where('jenis_produk_id', $request->jenisProdukID)
                 ->where('user_id', $user->id)
                 ->get();
 
         if(!isset($check[0]->produk_id)){
             $result = DB::table('keranjangs')->insert([
-                'produk_id' => $request->produkID,
+                'jenis_produk_id' => $request->jenisProdukID,
                 'user_id' => $user->id,
                 'jumlah' => $request->quantity,
                 'created_at' => now(),
@@ -61,7 +69,7 @@ class KeranjangController extends Controller
             return back()->with('pesanKeranjang', 'Tambah Keranjang Berhasil');
         } else {
             $update = DB::table('keranjangs')
-            ->where('produk_id', $request->produkID)
+            ->where('jenis_produk_id', $request->jenisProdukID)
             ->where('user_id', $user->id)
             ->update([
                 'jumlah' => ($check[0]->jumlah + $request->quantity)

@@ -20,7 +20,7 @@ class User extends Authenticatable
     protected $table = 'users';
 
     public function keranjang(){
-        return $this->belongsToMany(Produk::class, 'keranjangs','user_id','produk_id')->withPivot('jumlah');
+        return $this->belongsToMany(JenisProduk::class, 'keranjangs','user_id','jenis_produk_id')->withPivot('jumlah');
     }
     public function favorit(){
         return $this->belongsToMany(Produk::class, 'favorits','user_id','produk_id')->withTimestamps();;

@@ -320,8 +320,8 @@
                         <article class="col-4 my-2">
                             <div class="card">
                                 <figure class="card-img-top overlay overlay-1 hover-scale"><a
-                                        href="{{ route('produk-detail', ['produkId' => $p->id]) }}"">
-                                        <img src="{{ asset($p->gambar[0]->path) }}" alt="" /></a>
+                                        href="{{ route('produk-detail', ['produkId' => $p->id]) }}">
+                                        <img src="{{ isset($p->gambar[0]) ? asset($p->gambar[0]->path) : '' }}" alt="" /></a>
                                     <figcaption>
                                         <h5 class="from-top mb-0">Show More</h5>
                                     </figcaption>
@@ -329,7 +329,7 @@
                                 <div class="card-body">
                                     <div class="post-header ">
                                         <!-- /.post-category -->
-                                        <a href="#" class="hover" rel="category">{{ $p->kategori[0]->nama }}</a>
+                                        <a href="#" class="hover" rel="category">{{ isset($p->kategori[0]) ? $p->kategori[0]->nama : '' }}</a>
                                         <h2 class="post-title h3 mt-1 mb-3">{{ $p->nama }}
                                         </h2>
                                     </div>
