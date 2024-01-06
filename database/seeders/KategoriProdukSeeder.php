@@ -14,9 +14,9 @@ class KategoriProdukSeeder extends Seeder
      * @return void
      */
     public function run()
-    {   
-        Produk::all()->each(function($produk){
-            $produk->kategori()->attach(rand(1,3));
+    {
+        Produk::all()->each(function ($produk) {
+            $produk->kategori()->attach(rand(1, 3));
         });
     }
 }

@@ -35,11 +35,11 @@ use App\Models\Brand;
 |
 */
 
-Route::get('/',function(){
-    return view('home',[
-        'produk'=> Produk::all(),
-        'kategoris'=>Kategori::all(),
-        'brands'=>Brand::all()
+Route::get('/', function () {
+    return view('home', [
+        'produk' => Produk::all(),
+        'kategoris' => Kategori::all(),
+        'brands' => Brand::all()
     ]);
 });
 
@@ -59,22 +59,25 @@ Route::get('/produk-detail/{produkId}', [PelangganProdukController::class, 'prod
 
 //Admin thigs
 Route::prefix('admin')->group(function () {
-    Route::middleware('isadmin')->group(function(){
+    Route::middleware('isadmin')->group(function () {
         Route::get('/', function () {
             return view('admin.index');
+        });
+        Route::middleware('roleadmin')->group(function () {
+            Route::resource('admins', AdminController::class);
         });
         Route::resource('brands', BrandController::class);
         Route::resource('kategoris', KategoriController::class);
         Route::resource('produks', ProdukController::class);
-        Route::resource('admins', AdminController::class);
         Route::resource('diskon-produks', DiskonProdukController::class);
         Route::resource('gambars', GambarController::class)->except('create,store,show');
         Route::resource('notas', NotaController::class);
         Route::resource('kurirs', KurirController::class);
         Route::resource('metode-pembayarans', MetodePembayaranController::class);
         Route::resource('jenis-pengirimans', JenisPengirimanController::class);
+        Route::resource('jenis-produks', JenisPengirimanController::class);
     });
-    
+
 
     //Admin Login
     Route::post('login', [AdminLoginController::class, 'authenticate'])->name('authAdmin');
@@ -93,13 +96,13 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::group(['middleware' => ['auth']], function () {
     //User
     Route::post('/favorit', [UserController::class, 'addOrDeleteFavorite'])->name('favorit');
-    Route::get('/favorit-page', [UserController::class, 'showFavoriteProducts'] )->name('favorite.page');
+    Route::get('/favorit-page', [UserController::class, 'showFavoriteProducts'])->name('favorite.page');
     Route::resource('user/alamatPengiriman', AlamatPengirimanController::class);
 
     Route::resource('keranjang', KeranjangController::class);
     Route::post('/updateKeranjang', [KeranjangController::class, 'updateKeranjang'])->name('updateKeranjang');
     Route::post('/hapusKeranjang', [KeranjangController::class, 'hapusKeranjang'])->name('hapusKeranjang');
-    
+
     Route::post('/beli-barang/{produkId}', [UserController::class, 'beliBarang'])->name('beliBarang');
     Route::get('/alamat-list', [UserController::class, 'listAlamat'])->name('listAlamat');
     Route::get('/alamat-edit/{alamatId}', [UserController::class, 'editAlamat'])->name('editAlamat');
@@ -110,12 +113,12 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 // TEST ROUTE 
-Route::get('/checkout',function(){
+Route::get('/checkout', function () {
     return view('produk.checkout');
 })->name('checkout');
-Route::get('/histori-transaksi',function(){
+Route::get('/histori-transaksi', function () {
     return view('produk.histori-transaksi');
 })->name('historiTransaksi');
-Route::get('/detail-histori-transaksi',function(){
+Route::get('/detail-histori-transaksi', function () {
     return view('produk.detail-histori-transaksi');
 })->name('detailHistoriTransaksi');

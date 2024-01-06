@@ -46,10 +46,10 @@
             </div>
             <div class="form-group">
                 <label for="kecamatan">Kecamatan</label>
-                <input type="text" class "form-control" id="kecamatan" name="kecamatan" required>
+                <input type="text" class="form-control" id="kecamatan" name="kecamatan" required>
             </div>
             <button type="submit" class="btn btn-primary">Add User</button>
         </form>
     </div>
-</section>
+    </section>
 @endsection
