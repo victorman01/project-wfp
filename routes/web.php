@@ -98,13 +98,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('keranjang', KeranjangController::class);
     Route::post('/updateKeranjang', [KeranjangController::class, 'updateKeranjang'])->name('updateKeranjang');
     Route::post('/hapusKeranjang', [KeranjangController::class, 'hapusKeranjang'])->name('hapusKeranjang');
-
-    Route::post('/beli-barang/{produkId}', [UserController::class, 'beliBarang'])->name('beliBarang');
-    Route::get('/alamat-list', [UserController::class, 'listAlamat'])->name('listAlamat');
-    Route::get('/alamat-edit/{alamatId}', [UserController::class, 'editAlamat'])->name('editAlamat');
-    Route::post('/alamat-insert', [UserController::class, 'insertAlamat'])->name('insertAlamat');
+    
+    // Route::post('/beli-barang/{produkId}', [UserController::class, 'beliBarang'])->name('beliBarang');
+    // Route::get('/alamat-list', [UserController::class, 'listAlamat'])->name('listAlamat');
+    // Route::get('/alamat-edit/{alamatId}', [UserController::class, 'editAlamat'])->name('editAlamat');
+    // Route::post('/alamat-insert', [UserController::class, 'insertAlamat'])->name('insertAlamat');
 
     Route::get('/checkout-form', [PelangganProdukController::class, 'checkoutIndex'])->name('checkoutIndex');
+    Route::post('/checkout/{alamPeng}/{produkDibeli}', [PelangganProdukController::class, 'checkoutKeranjang'])->name('checkoutItem');
 });
 
 

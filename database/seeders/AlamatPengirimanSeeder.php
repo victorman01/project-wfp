@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AlamatPengiriman;
 use Illuminate\Database\Seeder;
 
 class AlamatPengirimanSeeder extends Seeder
@@ -13,6 +14,30 @@ class AlamatPengirimanSeeder extends Seeder
      */
     public function run()
     {
-        //
+        AlamatPengiriman::create([
+            'nama' => 'Kantor',
+            'alamat' => 'Sidodadi',
+            'nama_penerima' => 'Rony',
+            'nomor_handphone' => '085733181815',
+            'provinsi' => 'Jawa Timur',
+            'kota' => 'Malang',
+            'kecamatan' => 'Simokerto',
+            'kelurahan_kode_pos' => 'Sidodadi 60145',
+            'alamat_utama' => 1,
+            'user_id' => 1
+        ]);
+
+        AlamatPengiriman::create([
+            'nama' => 'Rumah',
+            'alamat' => 'Sidodadi',
+            'nama_penerima' => 'Alvin',
+            'nomor_handphone' => '085733181815',
+            'provinsi' => 'Jawa Timur',
+            'kota' => 'Malang',
+            'kecamatan' => 'Simokerto',
+            'kelurahan_kode_pos' => 'Sidodadi 60145',
+            'alamat_utama' => 0,
+            'user_id' => 1
+        ]);
     }
 }

@@ -50,12 +50,8 @@
 
 
                                         <div class="d-flex flex-column justify-content-between align-items-end">
-                                            <a class="btn btn-sm btn-danger"
-                                                onclick="hapusProduk('{{ $k->id }}')"><i class="uil uil-trash"></i>
-                                            </a>
                                             <input class="form-control" id="jum_barang{{ $k->id }}" type="number"
-                                                onchange="setHargaProduk(this.id)" value="{{ $k->pivot->jumlah }}"
-                                                min="1">
+                                                value="{{ $k->pivot->jumlah }}" disabled>
                                         </div>
                                     </div>
                                 @endforeach
@@ -72,24 +68,43 @@
                 <div class="col-4">
                     <div class="card card-border-end border-success">
                         <div class="card-body">
-                            <h3 class="post-title h3">Total Price: Rp10.000,-
+                            <h3 class="post-title h3">Total Harga: {{ number_format($totalHarga, 0, ',', '.') }},-
                             </h3>
 
-                            <h3 class="post-title h3">Total Item(s): 1
+                            <h3 class="post-title h3">Total Barang: {{ count($keranjang) }}
                             </h3>
 
                             <hr class="dropdown-divider">
 
                             <div class="form-select-wrapper mb-4">
-                                <select class="form-select" aria-label="Pilih Kurir">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
+                                <form
+                                    action="{{ route('checkoutItem', ['alamPeng' => $alamPeng, 'produkDibeli' => json_encode($produkPilihan)]) }}"
+                                    method="post" id="form_checkout">
+                                    @csrf
+                                    <select class="form-select" aria-label="Pilih Metode Pembayaran"
+                                        id="metode_pembayaran" name="metode_pembayaran" required>
+                                        <option value="default" selected>Pilih Metode Pembayaran</option>
+                                        @foreach ($metPem as $mp)
+                                            <option value="{{ $mp->id }}">{{ $mp->nama }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    <select class="form-select mt-2" aria-label="Pilih Kurir" name="kurir" id="kurir"
+                                        onchange="appendJenisPengiriman(this.value)" required>
+                                        <option value="default" selected>Pilih Kurir</option>
+                                        @foreach ($kurir as $k)
+                                            <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    <select class="form-select mt-2" aria-label="Pilih Kurir" name="jenis_pengiriman"
+                                        id="jenis_pengiriman" required>
+                                        <option value="default" selected>Pilih Jenis Pengiriman</option>
+                                    </select>
                             </div>
 
-                            <a class="d-flex btn btn-success">Pesan</a>
+                            <button class="d-flex btn btn-success" type="button" onclick="validateForm()">Pesan</button>
+                            </form>
 
                         </div>
                         <!--/.card-body -->
@@ -100,4 +115,34 @@
 
         </div>
     </section>
+@endsection
+
+@section('js')
+    <script>
+        function appendJenisPengiriman(kurirID) {
+            let listJenisPeng = <?php echo $jenisPengiriman; ?>;
+            $('#jenis_pengiriman').html('');
+            for (var element of listJenisPeng) {
+                if (element['kurir_id'] == kurirID) {
+                    $('#jenis_pengiriman').append('<option value="' + element['id'] + '">' + element['nama'] +
+                        " (" + element['lama_pengiriman'] + ")" + '</option>');
+                }
+            }
+        }
+
+        function validateForm() {
+            // Get selected values
+            var metodePembayaran = document.getElementById('metode_pembayaran').value;
+            var kurir = document.getElementById('kurir').value;
+            var jenisPengiriman = document.getElementById('jenis_pengiriman').value;
+            var form = document.getElementById('form_checkout');
+
+            // Prevent submitting kalau nilai select masih default
+            if (metodePembayaran == 'default' || kurir == 'default' || jenisPengiriman == 'default') {
+                alert('Pilih Metode Pembayaran, Kurir, dan Jenis Pengiriman terlebih dahulu!');
+            } else {
+                form.submit();
+            }
+        }
+    </script>
 @endsection

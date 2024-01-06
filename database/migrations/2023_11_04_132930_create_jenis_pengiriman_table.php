@@ -16,6 +16,8 @@ class CreateJenisPengirimanTable extends Migration
         Schema::create('jenis_pengirimans', function (Blueprint $table) {
             $table->id();
             $table->string('nama', 45);
+            $table->integer('harga');
+            $table->string('lama_pengiriman');
             $table->foreignId('kurir_id')->constrained();
             $table->timestamps();
         });

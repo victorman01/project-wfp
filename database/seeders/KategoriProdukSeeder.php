@@ -14,9 +14,21 @@ class KategoriProdukSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        Produk::all()->each(function ($produk) {
-            $produk->kategori()->attach(rand(1, 3));
+    {   
+        Kategori::create([
+            'nama' => 'Alat Rumah Tangga'
+        ]);
+        
+        Kategori::create([
+            'nama' => 'Alat Mandi'
+        ]);
+        
+        Kategori::create([
+            'nama' => 'Alat Tidur'
+        ]);
+
+        Produk::all()->each(function($produk){
+            $produk->kategori_produk()->attach(1);
         });
     }
 }

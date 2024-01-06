@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\MetodePembayaran;
 use Illuminate\Database\Seeder;
 
 class MetodePembayaranSeeder extends Seeder
@@ -13,6 +14,16 @@ class MetodePembayaranSeeder extends Seeder
      */
     public function run()
     {
-        //
+        MetodePembayaran::create([
+            'nama' => 'OVO'
+        ]);
+
+        MetodePembayaran::create([
+            'nama' => 'Gopay'
+        ]);
+
+        MetodePembayaran::create([
+            'nama' => 'Dana'
+        ]);
     }
 }

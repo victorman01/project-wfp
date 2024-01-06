@@ -12,7 +12,7 @@ class Kategori extends Model
     protected $guarded = ['id'];
     protected $table = 'kategoris';
 
-    public function produk(){
-        return $this->belongsToMany(Produk::class, 'kategoris_produks', 'kategori_id','produk_id');
+    public function kategori_produk(){
+        return $this->belongsToMany(Produk::class, 'kategoris_produks', 'kategori_id','produk_id')->withTimestamps();
     }
 }

@@ -18,32 +18,41 @@
 
                             <hr class="dropdown-divider">
                             @if ($keranjang != null)
-                                @foreach ($keranjang as $k)
-                                    {{-- Loops Here --}}
-                                    <div class="d-flex justify-content-start my-5" id="container_produk{{ $k->id }}">
-                                        <img src="https://picsum.photos/150/150" alt="Product Image"
-                                            class="img-fluid rounded-4">
+                                <form action="{{ route('checkoutIndex') }}" id="form_pembelian">
+                                    @foreach ($keranjang as $k)
+                                        {{-- Loops Here --}}
+                                        <div class="d-flex justify-content-start my-5"
+                                            id="container_produk{{ $k->id }}">
+                                            <img src="https://picsum.photos/150/150" alt="Product Image"
+                                                class="img-fluid rounded-4">
 
-                                        <div class="container py-1">
-                                            <div class="row ms-2">
-                                                <h3 class="post-title h3">{{ $k->produk->nama }}</h3>
-                                                <p class="text-muted">Spesifikasi: {{ $k->spesifikasi }}</p>
-                                                <p id="harga_total{{ $k->id }}">Rp{{ $k->harga }},-</p>
-                                                <input type="hidden" id="harga_barang{{ $k->id }}"
-                                                    value="{{ $k->harga }}">
+                                            <div class="container py-1">
+                                                {{-- Pilih Barang Yang Akan Dibeli --}}
+                                                <input type="checkbox" name="produk_pilihan[]" id=""
+                                                    class="form-check-input" value="{{ $k->id }}">
+                                                <label for="">Pilih Produk {{ $k->produk->nama }}</label>
+
+                                                <div class="row ms-2">
+                                                    <h3 class="post-title h3">{{ $k->produk->nama }}</h3>
+                                                    <p class="text-muted">Spesifikasi: {{ $k->spesifikasi }}</p>
+                                                    <p id="harga_total{{ $k->id }}">Rp{{ $k->harga }},-</p>
+                                                    <input type="hidden" id="harga_barang{{ $k->id }}"
+                                                        value="{{ $k->harga }}">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="d-flex flex-column justify-content-between align-items-end">
+                                                <a class="btn btn-sm btn-danger"
+                                                    onclick="hapusProduk('{{ $k->id }}')"><i
+                                                        class="uil uil-trash"></i> </a>
+                                                <input class="form-control" id="jum_barang{{ $k->id }}"
+                                                    type="number" onchange="setHargaProduk(this.id)"
+                                                    value="{{ $k->pivot->jumlah }}" min="1">
                                             </div>
                                         </div>
-
-
-                                        <div class="d-flex flex-column justify-content-between align-items-end">
-                                            <a class="btn btn-sm btn-danger" onclick="hapusProduk('{{ $k->id }}')"><i
-                                                    class="uil uil-trash"></i> </a>
-                                            <input class="form-control" id="jum_barang{{ $k->id }}" type="number"
-                                                onchange="setHargaProduk(this.id)" value="{{ $k->pivot->jumlah }}"
-                                                min="1">
-                                        </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </form>
                             @else
                                 {{-- Perlu diperbaiki --}}
                                 <p>Keranjang masih kosong</p>
@@ -67,7 +76,7 @@
                             <hr class="dropdown-divider">
 
                             <div class="d-flex justify-content-end">
-                                <a class="btn btn-outline-success btn-sm" href="{{ route('checkout') }}">Buy</a>
+                                <a class="btn btn-outline-success btn-sm" onclick="submitForm()">Buy</a>
                             </div>
 
                         </div>
@@ -75,6 +84,11 @@
                     </div>
                     <!-- /.card -->
                 </div>
+                @if (session('msg'))
+                    <div class="alert alert-danger">
+                        {{ session('msg') }}
+                    </div>
+                @endif
             </div>
 
         </div>
@@ -175,6 +189,11 @@
                     }
                 }
             })
+        }
+
+        function submitForm() {
+            var form = document.getElementById("form_pembelian");
+            form.submit();
         }
     </script>
 @endsection

@@ -10,8 +10,11 @@ use Database\Seeders\BrandSeeder;
 use Database\Seeders\KurirSeeder;
 use Database\Seeders\GambarSeeder;
 use Database\Seeders\ProdukSeeder;
-use Database\Seeders\DiskonProdukSeeder;
 use Database\Seeders\JenisProdukSeeder;
+use Database\Seeders\DiskonProdukSeeder;
+use Database\Seeders\JenisPengirimanSeeder;
+use Database\Seeders\AlamatPengirimanSeeder;
+use Database\Seeders\MetodePembayaranSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,7 +27,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call(BrandSeeder::class);
-        $this->call(KategoriSeeder::class);
+        $this->call(KurirSeeder::class);
         $this->call(ProdukSeeder::class);
         $this->call(JenisProdukSeeder::class);
         $this->call(DiskonProdukSeeder::class);
@@ -32,5 +35,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(KategoriProdukSeeder::class);
+        $this->call(MetodePembayaranSeeder::class);
+        $this->call(AlamatPengirimanSeeder::class);
+        $this->call(JenisPengirimanSeeder::class);
     }
 }

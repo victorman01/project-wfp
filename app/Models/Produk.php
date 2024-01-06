@@ -19,10 +19,10 @@ class Produk extends Model
     protected $table = 'produks';
 
     public function favorit(){
-        return $this->belongsToMany(User::class, 'favorits','produk_id','user_id')->withTimestamps();;
+        return $this->belongsToMany(User::class, 'favorits','produk_id','user_id')->withTimestamps();
     }
-    public function kategori(){
-        return $this->belongsToMany(Kategori::class, 'kategoris_produks', 'produk_id','kategori_id');
+    public function kategori_produk(){
+        return $this->belongsToMany(Kategori::class, 'kategoris_produks', 'produk_id','kategori_id')->withTimestamps();
     }
 
     public function brand(){
