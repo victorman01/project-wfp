@@ -1,9 +1,9 @@
-@extends('layouts.home')
+@extends('layouts.user.main')
 
 @section('content')
-    @isset($alamat)
-        @foreach($alamat as $a)
-            @if($a->status_hapus == 0)
+    @if($alamat != null)
+        @foreach ($alamat as $a)
+            @if ($a->status_hapus == 0)
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">{{ $a->nama }}</h5>
@@ -24,7 +24,7 @@
         <p>Kamu belum memiliki alamat apapun</p>
     @endisset
 
-    @if(session()->has('msg'))
+    @if (session()->has('msg'))
         <div>
             <p>{{ session('msg') }}</p>
         </div>

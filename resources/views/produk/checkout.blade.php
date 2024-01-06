@@ -13,13 +13,14 @@
                 <div class="col-8">
                     <div class="card card-border-start border-primary">
                         <div class="card-body">
-                            <h2 class="post-title h2">Alamat Pengiriman
-                            </h2>
+                            <h2 class="post-title h2">Alamat Pengiriman</h2>
 
                             <hr class="dropdown-divider">
 
-                            <p class="fw-bold">Rony Hartono Irawan (082143492932)</p>
-                            <p class="text">Jln Azul 123, Tenggilis Mejoyo, Surabaya, Jawa Timur</p>
+                            <p class="fw-bold">{{ $alamPeng->nama }}</p>
+                            <p class="fw-bold">{{ $alamPeng->nama_penerima }} ({{ $alamPeng->nomor_handphone }})</p>
+                            <p class="text">{{ $alamPeng->alamat }}, {{ $alamPeng->kecamatan }}, {{ $alamPeng->kota }},
+                                {{ $alamPeng->provinsi }}</p>
                         </div>
                         <!--/.card-body -->
                     </div>
@@ -27,28 +28,41 @@
 
                     <div class="card card-border-start border-primary mt-3">
                         <div class="card-body">
-                            <h2 class="post-title h2">Detail Barang
-                            </h2>
+                            <h2 class="post-title h2">Detail Barang</h2>
 
                             <hr class="dropdown-divider">
-                            <div class="d-flex justify-content-start my-5">
-                                <img src="https://picsum.photos/150/150" alt="Product Image" class="img-fluid rounded-4">
+                            @if ($keranjang != null)
+                                @foreach ($keranjang as $k)
+                                    {{-- Loops Here --}}
+                                    <div class="d-flex justify-content-start my-5" id="container_produk{{ $k->id }}">
+                                        <img src="https://picsum.photos/150/150" alt="Product Image"
+                                            class="img-fluid rounded-4">
 
-                                <div class="container py-1">
-                                    <div class="row ms-2">
-                                        <h3 class="post-title h3">Test</h3>
-                                        <p class="text-muted">akasa</p>
-                                        <p><b>Rp 1000000</b></p>
+                                        <div class="container py-1">
+                                            <div class="row ms-2">
+                                                <h3 class="post-title h3">{{ $k->produk->nama }}</h3>
+                                                <p class="text-muted">Spesifikasi: {{ $k->spesifikasi }}</p>
+                                                <p id="harga_total{{ $k->id }}">Rp{{ $k->harga }},-</p>
+                                                <input type="hidden" id="harga_barang{{ $k->id }}"
+                                                    value="{{ $k->harga }}">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="d-flex flex-column justify-content-between align-items-end">
+                                            <a class="btn btn-sm btn-danger"
+                                                onclick="hapusProduk('{{ $k->id }}')"><i class="uil uil-trash"></i>
+                                            </a>
+                                            <input class="form-control" id="jum_barang{{ $k->id }}" type="number"
+                                                onchange="setHargaProduk(this.id)" value="{{ $k->pivot->jumlah }}"
+                                                min="1">
+                                        </div>
                                     </div>
-                                </div>
-
-
-                                <div class="d-flex flex-column justify-content-between align-items-end">
-                                    <a class="btn btn-sm btn-danger"><i class="uil uil-trash"></i> </a>
-                                    <input class="form-control" type="number" name="jumBarang" value="1"
-                                        min="1" id="">
-                                </div>
-                            </div>
+                                @endforeach
+                            @else
+                                {{-- Perlu diperbaiki --}}
+                                <p>Keranjang masih kosong</p>
+                            @endif
                         </div>
                         <!--/.card-body -->
                     </div>

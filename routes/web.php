@@ -104,6 +104,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/alamat-list', [UserController::class, 'listAlamat'])->name('listAlamat');
     Route::get('/alamat-edit/{alamatId}', [UserController::class, 'editAlamat'])->name('editAlamat');
     Route::post('/alamat-insert', [UserController::class, 'insertAlamat'])->name('insertAlamat');
+
+    Route::get('/checkout-form', [PelangganProdukController::class, 'checkoutIndex'])->name('checkoutIndex');
 });
 
 

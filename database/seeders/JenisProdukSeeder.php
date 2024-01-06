@@ -19,7 +19,7 @@ class JenisProdukSeeder extends Seeder
             'spesifikasi'=> 'Bahan Bagus',
             'harga'=>100000,
             'stok'=>100,
-            'produk_id' => mt_rand(1,3)
+            'produk_id' => 1
         ]);
 
         JenisProduk::create([
@@ -27,7 +27,7 @@ class JenisProdukSeeder extends Seeder
             'spesifikasi'=> 'Bahan Bagus',
             'harga'=>100000,
             'stok'=>100,
-            'produk_id' => mt_rand(1,3)
+            'produk_id' => 2
         ]);
 
         JenisProduk::create([
@@ -35,7 +35,7 @@ class JenisProdukSeeder extends Seeder
             'spesifikasi'=> 'Bahan Bagus',
             'harga'=>100000,
             'stok'=>100,
-            'produk_id' => mt_rand(1,3)
+            'produk_id' => 3
         ]);
     }
 }

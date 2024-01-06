@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlamatPengiriman;
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PelangganProdukController extends Controller
 {
@@ -85,9 +87,30 @@ class PelangganProdukController extends Controller
 
     public function produkDetail(Request $request, $produkId){
         $produkDetail = Produk::find($produkId);
-        // dd(isset($produkDetail->favorit[0]));
         return view('produk.detail', [
             'produk' => $produkDetail
+        ]);
+    }
+
+    public function checkoutIndex(){
+        $user = Auth::user();
+
+        $alamatPengiriman = AlamatPengiriman::where('user_id', $user->id)
+                        ->where('alamat_utama', 1)
+                        ->get();
+        // dd($alamatPengiriman);
+        $keranjang = isset($user->keranjang[0]) ? $user->keranjang : null;
+
+        // Calculate total price from keranjang table for a specific user
+        $totalPrice = 0;
+        if($keranjang != null){
+            foreach($keranjang as $k){
+                $totalPrice += $k->pivot->jumlah * $k->harga;
+            }
+        }
+        return view('produk.checkout', [
+            'alamPeng' => $alamatPengiriman[0],
+            'keranjang' => $keranjang,
         ]);
     }
 }

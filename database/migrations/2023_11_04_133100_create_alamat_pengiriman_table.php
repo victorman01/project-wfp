@@ -24,7 +24,6 @@ class CreateAlamatPengirimanTable extends Migration
             $table->string('kecamatan', 45);
             $table->string('kelurahan_kode_pos', 45);
             $table->tinyInteger('alamat_utama');
-            $table->tinyInteger('status_hapus');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

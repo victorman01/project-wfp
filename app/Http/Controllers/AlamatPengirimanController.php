@@ -43,7 +43,30 @@ class AlamatPengirimanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'nama' => 'required|string',
+            'alamat' => 'required|string',
+            'nama_penerima' => 'required|string',
+            'nomor_handphone' => 'required|numeric',
+            'provinsi' => 'required|string',
+            'kota' => 'required|string',
+            'kecamatan' => 'required|string',
+            'kelurahan_kode_pos' => 'required|string',
+            'alamat_utama' => 'required'
+        ]);
+
+        if($request->alamat_utama == 1){
+            $validation['alamat_utama'] = 1;
+        } else{
+            $validation['alamat_utama'] = 0;
+        }
+
+        $status = Auth::user()->alamatPengiriman()->create($validation);
+        if($status){
+            return redirect()->route('alamatPengiriman.index');
+        } else {
+            return back()->with('msg', 'Gagal Insert Alamat');
+        }
     }
 
     /**
@@ -91,7 +114,7 @@ class AlamatPengirimanController extends Controller
             'alamat_utama' => 'required'
         ]);
 
-        if($request->alamat_utama){
+        if($request->alamat_utama == 1){
             $validation['alamat_utama'] = 1;
         } else{
             $validation['alamat_utama'] = 0;
@@ -110,8 +133,7 @@ class AlamatPengirimanController extends Controller
      */
     public function destroy(AlamatPengiriman $alamatPengiriman)
     {
-        $alamatPengiriman->status_hapus = 1;
-        $alamatPengiriman->save();
+        $alamatPengiriman->delete();
 
         return redirect()->route('alamatPengiriman.index')->with('msg','Sukses Hapus Data'); 
     }

@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.user.main')
 
 @section('content')
     <form method="POST" action="{{ route('alamatPengiriman.update', $alamatPengiriman) }}">
@@ -41,8 +41,8 @@
         </div>
         <div class="form-group">
             <label for="inputAlamatUtama">Alamat Utama:</label>
-            <input type="radio" name="alamat_utama" id="alamat_utama1" {{ ($alamatPengiriman->alamat_utama == 1) ? 'checked' : '' }}><label for="alamat_utama1">Ya</label>
-            <input type="radio" name="alamat_utama" id="alamat_utama2" {{ ($alamatPengiriman->alamat_utama == 0) ? 'checked' : '' }}><label for="alamat_utama1">Tidak</label>
+            <input type="radio" name="alamat_utama" class="form-check-input" id="alamat_utama1" {{ ($alamatPengiriman->alamat_utama == 1) ? 'checked' : '' }} value="1"><label for="alamat_utama1">Ya</label>
+            <input type="radio" name="alamat_utama" class="form-check-input" id="alamat_utama2" {{ ($alamatPengiriman->alamat_utama == 0) ? 'checked' : '' }} value="0"><label for="alamat_utama1">Tidak</label>
         </div>
         @if($errors->any())
             <div class="alert alert-danger">
