@@ -15,7 +15,7 @@ class JenisProdukSeeder extends Seeder
     public function run()
     {
         JenisProduk::create([
-            'nama_jenis' => "Jenis Produk 1",
+            'nama' => "Jenis Produk 1",
             'spesifikasi'=> 'Bahan Bagus',
             'harga'=>100000,
             'stok'=>100,
@@ -23,7 +23,7 @@ class JenisProdukSeeder extends Seeder
         ]);
 
         JenisProduk::create([
-            'nama_jenis' => "Jenis Produk 2",
+            'nama' => "Jenis Produk 2",
             'spesifikasi'=> 'Bahan Bagus',
             'harga'=>100000,
             'stok'=>100,
@@ -31,7 +31,7 @@ class JenisProdukSeeder extends Seeder
         ]);
 
         JenisProduk::create([
-            'nama_jenis' => "Jenis Produk 3",
+            'nama' => "Jenis Produk 3",
             'spesifikasi'=> 'Bahan Bagus',
             'harga'=>100000,
             'stok'=>100,

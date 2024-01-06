@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Brand;
 use App\Models\Produk;
 use App\Models\Kategori;
 use App\Http\Requests\Request;
@@ -17,12 +18,12 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\JenisProdukController;
 use App\Http\Controllers\DiskonProdukController;
 use App\Http\Controllers\JenisPengirimanController;
 use App\Http\Controllers\PelangganProdukController;
 use App\Http\Controllers\AlamatPengirimanController;
 use App\Http\Controllers\MetodePembayaranController;
-use App\Models\Brand;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +77,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('kurirs', KurirController::class);
         Route::resource('metode-pembayarans', MetodePembayaranController::class);
         Route::resource('jenis-pengirimans', JenisPengirimanController::class);
-        Route::resource('jenis-produks', JenisPengirimanController::class);
+        Route::resource('jenis-produks', JenisProdukController::class);
     });
 
 
