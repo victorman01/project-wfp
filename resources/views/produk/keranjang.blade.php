@@ -36,9 +36,11 @@
 
 
                                         <div class="d-flex flex-column justify-content-between align-items-end">
-                                            <a class="btn btn-sm btn-danger" onclick="hapusProduk('{{ $k->id }}')"><i class="uil uil-trash"></i> </a>
+                                            <a class="btn btn-sm btn-danger" onclick="hapusProduk('{{ $k->id }}')"><i
+                                                    class="uil uil-trash"></i> </a>
                                             <input class="form-control" id="jum_barang{{ $k->id }}" type="number"
-                                                onchange="setHargaProduk(this.id)" value="1" min="1">
+                                                onchange="setHargaProduk(this.id)" value="{{ $k->pivot->jumlah }}"
+                                                min="1">
                                         </div>
                                     </div>
                                 @endforeach
@@ -59,7 +61,8 @@
                             <h3 class="post-title h3">Total Price: Rp <span id="total_price">{{ $total_price }},-</span>
                             </h3>
 
-                            <h3 class="post-title h3" id="total_item">Total Item(s): {{ $keranjang != null ? count($keranjang) : 0 }}</h3>
+                            <h3 class="post-title h3" id="total_item">Total Item(s):
+                                {{ $keranjang != null ? count($keranjang) : 0 }}</h3>
 
                             <hr class="dropdown-divider">
 
@@ -90,42 +93,88 @@
             // Get raw ID
             let rawID = idBarang.replace(/[^0-9]/g, "");
             let jumBarang = $("#jum_barang" + rawID).val()
-            // alert(jumBarang);
             let hargaBarang = $('#harga_barang' + rawID).val()
-            let hargaTotal = hargaBarang * jumBarang
+            let hargaTotal = hargaBarang * jumBarang //PERLU DIPERBAIKI SUPAYA REALTIME MESKIPUN DICLICK DENGAN CEPAT
 
-            $('#harga_total' + rawID).html("Rp" + hargaTotal + ",-");
+            //AJAX
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('updateKeranjang') }}',
+                data: {
+                    '_token': '<?php echo csrf_token(); ?>',
+                    'idJenisProduk': rawID,
+                    'jumlah': jumBarang
+                },
+                success: function(data) {
+                    if (data.pesan == 'Gagal') {
+                        alert("gagal update keranjang");
+                    } else {
+                        //Update harga total
+                        $('#harga_total' + rawID).html("Rp" + hargaTotal + ",-");
 
-            // Fungsi untuk mengambil harga keseluruhan
-            var inputElement = document.getElementById(idBarang);
-            var previousValue = inputElement.defaultValue;
-            var currentValue = inputElement.value;
+                        // Fungsi untuk mengambil harga keseluruhan
+                        var inputElement = document.getElementById(idBarang);
+                        var previousValue = inputElement.defaultValue;
+                        var currentValue = inputElement.value;
 
-            inputElement.defaultValue = inputElement.value
-            let hargaTotalSebelumnya = 0
-            hargaTotalSebelumnya = hargaBarang * (previousValue)
+                        inputElement.defaultValue = inputElement.value
+                        let hargaTotalSebelumnya = 0
+                        hargaTotalSebelumnya = hargaBarang * (previousValue)
 
-            let totalHarga = $("#total_price_val").val() - hargaTotalSebelumnya + hargaTotal
-            $("#total_price_val").val(totalHarga)
+                        let totalHarga = $("#total_price_val").val() - hargaTotalSebelumnya + hargaTotal
+                        $("#total_price_val").val(totalHarga)
 
-            $('#total_price').html(totalHarga + ",-");
+                        $('#total_price').html(totalHarga + ",-");
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Handle the error response and display the error message
+                    if (jqXHR.responseJSON && jqXHR.responseJSON.error) {
+                        alert(jqXHR.responseJSON.error);
+                    } else {
+                        alert('An error occurred while processing your request.');
+                    }
+                }
+            })
         };
 
-        function hapusProduk(idContainer){
-            //Update total harga dari seluruh produk
-            let hargaTotalDihapus = $("#harga_total" + idContainer).html().replace(/[^0-9]/g, "")
-            let totalHarga = $("#total_price_val").val() - parseInt(hargaTotalDihapus)
-            $("#total_price_val").val(totalHarga)
-            $('#total_price').html(totalHarga + ",-");
+        function hapusProduk(idContainer) {
+            //AJAX
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('hapusKeranjang') }}',
+                data: {
+                    '_token': '<?php echo csrf_token(); ?>',
+                    'idJenisProduk': idContainer
+                },
+                success: function(data) {
+                    if (data.pesan == 'Gagal') {
+                        alert("gagal update keranjang");
+                    } else {
+                        //Update total harga dari seluruh produk
+                        let hargaTotalDihapus = $("#harga_total" + idContainer).html().replace(/[^0-9]/g, "")
+                        let totalHarga = $("#total_price_val").val() - parseInt(hargaTotalDihapus)
+                        $("#total_price_val").val(totalHarga)
+                        $('#total_price').html(totalHarga + ",-");
 
-            //Hapus isi dari container yang bersangkutan
-            $('#container_produk' + idContainer).html('');
+                        //Hapus isi dari container yang bersangkutan
+                        $('#container_produk' + idContainer).html('');
+                        $('#container_produk' + idContainer).html('<p>Keranjang masih kosong</p>');
 
-            //Mengurangi total item
-            let totalItem = $("#total_item").html().replace(/[^0-9]/g, "")
-            $("#total_item").html("Total Item(s): " + (parseInt(totalItem)-1).toString())
-
-            //PERLU DITAMBAHKAN AJAX UNTUK UPDATE DATABASE
+                        //Mengurangi total item
+                        let totalItem = $("#total_item").html().replace(/[^0-9]/g, "")
+                        $("#total_item").html("Total Item(s): " + (parseInt(totalItem) - 1).toString())
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Handle the error response and display the error message
+                    if (jqXHR.responseJSON && jqXHR.responseJSON.error) {
+                        alert(jqXHR.responseJSON.error);
+                    } else {
+                        alert('An error occurred while processing your request.');
+                    }
+                }
+            })
         }
     </script>
 @endsection

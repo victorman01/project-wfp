@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisProduk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,7 @@ class KeranjangController extends Controller
                 $totalPrice += $k->pivot->jumlah * $k->harga;
             }
         }
+        // dd($keranjang);
         return view('produk.keranjang', [
             'keranjang' => $keranjang,
             'total_price' => $totalPrice,
@@ -57,10 +59,17 @@ class KeranjangController extends Controller
                 ->where('user_id', $user->id)
                 ->get();
 
-        if(!isset($check[0]->produk_id)){
-            $result = DB::table('keranjangs')->insert([
-                'jenis_produk_id' => $request->jenisProdukID,
-                'user_id' => $user->id,
+        if(!isset($check[0]->jenis_produk_id)){
+            // $result = DB::table('keranjangs')->insert([
+            //     'jenis_produk_id' => $request->jenisProdukID,
+            //     'user_id' => $user->id,
+            //     'jumlah' => $request->quantity,
+            //     'created_at' => now(),
+            //     'updated_at' => now()
+            // ]);
+            
+            $jenisProduk = JenisProduk::find($request->jenisProdukID);
+            $user->keranjang()->attach($jenisProduk, [
                 'jumlah' => $request->quantity,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -68,11 +77,17 @@ class KeranjangController extends Controller
 
             return back()->with('pesanKeranjang', 'Tambah Keranjang Berhasil');
         } else {
-            $update = DB::table('keranjangs')
-            ->where('jenis_produk_id', $request->jenisProdukID)
-            ->where('user_id', $user->id)
-            ->update([
-                'jumlah' => ($check[0]->jumlah + $request->quantity)
+            // $update = DB::table('keranjangs')
+            // ->where('jenis_produk_id', $request->jenisProdukID)
+            // ->where('user_id', $user->id)
+            // ->update([
+            //     'jumlah' => ($check[0]->jumlah + $request->quantity)
+            // ]);
+
+            $jenisProduk = JenisProduk::find($request->jenisProdukID);
+            $user->keranjang()->updateExistingPivot($jenisProduk, [
+                'jumlah' => $check[0]->jumlah + $request->quantity,
+                'updated_at' => now()
             ]);
 
             return back()->with('pesanKeranjang', 'Update Keranjang Berhasil');
@@ -127,6 +142,34 @@ class KeranjangController extends Controller
         return back()->with('pesan', 'Update Keranjang Berhasil');
     }
 
+    public function updateKeranjang(Request $request){
+        $user = Auth::user();
+
+        $update = DB::table('keranjangs')
+            ->where('jenis_produk_id', $request->idJenisProduk)
+            ->where('user_id', $user->id)
+            ->update([
+                'jumlah' => ($request->jumlah),
+                'updated_at' => now()
+            ]);
+        // dd($update);
+        if($update == 0){
+            return response()->json(
+                array(
+                    'pesan' => 'Gagal'
+                ),
+                200
+            );
+        } else {
+            return response()->json(
+                array(
+                    'pesan' => 'Berhasil'
+                ),
+                200
+            );
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -138,9 +181,31 @@ class KeranjangController extends Controller
         $user = Auth::user();
 
         DB::table('keranjangs')
-            ->where('produk_id', $keranjang)
+            ->where('jenis_produk_id', $keranjang)
             ->where('user_id', $user->id)
             ->delete();
         return back()->with('pesan', 'Delete Keranjang Berhasil');
+    }
+
+    public function hapusKeranjang(Request $request){
+        $user = Auth::user();
+        $jenisProduk = JenisProduk::find($request->idJenisProduk);
+        $jumlahHapus = $user->keranjang()->detach($jenisProduk->id);
+
+        if($jumlahHapus == 0){
+            return response()->json(
+                array(
+                    'pesan' => 'Gagal'
+                ),
+                200
+            );
+        } else {
+            return response()->json(
+                array(
+                    'pesan' => 'Berhasil'
+                ),
+                200
+            );
+        }
     }
 }

@@ -95,7 +95,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/favorit', [UserController::class, 'addOrDeleteFavorite'])->name('favorit');
     Route::get('/favorit-page', [UserController::class, 'showFavoriteProducts'] )->name('favorite.page');
     Route::resource('user/alamatPengiriman', AlamatPengirimanController::class);
+
     Route::resource('keranjang', KeranjangController::class);
+    Route::post('/updateKeranjang', [KeranjangController::class, 'updateKeranjang'])->name('updateKeranjang');
+    Route::post('/hapusKeranjang', [KeranjangController::class, 'hapusKeranjang'])->name('hapusKeranjang');
     
     Route::post('/beli-barang/{produkId}', [UserController::class, 'beliBarang'])->name('beliBarang');
     Route::get('/alamat-list', [UserController::class, 'listAlamat'])->name('listAlamat');
