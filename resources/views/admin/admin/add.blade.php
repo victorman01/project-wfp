@@ -56,7 +56,7 @@
                 <label for="alamat">Alamat</label>
                 <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Add User</button>
+            <button type="submit" class="btn btn-primary">Add Admin</button>
         </form>
     </div>
 @endsection

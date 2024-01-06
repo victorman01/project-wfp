@@ -17,7 +17,7 @@ class CreatePelanggansTable extends Migration
             // $table->id();
             $table->unsignedBigInteger('pelanggan_id');
             $table->foreign('pelanggan_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('point');
+            $table->integer('point')->default(0);
             $table->timestamps();
         });
     }

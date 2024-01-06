@@ -33,7 +33,7 @@ class User extends Authenticatable
     }
 
     public function pelanggan(){
-        return $this->hasMany(Pelanggan::class, 'pelanggan_id');
+        return $this->hasOne(Pelanggan::class, 'pelanggan_id');
     }
 
     public function admin(){

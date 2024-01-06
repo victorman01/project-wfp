@@ -27,7 +27,7 @@
             </div>
             <div class="form-group">
                 <label for="kecamatan">Kecamatan</label>
-                <input type="text" class "form-control" id="kecamatan" name="kecamatan" required>
+                <input type="text" class="form-control" id="kecamatan" name="kecamatan" required>
             </div>
             <div class="form-group">
                 <label for="kelurahan_kode_pos">Kelurahan Kode Pos</label>

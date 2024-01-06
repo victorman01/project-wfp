@@ -30,7 +30,9 @@
                     <th scope="col">District</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Updated At</th>
-                    <th scope="col">Action</th>
+                    @can('owner')
+                        <th scope="col">Action</th>
+                    @endcan
                 </tr>
             </thead>
             <tbody>
@@ -40,26 +42,27 @@
                         <td>{{ $user->nama }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->nomor_handphone }}</td>
-                        <td>{{ $user->tgl_lahir }}</td>
-                        <td>{{ $user->point }}</td>
-                        <td>{{ $user->jenis_kelamin }}</td>
+                        <td>{{ \Carbon\Carbon::parse($user->tgl_lahir)->format('d M Y') }}</td>
+                        <td>{{ $user->pelanggan->point }}</td>
+                        <td>{{ $user->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                         <td>{{ $user->provinsi }}</td>
                         <td>{{ $user->kota }}</td>
                         <td>{{ $user->kecamatan }}</td>
-                        <td>{{ $user->created_at }}</td>
-                        <td>{{ $user->updated_at }}</td>
-                        <td>
-                            <p><a class="btn btn-primary btn-block" href="/admin/users/{{ $user->id }}/edit">Edit <i
-                                        class="fa fa-edit"></i></a></p>
-                            @can('owner')
+                        <td>{{ $user->created_at->format('d M Y') }}</td>
+                        <td>{{ $user->updated_at->format('d M Y') }}</td>
+                        @can('owner')
+                            <td>
+                                <p><a class="btn btn-primary btn-block" href="/admin/users/{{ $user->id }}/edit">Edit <i
+                                            class="fa fa-edit"></i></a></p>
+
                                 <form action="/admin/users/{{ $user->id }}" method="POST" class='d-inline'>
                                     @method('DELETE')
                                     @csrf
                                     <button class="btn btn-danger btn-block" type="submit"
                                         onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
-                            @endcan
-                        </td>
+                            </td>
+                        @endcan
                     </tr>
                 @endforeach
             </tbody>

@@ -9,9 +9,9 @@ class Pelanggan extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['pelanggan_id'];
-    protected $hidden = ['password'];
+    protected $guarded = [''];
     protected $table = 'pelanggans';
+    protected $primaryKey = 'pelanggan_id';
 
     public function user(){
         return $this->belongsTo(User::class, 'admin_id');

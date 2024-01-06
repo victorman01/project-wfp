@@ -66,6 +66,7 @@ Route::prefix('admin')->group(function () {
         Route::middleware('roleadmin')->group(function () {
             Route::resource('admins', AdminController::class);
         });
+        Route::resource('users', UserController::class);
         Route::resource('brands', BrandController::class);
         Route::resource('kategoris', KategoriController::class);
         Route::resource('produks', ProdukController::class);

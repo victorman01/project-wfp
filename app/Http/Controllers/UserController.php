@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 use App\Models\AlamatPengiriman;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -72,5 +76,76 @@ class UserController extends Controller
         return view('produk.favorit', [
             'favProducts' => $favProducts
         ]);
+    }
+    public function index(){
+        return view('admin.user.index',[
+            'users'=>User::where('role_id',3)->get()
+        ]);
+    }
+    public function create(){
+        return view('admin.user.add');
+    }
+    public function store(Request $request){
+        $validatedData = $request->validate([
+            'nama' => 'required|string',
+            'email' => 'required|email|string',
+            'password' => 'required|string',
+            'nomor_handphone' => 'required|string',
+            'provinsi' => 'required|string',
+            'kota' => 'required|string',
+            'kecamatan' => 'required|string',
+            'tgl_lahir' => 'required',
+            'jenis_kelamin' => 'required|string',
+            'point' => 'required|integer',
+        ]);
+        $validatedData['tanggal_lahir'] = $validatedData['tgl_lahir'];
+        $validatedData['password'] = Hash::make($validatedData['password'] );
+        $validatedData['role_id'] = 3;
+        $user = User::create($validatedData);
+        $validatedData2 = $request->validate([
+            'point' => 'required|integer',
+        ]);
+        Pelanggan::create([
+            'pelanggan_id' => $user->id,
+            'point'=>$validatedData2['point'],
+        ]);
+        return redirect('/admin/users')->with('success', 'Penambahan data pelanggan berhasil!');
+    }
+    public function edit(User $user){
+        $user->tgl_lahir = Carbon::parse($user->tgl_lahir);
+        return view('admin.user.edit',[
+            'user' => $user,
+        ]);
+    }
+    public function update(Request $request, User $user){
+        $validatedData = $request->validate([
+            'nama' => 'required|string',
+            'email' => 'required|email|string',
+            'nomor_handphone' => 'required|string',
+            'provinsi' => 'required|string',
+            'kota' => 'required|string',
+            'kecamatan' => 'required|string',
+            'tgl_lahir' => 'required',
+            'jenis_kelamin' => 'required|string',
+            'point' => 'required|integer',
+        ]);
+        $validatedData['tanggal_lahir'] = $validatedData['tgl_lahir'];
+        if($request->input('password')){
+            $validatedData['password'] = Hash::make($validatedData['password'] );
+        }
+        $validatedData['role_id'] = 3;
+        $user->update($validatedData);
+        $validatedData2 = $request->validate([
+            'point' => 'required|integer',
+        ]);
+        $user->pelanggan->update([
+            'pelanggan_id' => $user->id,
+            'point'=>$validatedData2['point'],
+        ]);
+        return redirect('/admin/users')->with('success', 'Modifikasi data pelanggan berhasil!');
+    }
+    public function destroy(User $user){
+        $user->delete();
+        return redirect('/admin/users')->with('success', 'Hapus data pelanggan berhasil!');
     }
 }
