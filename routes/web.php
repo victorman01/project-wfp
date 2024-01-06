@@ -44,19 +44,13 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/product-detail', function () {
-    return view('product.detail');
-})->name('product.detail');
-
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::get('/home', [App\Http\Controllers\ProdukController::class, 'show'])->name('home');
 
 //User: Product
 Route::get('/produk-detail/{produkId}', [PelangganProdukController::class, 'produkDetail'])->name('produk-detail');
-
+Route::get('/kategori/{kategoriId}', [ProdukController::class, 'showByCategory'])->name('daftarProdukByKategori');
 
 //Admin thigs
 Route::prefix('admin')->group(function () {
@@ -124,3 +118,8 @@ Route::get('/histori-transaksi', function () {
 Route::get('/detail-histori-transaksi', function () {
     return view('produk.detail-histori-transaksi');
 })->name('detailHistoriTransaksi');
+Route::get('/daftar-produk', function () {
+    return view('produk.daftar-produk',[
+        'produk' => Produk::all(),
+    ]);
+})->name('daftarProduk');

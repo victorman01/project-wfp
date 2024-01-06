@@ -10,9 +10,10 @@
         content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
     <meta name="author" content="elemis">
     @yield('title')
-    <link rel="shortcut icon" href="{{ asset('sandbox360/img/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('sandbox360/img/eCommerceIcon.png') }}">
     <link rel="stylesheet" href="{{ asset('sandbox360/css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('sandbox360/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('sandbox360/css/colors/orange.css') }}">
 </head>
 
 <body>
@@ -21,10 +22,9 @@
             <nav class="navbar navbar-expand-lg center-nav transparent navbar-light py-3">
                 <div class="container flex-lg-row flex-nowrap align-items-center">
                     <div class="navbar-brand w-100">
-                        <a href="/" class="display-6">
-                            {{-- <img src="{{ asset('sandbox360/img/logo.png') }}"
-                                srcset="{{ asset('sandbox360/img/logo@2x.png') }} 2x" alt="" /> --}}
-                            Brand Logo
+                        <a href="/" class="display-6 align-items-center">
+                            <img src="{{ asset('sandbox360/img/eCommerceIcon.png') }}" style="width: 40px;"/>
+                            ACEZ
                         </a>
                     </div>
                     <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
@@ -51,7 +51,7 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item"><a class="dropdown-item" href="{{route('historiTransaksi')}}">Histori Transaksi</a></li>
-                                        <li class="nav-item"><a class="dropdown-item" href="#">Another action</a>
+                                        <li class="nav-item"><a class="dropdown-item" href="{{route('alamatPengiriman.index')}}">Alamat</a></li>
                                         </li>
                                         <li class="nav-item">
                                             <hr class="dropdown-divider">

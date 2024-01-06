@@ -16,17 +16,17 @@ class GambarSeeder extends Seeder
     {
         Gambar::create([
             'nama'=>'Kloset',
-            'path'=>'ehh',
+            'path'=>'sandbox360\img\photos\cf3.jpg',
             'produk_id'=>1
         ]);
         Gambar::create([
             'nama'=>'Westafel',
-            'path'=>'ehh',
+            'path'=>'sandbox360\img\photos\cf2.jpg',
             'produk_id'=>2
         ]);
         Gambar::create([
             'nama'=>'Bak Mandi',
-            'path'=>'ehh',
+            'path'=>'sandbox360\img\photos\cf1.jpg',
             'produk_id'=>3
         ]);
     }

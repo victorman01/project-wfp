@@ -82,6 +82,18 @@ class ProdukController extends Controller
         // ]);
     }
 
+    public function showByCategory($kategoriId)
+    {
+        $produk = Produk::whereHas('kategori', function ($query) use ($kategoriId) {
+            $query->where('kategori_id', $kategoriId);
+        })->get();;
+        $kategori = Kategori::find($kategoriId);
+        return view('produk.daftar-produk-by-kategori', [
+            'produk' => $produk,
+            'kategori' => $kategori
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

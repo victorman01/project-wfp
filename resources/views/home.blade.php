@@ -35,15 +35,15 @@
 
     {{-- SUPPORTED BY --}}
     <section class="wrapper bg-light wrapper-border">
-        <div class="container py-14 py-md-16">
-            <h2 class="fs-15 text-uppercase text-muted text-center mb-8">Featured Brands</h2>
+        <div class="container py-8 py-md-10">
+            <h2 class="fs-15 text-uppercase text-muted text-center mb-8">Brand Unggulan</h2>
             <div class="swiper-container clients mb-0" data-margin="30" data-dots="false" data-autoplay-timeout="3000"
                 data-items-xxl="3" data-items-xl="3" data-items-lg="3" data-items-md="3" data-items-xs="2">
                 <div class="swiper">
                     <div class="swiper-wrapper">
                         @foreach ($brands as $b)
                             <div class="swiper-slide px-5">
-                                <h2 class="text-center text-secondary display-2">{{$b->nama}}</h2>
+                                <h2 class="text-center text-secondary display-2">{{ $b->nama }}</h2>
                             </div>
                         @endforeach
                     </div>
@@ -57,258 +57,13 @@
     </section>
     <!-- /.section -->
 
-    {{-- LIST CATEGORIES --}}
-    <section class="wrapper bg-light">
-        <div class="container pt-6 pt-md-8 pb-6 pb-md-8">
-            <!-- /.row -->
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="mt-2 mb-2 text-primary">Categories</h2>
-                    <hr class="hr p-0 m-0 mb-2">
-                    <ul>
-                        @foreach ($kategoris as $k)
-                            <li>
-                                <a href="#" class="hover" rel="category">{{ $k->nama }}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-            <!-- /.position-relative -->
-        </div>
-        <!-- /.container -->
-    </section>
-    <!-- /section -->
-
-    {{-- LIST CATEGORIES --}}
-    {{-- <section class="wrapper bg-light">
-        <div class="container pt-6 pt-md-8 pb-6 pb-md-8">
-            <div class="row">
-                <h3 class="display-5 mb-6 text-center">Product Categories</h3>
-                <!-- /column -->
-            </div>
-            <!-- /.row -->
-            <div class="position-relative">
-                <div class="shape bg-dot primary rellax w-17 h-20" data-rellax-speed="1" style="top: 0; left: -1.7rem;">
-                </div>
-                <div class="swiper-container dots-closer blog grid-view mb-6" data-margin="0" data-dots="true"
-                    data-items-xl="3" data-items-md="2" data-items-xs="1">
-                    <div class="swiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="item-inner">
-                                    <article>
-                                        <div class="card">
-                                            <figure class="card-img-top overlay overlay-1 hover-scale"><a href="#">
-                                                    <img src="{{ asset('sandbox360/img/photos/b4.jpg') }}"
-                                                        alt="" /></a>
-                                                <figcaption>
-                                                    <h5 class="from-top mb-0">Show More</h5>
-                                                </figcaption>
-                                            </figure>
-                                            <div class="card-body">
-                                                <div class="post-header d-flex align-items-center justify-content-between">
-                                                    <!-- /.post-category -->
-                                                    <h2 class="post-title h3 mt-1 mb-3">Category 1
-                                                    </h2>
-
-                                                    <div class="post-category text-line">
-                                                        <a href="#" class="hover" rel="category">300
-                                                            Product(s)</a>
-                                                    </div>
-                                                </div>
-                                                <!-- /.post-header -->
-                                                <div class="post-content">
-                                                    <p>Mauris convallis non ligula non interdum. Gravida vulputate convallis
-                                                        tempus vestibulum cras imperdiet nun eu dolor.</p>
-                                                </div>
-                                                <!-- /.post-content -->
-                                            </div>
-                                            <!--/.card-body -->
-                                        </div>
-                                        <!-- /.card -->
-                                    </article>
-                                    <!-- /article -->
-                                </div>
-                                <!-- /.item-inner -->
-                            </div>
-                            <!--/.swiper-slide -->
-
-                            <div class="swiper-slide">
-                                <div class="item-inner">
-                                    <article>
-                                        <div class="card">
-                                            <figure class="card-img-top overlay overlay-1 hover-scale"><a href="#">
-                                                    <img src="{{ asset('sandbox360/img/photos/b4.jpg') }}"
-                                                        alt="" /></a>
-                                                <figcaption>
-                                                    <h5 class="from-top mb-0">Show More</h5>
-                                                </figcaption>
-                                            </figure>
-                                            <div class="card-body">
-                                                <div class="post-header d-flex align-items-center justify-content-between">
-                                                    <!-- /.post-category -->
-                                                    <h2 class="post-title h3 mt-1 mb-3">Category 2
-                                                    </h2>
-
-                                                    <div class="post-category text-line">
-                                                        <a href="#" class="hover" rel="category">300
-                                                            Product(s)</a>
-                                                    </div>
-                                                </div>
-                                                <!-- /.post-header -->
-                                                <div class="post-content">
-                                                    <p>Mauris convallis non ligula non interdum. Gravida vulputate convallis
-                                                        tempus vestibulum cras imperdiet nun eu dolor.</p>
-                                                </div>
-                                                <!-- /.post-content -->
-                                            </div>
-                                            <!--/.card-body -->
-                                        </div>
-                                        <!-- /.card -->
-                                    </article>
-                                    <!-- /article -->
-                                </div>
-                                <!-- /.item-inner -->
-                            </div>
-                            <!--/.swiper-slide -->
-
-                            <div class="swiper-slide">
-                                <div class="item-inner">
-                                    <article>
-                                        <div class="card">
-                                            <figure class="card-img-top overlay overlay-1 hover-scale"><a href="#">
-                                                    <img src="{{ asset('sandbox360/img/photos/b4.jpg') }}"
-                                                        alt="" /></a>
-                                                <figcaption>
-                                                    <h5 class="from-top mb-0">Show More</h5>
-                                                </figcaption>
-                                            </figure>
-                                            <div class="card-body">
-                                                <div class="post-header d-flex align-items-center justify-content-between">
-                                                    <!-- /.post-category -->
-                                                    <h2 class="post-title h3 mt-1 mb-3">Category 3
-                                                    </h2>
-
-                                                    <div class="post-category text-line">
-                                                        <a href="#" class="hover" rel="category">300
-                                                            Product(s)</a>
-                                                    </div>
-                                                </div>
-                                                <!-- /.post-header -->
-                                                <div class="post-content">
-                                                    <p>Mauris convallis non ligula non interdum. Gravida vulputate convallis
-                                                        tempus vestibulum cras imperdiet nun eu dolor.</p>
-                                                </div>
-                                                <!-- /.post-content -->
-                                            </div>
-                                            <!--/.card-body -->
-                                        </div>
-                                        <!-- /.card -->
-                                    </article>
-                                    <!-- /article -->
-                                </div>
-                                <!-- /.item-inner -->
-                            </div>
-                            <!--/.swiper-slide -->
-
-                            <div class="swiper-slide">
-                                <div class="item-inner">
-                                    <article>
-                                        <div class="card">
-                                            <figure class="card-img-top overlay overlay-1 hover-scale"><a href="#">
-                                                    <img src="{{ asset('sandbox360/img/photos/b4.jpg') }}"
-                                                        alt="" /></a>
-                                                <figcaption>
-                                                    <h5 class="from-top mb-0">Show More</h5>
-                                                </figcaption>
-                                            </figure>
-                                            <div class="card-body">
-                                                <div class="post-header d-flex align-items-center justify-content-between">
-                                                    <!-- /.post-category -->
-                                                    <h2 class="post-title h3 mt-1 mb-3">Category 4
-                                                    </h2>
-
-                                                    <div class="post-category text-line">
-                                                        <a href="#" class="hover" rel="category">300
-                                                            Product(s)</a>
-                                                    </div>
-                                                </div>
-                                                <!-- /.post-header -->
-                                                <div class="post-content">
-                                                    <p>Mauris convallis non ligula non interdum. Gravida vulputate convallis
-                                                        tempus vestibulum cras imperdiet nun eu dolor.</p>
-                                                </div>
-                                                <!-- /.post-content -->
-                                            </div>
-                                            <!--/.card-body -->
-                                        </div>
-                                        <!-- /.card -->
-                                    </article>
-                                    <!-- /article -->
-                                </div>
-                                <!-- /.item-inner -->
-                            </div>
-                            <!--/.swiper-slide -->
-
-                            <div class="swiper-slide">
-                                <div class="item-inner">
-                                    <article>
-                                        <div class="card">
-                                            <figure class="card-img-top overlay overlay-1 hover-scale"><a href="#">
-                                                    <img src="{{ asset('sandbox360/img/photos/b4.jpg') }}"
-                                                        alt="" /></a>
-                                                <figcaption>
-                                                    <h5 class="from-top mb-0">Show More</h5>
-                                                </figcaption>
-                                            </figure>
-                                            <div class="card-body">
-                                                <div class="post-header d-flex align-items-center justify-content-between">
-                                                    <!-- /.post-category -->
-                                                    <h2 class="post-title h3 mt-1 mb-3">Category 4
-                                                    </h2>
-
-                                                    <div class="post-category text-line">
-                                                        <a href="#" class="hover" rel="category">300
-                                                            Product(s)</a>
-                                                    </div>
-                                                </div>
-                                                <!-- /.post-header -->
-                                                <div class="post-content">
-                                                    <p>Mauris convallis non ligula non interdum. Gravida vulputate convallis
-                                                        tempus vestibulum cras imperdiet nun eu dolor.</p>
-                                                </div>
-                                                <!-- /.post-content -->
-                                            </div>
-                                            <!--/.card-body -->
-                                        </div>
-                                        <!-- /.card -->
-                                    </article>
-                                    <!-- /article -->
-                                </div>
-                                <!-- /.item-inner -->
-                            </div>
-                            <!--/.swiper-slide -->
-                        </div>
-                        <!--/.swiper-wrapper -->
-                    </div>
-                    <!-- /.swiper -->
-                </div>
-                <!-- /.swiper-container -->
-            </div>
-            <!-- /.position-relative -->
-        </div>
-        <!-- /.container -->
-    </section> --}}
-    <!-- /section -->
-
     {{-- LIST PRODUCTS --}}
     <section class="wrapper bg-light">
         <div class="overflow-hidden">
             <div class="container py-6 py-md-8">
                 <div class="row">
                     <div class="col-xl-7 col-xxl-6 mx-auto">
-                        <h2 class="display-5 text-center mt-2 mb-10">List of Our Products</h2>
+                        <h2 class="display-5 text-center mt-2 mb-10">Produk Rekomendasi</h2>
                     </div>
                     <!--/column -->
                 </div>
@@ -321,7 +76,8 @@
                             <div class="card">
                                 <figure class="card-img-top overlay overlay-1 hover-scale"><a
                                         href="{{ route('produk-detail', ['produkId' => $p->id]) }}">
-                                        <img src="{{ isset($p->gambar[0]) ? asset($p->gambar[0]->path) : '' }}" alt="" /></a>
+                                        <img src="{{ isset($p->gambar[0]) ? asset($p->gambar[0]->path) : '' }}"
+                                            alt="" /></a>
                                     <figcaption>
                                         <h5 class="from-top mb-0">Show More</h5>
                                     </figcaption>
@@ -329,21 +85,22 @@
                                 <div class="card-body">
                                     <div class="post-header ">
                                         <!-- /.post-category -->
-                                        <a href="#" class="hover" rel="category">{{ isset($p->kategori[0]) ? $p->kategori[0]->nama : '' }}</a>
+                                        <a href="#" class="hover"
+                                            rel="category">{{ isset($p->kategori[0]) ? $p->kategori[0]->nama : '' }}</a>
                                         <h2 class="post-title h3 mt-1 mb-3">{{ $p->nama }}
                                         </h2>
                                     </div>
                                     <!-- /.post-header -->
                                     <div class="post-content">
                                         <p>{{ $p->spesifikasi }}</p>
-                                        <p><b>Rp{{ $p->harga }}</b></p>
+                                        <p><b>Rp{{ $p->jenis_produk()->first()->harga }}</b></p>
                                     </div>
                                     <!-- /.post-content -->
 
                                     <div class="post-footer">
                                         <div class="d-flex justify-content-end">
                                             <a class="btn btn-primary "
-                                                href="{{ route('produk-detail', ['produkId' => $p->id]) }}">Show</a>
+                                                href="{{ route('produk-detail', ['produkId' => $p->id]) }}">Lihat</a>
                                         </div>
                                     </div>
                                 </div>
@@ -358,6 +115,72 @@
             <!-- /.container -->
         </div>
         <!-- /.overflow-hidden -->
+    </section>
+
+    {{-- LIST CATEGORIES --}}
+    <section class="wrapper bg-light">
+        <div class="container pb-6 pb-md-8">
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="mt-2 mb-2 text-primary">Kategori</h2>
+                            <hr class="hr p-0 m-0 mb-2">
+                            <ul>
+                                @foreach ($kategoris as $k)
+                                    <li>
+                                        <a href="{{ route('daftarProdukByKategori', ['kategoriId' => $k->id]) }}" class="hover" rel="category">{{ $k->nama }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="mt-2 mb-2">Daftar Produk</h2>
+                            <hr class="hr p-0 m-0 mb-2">
+
+                            <div class="row">
+                                {{-- CARD PRODUK --}}
+                                @foreach ($produk as $p)
+                                    <article class="col-3 my-2">
+                                        <a href="{{ route('produk-detail', ['produkId' => $p->id]) }}">
+                                            <div class="card">
+                                                <img class="card-img-top"
+                                                    src="{{ isset($p->gambar[0]) ? asset($p->gambar[0]->path) : '' }}"
+                                                    alt="" />
+                                                <div class="card-body p-3">
+                                                    <h2 class="h4">{{ $p->nama }}
+                                                    </h2>
+                                                    <p class="m-0">{{ $p->spesifikasi }}</p>
+                                                    <p class="m-0 text-dark"><b>Rp{{ $p->jenis_produk()->first()->harga }}</b></p>
+                                                </div>
+                                                <!--/.card-body -->
+                                            </div>
+                                            <!-- /.card -->
+                                        </a>
+                               
+                                    </article>
+                                    <!-- /article -->
+                                @endforeach
+                            </div>
+
+                            <div class="text-end">
+                                <a href="{{route('daftarProduk')}}" class="hover">Lihat Semua ></a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- /.position-relative -->
+        </div>
+        <!-- /.container -->
     </section>
     <!-- /section -->
 @endsection
