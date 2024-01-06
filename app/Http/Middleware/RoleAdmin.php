@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class IsAdmin
+class RoleAdmin
 {
     /**
      * Handle an incoming request.
@@ -15,16 +16,11 @@ class IsAdmin
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
-    {
-        // if (auth()->check()) {
-        //     return $next($request);
-        // }else{
-        //     return redirect('/admin/login');
-        // }
-        if (in_array(auth()->user()->role_id, [1, 2])) {
+    {  
+        $user = Auth::user();
+        if ($user->role_id == 1) {
             return $next($request);
-        } else {
-            return redirect('/admin/login');
         }
+        return abort(401);
     }
 }

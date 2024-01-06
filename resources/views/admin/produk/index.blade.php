@@ -1,12 +1,12 @@
 @extends('layouts.admin.main')
 @section('content')
-<style>
-    .btn-container {
-        display: flex;
-        flex-direction: column;
-        gap: 1px; 
-    }
-</style>
+    <style>
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+    </style>
     <div class="container">
         <h2>Produk table</h2>
         <p>The table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
@@ -49,38 +49,41 @@
                         <td>{{ $p->created_at }}</td>
                         <td>{{ $p->updated_at }}</td>
                         <td>
-                                <p><a class="btn btn-primary btn-block" href="/admin/produks/{{ $p->id }}/edit">Edit <i class="fa fa-edit"></i></a></p>
+                            <p><a class="btn btn-primary btn-block" href="/admin/produks/{{ $p->id }}/edit">Edit <i
+                                        class="fa fa-edit"></i></a></p>
+                            @can('owner')
                                 <form action="/admin/produks/{{ $p->id }}" method="POST" class='d-inline'>
                                     @method('DELETE')
                                     @csrf
                                     <button class="btn btn-danger btn-block" type="submit"
                                         onclick="return confirm('Are you sure?')">Delete</button><br>
                                 </form>
-                                <a class="btn btn-info btn-block" href="#showphoto_{{ $p->id }}"
-                                    data-toggle="modal">{{ $p->nama }}</a>
-                                <div class="modal fade" id="showphoto_{{ $p->id }}" tabindex="-1" role="basic"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">{{ $p->nama }}</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                @foreach ($p->gambar as $gambar)
-                                                    @if ($gambar->path)
-                                                        <img src="{{ asset('storage/' . $gambar->path) }}" height='200px' />
-                                                    @else
-                                                        <img src="" height='200px' />
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">Close</button>
-                                            </div>
+                            @endcan
+                            <a class="btn btn-info btn-block" href="#showphoto_{{ $p->id }}"
+                                data-toggle="modal">{{ $p->nama }}</a>
+                            <div class="modal fade" id="showphoto_{{ $p->id }}" tabindex="-1" role="basic"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">{{ $p->nama }}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            @foreach ($p->gambar as $gambar)
+                                                @if ($gambar->path)
+                                                    <img src="{{ asset('storage/' . $gambar->path) }}" height='200px' />
+                                                @else
+                                                    <img src="" height='200px' />
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default"
+                                                data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

@@ -37,7 +37,7 @@ class User extends Authenticatable
     }
 
     public function admin(){
-        return $this->hasMany(Admin::class, 'admin_id');
+        return $this->hasOne(Admin::class, 'admin_id');
     }
 
     public function role(){

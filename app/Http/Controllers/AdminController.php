@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
+use App\Models\User;
 use App\Models\Admin;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -15,8 +18,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.admin.index',[
-            'admins'=>Admin::all()
+        return view('admin.admin.index', [
+            'admins' => User::whereIn('role_id', [1, 2])->with('admin')->get()
         ]);
     }
 
@@ -27,7 +30,9 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.admin.add');
+        return view('admin.admin.add',[
+            'roles'=>Role::whereIn('id',[1,2])->get()
+        ]);
     }
 
     /**
@@ -39,22 +44,34 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama'=>'required|string',
-            'email'=>'required|email|string',
-            'password'=>'required|string',
-            'tgl_lahir'=>'required',
-            'jenis_kelamin'=>'required|string',
-            'alamat'=>'required|string',
+            'nama' => 'required|string',
+            'email' => 'required|email|string',
+            'password' => 'required|string',
+            'nomor_handphone' => 'required|string',
+            'provinsi' => 'required|string',
+            'kota' => 'required|string',
+            'kecamatan' => 'required|string',
+            'tgl_lahir' => 'required',
+            'jenis_kelamin' => 'required|string',
+            'role_id' => 'required|integer',
         ]);
-        $validatedData['tanggal_lahir']=$validatedData['tgl_lahir'];
-        Admin::create($validatedData);
-        return redirect('/admin/admins')->with('success','Penambahan data admin berhasil!');
+        $validatedData['tanggal_lahir'] = $validatedData['tgl_lahir'];
+        $validatedData['password'] = Hash::make($validatedData['password'] );
+        $akun = User::create($validatedData);
+        $validatedData2 = $request->validate([
+            'alamat' => 'required|string',
+        ]);
+        Admin::create([
+            'admin_id' => $akun->id,
+            'alamat'=>$validatedData2['alamat'],
+        ]);
+        return redirect('/admin/admins')->with('success', 'Penambahan data admin berhasil!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\User
      * @return \Illuminate\Http\Response
      */
     public function show(Admin $admin)
@@ -65,13 +82,14 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\User
      * @return \Illuminate\Http\Response
      */
-    public function edit(Admin $admin)
+    public function edit(User $admin)
     {
-        return view('admin.admin.edit',[
-            'admin'=>$admin,
+        return view('admin.admin.edit', [
+            'admin' => $admin,
+            'roles'=>Role::whereIn('id',[1,2])->get()
         ]);
     }
 
@@ -79,32 +97,36 @@ class AdminController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\User
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Admin $admin)
+    public function update(Request $request, User $admin)
     {
         $validatedData = $request->validate([
-            'nama'=>'required|string',
-            'email'=>'required|email|string',
-            'tgl_lahir'=>'required',
-            'jenis_kelamin'=>'required|string',
-            'alamat'=>'required|string',
+            'nama' => 'required|string',
+            'email' => 'required|email|string',
+            'tgl_lahir' => 'required',
+            'jenis_kelamin' => 'required|string',
+            'role_id' => 'required|integer',
         ]);
-        $validatedData['tanggal_lahir']=$validatedData['tgl_lahir'];
+        $validatedData['tanggal_lahir'] = $validatedData['tgl_lahir'];
+        if($request->password){
+            $validatedData['password'] = $request->password;
+        }
         $admin->update($validatedData);
-        return redirect('/admin/admins')->with('success','Modifikasi data admin berhasil!');
+        $admin->admin->update(['alamat' => $request->input('alamat')]);
+        return redirect('/admin/admins')->with('success', 'Modifikasi data admin berhasil!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\User
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Admin $admin)
+    public function destroy(User $admin)
     {
         $admin->delete();
-        return redirect('/admin/admins')->with('success','Penghapusan data admin berhasil!');
+        return redirect('/admin/admins')->with('success', 'Penghapusan data admin berhasil!');
     }
 }
