@@ -3,14 +3,13 @@
 @section('content')
     <div class="container">
         <h2>Gambar table</h2>
-        <p>The table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
         @if (session()->has('success'))
-            <div class="alert alert-success col-lg-8" role="alert">
+            <div class="alert alert-success" role="alert">
                 {{ session('success') }}
             </div>
         @endif
         @if (session()->has('error'))
-            <div class="alert alert-danger col-lg-8" role="alert">
+            <div class="alert alert-danger" role="alert">
                 {{ session('error') }}
             </div>
         @endif
@@ -42,13 +41,13 @@
                         <td>{{ $gambar->created_at }}</td>
                         <td>{{ $gambar->updated_at }}</td>
                         <td>
-                            <p><a class="btn btn-primary btn-block" href="/admin/gambars/{{ $gambar->id }}/edit">Edit <i
+                            <p><a class="btn btn-primary" href="/admin/gambars/{{ $gambar->id }}/edit">Edit <i
                                         class="fa fa-edit"></i></a></p>
                             @can('owner')
                                 <form action="/admin/gambars/{{ $gambar->id }}" method="POST" class='d-inline'>
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger btn-block" type="submit"
+                                    <button class="btn btn-danger" type="submit"
                                         onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
                             @endcan

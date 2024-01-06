@@ -3,15 +3,14 @@
 @section('content')
     <div class="container">
         <h2>Jenis Pengiriman table</h2>
-        <p>The table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
         <p><a href="/admin/jenis-pengirimans/create">Create New Jenis Pengiriman</a></p>
         @if (session()->has('success'))
-            <div class="alert alert-success col-lg-8" role="alert">
+            <div class="alert alert-success" role="alert">
                 {{ session('success') }}
             </div>
         @endif
         @if (session()->has('error'))
-            <div class="alert alert-danger col-lg-8" role="alert">
+            <div class="alert alert-danger" role="alert">
                 {{ session('error') }}
             </div>
         @endif
@@ -35,7 +34,7 @@
                         <td>{{ $jenisPengiriman->created_at }}</td>
                         <td>{{ $jenisPengiriman->updated_at }}</td>
                         <td>
-                            <p><a class="btn btn-primary btn-block"
+                            <p><a class="btn btn-primary"
                                     href="/admin/jenis-pengirimans/{{ $jenisPengiriman->id }}/edit">Edit <i
                                         class="fa fa-edit"></i></a></p>
                             @can('owner')
@@ -43,7 +42,7 @@
                                     class='d-inline'>
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger btn-block" type="submit"
+                                    <button class="btn btn-danger" type="submit"
                                         onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
                             @endcan

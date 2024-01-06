@@ -2,18 +2,17 @@
 
 @section('content')
     @if (session()->has('success'))
-        <div class="alert alert-success col-lg-8" role="alert">
+        <div class="alert alert-success" role="alert">
             {{ session('success') }}
         </div>
     @endif
     @if (session()->has('error'))
-        <div class="alert alert-danger col-lg-8" role="alert">
+        <div class="alert alert-danger" role="alert">
             {{ session('error') }}
         </div>
     @endif
     <div class="container">
         <h2>Admin table</h2>
-        <p>The table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
         <p><a href="/admin/admins/create">Create New Admin</a></p>
         <table class="table">
             <thead>
@@ -43,13 +42,13 @@
                         <td>{{ $admin->created_at }}</td>
                         <td>{{ $admin->updated_at }}</td>
                         <td>
-                            <p><a class="btn btn-primary btn-block" href="/admin/admins/{{ $admin->id }}/edit">Edit <i
+                            <p><a class="btn btn-primary" href="/admin/admins/{{ $admin->id }}/edit">Edit <i
                                         class="fa fa-edit"></i></a></p>
                             @can('owner')
                                 <form action="/admin/admins/{{ $admin->id }}" method="POST" class='d-inline'>
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger btn-block" type="submit"
+                                    <button class="btn btn-danger" type="submit"
                                         onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
                             @endcan

@@ -9,15 +9,14 @@
     </style>
     <div class="container">
         <h2>Produk table</h2>
-        <p>The table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
         <p><a href="/admin/produks/create">Create New Produk</a></p>
         @if (session()->has('success'))
-            <div class="alert alert-success col-lg-8" role="alert">
+            <div class="alert alert-success" role="alert">
                 {{ session('success') }}
             </div>
         @endif
         @if (session()->has('error'))
-            <div class="alert alert-danger col-lg-8" role="alert">
+            <div class="alert alert-danger" role="alert">
                 {{ session('error') }}
             </div>
         @endif
@@ -49,17 +48,17 @@
                         <td>{{ $p->created_at }}</td>
                         <td>{{ $p->updated_at }}</td>
                         <td>
-                            <p><a class="btn btn-primary btn-block" href="/admin/produks/{{ $p->id }}/edit">Edit <i
+                            <p><a class="btn btn-primary" href="/admin/produks/{{ $p->id }}/edit">Edit <i
                                         class="fa fa-edit"></i></a></p>
                             @can('owner')
                                 <form action="/admin/produks/{{ $p->id }}" method="POST" class='d-inline'>
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger btn-block" type="submit"
+                                    <button class="btn btn-danger" type="submit"
                                         onclick="return confirm('Are you sure?')">Delete</button><br>
                                 </form>
                             @endcan
-                            <a class="btn btn-info btn-block" href="#showphoto_{{ $p->id }}"
+                            <a class="btn btn-info" href="#showphoto_{{ $p->id }}"
                                 data-toggle="modal">{{ $p->nama }}</a>
                             <div class="modal fade" id="showphoto_{{ $p->id }}" tabindex="-1" role="basic"
                                 aria-hidden="true">
