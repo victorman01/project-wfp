@@ -26,7 +26,7 @@
                                             ? '<span class="badge bg-pale-green text-success rounded-pill">Alamat Utama</span>'
                                             : '' !!}
                                     </h5>
-                                    <p class="card-text">Alamat: <br>{{ $a->alamat }}, {{ $a->kota }},
+                                    <p class="card-text">Alamat: {{ $a->alamat }}, {{ $a->kota }},
                                         {{ $a->provinsi }}</p>
                                     <p class="card-text">Nomor HP: {{ $a->nomor_handphone }}</p>
                                     <p class="card-text">Nama Penerima: {{ $a->nama_penerima }}</p>
@@ -50,9 +50,10 @@
             <div class="my-20 text-center">
                 <div class=" h2">Kamu Belum Memiliki Alamat Apapun</div>
 
-                <a href="{{ route('alamatPengiriman.create') }}" class="btn btn-primary btn-large">Tambahkan Alamat Baru &nbsp;<i class="uil uil-plus"></i></a>
+                <a href="{{ route('alamatPengiriman.create') }}" class="btn btn-primary btn-large">Tambahkan Alamat Baru
+                    &nbsp;<i class="uil uil-plus"></i></a>
             </div>
-       
+
         @endisset
 
 
