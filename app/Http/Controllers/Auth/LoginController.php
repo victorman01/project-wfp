@@ -51,6 +51,8 @@ class LoginController extends Controller
 
             if (Auth::user()->role_id != 3) {
                 Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
                 return back()->with('loginError', 'Login Failed');
             }
 
