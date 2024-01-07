@@ -218,9 +218,9 @@ class PelangganProdukController extends Controller
         }
     }
 
-    public function invoiceTransaksi(Request $request, $id)
+    public function invoiceTransaksi(Request $request)
     {
-        $nota = Nota::find($id);
+        $nota = Nota::find($request->id_nota);
         $invoice = $nota->detail_transaksi;
         // dd($detailTransaksi);    
         return view('produk.detail-invoice', [
@@ -238,6 +238,10 @@ class PelangganProdukController extends Controller
     }
 
     public function detailHistoriTransaksi(Request $request){
-        return view('produk.detail-histori-transaksi');
+        $user = Auth::user();
+        $nota = Nota::find($request->id_nota);
+        return view('produk.detail-histori-transaksi', [
+            'nota' => $nota
+        ]);
     }
 }
