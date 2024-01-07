@@ -151,17 +151,17 @@ class PelangganProdukController extends Controller
         $keranjang = []; //Variabel yang dipersiapkan untuk attach data detail_transaksi
         foreach ($produkDibeli as $p) {
             $k = $user->keranjang()->find($p);
-            $checkDiskon = $k->diskon_produk()->where('jenis_produk_id', $k->id)
+            $checkDiskon = $k->diskonProduk()->where('jenis_produk_id', $k->id)
                 ->where('periode_mulai', '<=', now())
                 ->where('periode_berakhir', '>=', now())->get();
 
             if (isset($checkDiskon[0]))
             {
-                $besarDisc = $k->harga * $k->pivot->jumlah * $k->diskon_produk[0]->diskon / 100;
+                $besarDisc = $k->harga * $k->pivot->jumlah * $k->diskonProduk[0]->diskon / 100;
                 $keranjang[$p] = [
                     'jumlah' => $k->pivot->jumlah,
                     'sub_total' => $k->harga * $k->pivot->jumlah,
-                    'diskon' => $k->diskon_produk[0]->diskon,
+                    'diskon' => $k->diskonProduk[0]->diskon,
                     'besar_diskon' => $besarDisc,
                     'created_at' => now(),
                     'updated_at' => now()
@@ -221,7 +221,7 @@ class PelangganProdukController extends Controller
     public function invoiceTransaksi(Request $request)
     {
         $nota = Nota::find($request->id_nota);
-        $invoice = $nota->detail_transaksi;
+        $invoice = $nota->detailTransaksi;
         // dd($detailTransaksi);    
         return view('produk.detail-invoice', [
             'nota' => $nota,

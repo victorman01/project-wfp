@@ -21,7 +21,7 @@ class Produk extends Model
     public function favorit(){
         return $this->belongsToMany(User::class, 'favorits','produk_id','user_id')->withTimestamps();
     }
-    public function kategori_produk(){
+    public function kategoriProduk(){
         return $this->belongsToMany(Kategori::class, 'kategoris_produks', 'produk_id','kategori_id')->withTimestamps();
     }
 
@@ -32,7 +32,7 @@ class Produk extends Model
         return $this->hasMany(Gambar::class);
     }
 
-    public function jenis_produk(){
+    public function jenisProduk(){
         return $this->hasMany(JenisProduk::class);
     }
 }

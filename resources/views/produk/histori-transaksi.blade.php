@@ -28,14 +28,14 @@
                                 </div>
 
                                 <div class="col-4">
-                                    <h3 class="post-title h3">{{ $n->detail_transaksi[0]->produk->nama }}</h3>
+                                    <h3 class="post-title h3">{{ $n->detailTransaksi[0]->produk->nama }}</h3>
                                     
-                                    <label for="">Jenis: {{ $n->detail_transaksi[0]->nama }}</label>
-                                    <p class="text-muted">{{ $n->detail_transaksi[0]->pivot->jumlah }} Barang x Rp{{ number_format($n->detail_transaksi[0]->pivot->sub_total / $n->detail_transaksi[0]->pivot->jumlah, 0, ',', '.') }}</p>
+                                    <label for="">Jenis: {{ $n->detailTransaksi[0]->nama }}</label>
+                                    <p class="text-muted">{{ $n->detailTransaksi[0]->pivot->jumlah }} Barang x Rp{{ number_format($n->detailTransaksi[0]->pivot->sub_total / $n->detailTransaksi[0]->pivot->jumlah, 0, ',', '.') }}</p>
                                     <form action="{{ route('detailHistoriTransaksi') }}" method="post" id="formDetailHistori">
                                         @csrf
                                         <input type="hidden" name="id_nota" value="{{ $n->id }}">
-                                        @isset($n->detail_transaksi[1])
+                                        @isset($n->detailTransaksi[1])
                                             <a id="harga_total" class="hover" onclick="document.getElementById('formDetailHistori').submit();">+1 produk Lainnya</a>
                                         @endisset
                                 </div>  

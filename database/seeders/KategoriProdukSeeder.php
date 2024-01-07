@@ -28,7 +28,7 @@ class KategoriProdukSeeder extends Seeder
         ]);
 
         Produk::all()->each(function($produk){
-            $produk->kategori_produk()->attach(1);
+            $produk->kategoriProduk()->attach(1);
         });
     }
 }

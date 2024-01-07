@@ -28,7 +28,7 @@ class Nota extends Model
     public function jenisPengiriman(){
         return $this->belongsTo(JenisPengiriman::class, 'jenis_pengiriman_id');
     }
-    public function detail_transaksi(){
+    public function detailTransaksi(){
         return $this->belongsToMany(JenisProduk::class, 'detail_transaksis','nota_id','jenis_produk_id')->withPivot(['jumlah', 'sub_total', 'diskon', 'besar_diskon']);
     }
 }

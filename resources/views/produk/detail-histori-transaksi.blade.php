@@ -45,7 +45,7 @@
                             </div>
                             <div class="card-body">
                                 <p class="text-muted">Metode Pembayaran: <span class="text-dark">{{ $nota->metodePembayaran->nama }}</span></p>
-                                <p class="text-muted">Total Harga ({{ count($nota->detail_transaksi) }} Produk): <span class="text-dark">Rp{{ number_format($nota->total_pembayaran, 0, ',', '.') }}</span></p>
+                                <p class="text-muted">Total Harga ({{ count($nota->detailTransaksi) }} Produk): <span class="text-dark">Rp{{ number_format($nota->total_pembayaran, 0, ',', '.') }}</span></p>
                                 <p class="text-muted">Diskon: <span class="text-dark">- Rp{{ number_format($nota->total_diskon, 0, ',', '.') }}</span></p>
                                 <p class="text-muted">Total Ongkir: <span class="text-dark">Rp{{ number_format($nota->jenisPengiriman->harga, 0, ',', '.') }}</span></p>
                                 <p class="text-muted">PPN: <span class="text-dark">Rp{{ number_format($nota->total_ppn, 0, ',', '.') }}</span></p>
@@ -62,7 +62,7 @@
                     </div>
                     <div class="card-body p-5">
                         {{-- DAFTAR PRODUK --}}
-                        @foreach($nota->detail_transaksi as $dt)
+                        @foreach($nota->detailTransaksi as $dt)
                             <div class="card border my-3">
                                 <div class="card-body p-2">
                                     <div class="row my-5" id="histori_transaksi">

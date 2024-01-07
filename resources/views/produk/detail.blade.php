@@ -18,7 +18,7 @@
                 <div class="card my-2 border-dark">
                     <div class="card-body">
                         <label for="spesifikasi"><b>Spesifikasi:</b></label>
-                        <p id="spesifikasi">{{ $produk->jenis_produk[0]->spesifikasi }}</p>
+                        <p id="spesifikasi">{{ $produk->jenisProduk[0]->spesifikasi }}</p>
 
                         <label for="informasi"><b>Informasi:</b></label>
                         <p id="informasi">{{ $produk->informasi }}</p>
@@ -30,8 +30,8 @@
                         <label for="brand"><b>Jenis Produk:</b></label>
 
                         <div class="row">
-                            @foreach ($produk->jenis_produk as $jp)
-                                @if ($jp == $produk->jenis_produk->first())
+                            @foreach ($produk->jenisProduk as $jp)
+                                @if ($jp == $produk->jenisProduk->first())
                                     <button id="{{ $jp->id }}" class="col-2 m-2 btn btn-primary"
                                         onclick="JenisProdukChange(this.id, '{{ $jp->spesifikasi }}', '{{ $jp->harga }}', '{{ $jp->stok }}', '{{ $jp->id }}')">{{ $jp->nama }}
                                     </button>
@@ -48,10 +48,10 @@
                 <div class="card my-2 border-dark">
                     <div class="card-body">
                         <p><b>Harga: Rp.</b> <span
-                                id="harga">{{ number_format($produk->jenis_produk[0]->harga) }}</span>
+                                id="harga">{{ number_format($produk->jenisProduk[0]->harga) }}</span>
                         </p>
                         <p><b>Jumlah Stok:</b> <span class="text-success" id="stok">
-                                {{ $produk->jenis_produk[0]->stok }}</span></p>
+                                {{ $produk->jenisProduk[0]->stok }}</span></p>
                     </div>
                 </div>
 
@@ -64,7 +64,7 @@
                                 <input type="number" id="quantity" class="form-control" value="1" min="1"
                                     name="quantity">
                                 <input type="hidden" name="jenisProdukID" id="jenisProdukID"
-                                    value="{{ $produk->jenis_produk[0]->id }}">
+                                    value="{{ $produk->jenisProduk[0]->id }}">
                             </div>
 
                         </div>
@@ -75,7 +75,7 @@
                             </a>
 
                             <button type="submit" class="btn btn-primary mt-2" id="btn-submit" 
-                                {{ $produk->jenis_produk[0]->stok == 0 ? 'disabled' : '' }}>{{ $produk->jenis_produk[0]->stok == 0 ? 'Stok Habis' : 'Tambahkan Ke Keranjang' }}</button>
+                                {{ $produk->jenisProduk[0]->stok == 0 ? 'disabled' : '' }}>{{ $produk->jenisProduk[0]->stok == 0 ? 'Stok Habis' : 'Tambahkan Ke Keranjang' }}</button>
                         </div>
                     </form>
                 </div>

@@ -32,16 +32,16 @@
                                 <div class="card-body">
                                     <div class="post-header ">
                                         <!-- /.post-category -->
-                                        <a href="{{ route('daftarProdukByKategori', ['kategoriId' => $p->kategori_produk[0]->id]) }}"
+                                        <a href="{{ route('daftarProdukByKategori', ['kategoriId' => $p->kategoriProduk[0]->id]) }}"
                                             class="hover"
-                                            rel="category">{{ isset($p->kategori_produk[0]) ? $p->kategori_produk[0]->nama : '' }}</a>
+                                            rel="category">{{ isset($p->kategoriProduk[0]) ? $p->kategoriProduk[0]->nama : '' }}</a>
                                         <h2 class="post-title h3 mt-1 mb-3">{{ $p->nama }}
                                         </h2>
                                     </div>
                                     <!-- /.post-header -->
                                     <div class="post-content">
                                         <p>{{ $p->spesifikasi }}</p>
-                                        <p><b>Rp. {{ number_format($p->jenis_produk()->first()->harga, 0, ',', '.') }}</b>
+                                        <p><b>Rp. {{ number_format($p->jenisProduk()->first()->harga, 0, ',', '.') }}</b>
                                         </p>
                                     </div>
                                     <!-- /.post-content -->
