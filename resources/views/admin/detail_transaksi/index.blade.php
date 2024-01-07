@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h2>Detail Transaksi table</h2>
-        <p><a href="/admin/detail_transaksis/create">Create New Detail Transaksi</a></p>
+        <p><a href="/admin/detail-transaksi/create">Create New Detail Transaksi</a></p>
         @if (session()->has('success'))
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}

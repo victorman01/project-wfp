@@ -67,7 +67,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="container flex-lg-row flex-nowrap align-items-center">
                 <div class="navbar-brand w-100">
                     <a href="/" class="display-6 align-items-center">
-                        <img src="{{ asset('sandbox360/img/admin-icon.png') }}" style="width: 40px;"/>
+                        <img src="{{ asset('sandbox360/img/admin-icon.png') }}" style="width: 40px;" />
                         ACEZ ADMIN PAGE
                     </a>
                 </div>
@@ -83,7 +83,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{Auth::user()->nama}}
+                                    {{ Auth::user()->nama }}
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
@@ -138,7 +138,8 @@ License: You must have a valid license purchased only from themeforest(the above
                         <form class="search-form" role="form" action="index.html" method="get">
                             <div class="input-icon right">
                                 <i class="icon-magnifier"></i>
-                                <input type="text" class="form-control form-control-lg" name="query" placeholder="Search...">
+                                <input type="text" class="form-control form-control-lg" name="query"
+                                    placeholder="Search...">
                             </div>
                         </form>
                     </li>
@@ -280,12 +281,6 @@ License: You must have a valid license purchased only from themeforest(the above
                             </li>
                         </ul>
                     </li>
-                    <li class="last ">
-                        <a href="login.html">
-                            <i class="icon-user"></i>
-                            <span class="title">Login</span>
-                        </a>
-                    </li>
                 </ul>
                 <!-- END SIDEBAR MENU -->
             </div>
@@ -381,10 +376,10 @@ License: You must have a valid license purchased only from themeforest(the above
     </script>
 
     <script>
-        $(document).ready(function () {
-        $('.page-sidebar-menu li').click(function () {
-            $(this).find('ul.sub-menu').toggle();
-        });
+        $(document).ready(function() {
+            $('.page-sidebar-menu li').click(function() {
+                $(this).find('ul.sub-menu').toggle();
+            });
         });
     </script>
     @yield('scripts')
