@@ -37,7 +37,8 @@
                                     <!-- /.post-header -->
                                     <div class="post-content">
                                         <p>{{ $p->spesifikasi }}</p>
-                                        <p><b>Rp{{ $p->jenis_produk()->first()->harga }}</b></p>
+                                        <p><b>{{ 'Rp. ' . number_format($p->jenis_produk()->first()->harga, 0, ',', '.') }}
+                                            </b></p>
                                     </div>
                                     <!-- /.post-content -->
 
