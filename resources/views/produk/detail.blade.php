@@ -69,7 +69,7 @@
 
                         <div class="col text-end">
                             <a class="btn mt-2 {{ isset($produk->favorit[0]) ? 'btn-pink' : 'btn-success' }}"
-                                onclick="Fav()" id="btn-fav">Favorit<i class="ms-2 uil uil-heart"></i> </a>
+                                onclick="Fav({{ $produk->id }})" id="btn-fav">Favorit<i class="ms-2 uil uil-heart"></i> </a>
 
                             <button type="submit" class="btn btn-primary mt-2">Add to Cart</button>
                         </div>
@@ -121,8 +121,7 @@
 
         }
 
-        function Fav() {
-            var produkID = document.getElementById('produkID').value;
+        function Fav(produkID) {
             var btn_fav = document.getElementById('btn-fav');
             $.ajax({
                 type: 'POST',
