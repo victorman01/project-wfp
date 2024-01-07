@@ -85,7 +85,8 @@
                                 <div class="card-body">
                                     <div class="post-header ">
                                         <!-- /.post-category -->
-                                        <a href="{{ route('daftarProdukByKategori', ['kategoriId' => $p->kategori_produk[0]->id]) }}" class="hover"
+                                        <a href="{{ route('daftarProdukByKategori', ['kategoriId' => $p->kategori_produk[0]->id]) }}"
+                                            class="hover"
                                             rel="category">{{ isset($p->kategori_produk[0]) ? $p->kategori_produk[0]->nama : '' }}</a>
                                         <h2 class="post-title h3 mt-1 mb-3">{{ $p->nama }}
                                         </h2>
@@ -93,7 +94,8 @@
                                     <!-- /.post-header -->
                                     <div class="post-content">
                                         <p>{{ $p->spesifikasi }}</p>
-                                        <p><b>Rp{{ $p->jenis_produk()->first()->harga }}</b></p>
+                                        <p><b>{{ 'Rp ' . number_format($p->jenis_produk()->first()->harga, 0, ',', '.') }}</b>
+                                        </p>
                                     </div>
                                     <!-- /.post-content -->
 
@@ -130,7 +132,8 @@
                             <ul>
                                 @foreach ($kategoris as $k)
                                     <li>
-                                        <a href="{{ route('daftarProdukByKategori', ['kategoriId' => $k->id]) }}" class="hover" rel="category">{{ $k->nama }}</a>
+                                        <a href="{{ route('daftarProdukByKategori', ['kategoriId' => $k->id]) }}"
+                                            class="hover" rel="category">{{ $k->nama }}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -156,20 +159,23 @@
                                                     <h2 class="h4">{{ $p->nama }}
                                                     </h2>
                                                     <p class="m-0">{{ $p->spesifikasi }}</p>
-                                                    <p class="m-0 text-dark"><b>Rp{{ $p->jenis_produk()->first()->harga }}</b></p>
+                                                    <p class="m-0 text-dark">
+                                                        <b>{{ 'Rp ' . number_format($p->jenis_produk()->first()->harga, 0, ',', '.') }}
+                                                        </b>
+                                                    </p>
                                                 </div>
                                                 <!--/.card-body -->
                                             </div>
                                             <!-- /.card -->
                                         </a>
-                               
+
                                     </article>
                                     <!-- /article -->
                                 @endforeach
                             </div>
 
                             <div class="text-end">
-                                <a href="{{route('daftarProduk')}}" class="hover">Lihat Semua ></a>
+                                <a href="{{ route('daftarProduk') }}" class="hover">Lihat Semua ></a>
                             </div>
 
                         </div>

@@ -27,7 +27,7 @@
                                             {{-- Pilih Barang Yang Akan Dibeli --}}
                                             <div class="me-2">
                                                 <input type="checkbox" name="produk_pilihan[]" id=""
-                                                class="form-check-input border p-3" value="{{ $k->id }}" checked>
+                                                    class="form-check-input border p-3" value="{{ $k->id }}" checked>
                                             </div>
 
                                             <img src="{{ isset($k->produk->gambar[0]->path) ? asset($k->produk->gambar[0]->path) : '' }}"
@@ -41,7 +41,8 @@
 
                                                     <h3 class="post-title h3">{{ $k->produk->nama }}</h3>
                                                     <p class="text-muted">Spesifikasi: {{ $k->spesifikasi }}</p>
-                                                    <p id="harga_total{{ $k->id }}">Rp{{ $k->harga }},-</p>
+                                                    <p id="harga_total{{ $k->id }}">
+                                                        Rp{{ number_format($k->harga, 0, ',', '.') }},-</p>
                                                     <input type="hidden" id="harga_barang{{ $k->id }}"
                                                         value="{{ $k->harga }}">
                                                 </div>
@@ -76,7 +77,8 @@
                     <div class="card card-border-end border-success">
                         <div class="card-body">
                             <input type="hidden" id="total_price_val" name="total_price_val" value="{{ $total_price }}">
-                            <h3 class="post-title h3">Total Price: Rp <span id="total_price">{{ $total_price }},-</span>
+                            <h3 class="post-title h3">Total Price: Rp. <span
+                                    id="total_price">{{ number_format($total_price, 0, ',', '.') }},-</span>
                             </h3>
 
                             <h3 class="post-title h3" id="total_item">Total Item(s):
@@ -182,11 +184,11 @@
 
                         //Hapus isi dari container yang bersangkutan
                         $('#container_produk' + idContainer).html('');
-              
+
                         //Mengurangi total item
                         let totalItem = $("#total_item").html().replace(/[^0-9]/g, "")
 
-                        if((totalItem-1) == 0){
+                        if ((totalItem - 1) == 0) {
                             $('#container_produk' + idContainer).html(`<div class="text-center my-2">
                                     <p class="h2 text-primary">Keranjang masih kosong</p>
                                     <img class="w-50"

@@ -47,7 +47,8 @@
 
                 <div class="card my-2 border-dark">
                     <div class="card-body">
-                        <p><b>Harga:</b> <span id="harga">{{ number_format($produk->jenis_produk[0]->harga) }}</span>
+                        <p><b>Harga: Rp.</b> <span
+                                id="harga">{{ number_format($produk->jenis_produk[0]->harga) }}</span>
                         </p>
                         <p><b>Jumlah Stok:</b> <span class="text-success" id="stok">
                                 {{ $produk->jenis_produk[0]->stok }}</span></p>
@@ -62,14 +63,16 @@
                                 <label for="quantity" class="me-2">Quantity:</label>
                                 <input type="number" id="quantity" class="form-control" value="1" min="1"
                                     name="quantity">
-                                <input type="hidden" name="jenisProdukID" id="jenisProdukID" value="{{ $produk->jenis_produk[0]->id }}">
+                                <input type="hidden" name="jenisProdukID" id="jenisProdukID"
+                                    value="{{ $produk->jenis_produk[0]->id }}">
                             </div>
 
                         </div>
 
                         <div class="col text-end">
                             <a class="btn mt-2 {{ isset($produk->favorit[0]) ? 'btn-pink' : 'btn-success' }}"
-                                onclick="Fav({{ $produk->id }})" id="btn-fav">Favorit<i class="ms-2 uil uil-heart"></i> </a>
+                                onclick="Fav({{ $produk->id }})" id="btn-fav">Favorit<i class="ms-2 uil uil-heart"></i>
+                            </a>
 
                             <button type="submit" class="btn btn-primary mt-2">Add to Cart</button>
                         </div>

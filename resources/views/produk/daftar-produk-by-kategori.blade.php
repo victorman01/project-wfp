@@ -12,7 +12,8 @@
             <div class="container py-6 py-md-8">
                 <div class="row">
 
-                    <h2 class="display-5 text-center mt-2 mb-10">Daftar Produk Kategori <span class="text-primary">{{ $kategori->nama }}</span></h2>
+                    <h2 class="display-5 text-center mt-2 mb-10">Daftar Produk Kategori <span
+                            class="text-primary">{{ $kategori->nama }}</span></h2>
 
 
                     {{-- CARD PRODUK --}}
@@ -23,7 +24,7 @@
                                         href="{{ route('produk-detail', ['produkId' => $p->id]) }}">
                                         <img src="{{ isset($p->gambar[0]) ? asset($p->gambar[0]->path) : '' }}"
                                             alt="" /></a>
-                                        
+
                                     <figcaption>
                                         <h5 class="from-top mb-0">Show More</h5>
                                     </figcaption>
@@ -31,7 +32,8 @@
                                 <div class="card-body">
                                     <div class="post-header ">
                                         <!-- /.post-category -->
-                                        <a href="{{ route('daftarProdukByKategori', ['kategoriId' => $p->kategori_produk[0]->id]) }}" class="hover"
+                                        <a href="{{ route('daftarProdukByKategori', ['kategoriId' => $p->kategori_produk[0]->id]) }}"
+                                            class="hover"
                                             rel="category">{{ isset($p->kategori_produk[0]) ? $p->kategori_produk[0]->nama : '' }}</a>
                                         <h2 class="post-title h3 mt-1 mb-3">{{ $p->nama }}
                                         </h2>
@@ -39,7 +41,8 @@
                                     <!-- /.post-header -->
                                     <div class="post-content">
                                         <p>{{ $p->spesifikasi }}</p>
-                                        <p><b>Rp{{ $p->jenis_produk()->first()->harga }}</b></p>
+                                        <p><b>Rp. {{ number_format($p->jenis_produk()->first()->harga, 0, ',', '.') }}</b>
+                                        </p>
                                     </div>
                                     <!-- /.post-content -->
 
