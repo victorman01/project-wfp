@@ -106,7 +106,7 @@ class PelangganProdukController extends Controller
             ->get();
 
         if (!isset($alamatPengiriman[0])) {
-            return back()->with('msg', 'Pilih alamat utama dari pengiriman terlebih dahulu');
+            return redirect()->route('alamatPengiriman.index')->with('msg_failed', 'Pilih alamat utama terlebih dahulu');
         }
 
         $keranjang = [];
