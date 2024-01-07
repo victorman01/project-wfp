@@ -101,16 +101,8 @@ class NotaController extends Controller
     public function update(Request $request, Nota $nota)
     {
         $validatedData = $request->validate([
-            'total_pembayaran'=>'required|numeric',
-            'total_diskon'=>'required|numeric',
-            'total_pembayaran_diskon'=>'required|numeric',
-            'total_keseluruhan'=>'required|numeric',
             'status_pengiriman' => 'required|in:Menunggu Pembayaran,Persiapan Barang,Siap Diantar,Pengiriman,Pesanan Diterima,Pesanan Selesai',
             'status_pembayaran' => 'required|in:Lunas,Belum Dibayar',
-            'user_id'=>'required',
-            'metode_pembayaran_id'=>'required',
-            'alamat_pengiriman_id'=>'required',
-            'jenis_pengiriman_id'=>'required'
         ]);
         $nota = Nota::create($validatedData);
         return redirect('/admin/notas')->with('success', 'Nota has been updated!');

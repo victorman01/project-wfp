@@ -21,6 +21,7 @@
                     <th scope="col">Total Pembayaran</th>
                     <th scope="col">Total Diskon</th>
                     <th scope="col">Total Pembayaran Diskon</th>
+                    <th scope="col">Total PPN</th>
                     <th scope="col">Total Keseluruhan</th>
                     <th scope="col">User</th>
                     <th scope="col">Metode Pembayaran</th>
@@ -30,7 +31,9 @@
                     <th scope="col">Status Pengiriman</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Updated At</th>
-                    <th scope="col">Action</th>
+                    @can('owner')
+                        <th scope="col">Action</th>
+                    @endcan
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +43,7 @@
                         <td>{{ $nota->total_pembayaran }}</td>
                         <td>{{ $nota->total_diskon }}</td>
                         <td>{{ $nota->total_pembayaran_diskon }}</td>
+                        <td>{{ $nota->total_ppn }}</td>
                         <td>{{ $nota->total_keseluruhan }}</td>
                         <td>{{ $nota->user->nama }}</td>
                         <td>{{ $nota->metodePembayaran->nama }}</td>

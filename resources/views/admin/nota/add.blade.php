@@ -19,9 +19,12 @@
                     required>
             </div>
             <div class="form-group">
+                <label for="total_ppn">Total PPN</label>
+                <input type="number" class="form-control" id="total_ppn" name="total_ppn" required>
+            </div>
+            <div class="form-group">
                 <label for="total_keseluruhan">Total Keseluruhan</label>
                 <input type="number" class="form-control" id="total_keseluruhan" name="total_keseluruhan" required>
-                required>
             </div>
             <div class="form-group">
                 <label for="user_id">User</label>

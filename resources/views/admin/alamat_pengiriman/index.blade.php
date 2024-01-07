@@ -30,7 +30,9 @@
                     <th scope="col">User ID</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Updated At</th>
-                    <th scope="col">Action</th>
+                    @can('owner')
+                        <th scope="col">Action</th>
+                    @endcan
                 </tr>
             </thead>
             <tbody>

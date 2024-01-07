@@ -28,6 +28,7 @@ class AdminAlamatPengirimanController extends Controller
      */
     public function create()
     {
+        $this->authorize('owner');
         return view('admin.alamat_pengiriman.add',[
             'users'=>User::all()
         ]);
@@ -41,6 +42,7 @@ class AdminAlamatPengirimanController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('owner');
         $validatedData = $request->validate([
             'nama'=>'required|string',
             'alamat'=>'required|string',
@@ -76,6 +78,7 @@ class AdminAlamatPengirimanController extends Controller
      */
     public function edit(AlamatPengiriman $alamatPengiriman)
     {
+        $this->authorize('owner');
         return view('admin.alamat_pengiriman.edit',[
             'users'=>User::all(),
             'alamat_pengiriman'=>$alamatPengiriman
@@ -91,6 +94,7 @@ class AdminAlamatPengirimanController extends Controller
      */
     public function update(Request $request, AlamatPengiriman $alamatPengiriman)
     {
+        $this->authorize('owner');
         $validatedData = $request->validate([
             'nama'=>'required|string',
             'alamat'=>'required|string',
@@ -115,6 +119,7 @@ class AdminAlamatPengirimanController extends Controller
      */
     public function destroy(AlamatPengiriman $alamatPengiriman)
     {
+        $this->authorize('owner');  
         $alamatPengiriman->delete();
         return redirect('admin/alamat-pengirimans')->with('success', 'Alamat Pengiriman berhasil dihapus');
     }

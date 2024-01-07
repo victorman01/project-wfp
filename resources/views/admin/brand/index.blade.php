@@ -30,9 +30,9 @@
                     <td>{{ $b->created_at }}</td>
                     <td>{{ $b->updated_at }}</td>
                     <td>
-                        <p><a class="btn btn-primary" href="/admin/brands/{{ $b->id }}/edit">Edit <i
-                                    class="fa fa-edit"></i></a></p>
                         @can('owner')
+                            <p><a class="btn btn-primary" href="/admin/brands/{{ $b->id }}/edit">Edit <i
+                                        class="fa fa-edit"></i></a></p>
                             <form action="/admin/brands/{{ $b->id }}" method="POST" class='d-inline'>
                                 @method('DELETE')
                                 @csrf

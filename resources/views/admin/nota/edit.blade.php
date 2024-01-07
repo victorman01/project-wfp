@@ -7,69 +7,32 @@
             @csrf
             @method('put')
             <div class="form-group">
-                <label for="total_pembayaran">Total Pembayaran</label>
-                <input type="number" step="0.01" class="form-control" id="total_pembayaran" name="total_pembayaran"
-                    value="{{ $nota->total_pembayaran }}" required>
+                <label for="total_pembayaran"><b>Total Pembayaran:</b> {{ $nota->total_pembayaran }}</label>
             </div>
             <div class="form-group">
-                <label for="total_diskon">Total Diskon</label>
-                <input type="number" class="form-control" id="total_diskon" name="total_diskon"
-                    value="{{ $nota->total_diskon }}" required>
+                <label for="total_diskon"><b>Total Diskon:</b> {{ $nota->total_diskon }}</label>
             </div>
             <div class="form-group">
-                <label for="total_pembayaran_diskon">Total Pembayaran Diskon</label>
-                <input type="number" class="form-control" id="total_pembayaran_diskon" name="total_pembayaran_diskon"
-                    value="{{ $nota->total_pembayaran_diskon }}" required>
-                required>
+                <label for="total_pembayaran_diskon"><b>Total Pembayaran Diskon:</b>
+                    {{ $nota->total_pembayaran_diskon }}</label>
             </div>
             <div class="form-group">
-                <label for="total_keseluruhan">Total Keseluruhan</label>
-                <input type="number" class="form-control" id="total_keseluruhan" name="total_keseluruhan"
-                    value="{{ $nota->total_keseluruhan }}" required>
-                required>
+                <label for="total_ppn"><b>Total PPN:</b> {{ $nota->total_ppn }}</label>
             </div>
             <div class="form-group">
-                <label for="user_id">User</label>
-                <select name="user_id" class="form-control">
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}" {{ $nota->user->id == $user->id ? 'selected' : '' }}>
-                            {{ $user->nama }}
-                        </option>
-                    @endforeach
-                </select>
+                <label for="total_keseluruhan"><b>Total Keseluruhan: </b>{{ $nota->total_keseluruhan }}</label>
             </div>
             <div class="form-group">
-                <label for="metode_pembayaran_id">Metode Pembayaran</label>
-                <select name="metode_pembayaran_id" class="form-control">
-                    @foreach ($metodePembayarans as $metodePembayaran)
-                        <option value="{{ $metodePembayaran->id }}"
-                            {{ $nota->metodePembayaran->id == $metodePembayaran->id ? 'selected' : '' }}>
-                            {{ $metodePembayaran->nama }}
-                        </option>
-                    @endforeach
-                </select>
+                <label for="user_id"><b>User: </b>{{ $nota->user->id }} - {{ $nota->user->nama }}</label>
             </div>
             <div class="form-group">
-                <label for="alamat_pengiriman_id">Alamat Pengiriman</label>
-                <select name="alamat_pengiriman_id" class="form-control">
-                    @foreach ($alamatPengirimans as $alamatPengiriman)
-                        <option value="{{ $alamatPengiriman->id }}"
-                            {{ $nota->alamatPengiriman->id == $alamatPengiriman->id ? 'selected' : '' }}>
-                            {{ $alamatPengiriman->nama_penerima }}
-                        </option>
-                    @endforeach
-                </select>
+                <label for="metode_pembayaran_id"><b>Metode Pembayaran: </b>{{ $nota->metodePembayaran->nama }}</label>
             </div>
             <div class="form-group">
-                <label for="jenis_pengiriman_id">Jenis Pengiriman</label>
-                <select name="jenis_pengiriman_id" class="form-control">
-                    @foreach ($jenisPengirimans as $jenisPengiriman)
-                        <option value="{{ $jenisPengiriman->id }}"
-                            {{ $nota->jenisPengiriman->id == $jenisPengiriman->id ? 'selected' : '' }}>
-                            {{ $jenisPengiriman->nama }}
-                        </option>
-                    @endforeach
-                </select>
+                <label for="alamat_pengiriman_id"><b>Alamat Pengiriman: {{ $nota->alamatPengiriman->nama }}</b></label>
+            </div>
+            <div class="form-group">
+                <label for="jenis_pengiriman_id"><b>Jenis Pengiriman: </b>{{ $nota->jenisPengiriman->nama }}</label>
             </div>
             <div class="form-group">
                 <label for="status_pembayaran">Status Pembayaran</label>
