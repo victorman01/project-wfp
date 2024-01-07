@@ -112,7 +112,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/checkout/{alamPeng}/{produkDibeli}', [PelangganProdukController::class, 'checkoutKeranjang'])->name('checkoutItem');
     
     //Ganti pake post
-    Route::get('/detail-histori-transaksi/{id}', [PelangganProdukController::class, 'detailTransaksi'])->name('detailTransaksi');
+    Route::get('/invoice/{id}', [PelangganProdukController::class, 'invoiceTransaksi'])->name('invoiceTransaksi');
 });
 
 
