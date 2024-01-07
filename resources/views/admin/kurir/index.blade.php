@@ -34,14 +34,12 @@
                         <td>
                             <p><a class="btn btn-primary" href="/admin/kurirs/{{ $kurir->id }}/edit">Edit <i
                                         class="fa fa-edit"></i></a></p>
-                            @can('owner')
-                                <form action="/admin/kurirs/{{ $kurir->id }}" method="POST" class='d-inline'>
-                                    @method('DELETE')
-                                    @csrf
-                                    <button class="btn btn-danger" type="submit"
-                                        onclick="return confirm('Are you sure?')">Delete</button>
-                                </form>
-                            @endcan
+                            <form action="/admin/kurirs/{{ $kurir->id }}" method="POST" class='d-inline'>
+                                @method('DELETE')
+                                @csrf
+                                <button class="btn btn-danger" type="submit"
+                                    onclick="return confirm('Are you sure?')">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

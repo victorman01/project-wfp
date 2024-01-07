@@ -25,6 +25,7 @@ use App\Http\Controllers\JenisPengirimanController;
 use App\Http\Controllers\PelangganProdukController;
 use App\Http\Controllers\AlamatPengirimanController;
 use App\Http\Controllers\MetodePembayaranController;
+use App\Http\Controllers\AdminAlamatPengirimanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('jenis-pengirimans', JenisPengirimanController::class);
         Route::resource('jenis-produks', JenisProdukController::class);
         Route::resource('detail-transaksi', DetailTransaksiController::class);
+        Route::resource('alamat-pengirimans', AdminAlamatPengirimanController::class);
     });
 
 

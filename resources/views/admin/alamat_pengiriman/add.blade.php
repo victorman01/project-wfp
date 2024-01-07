@@ -3,11 +3,11 @@
 @section('content')
     <div class="container">
         <h2>Add New Shipping Address</h2>
-        <form method="post" action="/admin/alamat_pengirimans">
+        <form method="post" action="/admin/alamat-pengirimans">
             @csrf
             <div class="form-group">
-                <label for="alamat">Alamat</label>
-                <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
+                <label for="nama">Nama Tempat</label>
+                <input type="text" class="form-control" id="nama" name="nama" required>
             </div>
             <div class="form-group">
                 <label for="nama_penerima">Nama Penerima</label>
@@ -33,9 +33,12 @@
                 <label for="kelurahan_kode_pos">Kelurahan Kode Pos</label>
                 <input type="text" class="form-control" id="kelurahan_kode_pos" name="kelurahan_kode_pos" required>
             </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="alamat_utama" name="alamat_utama" value="1">
-                <label class="form-check-label" for="alamat_utama">Alamat Utama</label>
+            <div class="form-group">
+                <label for="alamat_utama">Alamat Utama</label>
+                <select name="alamat_utama" class="form-control">
+                    <option value="1">Ya</option>
+                    <option value="0">Tidak</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="user_id">User</label>
@@ -44,6 +47,10 @@
                         <option value="{{ $user->id }}">{{ $user->nama }}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="alamat">Alamat</label>
+                <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Add Shipping Address</button>
         </form>

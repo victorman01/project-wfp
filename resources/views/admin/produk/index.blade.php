@@ -50,14 +50,12 @@
                         <td>
                             <p><a class="btn btn-primary" href="/admin/produks/{{ $p->id }}/edit">Edit <i
                                         class="fa fa-edit"></i></a></p>
-                            @can('owner')
-                                <form action="/admin/produks/{{ $p->id }}" method="POST" class='d-inline'>
-                                    @method('DELETE')
-                                    @csrf
-                                    <button class="btn btn-danger" type="submit"
-                                        onclick="return confirm('Are you sure?')">Delete</button><br>
-                                </form>
-                            @endcan
+                            <form action="/admin/produks/{{ $p->id }}" method="POST" class='d-inline'>
+                                @method('DELETE')
+                                @csrf
+                                <button class="btn btn-danger" type="submit"
+                                    onclick="return confirm('Are you sure?')">Delete</button><br>
+                            </form>
                             <a class="btn btn-info" href="#showphoto_{{ $p->id }}"
                                 data-toggle="modal">{{ $p->nama }}</a>
                             <div class="modal fade" id="showphoto_{{ $p->id }}" tabindex="-1" role="basic"
