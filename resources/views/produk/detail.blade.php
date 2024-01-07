@@ -74,7 +74,8 @@
                                 onclick="Fav({{ $produk->id }})" id="btn-fav">Favorit<i class="ms-2 uil uil-heart"></i>
                             </a>
 
-                            <button type="submit" class="btn btn-primary mt-2">Add to Cart</button>
+                            <button type="submit" class="btn btn-primary mt-2" id="btn-submit" 
+                                {{ $produk->jenis_produk[0]->stok == 0 ? 'disabled' : '' }}>{{ $produk->jenis_produk[0]->stok == 0 ? 'Stok Habis' : 'Tambahkan Ke Keranjang' }}</button>
                         </div>
                     </form>
                 </div>
@@ -120,8 +121,11 @@
 
             // Mengubah semua class btn jenis produk terpilih menjadi primary
             document.getElementById(eventId).className = "col-2 m-2 btn btn-primary";
-
-
+            if(stok.val() == 0){
+                $('#btn-submit').prop('disabled', true)
+            } else {
+                $('#btn-submit').prop('disabled', false)
+            }
         }
 
         function Fav(produkID) {
