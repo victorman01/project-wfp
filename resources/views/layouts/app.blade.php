@@ -13,6 +13,7 @@
     <link rel="shortcut icon" href="{{ asset('sandbox360/img/favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('sandbox360/css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('sandbox360/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('sandbox360/css/colors/orange.css') }}">
 </head>
 
 <body>

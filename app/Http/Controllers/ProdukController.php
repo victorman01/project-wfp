@@ -153,4 +153,13 @@ class ProdukController extends Controller
         $produk->delete();
         return redirect('/admin/produks')->with('success', 'Product has been deleted!');
     }
+
+    public function searchProduk(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        $produkList = Produk::where('nama', 'like', '%' . $keyword . '%')->get();
+
+        return view('produk.daftar-produk', ['produk' => $produkList]);
+    }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.user.main')
 
 @section('title')
-    <title>Charts</title>
+    <title>Keranjang</title>
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                 <div class="col-8">
                     <div class="card card-border-start border-primary">
                         <div class="card-body">
-                            <h2 class="post-title h2">Chart Item(s)
-                            </h2>
-
-                            <hr class="dropdown-divider">
                             @if ($keranjang != null)
+                                <h2 class="post-title h2">Chart Item(s)
+                                </h2>
+
+                                <hr class="dropdown-divider">
                                 <form action="{{ route('checkoutIndex') }}" id="form_pembelian">
                                     @foreach ($keranjang as $k)
                                         {{-- Loops Here --}}
@@ -54,8 +54,10 @@
                                     @endforeach
                                 </form>
                             @else
-                                {{-- Perlu diperbaiki --}}
-                                <p>Keranjang masih kosong</p>
+                                <div class="text-center my-2">
+                                    <p class="h2 text-primary">Keranjang masih kosong</p>
+                                    <img class="w-50" src="{{ asset('sandbox360\img\illustrations\empty_chart.jpg') }}" />
+                                </div>
                             @endif
                         </div>
                         <!--/.card-body -->

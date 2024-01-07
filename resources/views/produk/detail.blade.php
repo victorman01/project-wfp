@@ -33,11 +33,11 @@
                             @foreach ($produk->jenis_produk as $jp)
                                 @if ($jp == $produk->jenis_produk->first())
                                     <button id="{{ $jp->id }}" class="col-2 m-2 btn btn-primary"
-                                        onclick="JenisProdukChange(this.id, '{{ $jp->spesifikasi }}', '{{ $jp->harga }}', '{{ $jp->stok }}', '{{ $jp->id }}')">{{ $jp->nama_jenis }}
+                                        onclick="JenisProdukChange(this.id, '{{ $jp->spesifikasi }}', '{{ $jp->harga }}', '{{ $jp->stok }}', '{{ $jp->id }}')">{{ $jp->nama }}
                                     </button>
                                 @else
                                     <button id="{{ $jp->id }}" class="col-2 m-2 btn btn-outline-primary"
-                                        onclick="JenisProdukChange(this.id, '{{ $jp->spesifikasi }}', '{{ $jp->harga }}', '{{ $jp->stok }}', '{{ $jp->id }}')">{{ $jp->nama_jenis }}
+                                        onclick="JenisProdukChange(this.id, '{{ $jp->spesifikasi }}', '{{ $jp->harga }}', '{{ $jp->stok }}', '{{ $jp->id }}')">{{ $jp->nama }}
                                     </button>
                                 @endif
                             @endforeach

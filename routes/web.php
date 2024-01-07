@@ -51,6 +51,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //User: Product
 Route::get('/produk-detail/{produkId}', [PelangganProdukController::class, 'produkDetail'])->name('produk-detail');
 Route::get('/kategori/{kategoriId}', [ProdukController::class, 'showByCategory'])->name('daftarProdukByKategori');
+Route::get('/search-produk', [ProdukController::class, 'searchProduk'])->name('cariProduk');
+
 
 //Admin thigs
 Route::prefix('admin')->group(function () {
