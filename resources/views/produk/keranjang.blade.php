@@ -14,7 +14,7 @@
                     <div class="card card-border-start border-primary">
                         <div class="card-body">
                             @if ($keranjang != null)
-                                <h2 class="post-title h2">Chart Item(s)
+                                <h2 class="post-title h2">Barang Keranjang
                                 </h2>
 
                                 <hr class="dropdown-divider">
@@ -23,16 +23,22 @@
                                         {{-- Loops Here --}}
                                         <div class="d-flex justify-content-start my-5"
                                             id="container_produk{{ $k->id }}">
-                                            <img src="https://picsum.photos/150/150" alt="Product Image"
-                                                class="img-fluid rounded-4">
+
+                                            {{-- Pilih Barang Yang Akan Dibeli --}}
+                                            <div class="me-2">
+                                                <input type="checkbox" name="produk_pilihan[]" id=""
+                                                class="form-check-input border p-3" value="{{ $k->id }}" checked>
+                                            </div>
+
+                                            <img src="{{ isset($k->produk->gambar[0]->path) ? asset($k->produk->gambar[0]->path) : '' }}"
+                                                alt="Product Image" class="img rounded shadow"
+                                                style="width:200px;height:200px;object-fit: cover;">
 
                                             <div class="container py-1">
-                                                {{-- Pilih Barang Yang Akan Dibeli --}}
-                                                <input type="checkbox" name="produk_pilihan[]" id=""
-                                                    class="form-check-input" value="{{ $k->id }}">
-                                                <label for="">Pilih Produk {{ $k->produk->nama }}</label>
 
-                                                <div class="row ms-2">
+                                                <div class="row">
+                                                    <label for="">Pilih Produk {{ $k->produk->nama }}</label>
+
                                                     <h3 class="post-title h3">{{ $k->produk->nama }}</h3>
                                                     <p class="text-muted">Spesifikasi: {{ $k->spesifikasi }}</p>
                                                     <p id="harga_total{{ $k->id }}">Rp{{ $k->harga }},-</p>
@@ -56,7 +62,8 @@
                             @else
                                 <div class="text-center my-2">
                                     <p class="h2 text-primary">Keranjang masih kosong</p>
-                                    <img class="w-50" src="{{ asset('sandbox360\img\illustrations\empty_chart.jpg') }}" />
+                                    <img class="w-50"
+                                        src="{{ asset('sandbox360\img\illustrations\empty_chart.jpg') }}" />
                                 </div>
                             @endif
                         </div>
@@ -175,10 +182,18 @@
 
                         //Hapus isi dari container yang bersangkutan
                         $('#container_produk' + idContainer).html('');
-                        $('#container_produk' + idContainer).html('<p>Keranjang masih kosong</p>');
-
+              
                         //Mengurangi total item
                         let totalItem = $("#total_item").html().replace(/[^0-9]/g, "")
+
+                        if((totalItem-1) == 0){
+                            $('#container_produk' + idContainer).html(`<div class="text-center my-2">
+                                    <p class="h2 text-primary">Keranjang masih kosong</p>
+                                    <img class="w-50"
+                                        src="{{ asset('sandbox360/img/illustrations/empty_chart.jpg') }}" />
+                                </div>`);
+                        }
+
                         $("#total_item").html("Total Item(s): " + (parseInt(totalItem) - 1).toString())
                     }
                 },

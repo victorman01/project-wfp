@@ -85,8 +85,8 @@
                                 <div class="card-body">
                                     <div class="post-header ">
                                         <!-- /.post-category -->
-                                        <a href="#" class="hover"
-                                            rel="category">{{ isset($p->kategori[0]) ? $p->kategori[0]->nama : '' }}</a>
+                                        <a href="{{ route('daftarProdukByKategori', ['kategoriId' => $p->kategori_produk[0]->id]) }}" class="hover"
+                                            rel="category">{{ isset($p->kategori_produk[0]) ? $p->kategori_produk[0]->nama : '' }}</a>
                                         <h2 class="post-title h3 mt-1 mb-3">{{ $p->nama }}
                                         </h2>
                                     </div>

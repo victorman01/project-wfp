@@ -6,50 +6,61 @@
 
 @section('content')
     {{-- LIST PRODUCT --}}
-    {{-- LIST PRODUCT --}}
     <section class="bg-white">
 
-        <div class="container py-2">
-            <h3 class="mt-4">List Favorite Product(s)</h3>
+        <div class="container py-2 my-4">
 
-            <div class="row mt-4 mb-6 justify-content-start">
-                {{-- CARD PRODUK --}}
-                @foreach ($favProducts as $p)
-                    <article class="col-3 my-2">
-                        <div class="card shadow-lg">
-                            <figure class="card-img-top overlay overlay-1">
-                                {{-- @foreach ($p->gambar as $gambar)
-                                @if ($gambar->path)
-                                    <img src="{{ asset('storage/' . $gambar->path) }}" height='200px' />
-                                @else
-                                    <img src="{{ asset('sandbox360//img/photos/cs1.jpg') }}" height='200px' alt="" />
-                                @endif
-                            @endforeach --}}
-                                <img src="{{ asset('sandbox360//img/photos/cs1.jpg') }}" height='200px' alt="" />
+            @if (count($favProducts) > 0)
+                <h3 class="mt-4">Daftar Produk Favorit</h3>
 
-                            </figure>
-                            <div class="card-body p-6">
-                                <div class="post-header">
-                                    <!-- /.post-category -->
+                <div class="row mt-4 mb-6 justify-content-start">
+                    {{-- CARD PRODUK --}}
+                    @foreach ($favProducts as $p)
+                        <div class="col-4 my-2">
+                            <div class="card">
+                                <figure class="card-img-top overlay overlay-1 hover-scale"><a
+                                        href="{{ route('produk-detail', ['produkId' => $p->id]) }}">
+                                        <img src="{{ isset($p->gambar[0]) ? asset($p->gambar[0]->path) : '' }}"
+                                            alt="" /></a>
+                                    <figcaption>
+                                        <h5 class="from-top mb-0">Show More</h5>
+                                    </figcaption>
+                                </figure>
+                                <div class="card-body">
+                                    <div class="post-header ">
+                                        <!-- /.post-category -->
+                                        <a href="#" class="hover"
+                                            rel="category">{{ isset($p->kategori[0]) ? $p->kategori[0]->nama : '' }}</a>
+                                        <h2 class="post-title h3 mt-1 mb-3">{{ $p->nama }}
+                                        </h2>
+                                    </div>
+                                    <!-- /.post-header -->
+                                    <div class="post-content">
+                                        <p>{{ $p->spesifikasi }}</p>
+                                        <p><b>Rp{{ $p->jenis_produk()->first()->harga }}</b></p>
+                                    </div>
+                                    <!-- /.post-content -->
 
-                                    <h4 class="post-title h4 mt-1 mb-3">{{ $p->nama }}</h4>
-                                    <p>{{ $p->spesifikasi }}</p>
-                                    <p><b>Rp{{ $p->harga }}</b></p>
-                                </div>
-                                <!-- /.post-header -->
-                                <div class="post-footer">
-                                    <div class="d-flex justify-content-end">
-                                        <a class="btn btn-primary "
-                                            href="{{ route('produk-detail', ['produkId' => $p->id]) }}">Show</a>
+                                    <div class="post-footer">
+                                        <div class="d-flex justify-content-end">
+                                            <a class="btn btn-primary "
+                                                href="{{ route('produk-detail', ['produkId' => $p->id]) }}">Lihat</a>
+                                        </div>
                                     </div>
                                 </div>
+                                <!--/.card-body -->
                             </div>
-                            <!--/.card-body -->
+                            <!-- /.card -->
                         </div>
-                        <!-- /.card -->
-                    </article>
-                    <!-- /article -->
-                @endforeach
-            </div>
+                        <!-- /div -->
+                    @endforeach
+                </div>
+            @else
+                <div class="text-center my-2">
+                    <p class="h2 text-primary">Belum Ada Produk Favorit</p>
+                    <img class="w-50" src="{{ asset('sandbox360\img\illustrations\empty.png') }}" />
+                </div>
+            @endif
+
     </section>
 @endsection

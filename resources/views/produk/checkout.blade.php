@@ -35,8 +35,9 @@
                                 @foreach ($keranjang as $k)
                                     {{-- Loops Here --}}
                                     <div class="d-flex justify-content-start my-5" id="container_produk{{ $k->id }}">
-                                        <img src="https://picsum.photos/150/150" alt="Product Image"
-                                            class="img-fluid rounded-4">
+                                        <img src="{{ isset($k->produk->gambar[0]->path) ? asset($k->produk->gambar[0]->path) : '' }}"
+                                            alt="Product Image" class="img rounded shadow"
+                                            style="width:200px;height:200px;object-fit: cover;">
 
                                         <div class="container py-1">
                                             <div class="row ms-2">
@@ -81,8 +82,8 @@
                                     action="{{ route('checkoutItem', ['alamPeng' => $alamPeng, 'produkDibeli' => json_encode($produkPilihan)]) }}"
                                     method="post" id="form_checkout">
                                     @csrf
-                                    <select class="form-select" aria-label="Pilih Metode Pembayaran"
-                                        id="metode_pembayaran" name="metode_pembayaran" required>
+                                    <select class="form-select" aria-label="Pilih Metode Pembayaran" id="metode_pembayaran"
+                                        name="metode_pembayaran" required>
                                         <option value="default" selected>Pilih Metode Pembayaran</option>
                                         @foreach ($metPem as $mp)
                                             <option value="{{ $mp->id }}">{{ $mp->nama }}</option>
