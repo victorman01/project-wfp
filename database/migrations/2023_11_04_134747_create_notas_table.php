@@ -19,6 +19,7 @@ class CreateNotasTable extends Migration
             $table->double('total_diskon');
             $table->double('total_pembayaran_diskon');
             $table->double('total_ppn');
+            $table->double('total_keseluruhan');
             $table->enum('status_pengiriman', ['Menunggu Pembayaran', 'Persiapan Barang', 'Siap Diantar', 
                                 'Pengiriman', 'Pesanan Diterima', 'Pesanan Selesai'])->default('Menunggu Pembayaran');
             $table->enum('status_pembayaran', ['Lunas', 'Belum Dibayar'])->default('Belum Dibayar');
