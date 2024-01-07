@@ -108,19 +108,22 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/checkout-form', [PelangganProdukController::class, 'checkoutIndex'])->name('checkoutIndex');
     Route::post('/checkout/{alamPeng}/{produkDibeli}', [PelangganProdukController::class, 'checkoutKeranjang'])->name('checkoutItem');
+    
+    //Ganti pake post
+    Route::get('/detail-histori-transaksi/{id}', [PelangganProdukController::class, 'detailTransaksi'])->name('detailTransaksi');
 });
 
 
 // TEST ROUTE 
-Route::get('/checkout', function () {
-    return view('produk.checkout');
-})->name('checkout');
+// Route::get('/checkout', function () {
+//     return view('produk.checkout');
+// })->name('checkout');
 Route::get('/histori-transaksi', function () {
     return view('produk.histori-transaksi');
 })->name('historiTransaksi');
-Route::get('/detail-histori-transaksi', function () {
-    return view('produk.detail-histori-transaksi');
-})->name('detailHistoriTransaksi');
+// Route::get('/detail-histori-transaksi', function () {
+//     return view('produk.detail-histori-transaksi');
+// })->name('detailHistoriTransaksi');
 Route::get('/daftar-produk', function () {
     return view('produk.daftar-produk',[
         'produk' => Produk::all(),

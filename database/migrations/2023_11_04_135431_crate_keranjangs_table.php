@@ -14,8 +14,8 @@ class CrateKeranjangsTable extends Migration
     public function up()
     {
         Schema::create('keranjangs', function (Blueprint $table) {
-            $table->foreignId('jenis_produk_id')->constrained()->onDelete('cascade');;
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');;
+            $table->foreignId('jenis_produk_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('jumlah');
             $table->timestamps();
         });

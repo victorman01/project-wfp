@@ -17,11 +17,11 @@ class JenisProduk extends Model
     }
 
     public function detailTransaksi(){
-        return $this->belongsToMany(Nota::class, 'detail_transaksis', 'jenis_produk_id', 'nota_id');
+        return $this->belongsToMany(Nota::class, 'detail_transaksis', 'jenis_produk_id', 'nota_id')->withPivot(['jumlah', 'sub_total', 'diskon', 'besar_diskon']);
     }
 
-    public function diskonProduk(){
-        return $this->hasMany(DiskonProduk::class, 'diskon_produk_id');
+    public function diskon_produk(){
+        return $this->hasMany(DiskonProduk::class);
     }
 
     public function produk(){

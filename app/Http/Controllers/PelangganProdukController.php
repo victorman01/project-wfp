@@ -90,27 +90,29 @@ class PelangganProdukController extends Controller
         //
     }
 
-    public function produkDetail(Request $request, $produkId){
+    public function produkDetail(Request $request, $produkId)
+    {
         $produkDetail = Produk::find($produkId);
         return view('produk.detail', [
             'produk' => $produkDetail
         ]);
     }
 
-    public function checkoutIndex(Request $request){
+    public function checkoutIndex(Request $request)
+    {
         $user = Auth::user();
         $alamatPengiriman = AlamatPengiriman::where('user_id', $user->id)
-                        ->where('alamat_utama', 1)
-                        ->get();
+            ->where('alamat_utama', 1)
+            ->get();
 
-        if(!isset($alamatPengiriman[0])){
+        if (!isset($alamatPengiriman[0])) {
             return back()->with('msg', 'Pilih alamat utama dari pengiriman terlebih dahulu');
         }
 
         $keranjang = [];
         $totalHarga = 0;
-        if($request->produk_pilihan != null){
-            foreach($request->produk_pilihan as $p){
+        if ($request->produk_pilihan != null) {
+            foreach ($request->produk_pilihan as $p) {
                 $k = $user->keranjang()->find($p);
                 $keranjang[] = $k;
                 $totalHarga += $k->harga * $k->pivot->jumlah;
@@ -134,7 +136,8 @@ class PelangganProdukController extends Controller
         ]);
     }
 
-    public function checkoutKeranjang(Request $request, AlamatPengiriman $alamPeng, $produkDibeli){
+    public function checkoutKeranjang(Request $request, AlamatPengiriman $alamPeng, $produkDibeli)
+    {
         //CATATAN:
         //$request menyimpan id dari: metode_pembayaran, kurir, dan jenis_pengiriman
         //$alamPeng menyimpan object alamat pengiriman
@@ -144,35 +147,58 @@ class PelangganProdukController extends Controller
 
         $user = Auth::user();
         $totalPembayaran = 0;
+        $totalDiskon = 0;
         $keranjang = []; //Variabel yang dipersiapkan untuk attach data detail_transaksi
-        foreach($produkDibeli as $p){
+        foreach ($produkDibeli as $p) {
             $k = $user->keranjang()->find($p);
-            $keranjang[$p] = [
-                'jumlah' => $k->pivot->jumlah,
-                'sub_total' => $k->harga * $k->pivot->jumlah,
-                'created_at' => now(),
-                'updated_at' => now()
-            ];
+            if (
+                $k->diskon_produk()->where('jenis_produk_id', $k->id)
+                    ->where('periode_mulai', '<=', now())
+                    ->where('periode_berakhir', '>=', now())
+            ) {
+                $besarDisc = $k->harga * $k->pivot->jumlah * $k->diskon_produk[0]->diskon / 100;
+                $keranjang[$p] = [
+                    'jumlah' => $k->pivot->jumlah,
+                    'sub_total' => $k->harga * $k->pivot->jumlah,
+                    'diskon' => $k->diskon_produk[0]->diskon,
+                    'besar_diskon' => $besarDisc,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ];
+            } else {
+                $besarDisc = 0;
+                $keranjang[$p] = [
+                    'jumlah' => $k->pivot->jumlah,
+                    'sub_total' => $k->harga * $k->pivot->jumlah,
+                    'diskon' => 0,
+                    'besar_diskon' => $besarDisc,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ];
+            }
             $totalPembayaran += $k->harga * $k->pivot->jumlah;
+            $totalDiskon += $besarDisc;
         }
 
         //buat nota
         $createNota = Nota::create([
             'total_pembayaran' => $totalPembayaran,
-            'total_ppn' => $totalPembayaran * 0.11,
+            'total_diskon' => $totalDiskon,
+            'total_pembayaran_diskon' => $totalPembayaran - $totalDiskon,
+            'total_ppn' => ($totalPembayaran - $totalDiskon) * 0.11,
             'status_pengiriman' => 'Diproses',
             'user_id' => $user->id,
             'metode_pembayaran_id' => $request->metode_pembayaran,
-            'alamat_pengiriman_id'=> $alamPeng->id,
+            'alamat_pengiriman_id' => $alamPeng->id,
             'jenis_pengiriman_id' => $request->jenis_pengiriman,
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        
+
         //Jika berhasil membuat nota, buat detail transaksinya
-        if($createNota){
-            $detailTransaksi = $createNota->detailTransaksi()->attach($keranjang);
-            foreach($produkDibeli as $p){
+        if ($createNota) {
+            $detailTransaksi = $createNota->detail_transaksi()->attach($keranjang);
+            foreach ($produkDibeli as $p) {
                 //Update stok dan detach m-n
                 $k = $user->keranjang()->find($p);
                 $k->stok -= $k->pivot->jumlah;
@@ -183,5 +209,16 @@ class PelangganProdukController extends Controller
         } else {
             return back()->with('msg', 'Beli Produk Gagal! Pastikan semua data terisi dengan benar.');
         }
+    }
+
+    public function detailTransaksi(Request $request, $id)
+    {
+        $nota = Nota::find($id);
+        $detailTrans = $nota->detail_transaksi;
+        // dd($detailTransaksi);    
+        return view('produk.detail-histori-transaksi', [
+            'nota' => $nota,
+            'detailTransaksi' => $detailTrans
+        ]);
     }
 }

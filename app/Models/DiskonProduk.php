@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Produk;
+use App\Models\JenisProduk;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -13,6 +14,6 @@ class DiskonProduk extends Model
     protected $table = 'diskon_produks';
 
     public function jenis_produk(){
-        return $this->belongsTo(Produk::class, 'jenis_produk_id');
+        return $this->belongsTo(JenisProduk::class);
     }
 }

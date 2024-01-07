@@ -14,11 +14,12 @@ class CreateDetailTransaksisTable extends Migration
     public function up()
     {
         Schema::create('detail_transaksis', function (Blueprint $table) {
-            $table->id();
             $table->integer('jumlah');
             $table->double('sub_total');
-            $table->foreignId('jenis_produk_id')->constrained();
-            $table->foreignId('nota_id')->constrained();
+            $table->double('diskon');
+            $table->double('besar_diskon');
+            $table->foreignId('jenis_produk_id')->constrained()->onDelete('cascade');;
+            $table->foreignId('nota_id')->constrained()->onDelete('cascade');;
             $table->timestamps();
         });
     }

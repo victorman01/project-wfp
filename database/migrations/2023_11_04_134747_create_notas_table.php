@@ -16,6 +16,8 @@ class CreateNotasTable extends Migration
         Schema::create('notas', function (Blueprint $table) {
             $table->id();
             $table->double('total_pembayaran');
+            $table->double('total_diskon');
+            $table->double('total_pembayaran_diskon');
             $table->double('total_ppn');
             $table->enum('status_pengiriman', ['Menunggu Pembayaran', 'Diproses', 'Dikirim', 'Diterima']);
             $table->foreignId('user_id')->constrained();
