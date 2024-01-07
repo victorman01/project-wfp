@@ -21,7 +21,7 @@ class IsAdmin
         // }else{
         //     return redirect('/admin/login');
         // }
-        if (in_array(auth()->user()->role_id, [1, 2])) {
+        if (auth()->check() && in_array(auth()->user()->role_id, [1, 2])) {
             return $next($request);
         } else {
             return redirect('/admin/login');
