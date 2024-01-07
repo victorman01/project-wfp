@@ -120,6 +120,11 @@ class AlamatPengirimanController extends Controller
             $validation['alamat_utama'] = 0;
         }
 
+        //Set semua alamat pengiriman menjadi bukan alamat utama
+        $alamatUtama = Auth::user()->alamatPengiriman()->where('alamat_utama', 1)->first();
+        $alamatUtama->update(['alamat_utama' => 0]);
+
+        //Update alamat utama yang baru
         $alamatPengiriman->update($validation);
 
         return redirect()->route('alamatPengiriman.index')->with('msg','Sukses Update Data');
@@ -133,8 +138,15 @@ class AlamatPengirimanController extends Controller
      */
     public function destroy(AlamatPengiriman $alamatPengiriman)
     {
-        $alamatPengiriman->delete();
-
-        return redirect()->route('alamatPengiriman.index')->with('msg','Sukses Hapus Data'); 
+        $user = Auth::user();
+        // dd($user->alamatPengiriman);
+        if(count($user->alamatPengiriman) > 1){
+            if($alamatPengiriman->alamat_utama == 1){
+                $alamatPengiriman->delete();
+                $user->alamatPengiriman()->first()->update(['alamat_utama' => 1]);
+                return redirect()->route('alamatPengiriman.index')->with('msg_success','Sukses Hapus Data');
+            }
+        }
+        return redirect()->route('alamatPengiriman.index')->with('msg_failed','Alamat Pengiriman Hanya 1 dan Tidak Dapat Dihapus!');
     }
 }

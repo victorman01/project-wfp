@@ -57,9 +57,13 @@
         @endisset
 
 
-        @if (session()->has('msg'))
-            <div>
-                <p>{{ session('msg') }}</p>
+        @if (session()->has('msg_success'))
+            <div class="mt-2 alert alert-success">
+                <p>{{ session('msg_success') }}</p>
+            </div>
+        @elseif (session()->has('msg_failed'))
+            <div class="mt-2 alert alert-danger">
+                <p>{{ session('msg_failed') }}</p>
             </div>
         @endif
 </div>

@@ -110,7 +110,7 @@
                                 <div class="col-md-1">
                                     <div class="form-check">
                                         <input type="radio" name="alamat_utama" class="form-check-input"
-                                            {{ $alamatPengiriman->alamat_utama == 1 ? 'checked' : '' }}>
+                                            {{ $alamatPengiriman->alamat_utama == 1 ? 'checked' : '' }} value="1">
                                         <label for="">Ya</label>
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@
                                 <div class="col-md-1">
                                     <div class="form-check">
                                         <input type="radio" name="alamat_utama" class="form-check-input"
-                                            {{ $alamatPengiriman->alamat_utama == 0 ? 'checked' : '' }}>
+                                            {{ $alamatPengiriman->alamat_utama == 0 ? 'checked' : '' }} value="0">
                                         <label for="">Tidak</label>
                                     </div>
                                 </div>
