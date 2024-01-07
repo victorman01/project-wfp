@@ -213,14 +213,14 @@ class PelangganProdukController extends Controller
         }
     }
 
-    public function detailTransaksi(Request $request, $id)
+    public function invoiceTransaksi(Request $request, $id)
     {
         $nota = Nota::find($id);
-        $detailTrans = $nota->detail_transaksi;
+        $invoice = $nota->detail_transaksi;
         // dd($detailTransaksi);    
-        return view('produk.detail-histori-transaksi', [
+        return view('produk.detail-invoice', [
             'nota' => $nota,
-            'detailTransaksi' => $detailTrans
+            'detailInvoice' => $invoice
         ]);
     }
 }

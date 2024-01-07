@@ -19,11 +19,6 @@
                             <div class="mb-4">
                                 <h2 class="mb-1 text-muted">ACEZ</h2>
                             </div>
-                            {{-- <div class="text-muted">
-                                <p class="mb-1">3184 Spruce Drive Pittsburgh, PA 15201</p>
-                                <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i> xyz@987.com</p>
-                                <p><i class="uil uil-phone me-1"></i> 012-345-6789</p>
-                            </div> --}}
                         </div>
 
                         <hr class="my-4">
@@ -51,10 +46,6 @@
                                         <h5 class="font-size-15 mb-1">Tanggal Nota:</h5>
                                         <p>{{ date('d F Y', strtotime($nota->created_at)) }}</p>
                                     </div>
-                                    {{-- <div class="mt-4">
-                                        <h5 class="font-size-15 mb-1">No Order:</h5>
-                                        <p>#1123456</p>
-                                    </div> --}}
                                 </div>
                             </div>
                             <!-- end col -->
@@ -76,33 +67,20 @@
                                         </tr>
                                     </thead><!-- end thead -->
                                     <tbody>
-                                        @for ($i = 0; $i < count($detailTransaksi); $i++)
+                                        @for ($i = 0; $i < count($detailInvoice); $i++)
                                             <tr>
                                                 <th scope="row">{{ $i + 1 }}</th>
                                                 <td>
                                                     <div>
-                                                        <h5 class="text-truncate font-size-14 mb-1">{{ $detailTransaksi[$i]->produk->nama }}</h5>
-                                                        <p class="text-muted mb-0">{{ $detailTransaksi[$i]->nama_jenis }}</p>
+                                                        <h5 class="text-truncate font-size-14 mb-1">{{ $detailInvoice[$i]->produk->nama }}</h5>
+                                                        <p class="text-muted mb-0">{{ $detailInvoice[$i]->nama_jenis }}</p>
                                                     </div>
                                                 </td>
-                                                <td>{{ $detailTransaksi[$i]->pivot->sub_total / $detailTransaksi[$i]->pivot->jumlah }}</td>
-                                                <td>{{ $detailTransaksi[$i]->pivot->jumlah }}</td>
-                                                <td class="text-end">{{ $detailTransaksi[$i]->pivot->sub_total }}</td>
+                                                <td>{{ $detailInvoice[$i]->pivot->sub_total / $detailInvoice[$i]->pivot->jumlah }}</td>
+                                                <td>{{ $detailInvoice[$i]->pivot->jumlah }}</td>
+                                                <td class="text-end">{{ $detailInvoice[$i]->pivot->sub_total }}</td>
                                             </tr>
                                         @endfor
-                                        <!-- end tr -->
-                                        {{-- <tr>
-                                            <th scope="row">02</th>
-                                            <td>
-                                                <div>
-                                                    <h5 class="text-truncate font-size-14 mb-1">Stainless Steel S010</h5>
-                                                    <p class="text-muted mb-0">Watch, Gold</p>
-                                                </div>
-                                            </td>
-                                            <td>Rp245.000,-</td>
-                                            <td>2</td>
-                                            <td class="text-end">Rp490.000.-</td>
-                                        </tr> --}}
                                         <!-- end tr -->
                                         <tr>
                                             <th scope="row" colspan="4" class="text-end">Sub Total</th>
@@ -130,7 +108,7 @@
                                         <tr>
                                             <th scope="row" colspan="4" class="border-0 text-end">Total</th>
                                             <td class="border-0 text-end">
-                                                <h4 class="m-0 fw-semibold">Rp{{ number_format(($nota->total_pembayaran_diskon + $nota->total_ppn), 0, ',', '.') }}</h4>
+                                                <h4 class="m-0 fw-semibold">Rp{{ number_format(($nota->total_pembayaran_diskon + $nota->total_ppn + $nota->jenisPengiriman->harga), 0, ',', '.') }}</h4>
                                             </td>
                                         </tr>
                                         <!-- end tr -->
