@@ -21,6 +21,7 @@
                     <th scope="col">Total Pembayaran</th>
                     <th scope="col">Total Diskon</th>
                     <th scope="col">Total Pembayaran Diskon</th>
+                    <th scope="col">Total Keseluruhan</th>
                     <th scope="col">User</th>
                     <th scope="col">Metode Pembayaran</th>
                     <th scope="col">Alamat Pengiriman</th>
@@ -39,6 +40,7 @@
                         <td>{{ $nota->total_pembayaran }}</td>
                         <td>{{ $nota->total_diskon }}</td>
                         <td>{{ $nota->total_pembayaran_diskon }}</td>
+                        <td>{{ $nota->total_keseluruhan }}</td>
                         <td>{{ $nota->user->nama }}</td>
                         <td>{{ $nota->metodePembayaran->nama }}</td>
                         <td>{{ $nota->alamatPengiriman->alamat }}</td>

@@ -49,7 +49,11 @@ class NotaController extends Controller
     {
         $validatedData = $request->validate([
             'total_pembayaran'=>'required|numeric',
-            'status_pengiriman'=>'required',
+            'total_diskon'=>'required|numeric',
+            'total_pembayaran_diskon'=>'required|numeric',
+            'total_keseluruhan'=>'required|numeric',
+            'status_pengiriman' => 'required|in:Menunggu Pembayaran,Persiapan Barang,Siap Diantar,Pengiriman,Pesanan Diterima,Pesanan Selesai',
+            'status_pembayaran' => 'required|in:Lunas,Belum Dibayar',
             'user_id'=>'required',
             'metode_pembayaran_id'=>'required',
             'alamat_pengiriman_id'=>'required',
@@ -98,7 +102,11 @@ class NotaController extends Controller
     {
         $validatedData = $request->validate([
             'total_pembayaran'=>'required|numeric',
-            'status_pengiriman'=>'required',
+            'total_diskon'=>'required|numeric',
+            'total_pembayaran_diskon'=>'required|numeric',
+            'total_keseluruhan'=>'required|numeric',
+            'status_pengiriman' => 'required|in:Menunggu Pembayaran,Persiapan Barang,Siap Diantar,Pengiriman,Pesanan Diterima,Pesanan Selesai',
+            'status_pembayaran' => 'required|in:Lunas,Belum Dibayar',
             'user_id'=>'required',
             'metode_pembayaran_id'=>'required',
             'alamat_pengiriman_id'=>'required',
