@@ -10,13 +10,13 @@
                 <input type="number" class="form-control" id="total_pembayaran" name="total_pembayaran" required>
             </div>
             <div class="form-group">
-                <label for="status_pengiriman">Status Pengiriman</label>
-                <select class="form-control" id="status_pengiriman" name="status_pengiriman">
-                    <option value="Menunggu Pembayaran">Menunggu Pembayaran</option>
-                    <option value="Diproses">Diproses</option>
-                    <option value="Dikirim">Dikirim</option>
-                    <option value="Diterima">Diterima</option>
-                </select>
+                <label for="total_diskon">Total Diskon</label>
+                <input type="number" class="form-control" id="total_diskon" name="total_diskon" required>
+            </div>
+            <div class="form-group">
+                <label for="total_pembayaran_diskon">Total Pembayaran Diskon</label>
+                <input type="number" class="form-control" id="total_pembayaran_diskon" name="total_pembayaran_diskon"
+                    required>
             </div>
             <div class="form-group">
                 <label for="user_id">User</label>
@@ -47,6 +47,23 @@
                 <select class="form-control" id="jenis_pengiriman_id" name="jenis_pengiriman_id">
                     @foreach ($jenis_pengirimans as $jenis_pengiriman)
                         <option value="{{ $jenis_pengiriman->id }}">{{ $jenis_pengiriman->nama }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="status_pembayaran">Status Pembayaran</label>
+                <select class="form-control" id="status_pembayaran" name="status_pembayaran">
+                    <option value="Belum Dibayar">Belum Dibayar</option>
+                    <option value="Lunas">Lunas</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="status_pengiriman">Status Pengiriman</label>
+                <select name="status_pengiriman" class="form-control">
+                    @foreach (['Menunggu Pembayaran', 'Persiapan Barang', 'Siap Diantar', 'Pengiriman', 'Pesanan Diterima', 'Pesanan Selesai'] as $status)
+                        <option value="{{ $status }}">
+                            {{ $status }}
+                        </option>
                     @endforeach
                 </select>
             </div>

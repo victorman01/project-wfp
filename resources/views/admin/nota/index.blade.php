@@ -19,11 +19,14 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Total Pembayaran</th>
+                    <th scope="col">Total Diskon</th>
+                    <th scope="col">Total Pembayaran Diskon</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Metode Pembayaran</th>
+                    <th scope="col">Alamat Pengiriman</th>
+                    <th scope="col">Jenis Pengiriman</th>
+                    <th scope="col">Status Pembayaran</th>
                     <th scope="col">Status Pengiriman</th>
-                    <th scope="col">User ID</th>
-                    <th scope="col">Metode Pembayaran ID</th>
-                    <th scope="col">Alamat Pengiriman ID</th>
-                    <th scope="col">Jenis Pengiriman ID</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Updated At</th>
                     <th scope="col">Action</th>
@@ -34,11 +37,14 @@
                     <tr>
                         <td>{{ $nota->id }}</td>
                         <td>{{ $nota->total_pembayaran }}</td>
+                        <td>{{ $nota->total_diskon }}</td>
+                        <td>{{ $nota->total_pembayaran_diskon }}</td>
+                        <td>{{ $nota->user->nama }}</td>
+                        <td>{{ $nota->metodePembayaran->nama }}</td>
+                        <td>{{ $nota->alamatPengiriman->alamat }}</td>
+                        <td>{{ $nota->jenisPengiriman->nama }}</td>
+                        <td>{{ $nota->status_pembayaran }}</td>
                         <td>{{ $nota->status_pengiriman }}</td>
-                        <td>{{ $nota->user_id }}</td>
-                        <td>{{ $nota->metode_pembayaran_id }}</td>
-                        <td>{{ $nota->alamat_pengiriman_id }}</td>
-                        <td>{{ $nota->jenis_pengiriman_id }}</td>
                         <td>{{ $nota->created_at }}</td>
                         <td>{{ $nota->updated_at }}</td>
                         <td>
