@@ -151,11 +151,12 @@ class PelangganProdukController extends Controller
         $keranjang = []; //Variabel yang dipersiapkan untuk attach data detail_transaksi
         foreach ($produkDibeli as $p) {
             $k = $user->keranjang()->find($p);
-            if (
-                $k->diskon_produk()->where('jenis_produk_id', $k->id)
-                    ->where('periode_mulai', '<=', now())
-                    ->where('periode_berakhir', '>=', now())
-            ) {
+            $checkDiskon = $k->diskon_produk()->where('jenis_produk_id', $k->id)
+                ->where('periode_mulai', '<=', now())
+                ->where('periode_berakhir', '>=', now())->get();
+
+            if (isset($checkDiskon[0]))
+            {
                 $besarDisc = $k->harga * $k->pivot->jumlah * $k->diskon_produk[0]->diskon / 100;
                 $keranjang[$p] = [
                     'jumlah' => $k->pivot->jumlah,
@@ -186,7 +187,8 @@ class PelangganProdukController extends Controller
             'total_diskon' => $totalDiskon,
             'total_pembayaran_diskon' => $totalPembayaran - $totalDiskon,
             'total_ppn' => ($totalPembayaran - $totalDiskon) * 0.11,
-            'status_pengiriman' => 'Diproses',
+            'status_pengiriman' => 'Menunggu Pembayaran',
+            'status_pembayaran' => 'Belum Dibayar',
             'user_id' => $user->id,
             'metode_pembayaran_id' => $request->metode_pembayaran,
             'alamat_pengiriman_id' => $alamPeng->id,

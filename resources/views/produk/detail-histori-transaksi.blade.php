@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <div class="invoice-title">
                             <h4 class="float-end font-size-15">Invoice #{{ $nota->id }} <span
-                                    class="badge bg-success font-size-12 ms-2">Paid</span></h4>
+                                    class="badge bg-success font-size-12 ms-2">{{ $nota->status_pembayaran }}</span></h4>
                             <div class="mb-4">
                                 <h2 class="mb-1 text-muted">ACEZ</h2>
                             </div>
@@ -130,7 +130,7 @@
                                         <tr>
                                             <th scope="row" colspan="4" class="border-0 text-end">Total</th>
                                             <td class="border-0 text-end">
-                                                <h4 class="m-0 fw-semibold">Rp{{ number_format($nota->total_pembayaran_diskon, 0, ',', '.') }}</h4>
+                                                <h4 class="m-0 fw-semibold">Rp{{ number_format(($nota->total_pembayaran_diskon + $nota->total_ppn), 0, ',', '.') }}</h4>
                                             </td>
                                         </tr>
                                         <!-- end tr -->
