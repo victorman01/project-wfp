@@ -123,9 +123,9 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('/histori-transaksi', function () {
     return view('produk.histori-transaksi');
 })->name('historiTransaksi');
-// Route::get('/detail-histori-transaksi', function () {
-//     return view('produk.detail-histori-transaksi');
-// })->name('detailHistoriTransaksi');
+Route::get('/detail-histori-transaksi', function () {
+    return view('produk.detail-histori-transaksi');
+})->name('detailHistoriTransaksi');
 Route::get('/daftar-produk', function () {
     return view('produk.daftar-produk',[
         'produk' => Produk::all(),

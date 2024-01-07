@@ -1,7 +1,7 @@
 @extends('layouts.user.main')
 
 @section('title')
-    <title>Histori Transaksi</title>
+    <title>Invoice</title>
 @endsection
 
 @section('content')
