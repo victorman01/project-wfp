@@ -116,7 +116,7 @@ Route::group(['middleware' => ['ispelanggan']], function () {
     //Ganti pake post
     Route::get('/histori-transaksi', [PelangganProdukController::class, 'historiTransaksi'])->name('historiTransaksi');
     Route::post('/detail-histori-transaksi', [PelangganProdukController::class, 'detailHistoriTransaksi'])->name('detailHistoriTransaksi');
-    Route::get('/invoice/{id}', [PelangganProdukController::class, 'invoiceTransaksi'])->name('invoiceTransaksi');
+    Route::post('/invoice', [PelangganProdukController::class, 'invoiceTransaksi'])->name('invoiceTransaksi');
 });
 
 

@@ -16,19 +16,22 @@
                     <div class="col">
                         {{-- CARD INVOICE --}}
                         <div class="card my-1 h-100">
-                            <div class="card-header">
+                        <div class="card-header">
                                 <h5 class="card-title">Status: <span class="badge bg-success rounded">Selesai</span>
                                 </h5>
                             </div>
                             <div class="card-body p-2 px-8">
                                 <div class="row my-5">
-                                    <p class="text-muted">No. Invoice: <span class="text-dark fw-bold">1</span></p>
-                                    <p class="text-muted">Tanggal Pembelian: <span class="text-dark fw-bold">08 Jan
-                                            2024</span></p>
+                                    <form action="{{ route('invoiceTransaksi') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="id_nota" value="{{ $nota->id }}">
+                                        <button class="btn btn-success" type="submit">Lihat Invoice</button>
+                                    </form>
+                                    <p class="text-muted">Tanggal Pembelian: <span class="text-dark fw-bold">{{ date('d F Y', strtotime($nota->created_at)) }}</span></p>
 
-                                    <p class="text-muted">Kurir: <span class="text-dark">JNE-Sameday</span></p>
-                                    <p class="text-muted">Alamat: <span class="text-dark">Nama Jalan <br> Kota, Provinsi
-                                            <br> Nomor HP</span></p>
+                                    <p class="text-muted">Kurir: <span class="text-dark">{{ $nota->jenisPengiriman->kurir->nama }} - {{ $nota->jenisPengiriman->nama }}</span></p>
+                                    <p class="text-muted">Alamat: <span class="text-dark">{{ $nota->alamatPengiriman->alamat }} <br> {{ $nota->alamatPengiriman->kota }}, {{ $nota->alamatPengiriman->provinsi }}
+                                            <br> {{ $nota->alamatPengiriman->nomor_handphone }} </span></p>
                                 </div>
                             </div>
                         </div>
@@ -41,11 +44,13 @@
                                 <h5 class="card-title">Rincian Pembayaran</h5>
                             </div>
                             <div class="card-body">
-                                <p class="text-muted">Metode Pembayaran: <span class="text-dark">OVO</span></p>
-                                <p class="text-muted">Total Harga (2 Barang): <span class="text-dark">Rp100.000,-</span></p>
-                                <p class="text-muted">Total Ongkir: <span class="text-dark">Rp10.000,-</span></p>
+                                <p class="text-muted">Metode Pembayaran: <span class="text-dark">{{ $nota->metodePembayaran->nama }}</span></p>
+                                <p class="text-muted">Total Harga ({{ count($nota->detail_transaksi) }} Produk): <span class="text-dark">Rp{{ number_format($nota->total_pembayaran, 0, ',', '.') }}</span></p>
+                                <p class="text-muted">Diskon: <span class="text-dark">- Rp{{ number_format($nota->total_diskon, 0, ',', '.') }}</span></p>
+                                <p class="text-muted">Total Ongkir: <span class="text-dark">Rp{{ number_format($nota->jenisPengiriman->harga, 0, ',', '.') }}</span></p>
+                                <p class="text-muted">PPN: <span class="text-dark">Rp{{ number_format($nota->total_ppn, 0, ',', '.') }}</span></p>
                                 <br>
-                                <h5 class="fw-bold">Total Harga: Rp110.000,-</span></h5>
+                                <h5 class="fw-bold">Total Harga: Rp{{ number_format($nota->total_keseluruhan, 0, ',', '.') }}</span></h5>
                             </div>
                         </div>
                     </div>
@@ -57,83 +62,33 @@
                     </div>
                     <div class="card-body p-5">
                         {{-- DAFTAR PRODUK --}}
-                        <div class="card border my-3">
-                            <div class="card-body p-2">
-                                <div class="row my-5" id="histori_transaksi">
-                                    <div class="col-2 text-end">
-                                        <img src="{{ asset('sandbox360\img\photos\cf3.jpg') }}" alt="Product Image"
-                                            class=" img rounded shadow" style="width:120px;height:120px;object-fit: cover;">
-                                    </div>
+                        @foreach($nota->detail_transaksi as $dt)
+                            <div class="card border my-3">
+                                <div class="card-body p-2">
+                                    <div class="row my-5" id="histori_transaksi">
+                                        <div class="col-2 text-end">
+                                            <img src="{{ asset('sandbox360\img\photos\cf3.jpg') }}" alt="Product Image"
+                                                class=" img rounded shadow" style="width:120px;height:120px;object-fit: cover;">
+                                        </div>
 
-                                    <div class="col-4">
-                                        <label for="">Produk A</label>
-
-                                        <h3 class="post-title h3">Jenis: A++</h3>
-                                        <p class="text-muted">1 Barang x Rp59000,-</p>
-                                    </div>
-                                    <div class="col-3">
-                                        <br>
-                                        <p class="text-muted m-0">Total Belanja</p>
-                                        <h3 class="post-title h3 m-0 mb-3">Rp120000,-</h3>
-                                    </div>
-                                    <div class="col-3 d-flex justify-content-end align-items-end">
-                                        <a href="" class="btn btn-outline-primary me-4">Beli Lagi</a>
+                                        <div class="col-4">
+                                            <h3 class="post-title h3">{{ $dt->produk->nama }}</h3>
+                                            
+                                            <label for="">Jenis: {{ $dt->nama }}</label>
+                                            <p class="text-muted">{{ $dt->pivot->jumlah }} Barang x Rp{{ number_format($dt->pivot->sub_total / $dt->pivot->jumlah, 0, ',', '.') }}</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <br>
+                                            <p class="text-muted m-0">Total Belanja</p>
+                                            <h3 class="post-title h3 m-0 mb-3">Rp{{ number_format($dt->pivot->sub_total, 0, ',', '.') }}</h3>
+                                        </div>
+                                        <div class="col-3 d-flex justify-content-end align-items-end">
+                                            <a href="{{ route('produk-detail', ['produkId' => $dt->produk->id]) }}" class="btn btn-outline-primary me-4">Beli Lagi</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="card border my-3">
-                            <div class="card-body p-2">
-                                <div class="row my-5" id="histori_transaksi">
-                                    <div class="col-2 text-end">
-                                        <img src="{{ asset('sandbox360\img\photos\cf3.jpg') }}" alt="Product Image"
-                                            class=" img rounded shadow" style="width:120px;height:120px;object-fit: cover;">
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="">Produk A</label>
-
-                                        <h3 class="post-title h3">Jenis: A++</h3>
-                                        <p class="text-muted">1 Barang x Rp59000,-</p>
-                                    </div>
-                                    <div class="col-3">
-                                        <br>
-                                        <p class="text-muted m-0">Total Belanja</p>
-                                        <h3 class="post-title h3 m-0 mb-3">Rp120000,-</h3>
-                                    </div>
-                                    <div class="col-3 d-flex justify-content-end align-items-end">
-                                        <a href="" class="btn btn-outline-primary me-4">Beli Lagi</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card border my-3">
-                            <div class="card-body p-2">
-                                <div class="row my-5" id="histori_transaksi">
-                                    <div class="col-2 text-end">
-                                        <img src="{{ asset('sandbox360\img\photos\cf3.jpg') }}" alt="Product Image"
-                                            class=" img rounded shadow" style="width:120px;height:120px;object-fit: cover;">
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="">Produk A</label>
-
-                                        <h3 class="post-title h3">Jenis: A++</h3>
-                                        <p class="text-muted">1 Barang x Rp59000,-</p>
-                                    </div>
-                                    <div class="col-3">
-                                        <br>
-                                        <p class="text-muted m-0">Total Belanja</p>
-                                        <h3 class="post-title h3 m-0 mb-3">Rp120000,-</h3>
-                                    </div>
-                                    <div class="col-3 d-flex justify-content-end align-items-end">
-                                        <a href="" class="btn btn-outline-primary me-4">Beli Lagi</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
