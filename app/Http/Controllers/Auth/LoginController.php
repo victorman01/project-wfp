@@ -46,10 +46,17 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+
+            if (Auth::user()->role_id != 3) {
+                Auth::logout();
+                return back()->with('loginError', 'Login Failed');
+            }
+
             return redirect()->intended('/home');
         }
+
 
         return back()->with('loginError', 'Login Failed');
     }

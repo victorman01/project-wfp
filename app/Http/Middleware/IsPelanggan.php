@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IsPelanggan
 {
@@ -16,11 +17,14 @@ class IsPelanggan
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->role == 3) {
+        if (auth()->check() && in_array(auth()->user()->role_id, [3])) {
             return $next($request);
-        }else{
-            return redirect()->back();
+        }elseif(auth()->check() && in_array(auth()->user()->role_id, [1, 2])) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return redirect('/login')->with('loginError','Login Failed!');
         }
-        return abort(404);
+        return redirect('/login');
     }
 }

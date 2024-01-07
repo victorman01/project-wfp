@@ -95,7 +95,7 @@ Route::post('login', [LoginController::class, 'authenticate'])->name('login');
 Route::get('login', [LoginController::class, 'showLoginUI'])->name('loginUI');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['ispelanggan']], function () {
     //User
     Route::post('/favorit', [UserController::class, 'addOrDeleteFavorite'])->name('favorit');
     Route::get('/favorit-page', [UserController::class, 'showFavoriteProducts'])->name('favorite.page');
