@@ -228,4 +228,16 @@ class PelangganProdukController extends Controller
             'detailInvoice' => $invoice
         ]);
     }
+
+    public function historiTransaksi(Request $request){
+        $user = Auth::user();
+        $nota = Nota::where('user_id', $user->id)->get();
+        return view('produk.histori-transaksi', [
+            'nota' => $nota
+        ]);
+    }
+
+    public function detailHistoriTransaksi(Request $request){
+        return view('produk.detail-histori-transaksi');
+    }
 }

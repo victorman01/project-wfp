@@ -114,6 +114,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/checkout/{alamPeng}/{produkDibeli}', [PelangganProdukController::class, 'checkoutKeranjang'])->name('checkoutItem');
     
     //Ganti pake post
+    Route::get('/histori-transaksi', [PelangganProdukController::class, 'historiTransaksi'])->name('historiTransaksi');
+    Route::post('/detail-histori-transaksi', [PelangganProdukController::class, 'detailHistoriTransaksi'])->name('detailHistoriTransaksi');
     Route::get('/invoice/{id}', [PelangganProdukController::class, 'invoiceTransaksi'])->name('invoiceTransaksi');
 });
 
@@ -122,12 +124,6 @@ Route::group(['middleware' => ['auth']], function () {
 // Route::get('/checkout', function () {
 //     return view('produk.checkout');
 // })->name('checkout');
-Route::get('/histori-transaksi', function () {
-    return view('produk.histori-transaksi');
-})->name('historiTransaksi');
-Route::get('/detail-histori-transaksi', function () {
-    return view('produk.detail-histori-transaksi');
-})->name('detailHistoriTransaksi');
 Route::get('/daftar-produk', function () {
     return view('produk.daftar-produk',[
         'produk' => Produk::all(),
