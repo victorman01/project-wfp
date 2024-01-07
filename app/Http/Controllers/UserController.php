@@ -17,21 +17,16 @@ class UserController extends Controller
     public function addOrDeleteFavorite(Request $request){
         $user = Auth::user();
 
-        $userFav = isset($user->favorit) ? $user->favorit : null;
-
-        $statusFavorit = false;
-
+        $produkId = $request->produkId;
+        
         //Check if the user already favorite the item or not
-        if($userFav != null){
-            foreach($userFav as $uf){
-                if($uf->id == $request->produkId){
-                    $statusFavorit = true;
-                }
-            }
-        }
+        $exists = User::whereHas('favorit', function ($query) use ($produkId) {
+            $query->where('produk_id', $produkId);
+        })->where('id', $user->id)->exists();
+
 
         //Add or Delete Favorit for user
-        if(!$statusFavorit){
+        if(!$exists){
             $user->favorit()->attach([$request->produkId]);
             // return back()->with('pesan', 'Tambah Favorit Berhasil');
             return response()->json(
