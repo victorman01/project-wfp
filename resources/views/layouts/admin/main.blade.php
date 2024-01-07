@@ -62,229 +62,14 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <body class="page-header-fixed">
     <!-- BEGIN HEADER -->
-    <header class="wrapper bg-soft-primary">
-        <nav class="navbar navbar-expand-lg center-nav transparent navbar-light py-3">
-            <div class="container flex-lg-row flex-nowrap align-items-center">
-                <div class="navbar-brand w-100">
-                    <a href="/" class="display-6 align-items-center">
-                        <img src="{{ asset('sandbox360/img/admin-icon.png') }}" style="width: 40px;" />
-                        ACEZ ADMIN PAGE
-                    </a>
-                </div>
-                <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
-
-                </div>
-                <!-- /.navbar-collapse -->
-                <div class="navbar-other w-100 d-flex ms-auto">
-                    <ul class="navbar-nav flex-row align-items-center ms-auto">
-
-                        @if (Auth::check())
-                            {{-- IF LOGGED IN --}}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ ucwords(Auth::user()->nama) }}
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <form action="{{ route('logoutAdmin') }}" method="POST">
-                                            @csrf
-                                            <button class="dropdown-item text-danger">Logout</button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @else
-                            <li class="nav-item d-none d-md-block">
-                                {{-- SIGN IN BUTTON --}}
-                                <a href="{{ route('loginUI') }}" class="btn btn-sm btn-primary rounded-pill">Sign
-                                    In</a>
-                            </li>
-                        @endif
-
-
-                        <li class="nav-item d-lg-none">
-                            <button class="hamburger offcanvas-nav-btn"><span></span></button>
-                        </li>
-                    </ul>
-                    <!-- /.navbar-nav -->
-                </div>
-                <!-- /.navbar-other -->
-            </div>
-            <!-- /.container -->
-        </nav>
-        <!-- /.navbar -->
-    </header>
+    @include('layouts.admin.header')
     <!-- END HEADER -->
     <div class="clearfix">
     </div>
     <!-- BEGIN CONTAINER -->
     <div class="page-container">
         <!-- BEGIN SIDEBAR -->
-        <div class="page-sidebar-wrapper">
-            <div class="page-sidebar navbar-collapse collapse">
-                <!-- BEGIN SIDEBAR MENU -->
-                <!-- DOC: for circle icon style menu apply page-sidebar-menu-circle-icons class right after sidebar-toggler-wrapper -->
-                <ul class="page-sidebar-menu">
-                    <li class="sidebar-toggler-wrapper" data-toggle="collapse" data-target=".page-sidebar">
-                        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-                        <div class="sidebar-toggler">
-                        </div>
-                        <div class="clearfix">
-                        </div>
-                        <!-- END SIDEBAR TOGGLER BUTTON -->
-                    </li>
-                    <li class="sidebar-search-wrapper">
-                        <form class="search-form" role="form" action="index.html" method="get">
-                            <div class="input-icon right">
-                                <i class="icon-magnifier"></i>
-                                <input type="text" class="form-control form-control-lg" name="query"
-                                    placeholder="Search...">
-                            </div>
-                        </form>
-                    </li>
-                    <li class="start active ">
-                        <a href="/admin">
-                            <i class="icon-home"></i>
-                            <span class="title">Dashboard</span>
-                            <span class="selected"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="icon-puzzle"></i>
-                            <span class="title">Kategori</span>
-                            <span class="arrow "></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="{{ route('kategoris.index') }}">
-                                    <i class="icon-anchor"></i>
-                                    List Kategori</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="icon-present"></i>
-                            <span class="title">Brand</span>
-                            <span class="arrow "></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="{{ route('brands.index') }}">
-                                    List Brand</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="icon-calendar"></i>
-                            <span class="title">Produk</span>
-                            <span class="arrow "></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="{{ route('produks.index') }}">
-                                    List Produk</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="icon-docs"></i>
-                            <span class="title">Gambar</span>
-                            <span class="arrow "></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="{{ route('gambars.index') }}">
-                                    List Gambar</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="icon-share"></i>
-                            <span class="title">Kurir</span>
-                            <span class="arrow "></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="{{ route('kurirs.index') }}">
-                                    List Kurir</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="icon-briefcase"></i>
-                            <span class="title">Metode Pembayaran</span>
-                            <span class="arrow "></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="{{ route('metode-pembayarans.index') }}">
-                                    List Metode Pembayaran</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="icon-layers"></i>
-                            <span class="title">Nota</span>
-                            <span class="arrow "></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="{{ route('notas.index') }}">
-                                    List Nota</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="icon-drop"></i>
-                            <span class="title">Jenis Pengiriman</span>
-                            <span class="arrow "></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="{{ route('jenis-pengirimans.index') }}">
-                                    List Jenis Pengiriman</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="icon-drop"></i>
-                            <span class="title">Diskon Produk</span>
-                            <span class="arrow "></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="{{ route('diskon-produks.index') }}">
-                                    List Nota</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="icon-drop"></i>
-                            <span class="title">Laporan</span>
-                            <span class="arrow "></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="#">
-                                    List Laporan</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- END SIDEBAR MENU -->
-            </div>
-        </div>
+        @include('layouts.admin.navbar')
         <!-- END SIDEBAR -->
         <!-- BEGIN CONTENT -->
         <div class="page-content-wrapper">
@@ -361,12 +146,12 @@ License: You must have a valid license purchased only from themeforest(the above
             Tasks.initDashboardWidget();
         });
     </script>
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.7.0.js"></script> --}}
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
     <script>
