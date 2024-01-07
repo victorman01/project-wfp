@@ -48,10 +48,9 @@
                         <td>{{ $alamat->created_at }}</td>
                         <td>{{ $alamat->updated_at }}</td>
                         <td>
-                            <p><a class="btn btn-primary"
-                                    href="/admin/alamat_pengirimans/{{ $alamat->id }}/edit">Edit <i
-                                        class="fa fa-edit"></i></a></p>
                             @can('owner')
+                                <p><a class="btn btn-primary" href="/admin/alamat_pengirimans/{{ $alamat->id }}/edit">Edit <i
+                                            class="fa fa-edit"></i></a></p>
                                 <form action="/admin/alamat_pengirimans/{{ $alamat->id }}" method="POST" class='d-inline'>
                                     @method('DELETE')
                                     @csrf

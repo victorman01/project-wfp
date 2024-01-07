@@ -83,11 +83,11 @@ License: You must have a valid license purchased only from themeforest(the above
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ Auth::user()->nama }}
+                                    {{ ucwords(Auth::user()->nama) }}
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
-                                        <form action="{{ route('logout') }}" method="POST">
+                                        <form action="{{ route('logoutAdmin') }}" method="POST">
                                             @csrf
                                             <button class="dropdown-item text-danger">Logout</button>
                                         </form>

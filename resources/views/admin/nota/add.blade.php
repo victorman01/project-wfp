@@ -19,6 +19,11 @@
                     required>
             </div>
             <div class="form-group">
+                <label for="total_keseluruhan">Total Keseluruhan</label>
+                <input type="number" class="form-control" id="total_keseluruhan" name="total_keseluruhan" required>
+                required>
+            </div>
+            <div class="form-group">
                 <label for="user_id">User</label>
                 <select class="form-control" id="user_id" name="user_id">
                     @foreach ($users as $user)
