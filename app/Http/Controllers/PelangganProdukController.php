@@ -182,11 +182,16 @@ class PelangganProdukController extends Controller
         }
 
         //buat nota
+        $jenisPengiriman = JenisPengiriman::find($request->jenis_pengiriman);
+        $totalPembayaranDiskon = $totalPembayaran - $totalDiskon;
+        $totalPPN = ($totalPembayaranDiskon) * 0.11;
+        $totalPembayaranKeseluruhan = $totalPembayaranDiskon + $totalPPN + $jenisPengiriman->harga;
         $createNota = Nota::create([
             'total_pembayaran' => $totalPembayaran,
             'total_diskon' => $totalDiskon,
-            'total_pembayaran_diskon' => $totalPembayaran - $totalDiskon,
-            'total_ppn' => ($totalPembayaran - $totalDiskon) * 0.11,
+            'total_pembayaran_diskon' => $totalPembayaranDiskon,
+            'total_ppn' => $totalPPN,
+            'total_keseluruhan' => $totalPembayaranKeseluruhan,
             'status_pengiriman' => 'Menunggu Pembayaran',
             'status_pembayaran' => 'Belum Dibayar',
             'user_id' => $user->id,

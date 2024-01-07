@@ -108,7 +108,7 @@
                                         <tr>
                                             <th scope="row" colspan="4" class="border-0 text-end">Total</th>
                                             <td class="border-0 text-end">
-                                                <h4 class="m-0 fw-semibold">Rp{{ number_format(($nota->total_pembayaran_diskon + $nota->total_ppn + $nota->jenisPengiriman->harga), 0, ',', '.') }}</h4>
+                                                <h4 class="m-0 fw-semibold">Rp{{ number_format(($nota->total_keseluruhan), 0, ',', '.') }}</h4>
                                             </td>
                                         </tr>
                                         <!-- end tr -->
