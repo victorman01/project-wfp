@@ -6,13 +6,32 @@
         <form method="post" action="/admin/produks/{{ $produk->id }}" enctype="multipart/form-data">
             @csrf
             @method('put')
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="form-group">
                 <label for="nama">Nama Produk</label>
                 <input type="text" class="form-control" id="nama" name="nama" value="{{ $produk->nama }}" required>
+                @error('nama')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="informasi">Informasi Produk</label>
                 <textarea class="form-control" id="informasi" name="informasi" rows="3" required>{{ $produk->informasi }}</textarea>
+                @error('informasi')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="brand_id">Brand Produk</label>

@@ -4,9 +4,23 @@
         <h2>Add New Image for Product</h2>
         <form method="post" action="/admin/gambars" enctype='multipart/form-data'>
             @csrf
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="form-group">
                 <label for="nama">Image Name</label>
                 <input type="text" class="form-control" id="nama" name="nama" required>
+                @error('nama')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="path">Image File</label>

@@ -6,20 +6,44 @@
         <form method="post" action="/admin/alamat-pengirimans/{{ $alamat_pengiriman->id }}">
             @csrf
             @method('put')
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="form-group">
                 <label for="nama">Nama Tempat</label>
                 <input type="text" class="form-control" id="nama" name="nama" value={{ $alamat_pengiriman->nama }}
                     required>
+                @error('nama')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="nama_penerima">Nama Penerima</label>
                 <input type="text" class="form-control" id="nama_penerima" name="nama_penerima"
                     value="{{ $alamat_pengiriman->nama_penerima }}" required>
+                @error('nama_penerima')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="nomor_handphone">Nomor Handphone</label>
                 <input type="text" class="form-control" id="nomor_handphone" name="nomor_handphone"
                     value="{{ $alamat_pengiriman->nomor_handphone }}" required>
+                @error('nomor_handphone')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="provinsi">Provinsi</label>
@@ -68,6 +92,11 @@
             <div class="form-group">
                 <label for="alamat">Alamat</label>
                 <textarea class="form-control" id="alamat" name="alamat" rows="3" required>{{ $alamat_pengiriman->alamat }}</textarea>
+                @error('alamat')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Update Alamat Pengiriman</button>
         </form>

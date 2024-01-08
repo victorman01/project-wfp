@@ -5,26 +5,60 @@
         <h2>Add New Nota</h2>
         <form method="post" action="/admin/notas">
             @csrf
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="form-group">
                 <label for="total_pembayaran">Total Pembayaran</label>
                 <input type="number" class="form-control" id="total_pembayaran" name="total_pembayaran" required>
+                @error('total_pembayaran')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="total_diskon">Total Diskon</label>
                 <input type="number" class="form-control" id="total_diskon" name="total_diskon" required>
+                @error('total_diskon')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="total_pembayaran_diskon">Total Pembayaran Diskon</label>
                 <input type="number" class="form-control" id="total_pembayaran_diskon" name="total_pembayaran_diskon"
                     required>
+                @error('total_pembayaran_diskon')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="total_ppn">Total PPN</label>
                 <input type="number" class="form-control" id="total_ppn" name="total_ppn" required>
+                @error('total_ppn')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="total_keseluruhan">Total Keseluruhan</label>
                 <input type="number" class="form-control" id="total_keseluruhan" name="total_keseluruhan" required>
+                @error('total_keseluruhan')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="user_id">User</label>
