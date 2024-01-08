@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Provinsi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -35,7 +36,8 @@ class AdminController extends Controller
     public function create()
     {
         return view('admin.admin.add',[
-            'roles'=>Role::whereIn('id',[1,2])->get()
+            'roles'=>Role::whereIn('id',[1,2])->get(),
+            'provinsis'=>Provinsi::all(),
         ]);
     }
 
@@ -59,6 +61,17 @@ class AdminController extends Controller
             'jenis_kelamin' => 'required|string',
             'role_id' => 'required|integer',
         ]);
+        $provinsi = explode('-', $validatedData['provinsi']);
+        $validatedData['provinsi'] = ucwords(strtolower($provinsi[0]));
+
+        $kota = explode('-', $validatedData['kota']);
+        $validatedData['kota'] = ucwords(strtolower($kota[0]));
+
+        $kecamatan = explode('-', $validatedData['kecamatan']);
+        $validatedData['kecamatan'] = ucwords(strtolower($kecamatan[0]));
+
+        $kelurahan = explode('-', $validatedData['kelurahan']);
+        $validatedData['kelurahan'] = ucwords(strtolower($kelurahan[0]));
         $validatedData['tanggal_lahir'] = $validatedData['tgl_lahir'];
         $validatedData['password'] = Hash::make($validatedData['password'] );
         $akun = User::create($validatedData);
@@ -109,10 +122,25 @@ class AdminController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|string',
             'email' => 'required|email|string',
+            'nomor_handphone' => 'required|string',
+            'provinsi' => 'string',
+            'kota' => 'string',
+            'kecamatan' => 'string',
             'tgl_lahir' => 'required',
             'jenis_kelamin' => 'required|string',
             'role_id' => 'required|integer',
         ]);
+        $provinsi = explode('-', $validatedData['provinsi']);
+        $validatedData['provinsi'] = ucwords(strtolower($provinsi[0]));
+
+        $kota = explode('-', $validatedData['kota']);
+        $validatedData['kota'] = ucwords(strtolower($kota[0]));
+
+        $kecamatan = explode('-', $validatedData['kecamatan']);
+        $validatedData['kecamatan'] = ucwords(strtolower($kecamatan[0]));
+
+        $kelurahan = explode('-', $validatedData['kelurahan']);
+        $validatedData['kelurahan'] = ucwords(strtolower($kelurahan[0]));
         $validatedData['tanggal_lahir'] = $validatedData['tgl_lahir'];
         if($request->password){
             $validatedData['password'] = $request->password;
