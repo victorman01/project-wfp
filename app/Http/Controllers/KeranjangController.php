@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\JenisProduk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,8 +24,8 @@ class KeranjangController extends Controller
         // Calculate total price from keranjang table for a specific user
         $totalPrice = 0;
         $totalItem = 0;
-        if($keranjang != null){
-            foreach($keranjang as $k){
+        if ($keranjang != null) {
+            foreach ($keranjang as $k) {
                 $totalPrice += $k->pivot->jumlah * $k->harga;
                 $totalItem += $k->pivot->jumlah;
             }
@@ -58,11 +59,11 @@ class KeranjangController extends Controller
         $user = Auth::user();
 
         $check = DB::table('keranjangs')
-                ->where('jenis_produk_id', $request->jenisProdukID)
-                ->where('user_id', $user->id)
-                ->get();
+            ->where('jenis_produk_id', $request->jenisProdukID)
+            ->where('user_id', $user->id)
+            ->get();
 
-        if(!isset($check[0]->jenis_produk_id)){
+        if (!isset($check[0]->jenis_produk_id)) {
             // $result = DB::table('keranjangs')->insert([
             //     'jenis_produk_id' => $request->jenisProdukID,
             //     'user_id' => $user->id,
@@ -70,7 +71,7 @@ class KeranjangController extends Controller
             //     'created_at' => now(),
             //     'updated_at' => now()
             // ]);
-            
+
             $jenisProduk = JenisProduk::find($request->jenisProdukID);
             $user->keranjang()->attach($jenisProduk, [
                 'jumlah' => $request->quantity,
@@ -131,9 +132,9 @@ class KeranjangController extends Controller
         $user = Auth::user();
 
         $check = DB::table('keranjangs')
-        ->where('produk_id', $request->produkID)
-        ->where('user_id', $user->id)
-        ->get();
+            ->where('produk_id', $request->produkID)
+            ->where('user_id', $user->id)
+            ->get();
 
         $update = DB::table('keranjangs')
             ->where('produk_id', $request->produkID)
@@ -141,22 +142,37 @@ class KeranjangController extends Controller
             ->update([
                 'jumlah' => ($check[0]->jumlah + $request->quantity)
             ]);
-        
+
         return back()->with('pesan', 'Update Keranjang Berhasil');
     }
 
-    public function updateKeranjang(Request $request){
+    public function updateKeranjang(Request $request)
+    {
         $user = Auth::user();
+        $update = $user->keranjang()->updateExistingPivot($request->idJenisProduk, ['jumlah' => $request->jumlah]);
 
-        $update = DB::table('keranjangs')
-            ->where('jenis_produk_id', $request->idJenisProduk)
-            ->where('user_id', $user->id)
-            ->update([
-                'jumlah' => ($request->jumlah),
-                'updated_at' => now()
-            ]);
-        // dd($update);
-        if($update == 0){
+        //{ OLD }
+        // $keranjang = User::where('id', $user->id)
+        //     ->whereHas('keranjang', function ($query) use ($jenisProdukId) {
+        //         $query->where('jenis_produk_id', $jenisProdukId);
+        //     })
+        //     ->with([
+        //         'keranjang' => function ($query) use ($jenisProdukId) {
+        //             $query->where('jenis_produk_id', $jenisProdukId);
+        //         }
+        //     ])->first();
+
+        //{ NEW }
+        //Hitung Jumlah Barang pada keranjang
+        $jumlahBarang = $user->keranjang->sum('pivot.jumlah');
+
+        //Hitung total harga keseluruhan
+        $totalHarga = $user->keranjang->sum(function ($item) {
+            // Mengalikan jumlah pada pivot dengan harga barang pada JenisProduk
+            return $item->pivot->jumlah * $item->harga;
+        });
+
+        if ($update == 0) {
             return response()->json(
                 array(
                     'pesan' => 'Gagal'
@@ -166,7 +182,9 @@ class KeranjangController extends Controller
         } else {
             return response()->json(
                 array(
-                    'pesan' => 'Berhasil'
+                    'pesan' => 'Berhasil',
+                    'jumlahBarang' => $jumlahBarang,
+                    'totalHarga' => $totalHarga
                 ),
                 200
             );
@@ -190,12 +208,22 @@ class KeranjangController extends Controller
         return back()->with('pesan', 'Delete Keranjang Berhasil');
     }
 
-    public function hapusKeranjang(Request $request){
+    public function hapusKeranjang(Request $request)
+    {
         $user = Auth::user();
         $jenisProduk = JenisProduk::find($request->idJenisProduk);
         $jumlahHapus = $user->keranjang()->detach($jenisProduk->id);
 
-        if($jumlahHapus == 0){
+        //Hitung Jumlah Barang pada keranjang
+        $jumlahBarang = $user->keranjang->sum('pivot.jumlah');
+
+        //Hitung total harga keseluruhan
+        $totalHarga = $user->keranjang->sum(function ($item) {
+            // Mengalikan jumlah pada pivot dengan harga barang pada JenisProduk
+            return $item->pivot->jumlah * $item->harga;
+        });
+
+        if ($jumlahHapus == 0) {
             return response()->json(
                 array(
                     'pesan' => 'Gagal'
@@ -205,7 +233,9 @@ class KeranjangController extends Controller
         } else {
             return response()->json(
                 array(
-                    'pesan' => 'Berhasil'
+                    'pesan' => 'Berhasil',
+                    'jumlahBarang' => $jumlahBarang,
+                    'totalHarga' => $totalHarga
                 ),
                 200
             );
