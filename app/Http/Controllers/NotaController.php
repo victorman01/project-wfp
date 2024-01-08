@@ -114,10 +114,10 @@ class NotaController extends Controller
     public function update(Request $request, Nota $nota)
     {
         $validatedData = $request->validate([
-            'status_pengiriman' => 'required|in:Menunggu Pembayaran,Persiapan Barang,Siap Diantar,Pengiriman,Pesanan Diterima,Pesanan Selesai',
-            'status_pembayaran' => 'required|in:Lunas,Belum Dibayar',
+            'status_pengiriman' => 'required',
+            'status_pembayaran' => 'required',
         ]);
-        if($validatedData['status_pembayaran'] ==='Lunas'){
+        if($validatedData['status_pembayaran'] ==='Lunas' && $validatedData['status_pengiriman']==='Menunggu Pembayaran'){
             $validatedData['status_pengiriman']='Persiapan Barang';
         };
         $nota->update($validatedData);

@@ -23,13 +23,13 @@
                 <label for="total_keseluruhan"><b>Total Keseluruhan: </b>{{ $nota->total_keseluruhan }}</label>
             </div>
             <div class="form-group">
-                <label for="user_id"><b>User: </b>{{ $nota->user->id }} - {{ $nota->user->nama }}</label>
+                <label for="user_id"><b>User: </b>{{ $nota->user->id }} - {{ ucwords($nota->user->nama) }}</label>
             </div>
             <div class="form-group">
                 <label for="metode_pembayaran_id"><b>Metode Pembayaran: </b>{{ $nota->metodePembayaran->nama }}</label>
             </div>
             <div class="form-group">
-                <label for="alamat_pengiriman_id"><b>Alamat Pengiriman: {{ $nota->alamatPengiriman->nama }}</b></label>
+                <label for="alamat_pengiriman_id"><b>Alamat Pengiriman: </b>{{ $nota->alamatPengiriman->nama }}</label>
             </div>
             <div class="form-group">
                 <label for="jenis_pengiriman_id"><b>Jenis Pengiriman: </b>{{ $nota->jenisPengiriman->nama }}</label>
@@ -37,16 +37,18 @@
             <div class="form-group">
                 <label for="status_pembayaran">Status Pembayaran</label>
                 <select class="form-control form-control-sm" id="status_pembayaran" name="status_pembayaran"
-                    @if ($nota->statusPembayaran == 'Lunas' ? 'disabled' : '')  @endif>
-                    <option value="Belum Dibayar" @if ($nota->statusPembayaran == 'Belum Dibayar' ? 'selected' : '')  @endif>Belum Dibayar</option>
-                    <option value="Lunas" @if ($nota->statusPembayaran == 'Lunas' ? 'selected' : '')  @endif>Lunas</option>
+                    @if ($nota->status_pembayaran === 'Lunas') disabled @endif>
+                    <option value="Belum Dibayar" {{ $nota->status_pembayaran === 'Belum Dibayar' ? 'selected' : '' }}>
+                        Belum Dibayar</option>
+                    <option value="Lunas" {{ $nota->status_pembayaran === 'Lunas' ? 'selected' : '' }}>Lunas</option>
                 </select>
+                <input type="hidden" name="status_pembayaran" value="{{ $nota->status_pembayaran }}">
             </div>
             <div class="form-group">
                 <label for="status_pengiriman">Status Pengiriman</label>
                 <select name="status_pengiriman" class="form-control form-control-sm">
                     @foreach (['Menunggu Pembayaran', 'Persiapan Barang', 'Siap Diantar', 'Pengiriman', 'Pesanan Diterima', 'Pesanan Selesai'] as $status)
-                        @if ($nota->statusPembayaran == 'Lunas')
+                        @if ($nota->status_pembayaran === 'Lunas' && $status == 'Menunggu Pembayaran')
                             <option value="{{ $status }}" disabled>
                                 {{ $status }}
                             </option>
@@ -64,3 +66,9 @@
     </div>
     </div>
 @endsection
+
+@if (session()->has('error'))
+    <script>
+        alert({{ session('error') }});
+    </script>
+@endif
