@@ -25,7 +25,7 @@
         <tbody>
             @foreach ($kategoris as $k)
                 <tr>
-                    <td>{{ $k->id }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $k->nama }}</td>
                     <td>{{ $k->created_at->format('d M Y') }}</td>
                     <td>{{ $k->updated_at->format('d M Y') }}</td>

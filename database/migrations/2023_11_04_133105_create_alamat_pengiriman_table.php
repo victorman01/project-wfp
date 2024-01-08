@@ -19,10 +19,10 @@ class CreateAlamatPengirimanTable extends Migration
             $table->longtext('alamat');
             $table->string('nama_penerima', 45);
             $table->string('nomor_handphone', 45);
-            $table->string('provinsi', 45);
-            $table->string('kota', 45);
-            $table->string('kecamatan', 45);
-            $table->string('kelurahan_kode_pos', 45);
+            $table->string('provinsi');
+            $table->string('kota');
+            $table->string('kecamatan');
+            $table->string('kelurahan');
             $table->tinyInteger('alamat_utama');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();

@@ -28,7 +28,7 @@
             <tbody>
                 @foreach ($jenisPengirimans as $jenisPengiriman)
                     <tr>
-                        <td>{{ $jenisPengiriman->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $jenisPengiriman->nama }}</td>
                         <td>{{ $jenisPengiriman->kurir->nama }}</td>
                         <td>{{ $jenisPengiriman->created_at->format('d M Y') }}</td>

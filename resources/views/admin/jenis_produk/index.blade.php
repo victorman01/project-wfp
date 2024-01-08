@@ -31,7 +31,7 @@
             <tbody>
                 @foreach ($jps as $jp)
                     <tr>
-                        <td>{{ $jp->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $jp->nama }}</td>
                         <td>{{ $jp->spesifikasi }}</td>
                         <td>Rp. {{ number_format($jp->harga, 0, ',', '.') }}</td>
@@ -41,13 +41,14 @@
                         <td>{{ $jp->updated_at->format('d M Y') }}</td>
                         <td>
                             <div class="btn-container">
-                                <p class="mb-0"><a class="btn btn-primary btn-sm" href="/admin/jenis-produks/{{ $jp->id }}/edit">Edit <i
-                                    class="fa fa-edit"></i></a></p>
+                                <p class="mb-0"><a class="btn btn-primary btn-sm"
+                                        href="/admin/jenis-produks/{{ $jp->id }}/edit">Edit <i
+                                            class="fa fa-edit"></i></a></p>
                                 <form action="/admin/jenis-produks/{{ $jp->id }}" method="POST" class='d-inline'>
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger btn-sm" type="submit" 
-                                    onclick="return confirm('Are you sure?')">Delete</button>
+                                    <button class="btn btn-danger btn-sm" type="submit"
+                                        onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
                                 </p>
                             </div>
