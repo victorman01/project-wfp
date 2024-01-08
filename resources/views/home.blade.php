@@ -94,7 +94,7 @@
                                     <!-- /.post-header -->
                                     <div class="post-content">
                                         <p>{{ $p->spesifikasi }}</p>
-                                        <p><b>{{ 'Rp ' . number_format($p->jenisProduk()->first()->harga, 0, ',', '.') }}</b>
+                                        <p><b>{{ 'Rp' . number_format($p->jenisProduk()->first()->harga, 0, ',', '.') }}</b>
                                         </p>
                                     </div>
                                     <!-- /.post-content -->
@@ -160,7 +160,7 @@
                                                     </h2>
                                                     <p class="m-0">{{ $p->spesifikasi }}</p>
                                                     <p class="m-0 text-dark">
-                                                        <b>{{ 'Rp ' . number_format($p->jenisProduk()->first()->harga, 0, ',', '.') }}
+                                                        <b>{{ 'Rp' . number_format($p->jenisProduk()->first()->harga, 0, ',', '.') }}
                                                         </b>
                                                     </p>
                                                 </div>

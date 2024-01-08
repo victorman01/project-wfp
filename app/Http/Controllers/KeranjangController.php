@@ -22,15 +22,18 @@ class KeranjangController extends Controller
 
         // Calculate total price from keranjang table for a specific user
         $totalPrice = 0;
+        $totalItem = 0;
         if($keranjang != null){
             foreach($keranjang as $k){
                 $totalPrice += $k->pivot->jumlah * $k->harga;
+                $totalItem += $k->pivot->jumlah;
             }
         }
         // dd($keranjang);
         return view('produk.keranjang', [
             'keranjang' => $keranjang,
             'total_price' => $totalPrice,
+            'total_item' => $totalItem,
         ]);
     }
 
