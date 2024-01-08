@@ -1,22 +1,38 @@
 @extends('layouts.admin.main')
 
+@section('style')
+    <style>
+        .filter .form-select {
+            width: 200px;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="container">
         <h2>Laporan table</h2>
-        <!-- Sorting Filter Form -->
-        <form action="{{ route('admin.laporan') }}" method="get">
-            <label for="sort_by">Sort by:</label>
-            <select name="sort_by" id="sort_by" class="form-control form-control-sm">
-                <option value="total_keseluruhan">Total Keseluruhan</option>
-                <option value="total_pembayaran">Total Pembayaran</option>
-            </select>
-            <label for="sort_order">Order:</label>
-            <select name="sort_order" id="sort_order" class="form-control form-control-sm">
-                <option value="asc">Paling Sedikit</option>
-                <option value="desc">Paling Banyak</option>
-            </select>
-            <button class="btn btn-primary btn-sm" type="submit">Apply</button>
+        <form action="{{ route('admin.laporan') }}" method="get" class="my-3">
+            <div class="row filter align-items-end">
+                <div class="col-md-3 mb-2">
+                    <label for="sort_by" class="form-label">Sort by:</label>
+                    <select name="sort_by" id="sort_by" class="form-select form-select-sm">
+                        <option value="total_keseluruhan">Total Keseluruhan</option>
+                        <option value="total_pembayaran">Total Pembayaran</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <label for="sort_order" class="form-label">Order:</label>
+                    <select name="sort_order" id="sort_order" class="form-select form-select-sm">
+                        <option value="asc">Paling Sedikit</option>
+                        <option value="desc">Paling Banyak</option>
+                    </select>
+                </div>
+                <div class="col-md-2 mb-2">
+                    <button class="btn btn-primary btn-sm" type="submit">Apply</button>
+                </div>
+            </div>
         </form>
+
         <table class="table">
             <thead>
                 <tr>
@@ -44,7 +60,7 @@
                                 <td>Rp. {{ number_format($nota->total_diskon, 0, '.', ',') }}</td>
                                 <td>Rp. {{ number_format($nota->total_pembayaran_diskon, 0, '.', ',') }}</td>
                                 <td>Rp. {{ number_format($nota->total_ppn, 0, '.', ',') }}</td>
-                                <td>Rp. {{ number_format($nota->total_keseluruhan, 0, '.', ',')  }}</td>
+                                <td>Rp. {{ number_format($nota->total_keseluruhan, 0, '.', ',') }}</td>
                                 <td>{{ $nota->user->nama }}</td>
                                 <td>{{ $detailTransaksi->jenisProduk->produk->nama }}</td>
                                 <td>{{ $nota->metodePembayaran->nama }}</td>
@@ -60,7 +76,7 @@
                     $metodePembayaranCounts = collect($notas->pluck('metodePembayaran.nama'))->countBy();
                     $mostUsedMetodePembayaran = $metodePembayaranCounts->max();
                     $mostUsedMetodePembayaranName = $metodePembayaranCounts->keys()->first();
-                    
+
                     $kurirCounts = collect($notas->pluck('jenisPengiriman.kurir.nama'))->countBy();
                     $mostUsedKurir = $kurirCounts->max();
                     $mostUsedKurirName = $kurirCounts->keys()->first();
@@ -76,7 +92,10 @@
                         }
                     }
 
-                    $mostSoldProdukId = collect($totalQuantities)->sortDesc()->keys()->first();
+                    $mostSoldProdukId = collect($totalQuantities)
+                        ->sortDesc()
+                        ->keys()
+                        ->first();
 
                     $mostSoldProdukQuantity = $totalQuantities[$mostSoldProdukId] ?? 0;
                     $mostSoldProdukName = \App\Models\Produk::find($mostSoldProdukId)->nama;
@@ -84,10 +103,18 @@
             </tbody>
         </table>
 
-        <div>
-            <p>Produk Paling Banyak Terjual:<b>{{ $mostSoldProdukName }}</b> terjual sebanyak <b>{{ $mostSoldProdukQuantity }}</b> kali</p>
-            <p>Metode Pembayaran Paling Banyak Dipakai:<b> {{ $mostUsedMetodePembayaranName }}</b> dipakai sebanyak <b>{{ $mostUsedMetodePembayaran }}</b> kali</p>
-            <p>Kurir Paling Banyak Dipakai: <b>{{ $mostUsedKurirName }}</b> digunakan sebanyak <b>{{ $mostUsedKurir }}</b> kali</p>
+        <div class="card text-center mt-4">
+            <div class="card-body">
+                <h1 class="card-title">LAPORAN STATISTIK</h1>
+                <p class="card-text">Produk Paling Banyak Terjual: <b>{{ $mostSoldProdukName }}</b> terjual sebanyak
+                    <b>{{ $mostSoldProdukQuantity }}</b> kali
+                </p>
+                <p class="card-text">Metode Pembayaran Paling Banyak Dipakai: <b>{{ $mostUsedMetodePembayaranName }}</b>
+                    dipakai sebanyak <b>{{ $mostUsedMetodePembayaran }}</b> kali</p>
+                <p class="card-text">Kurir Paling Banyak Dipakai: <b>{{ $mostUsedKurirName }}</b> digunakan sebanyak
+                    <b>{{ $mostUsedKurir }}</b> kali
+                </p>
+            </div>
         </div>
     </div>
 @endsection
