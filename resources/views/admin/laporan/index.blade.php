@@ -31,6 +31,7 @@
                     <th scope="col">Metode Pembayaran</th>
                     <th scope="col">Jumlah</th>
                     <th scope="col">Sub Total</th>
+                    <th scope="col">Kurir</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,6 +50,7 @@
                                 <td>{{ $nota->metodePembayaran->nama }}</td>
                                 <td>{{ $detailTransaksi->jumlah }}</td>
                                 <td>Rp.{{ number_format($detailTransaksi->sub_total, 0, '.', ',') }}</td>
+                                <td>{{ $nota->jenisPengiriman->kurir->nama }}</td>
                             </tr>
                         @endif
                     @endforeach
@@ -59,7 +61,7 @@
                     $mostUsedMetodePembayaran = $metodePembayaranCounts->max();
                     $mostUsedMetodePembayaranName = $metodePembayaranCounts->keys()->first();
                     
-                    $kurirCounts = collect($notas->pluck('kurir'))->countBy();
+                    $kurirCounts = collect($notas->pluck('jenisPengiriman.kurir.nama'))->countBy();
                     $mostUsedKurir = $kurirCounts->max();
                     $mostUsedKurirName = $kurirCounts->keys()->first();
 
