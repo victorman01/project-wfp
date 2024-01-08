@@ -48,7 +48,7 @@ Route::group(['middleware' => ['isguest']], function () {
     });
 });
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('home', [
         'produk' =>  Produk::inRandomOrder()->take(6)->get(),
         'display_produk' => Produk::take(4)->get(),

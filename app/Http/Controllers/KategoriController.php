@@ -89,8 +89,7 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-        // dd($kategori->kategoriProduk);
-        if($kategori->kategoriProduk){
+        if($kategori->kategoriProduk->count()>0){
             return redirect('/admin/kategoris')->with('error', 'Kategori gagal dihapus!');
         }
         $kategori->delete();

@@ -133,7 +133,7 @@ class NotaController extends Controller
      */
     public function destroy(Nota $nota)
     {
-        if($nota->user && $nota->alamatPengiriman && $nota->metodePembayaran && $nota->jenisPengiriman && $nota->detailTransaksi){
+        if($nota->user && $nota->alamatPengiriman && $nota->metodePembayaran && $nota->jenisPengiriman && $nota->detailTransaksi->count()>0){
             return redirect('/admin/notas')->with('error', 'Nota gagal dihapus');
         }
         $nota->delete();

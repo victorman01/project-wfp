@@ -43,58 +43,58 @@ class DatabaseSeeder extends Seeder
         $this->call(AlamatPengirimanSeeder::class);
         $this->call(JenisPengirimanSeeder::class);
         $this->call(NotaSeeder::class);
-        // $this->call(DetailTransaksiSeeder::class);
+        $this->call(DetailTransaksiSeeder::class);
 
-        // // PROVINSI
-        // $csvFile = url('csv\provinces.csv');
-        // $csvData = array_map('str_getcsv', file($csvFile));
+        // PROVINSI
+        $csvFile = url('csv\provinces.csv');
+        $csvData = array_map('str_getcsv', file($csvFile));
 
-        // foreach ($csvData as $row) {
-        //     DB::table('provinsis')->insert([
-        //         'id' => $row[0],
-        //         'nama' => $row[1],
-        //         'created_at' => now(),
-        //         'updated_at' => now(),
-        //     ]);
-        // }
-        // // KOTA
-        // $csvFile = url('csv\regencies.csv');
-        // $csvData = array_map('str_getcsv', file($csvFile));
+        foreach ($csvData as $row) {
+            DB::table('provinsis')->insert([
+                'id' => $row[0],
+                'nama' => $row[1],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+        // KOTA
+        $csvFile = url('csv\regencies.csv');
+        $csvData = array_map('str_getcsv', file($csvFile));
 
-        // foreach ($csvData as $row) {
-        //     DB::table('kotas')->insert([
-        //         'id' => $row[0],
-        //         'provinsi_id' => $row[1],
-        //         'nama' => $row[2],
-        //         'created_at' => now(),
-        //         'updated_at' => now(),
-        //     ]);
-        // }
-        // // KECAMATAN
-        // $csvFile = url('csv\districts.csv');
-        // $csvData = array_map('str_getcsv', file($csvFile));
+        foreach ($csvData as $row) {
+            DB::table('kotas')->insert([
+                'id' => $row[0],
+                'provinsi_id' => $row[1],
+                'nama' => $row[2],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+        // KECAMATAN
+        $csvFile = url('csv\districts.csv');
+        $csvData = array_map('str_getcsv', file($csvFile));
 
-        // foreach ($csvData as $row) {
-        //     DB::table('kecamatans')->insert([
-        //         'id' => $row[0],
-        //         'kota_id' => $row[1],
-        //         'nama' => $row[2],
-        //         'created_at' => now(),
-        //         'updated_at' => now(),
-        //     ]);
-        // }
-        // // KELURAHAN
-        // $csvFile = url('csv\villages.csv');
-        // $csvData = array_map('str_getcsv', file($csvFile));
+        foreach ($csvData as $row) {
+            DB::table('kecamatans')->insert([
+                'id' => $row[0],
+                'kota_id' => $row[1],
+                'nama' => $row[2],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+        // KELURAHAN
+        $csvFile = url('csv\villages.csv');
+        $csvData = array_map('str_getcsv', file($csvFile));
 
-        // foreach ($csvData as $row) {
-        //     DB::table('kelurahans')->insert([
-        //         'id' => $row[0],
-        //         'kecamatan_id' => $row[1],
-        //         'nama' => $row[2],
-        //         'created_at' => now(),
-        //         'updated_at' => now(),
-        //     ]);
-        // }
+        foreach ($csvData as $row) {
+            DB::table('kelurahans')->insert([
+                'id' => $row[0],
+                'kecamatan_id' => $row[1],
+                'nama' => $row[2],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }
