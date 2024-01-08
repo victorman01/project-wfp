@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Provinsi;
 
 class UserController extends Controller
 {
@@ -78,7 +79,7 @@ class UserController extends Controller
         ]);
     }
     public function create(){
-        return view('admin.user.add');
+        return view('admin.user.add',['provinsis'=>Provinsi::all()]);
     }
     public function store(Request $request){
         $validatedData = $request->validate([
@@ -110,6 +111,7 @@ class UserController extends Controller
         $user->tgl_lahir = Carbon::parse($user->tgl_lahir);
         return view('admin.user.edit',[
             'user' => $user,
+            'provinsis'=>Provinsi::all()
         ]);
     }
     public function update(Request $request, User $user){
