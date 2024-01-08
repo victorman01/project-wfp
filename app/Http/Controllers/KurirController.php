@@ -93,6 +93,9 @@ class KurirController extends Controller
      */
     public function destroy(Kurir $kurir)
     {
+        if($kurir->jenisPengiriman->count()>0){
+            return redirect('/admin/kurirs')->with('error','Data kurir gagal terhapus!');
+        }
         $kurir->delete();
         return redirect('/admin/kurirs')->with('success','Data kurir telah terhapus!');
     }

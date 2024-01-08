@@ -110,6 +110,9 @@ class DetailTransaksiController extends Controller
      */
     public function destroy(DetailTransaksi $detailTransaksi)
     {
+        if($detailTransaksi->jenisProduk || $detailTransaksi->nota){
+            return redirect('admin.detail_transaksi.index')->with('error','Data Detail Transaksi gagal dihapus!');
+        }
         $detailTransaksi->delete();
         return redirect('admin.detail_transaksi.index')->with('success','Data Detail Transaksi berhasil dihapus!');
     }

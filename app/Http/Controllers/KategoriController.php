@@ -78,7 +78,7 @@ class KategoriController extends Controller
     {
         $validatedData = $request->validate(['nama'=>'required']);
         $kategori->update($validatedData);
-        return redirect('/admin/kategoris')->with('success', 'New kategori has been edited!');
+        return redirect('/admin/kategoris')->with('success', 'Kategori has been edited!');
     }
 
     /**
@@ -89,7 +89,11 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
+        // dd($kategori->kategoriProduk);
+        if($kategori->kategoriProduk){
+            return redirect('/admin/kategoris')->with('error', 'Kategori gagal dihapus!');
+        }
         $kategori->delete();
-        return redirect('/admin/kategoris')->with('success', 'New kategori has been deleted!');
+        return redirect('/admin/kategoris')->with('success', 'Kategori has been deleted!');
     }
 }

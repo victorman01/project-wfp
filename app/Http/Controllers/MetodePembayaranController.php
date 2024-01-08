@@ -93,6 +93,9 @@ class MetodePembayaranController extends Controller
      */
     public function destroy(MetodePembayaran $metodePembayaran)
     {
+        if($metodePembayaran->kurir->count() > 0){
+            return redirect('/admin/metode-pembayarans')->with('error','Data metode pembayaran gagal terhapus!');
+        }
         $metodePembayaran->delete();
         return redirect('/admin/metode-pembayarans')->with('success','Data metode pembayaran telah terhapus!');
     }

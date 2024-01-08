@@ -99,6 +99,9 @@ class JenisPengirimanController extends Controller
      */
     public function destroy(JenisPengiriman $jenisPengiriman)
     {
+        if($jenisPengiriman->kurir||$jenisPengiriman->nota->count()>0){
+            return redirect('/admin/jenis-pengirimans')->with('error','Data jenis pengiriman gagal terhapus!');
+        }
         $jenisPengiriman->delete();
         return redirect('/admin/jenis-pengirimans')->with('success','Data jenis pengiriman telah terhapus!');
     }

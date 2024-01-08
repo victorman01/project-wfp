@@ -105,6 +105,9 @@ class JenisProdukController extends Controller
      */
     public function destroy(JenisProduk $jenisProduk)
     {
+        if($jenisProduk->keranjang || $jenisProduk->detailTransaksi||$jenisProduk->diskonProduk->count()>0||$jenisProduk->produk){
+            return redirect('/admin/jenis-produks')->with('error','Data jenis produk gagal dihapus!');
+        }
         $jenisProduk->delete();
         return redirect('/admin/jenis-produks')->with('success','Data jenis produk telah dihapus!');
     }

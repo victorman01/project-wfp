@@ -103,6 +103,9 @@ class DiskonProdukController extends Controller
      */
     public function destroy(DiskonProduk $diskonProduk)
     {
+        if($diskonProduk->jenisProduk){
+            return redirect('/admin/diskon-produks')->with('error','Diskon Produk data gagal dihapus');
+        }
         $diskonProduk->delete();
         return redirect('/admin/diskon-produks')->with('success','Diskon Produk data is deleted successful');
     }

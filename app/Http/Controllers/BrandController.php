@@ -93,6 +93,9 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
+        if($brand->produk()->count() > 0){
+            return redirect('/admin/brands')->with('error', 'Brand gagal untuk dihapus');    
+        }
         $brand->delete();
         return redirect('/admin/brands')->with('success', 'New brand has been deleted!');
     }

@@ -141,6 +141,9 @@ class ProdukController extends Controller
      */
     public function destroy(Produk $produk)
     {
+        if($produk->favorit||$produk->kategoriProduk||$produk->brand ||$produk->gambar->count()>0||$produk->jenisProduk->count()>0){
+            return redirect('/admin/produks')->with('error', 'Product gagal dihapus');
+        }
         foreach ($produk->gambar as $gambar) {
             Storage::delete($gambar->path);
             $gambar->delete();

@@ -139,7 +139,10 @@ class UserController extends Controller
         ]);
         return redirect('/admin/users')->with('success', 'Modifikasi data pelanggan berhasil!');
     }
-    public function destroy(User $user){
+    public function destroy(User $admin){
+        if($admin->keranjang || $admin->favorit || $admin->alamatPengiriman->count() > 0 || $admin->nota ||$admin->pelanggan ||$admin->admin || $admin->role){
+            return redirect('/admin/users')->with('error', 'Hapus data pelanggan gagal!');
+        }
         $user->delete();
         return redirect('/admin/users')->with('success', 'Hapus data pelanggan berhasil!');
     }
