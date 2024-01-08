@@ -139,7 +139,8 @@
                             @if ($keranjang != null)
                                 @foreach ($keranjang as $k)
                                     {{-- Loops Here --}}
-                                    <div class="d-flex justify-content-start my-5" id="container_produk{{ $k->id }}">
+                                    <div class="d-flex justify-content-start my-5"
+                                        id="container_produk{{ $k->id }}">
                                         <img src="{{ isset($k->produk->gambar[0]->path) ? asset('storage/' . $k->produk->gambar[0]->path) : '' }}"
                                             alt="Product Image" class="img rounded shadow"
                                             style="width:200px;height:200px;object-fit: cover;">
@@ -148,7 +149,24 @@
                                             <div class="row ms-2">
                                                 <h3 class="post-title h3">{{ $k->produk->nama }}</h3>
                                                 <p class="text-muted">Spesifikasi: {{ $k->spesifikasi }}</p>
-                                                <p id="harga_total{{ $k->id }}">Rp{{ $k->harga }},-</p>
+
+                                                @php
+                                                    $checkDiskon = $k
+                                                        ->diskonProduk()
+                                                        ->where('jenis_produk_id', $k->id)
+                                                        ->where('periode_mulai', '<=', now())
+                                                        ->where('periode_berakhir', '>=', now())
+                                                        ->first();
+                                                    if (isset($checkDiskon)) {
+                                                        $hargaSetelahDisc = ($k->harga * (100 - $checkDiskon->diskon)) / 100;
+                                                        echo '<p id="harga_total' . $k->id . '"><b>Rp<span id="harga" style="text-decoration: line-through; color:red;">' . number_format($k->harga, 0, ',', '.') . '</b></span><span id="harga_diskon"><b> ' . number_format($hargaSetelahDisc, 0, ',', '.') . '</b></p>';
+                                                    } else {
+                                                        echo '<p id="harga_total' . $k->id . '">Rp' . number_format($k->harga, 0, ',', '.') . '</p>';
+                                                    }
+                                                @endphp
+
+
+                                                {{-- <p id="harga_total{{ $k->id }}">Rp{{ $k->harga }},-</p> --}}
                                                 <input type="hidden" id="harga_barang{{ $k->id }}"
                                                     value="{{ $k->harga }}">
                                             </div>
@@ -176,11 +194,13 @@
                 <div class="col-4">
                     <div class="card card-border-end border-success">
                         <div class="card-body">
-                            <h3 class="post-title h3">Total Harga: {{ number_format($totalHarga, 0, ',', '.') }},-
-                            </h3>
+                            <h3 class="post-title h3">Sub Total: Rp{{ number_format($totalHarga, 0, ',', '.') }}</h3>
+                            <h3 class="post-title h3">Total Diskon: <span
+                                    style="color:red;">-Rp{{ number_format($totalDiskon, 0, ',', '.') }}</span></h3>
 
-                            <h3 class="post-title h3">Total Barang: {{ count($keranjang) }}
+                            <h3 class="post-title h3">Total: Rp{{ number_format($totalHarga - $totalDiskon, 0, ',', '.') }}
                             </h3>
+                            <h3 class="post-title h3">Total Barang: {{ $totalItem }}</h3>
 
                             <hr class="dropdown-divider">
 
