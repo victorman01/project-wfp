@@ -39,6 +39,11 @@
                         <option value="{{ $produk->id }}">{{ $produk->nama }}</option>
                     @endforeach
                 </select>
+                @error('produk_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="nota_id">Nota ID</label>
@@ -47,6 +52,11 @@
                         <option value="{{ $nota->id }}">Transaction ID: {{ $nota->id }}</option>
                     @endforeach
                 </select>
+                @error('nota_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Add Transaction Detail</button>
         </form>

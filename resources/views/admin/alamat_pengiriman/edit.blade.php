@@ -53,24 +53,44 @@
                         <option value="{{ $pro->nama }}-{{ $pro->id }}">{{ $pro->nama }}</option>
                     @endforeach
                 </select>
+                @error('provinsi')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="kota">Kota/Kabupaten</label>
                 <select class="form-control form-control-sm" id="kota" name='kota'>
                     <option value="">PILIH KOTA/KABUPATEN</option>
                 </select>
+                @error('kota')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="kecamatan">Kecamatan</label>
                 <select class="form-control form-control-sm" id="kecamatan" name='kecamatan'>
                     <option value="">PILIH KECAMATAN</option>
                 </select>
+                @error('kecamatan')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="kelurahan_kode_pos">Kelurahan/Desa</label>
                 <select class="form-control form-control-sm" id="kelurahan" name='kelurahan'>
                     <option value="">PILIH KELURAHAN/DESA</option>
                 </select>
+                @error('kelurahan_kode_pos')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="alamat_utama">Alamat Utama</label>
@@ -78,6 +98,11 @@
                     <option value="1" {{ $alamat_pengiriman->alamat_utama == 1 ? 'selected' : '' }}>Yes</option>
                     <option value="0" {{ $alamat_pengiriman->alamat_utama == 0 ? 'selected' : '' }}>No</option>
                 </select>
+                @error('alamat_utama')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="user_id">User</label>
@@ -88,6 +113,11 @@
                         </option>
                     @endforeach
                 </select>
+                @error('user_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="alamat">Alamat</label>

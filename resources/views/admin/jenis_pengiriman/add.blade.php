@@ -30,6 +30,11 @@
                         <option value="{{ $kurir->id }}">{{ $kurir->nama }}</option>
                     @endforeach
                 </select>
+                @error('kurir_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Add Jenis Pengiriman</button>
         </form>

@@ -67,6 +67,11 @@
                         <option value="{{ $user->id }}">{{ $user->nama }}</option>
                     @endforeach
                 </select>
+                @error('user_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="metode_pembayaran_id">Metode Pembayaran</label>
@@ -75,6 +80,11 @@
                         <option value="{{ $metode_pembayaran->id }}">{{ $metode_pembayaran->nama }}</option>
                     @endforeach
                 </select>
+                @error('metode_pembayaran_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="alamat_pengiriman_id">Alamat Pengiriman</label>
@@ -83,6 +93,11 @@
                         <option value="{{ $alamat_pengiriman->id }}">{{ $alamat_pengiriman->alamat }}</option>
                     @endforeach
                 </select>
+                @error('alamat_pengiriman_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="jenis_pengiriman_id">Jenis Pengiriman</label>
@@ -91,6 +106,11 @@
                         <option value="{{ $jenis_pengiriman->id }}">{{ $jenis_pengiriman->nama }}</option>
                     @endforeach
                 </select>
+                @error('jenis_pengiriman_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="status_pembayaran">Status Pembayaran</label>
@@ -98,6 +118,11 @@
                     <option value="Belum Dibayar">Belum Dibayar</option>
                     <option value="Lunas">Lunas</option>
                 </select>
+                @error('status_pembayaran')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="status_pengiriman">Status Pengiriman</label>
@@ -108,6 +133,11 @@
                         </option>
                     @endforeach
                 </select>
+                @error('status_pengiriman')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Add Nota</button>
         </form>

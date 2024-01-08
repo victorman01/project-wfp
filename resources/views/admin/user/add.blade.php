@@ -74,6 +74,11 @@
                     <option value="L">Laki-laki</option>
                     <option value="P">Perempuan</option>
                 </select>
+                @error('jenis_kelamin')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="provinsi">Provinsi</label>
