@@ -35,7 +35,7 @@
                                 @foreach ($keranjang as $k)
                                     {{-- Loops Here --}}
                                     <div class="d-flex justify-content-start my-5" id="container_produk{{ $k->id }}">
-                                        <img src="{{ isset($k->produk->gambar[0]->path) ? asset($k->produk->gambar[0]->path) : '' }}"
+                                        <img src="{{ isset($k->produk->gambar[0]->path) ? asset('storage/' . $k->produk->gambar[0]->path) : '' }}"
                                             alt="Product Image" class="img rounded shadow"
                                             style="width:200px;height:200px;object-fit: cover;">
 

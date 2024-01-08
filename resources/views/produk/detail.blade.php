@@ -11,7 +11,7 @@
                 {{-- @foreach ($produk->gambar as $gambar)
                     <img src="{{ asset('storage/' . $gambar->path) }}" alt="">
                 @endforeach --}}
-                <img src="{{ asset($produk->gambar[0]->path) }}" alt="Product Image" class="img-fluid rounded-4" /></a>
+                <img src="{{ asset('storage/' . $produk->gambar[0]->path) }}" alt="Product Image" class="img-fluid rounded-4" /></a>
             </div>
             <div class="col-md-8 product-container">
                 <h1>{{ $produk->nama }}</h1>
