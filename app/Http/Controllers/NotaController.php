@@ -6,9 +6,11 @@ use App\Models\AlamatPengiriman;
 use App\Models\JenisPengiriman;
 use App\Models\MetodePembayaran;
 use App\Models\Nota;
+use App\Models\DetailTransaksi;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use DataTables;
 
 class NotaController extends Controller
 {
@@ -21,6 +23,13 @@ class NotaController extends Controller
     {
         return view('admin.nota.index',[
             'notas'=>Nota::all()
+        ]);
+    }
+
+    public function laporan(){
+        return view('admin.laporan.index',[
+            'notas'=>Nota::all(),
+            'detailTransaksis'=>DetailTransaksi::all()
         ]);
     }
 

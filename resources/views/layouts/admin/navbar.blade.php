@@ -164,7 +164,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="#">
+                        <a href="{{ route('admin.laporan') }}">
                             List Laporan</a>
                     </li>
                 </ul>

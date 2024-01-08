@@ -78,6 +78,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('jenis-produks', JenisProdukController::class);
         Route::resource('detail-transaksi', DetailTransaksiController::class);
         Route::resource('alamat-pengirimans', AdminAlamatPengirimanController::class);
+        Route::get('/laporan', [NotaController::class, 'laporan'])->name('admin.laporan');
     });
 
 

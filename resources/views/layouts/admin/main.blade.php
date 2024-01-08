@@ -58,9 +58,9 @@ License: You must have a valid license purchased only from themeforest(the above
     <style>
         /* Custom styling for DataTable navigation buttons */
         .table.dataTable .dataTables_wrapper .dataTables_paginate .paginate_button {
-            font-size: 14px; /* Adjust the font size as needed */
-            padding: 5px 10px; /* Adjust padding to add space around the button */
-            margin-right: 5px; /* Adjust margin to add space between buttons */
+            font-size: 14px;
+            padding: 5px 10px;
+            margin-right: 5px;
         }
     </style>
 
