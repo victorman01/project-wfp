@@ -23,8 +23,12 @@
             </div>
             <div class="form-group">
                 <label for="produk_id">Produk ID</label>
-                <input type="number" class="form-control" id="produk_id" name="produk_id"
-                    value="{{ $diskon_produk->produk_id }}" required>
+                <select name="produk_id" class="form-control form-control-sm">
+                    @foreach ($produks as $produk)
+                        <option value="{{ $produk->id }}" {{ $diskon_produk->produk_id ? 'selected' : '' }}>
+                            {{ $produk->nama }}</option>
+                    @endforeach
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Update Diskon Produk</button>
         </form>

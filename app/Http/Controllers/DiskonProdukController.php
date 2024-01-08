@@ -71,7 +71,8 @@ class DiskonProdukController extends Controller
     public function edit(DiskonProduk $diskonProduk)
     {
         return view('admin.diskon_produk.edit',[
-            'diskon_produk'=>$diskonProduk
+            'diskon_produk'=>$diskonProduk,
+            'produks'=>Produk::all()
         ]);
     }
 

@@ -13,7 +13,7 @@
             </div>
             <div class="form-group">
                 <label for="kurir_id">Kurir</label>
-                <select name="kurir_id" class="form-control" style="min-height: 45px;padding: 10px 15px;">
+                <select name="kurir_id" class="form-control form-control-sm" style="min-height: 45px;padding: 10px 15px;">
                     @foreach ($kurirs as $kurir)
                         <option value="{{ $kurir->id }}"
                             {{ $jenis_pengiriman->kurir->id == $kurir->id ? 'selected' : '' }}>
