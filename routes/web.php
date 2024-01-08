@@ -50,7 +50,8 @@ Route::group(['middleware' => ['isguest']], function () {
 
 Route::get('/', function () {
     return view('home', [
-        'produk' => Produk::all(),
+        'produk' =>  Produk::inRandomOrder()->take(6)->get(),
+        'display_produk' => Produk::take(4)->get(),
         'kategoris' => Kategori::all(),
         'brands' => Brand::all()
     ]);

@@ -73,5 +73,43 @@ class JenisProdukSeeder extends Seeder
             'stok' => 100,
             'produk_id' => 4
         ]);
+
+        JenisProduk::create([
+            'nama' => "Original",
+            'spesifikasi' => 'Dilengkapi tombol reset untuk mengubah kode kombinasi',
+            'harga' => 260000,
+            'stok' => 100,
+            'produk_id' => 5
+        ]);
+
+        JenisProduk::create([
+            'nama' => "Kuning",
+            'spesifikasi' => 'Cocok untuk hujan-hujan',
+            'harga' => 89000,
+            'stok' => 100,
+            'produk_id' => 6
+        ]);
+        
+        JenisProduk::create([
+            'nama' => "E27",
+            'spesifikasi' => 'Warna: Putih',
+            'harga' => 143000,
+            'stok' => 100,
+            'produk_id' => 7
+        ]);
+        JenisProduk::create([
+            'nama' => "XL",
+            'spesifikasi' => 'Warna: Putih',
+            'harga' => 159000,
+            'stok' => 100,
+            'produk_id' => 8
+        ]);
+        JenisProduk::create([
+            'nama' => "TM 30000",
+            'spesifikasi' => 'Super durable',
+            'harga' => 3159000,
+            'stok' => 10,
+            'produk_id' => 9
+        ]);
     }
 }

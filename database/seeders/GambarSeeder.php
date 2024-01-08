@@ -94,5 +94,85 @@ class GambarSeeder extends Seeder
             'path'=>'drip_coffee_4.jpg',
             'produk_id'=>4
         ]);
+        Gambar::create([
+            'nama'=>'Panci Shabu 1',
+            'path'=>'panci_1.jpg',
+            'produk_id'=>5
+        ]);
+        Gambar::create([
+            'nama'=>'Panci Shabu 2',
+            'path'=>'panci_2.jpg',
+            'produk_id'=>5
+        ]);
+        Gambar::create([
+            'nama'=>'Panci Shabu 3',
+            'path'=>'panci_3.jpg',
+            'produk_id'=>5
+        ]);
+        Gambar::create([
+            'nama'=>'Panci Shabu 4',
+            'path'=>'panci_4.jpg',
+            'produk_id'=>5
+        ]);
+        Gambar::create([
+            'nama'=>'Jas Hujan 1',
+            'path'=>'jas_hujan_1.jpg',
+            'produk_id'=>6
+        ]);        
+        Gambar::create([
+            'nama'=>'Jas Hujan 2',
+            'path'=>'jas_hujan_2.jpg',
+            'produk_id'=>6
+        ]);        
+        Gambar::create([
+            'nama'=>'Jas Hujan 3',
+            'path'=>'jas_hujan_3.jpg',
+            'produk_id'=>6
+        ]);        
+        Gambar::create([
+            'nama'=>'Jas Hujan 4',
+            'path'=>'jas_hujan_4.jpg',
+            'produk_id'=>6
+        ]); 
+        Gambar::create([
+            'nama'=>'Lampu 1',
+            'path'=>'lampu_1.jpg',
+            'produk_id'=>7
+        ]);  
+        Gambar::create([
+            'nama'=>'Lampu 2',
+            'path'=>'lampu_2.jpg',
+            'produk_id'=>7
+        ]);     
+        Gambar::create([
+            'nama'=>'Jerapah 1',
+            'path'=>'jerapah_1.jpg',
+            'produk_id'=>8
+        ]);  
+        Gambar::create([
+            'nama'=>'Jerapah 2',
+            'path'=>'jerapah_2.jpg',
+            'produk_id'=>8
+        ]);   
+        Gambar::create([
+            'nama'=>'Jerapah 3',
+            'path'=>'jerapah_3.jpg',
+            'produk_id'=>8
+        ]);    
+        Gambar::create([
+            'nama'=>'Treadmil 3',
+            'path'=>'treadmil_3.png',
+            'produk_id'=>9
+        ]);    
+        Gambar::create([
+            'nama'=>'Treadmil 2',
+            'path'=>'treadmil_2.png',
+            'produk_id'=>9
+        ]);    
+        Gambar::create([
+            'nama'=>'Treadmil 1',
+            'path'=>'treadmil_1.png',
+            'produk_id'=>9
+        ]);          
     }
 }
