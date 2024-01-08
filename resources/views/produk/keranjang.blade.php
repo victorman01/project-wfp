@@ -54,7 +54,8 @@
                                                     onclick="hapusProduk('{{ $k->id }}')"><i
                                                         class="uil uil-trash"></i> </a>
                                                 <input class="form-control" id="jum_barang{{ $k->id }}"
-                                                    type="number" onchange="setHargaProduk(this.id)"
+                                                    type="number" 
+                                                    oninput="setHargaProduk(this.id)"
                                                     value="{{ $k->pivot->jumlah }}" min="1">
                                             </div>
                                         </div>
@@ -108,19 +109,20 @@
 
 @section('js')
     <script>
-        $("[type='number']").keypress(function(evt) {
-            evt.preventDefault();
-        });
-
         let harga_keseluruhan = 0
 
         function setHargaProduk(idBarang) {
-            // Get raw ID
+            // Get raw ID   
             let rawID = idBarang.replace(/[^0-9]/g, "");
             let jumBarang = $("#jum_barang" + rawID).val()
             let hargaBarang = $('#harga_barang' + rawID).val()
-            let hargaTotal = hargaBarang * jumBarang //PERLU DIPERBAIKI SUPAYA REALTIME MESKIPUN DICLICK DENGAN CEPAT
 
+            //Prevent Submit kalau kosong jumBarang nya
+            if(jumBarang === "" || jumBarang === null || isNaN(jumBarang) || parseInt(jumBarang) <= 0){
+                return
+            }
+
+            let hargaTotal = hargaBarang * jumBarang //PERLU DIPERBAIKI SUPAYA REALTIME MESKIPUN DICLICK DENGAN CEPAT
             //AJAX
             $.ajax({
                 type: 'POST',
@@ -135,21 +137,23 @@
                         alert("gagal update keranjang");
                     } else {
                         //Update harga total
-                        $('#harga_total' + rawID).html("Rp" + hargaTotal + ",-");
+                        // $('#harga_total' + rawID).html("Rp" + data.totalHarga + ",-");   
+                        var totalItem = document.getElementById("total_item");
+                        totalItem.innerHTML = "Jumlah Barang: " +  data.jumlahBarang;
 
                         // Fungsi untuk mengambil harga keseluruhan
-                        var inputElement = document.getElementById(idBarang);
-                        var previousValue = inputElement.defaultValue;
-                        var currentValue = inputElement.value;
+                        // var inputElement = document.getElementById(idBarang);
+                        // var previousValue = inputElement.defaultValue;
+                        // var currentValue = inputElement.value;
 
-                        inputElement.defaultValue = inputElement.value
-                        let hargaTotalSebelumnya = 0
-                        hargaTotalSebelumnya = hargaBarang * (previousValue)
+                        // inputElement.defaultValue = inputElement.value
+                        // let hargaTotalSebelumnya = 0
+                        // hargaTotalSebelumnya = hargaBarang * (previousValue)
 
-                        let totalHarga = $("#total_price_val").val() - hargaTotalSebelumnya + hargaTotal
-                        $("#total_price_val").val(totalHarga)
+                        // let totalHarga = $("#total_price_val").val() - hargaTotalSebelumnya + hargaTotal
+                        $("#total_price_val").val(data.totalHarga)
 
-                        $('#total_price').html(totalHarga + ",-");
+                        $('#total_price').html(data.totalHarga.toLocaleString('id-ID') + ",-");
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -161,7 +165,7 @@
                     }
                 }
             })
-        };
+        }
 
         function hapusProduk(idContainer) {
             //AJAX
@@ -177,18 +181,22 @@
                         alert("gagal update keranjang");
                     } else {
                         //Update total harga dari seluruh produk
-                        let hargaTotalDihapus = $("#harga_total" + idContainer).html().replace(/[^0-9]/g, "")
-                        let totalHarga = $("#total_price_val").val() - parseInt(hargaTotalDihapus)
-                        $("#total_price_val").val(totalHarga)
-                        $('#total_price').html(totalHarga + ",-");
+                        // let hargaTotalDihapus = $("#harga_total" + idContainer).html().replace(/[^0-9]/g, "")
+                        // let totalHarga = $("#total_price_val").val() - parseInt(hargaTotalDihapus)
+                        // $("#total_price_val").val(totalHarga)
+                        // $('#total_price').html(totalHarga + ",-");
+                        var totalItemChange = document.getElementById("total_item");
+                        totalItemChange.innerHTML = "Jumlah Barang: " +  data.jumlahBarang;
+                        $("#total_price_val").val(data.totalHarga)
+                        $('#total_price').html(data.totalHarga.toLocaleString('id-ID') + ",-");
 
                         //Hapus isi dari container yang bersangkutan
                         $('#container_produk' + idContainer).html('');
 
                         //Mengurangi total item
-                        let totalItem = $("#total_item").html().replace(/[^0-9]/g, "")
+                        let totalItem = totalItemChange.innerHTML.replace(/[^0-9]/g, "")
 
-                        if ((totalItem - 1) == 0) {
+                        if ((totalItem) == 0) {
                             $('#container_produk' + idContainer).html(`<div class="text-center my-2">
                                     <p class="h2 text-primary">Keranjang masih kosong</p>
                                     <img class="w-50"
@@ -196,7 +204,7 @@
                                 </div>`);
                         }
 
-                        $("#total_item").html("Total Item(s): " + (parseInt(totalItem) - 1).toString())
+                        // $("#total_item").html("Total Item(s): " + (parseInt(totalItem) - 1).toString())
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
