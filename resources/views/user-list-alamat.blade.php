@@ -11,6 +11,12 @@
         @if (count($alamat) > 0)
             <div class="card-header text-center h2">Daftar Alamat Pengiriman</div>
 
+            <div class="text-center my-3">
+                <a href="{{ route('alamatPengiriman.create') }}" class="btn btn-primary btn-large">Tambahkan Alamat Baru
+                    &nbsp;<i class="uil uil-plus"></i></a>
+            </div>
+
+
             <div class="row">
 
                 @foreach ($alamat as $a)
@@ -45,6 +51,8 @@
                         </div>
                     @endif
                 @endforeach
+
+          
             </div>
         @else
             <div class="my-20 text-center">

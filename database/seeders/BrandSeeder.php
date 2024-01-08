@@ -15,13 +15,19 @@ class BrandSeeder extends Seeder
     public function run()
     {
         Brand::create([
-            'nama'=>'TOTO',
+            'nama' => 'SolidTech',
         ]);
         Brand::create([
-            'nama'=>'SOSO',
+            'nama' => 'QuantumGear',
         ]);
         Brand::create([
-            'nama'=>'BOBO',
+            'nama' => 'EliteForce',
+        ]);
+        Brand::create([
+            'nama' => 'SonicSpark',
+        ]);
+        Brand::create([
+            'nama' => 'ProPulse',
         ]);
     }
 }

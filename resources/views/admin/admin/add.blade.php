@@ -61,14 +61,19 @@
             </div>
             <div class="form-group">
                 <label for="jenis_kelamin">Jenis Kelamin</label>
-                <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
+                <select class="form-control form-control-sm" id="jenis_kelamin" name="jenis_kelamin">
                     <option value="L">Laki-laki</option>
                     <option value="P">Perempuan</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="provinsi">Provinsi</label>
-                <input type="text" class="form-control" id="provinsi" name="provinsi" required>
+                <select class="form-control form-control-sm" id="provinsi" name='provinsi'>
+                    <option value="">PILIH PROVINSI</option>
+                    @foreach ($provinsis as $pro)
+                        <option value="{{ $pro->nama }}-{{ $pro->id }}">{{ $pro->nama }}</option>
+                    @endforeach
+                </select>
                 @error('provinsi')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -76,8 +81,10 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="kota">Kota</label>
-                <input type="text" class="form-control" id="kota" name="kota" required>
+                <label for="kota">Kota/Kabupaten</label>
+                <select class="form-control form-control-sm" id="kota" name='kota'>
+                    <option value="">PILIH KOTA/KABUPATEN</option>
+                </select>
                 @error('kota')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -86,7 +93,9 @@
             </div>
             <div class="form-group">
                 <label for="kecamatan">Kecamatan</label>
-                <input type="text" class="form-control" id="kecamatan" name="kecamatan" required>
+                <select class="form-control form-control-sm" id="kecamatan" name='kecamatan'>
+                    <option value="">PILIH KECAMATAN</option>
+                </select>
                 @error('kecamatan')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -94,12 +103,28 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="kelurahan_kode_pos">Kelurahan/Desa</label>
+                <select class="form-control form-control-sm" id="kelurahan" name='kelurahan'>
+                    <option value="">PILIH KELURAHAN/DESA</option>
+                </select>
+                @error('kelurahan_kode_pos')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="role_id">Role</label>
-                <select name="role_id" class="form-control" required>
+                <select name="role_id" class="form-control form-control-sm" required>
                     @foreach ($roles as $role)
                         <option value="{{ $role->id }}">{{ $role->nama }}</option>
                     @endforeach
                 </select>
+                @error('role_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="alamat">Alamat</label>
@@ -113,4 +138,114 @@
             <button type="submit" class="btn btn-primary">Add Admin</button>
         </form>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#kota, #kecamatan, #kelurahan').prop('disabled', true);
+
+            $('#provinsi').change(function() {
+                var provinsiId = $(this).val();
+                provinsiId = provinsiId.split('-');
+                provinsiId = provinsiId[1]
+
+                $('#kota, #kecamatan, #kelurahan').empty().prop('disabled', true);
+
+                if (provinsiId) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '{{ route('getKotas') }}',
+                        data: {
+                            '_token': '{{ csrf_token() }}',
+                            'provinsi': provinsiId
+                        },
+                        success: function(data) {
+                            if (data.pesan == 'Gagal') {
+                                alert("Gagal!");
+                            } else {
+                                var kotas = JSON.parse(data.kotas);
+                                populateDropdown('#kota', kotas);
+                            }
+                        },
+                        error: handleAjaxError
+                    });
+                }
+            });
+
+            $('#kota').change(function() {
+                var kotaId = $(this).val();
+                kotaId = kotaId.split('-');
+                kotaId = kotaId[1]
+
+                $('#kecamatan, #kelurahan').empty().prop('disabled', true);
+
+                if (kotaId) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '{{ route('getKecamatans') }}',
+                        data: {
+                            '_token': '{{ csrf_token() }}',
+                            'kota': kotaId
+                        },
+                        success: function(data) {
+                            if (data.pesan == 'Gagal') {
+                                alert("Gagal!");
+                            } else {
+                                var kecamatans = JSON.parse(data.kecamatans);
+                                populateDropdown('#kecamatan', kecamatans);
+                            }
+                        },
+                        error: handleAjaxError
+                    });
+                }
+            });
+
+            $('#kecamatan').change(function() {
+                var kecamatanId = $(this).val();
+                kecamatanId = kecamatanId.split('-');
+                kecamatanId = kecamatanId[1]
+
+                $('#kelurahan').empty().prop('disabled', true);
+
+                if (kecamatanId) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '{{ route('getKelurahans') }}',
+                        data: {
+                            '_token': '{{ csrf_token() }}',
+                            'kecamatan': kecamatanId
+                        },
+                        success: function(data) {
+                            if (data.pesan == 'Gagal') {
+                                alert("Gagal!");
+                            } else {
+                                var kelurahans = JSON.parse(data.kelurahans);
+                                populateDropdown('#kelurahan', kelurahans);
+                            }
+                        },
+                        error: handleAjaxError
+                    });
+                }
+            });
+
+            function handleAjaxError(jqXHR, textStatus, errorThrown) {
+                if (jqXHR.responseJSON && jqXHR.responseJSON.error) {
+                    alert(jqXHR.responseJSON.error);
+                } else {
+                    alert('An error occurred while processing your request.');
+                }
+            }
+
+            function populateDropdown(elementId, data) {
+                var dropdown = $(elementId);
+                dropdown.empty().prop('disabled', false);
+                dropdown.append('<option value="">PILIH ' + elementId.toUpperCase().substr(1) + '</option>');
+
+                $.each(data, function(index, item) {
+                    dropdown.append('<option value="' + item.nama + '-' + item.id + '">' + item.nama +
+                        '</option>');
+                });
+            }
+        });
+    </script>
 @endsection

@@ -40,7 +40,8 @@ use App\Http\Controllers\AdminAlamatPengirimanController;
 Route::group(['middleware' => ['isguest']], function () {
     Route::get('/', function () {
         return view('home', [
-            'produk' => Produk::all(),
+            'produk' =>  Produk::inRandomOrder()->take(6)->get(),
+            'display_produk' => Produk::take(4)->get(),
             'kategoris' => Kategori::all(),
             'brands' => Brand::all()
         ]);
@@ -53,6 +54,10 @@ Route::group(['middleware' => ['isguest']], function () {
 Route::get('/produk-detail/{produkId}', [PelangganProdukController::class, 'produkDetail'])->name('produk-detail');
 Route::get('/kategori/{kategoriId}', [ProdukController::class, 'showByCategory'])->name('daftarProdukByKategori');
 Route::get('/search-produk', [ProdukController::class, 'searchProduk'])->name('cariProduk');
+
+Route::get('/get-kotas', [AdminAlamatPengirimanController::class,'getKotas'])->name('getKotas');
+Route::get('/get-kecamatans', [AdminAlamatPengirimanController::class,'getKecamatans'])->name('getKecamatans');
+Route::get('/get-kelurahans', [AdminAlamatPengirimanController::class,'getKelurahans'])->name('getKelurahans');
 
 
 //Admin thigs
@@ -78,9 +83,6 @@ Route::prefix('admin')->group(function () {
         Route::resource('detail-transaksi', DetailTransaksiController::class);
         Route::resource('alamat-pengirimans', AdminAlamatPengirimanController::class);
         Route::get('/laporan', [NotaController::class, 'laporan'])->name('admin.laporan');
-        Route::get('/get-kotas', [AdminAlamatPengirimanController::class,'getKotas'])->name('getKotas');
-        Route::get('/get-kecamatans', [AdminAlamatPengirimanController::class,'getKecamatans'])->name('getKecamatans');
-        Route::get('/get-kelurahans', [AdminAlamatPengirimanController::class,'getKelurahans'])->name('getKelurahans');
     });
 
 
