@@ -52,6 +52,11 @@
                             {{ $p->nama }}</option>
                     @endforeach
                 </select>
+                @error('produk_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="spesifikasi">Spesifikasi</label>

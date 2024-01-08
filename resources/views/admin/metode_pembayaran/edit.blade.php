@@ -19,7 +19,7 @@
                 <label for="nama">Nama Metode Pembayaran</label>
                 <input type="text" class="form-control" id="nama" name="nama" value="{{ $metodePembayaran->nama }}"
                     required>
-                    @error('nama')
+                @error('nama')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>

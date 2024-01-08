@@ -38,6 +38,11 @@
                         <option value="{{ $produk->id }}">{{ $produk->nama }}</option>
                     @endforeach
                 </select>
+                @error('produk_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Add Image</button>
         </form>

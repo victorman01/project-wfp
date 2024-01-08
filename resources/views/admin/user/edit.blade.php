@@ -79,6 +79,11 @@
                     <option value="L" {{ $user->jenis_kelamin === 'L' ? 'selected' : '' }}>Laki-Laki</option>
                     <option value="P" {{ $user->jenis_kelamin === 'P' ? 'selected' : '' }}>Perempuan</option>
                 </select>
+                @error('jenis_kelamin')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="provinsi">Provinsi</label>

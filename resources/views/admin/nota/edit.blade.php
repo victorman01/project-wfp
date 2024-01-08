@@ -51,6 +51,11 @@
                         Belum Dibayar</option>
                     <option value="Lunas" {{ $nota->status_pembayaran === 'Lunas' ? 'selected' : '' }}>Lunas</option>
                 </select>
+                @error('status_pembayaran')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
                 <input type="hidden" name="status_pembayaran" value="{{ $nota->status_pembayaran }}">
             </div>
             <div class="form-group">
@@ -69,6 +74,11 @@
                         @endif
                     @endforeach
                 </select>
+                @error('status_pengiriman')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Update Nota</button>
         </form>
