@@ -26,8 +26,8 @@
 
                                             {{-- Pilih Barang Yang Akan Dibeli --}}
                                             <div class="me-2">
-                                                <input type="checkbox" name="produk_pilihan[]" id=""
-                                                    class="form-check-input border p-3" value="{{ $k->id }}" checked>
+                                                <input type="checkbox" name="produk_pilihan[]" id="checkbox{{ $k->id }}"
+                                                    class="form-check-input border p-3" value="{{ $k->id }}" onchange="ubahCheckbox(this.id)" checked>
                                             </div>
 
                                             <img src="{{ isset($k->produk->gambar[0]->path) ? asset($k->produk->gambar[0]->path) : '' }}"
@@ -77,12 +77,12 @@
                     <div class="card card-border-end border-success">
                         <div class="card-body">
                             <input type="hidden" id="total_price_val" name="total_price_val" value="{{ $total_price }}">
-                            <h3 class="post-title h3">Total Price: Rp. <span
+                            <h3 class="post-title h3">Total Harga: Rp. <span
                                     id="total_price">{{ number_format($total_price, 0, ',', '.') }},-</span>
                             </h3>
 
-                            <h3 class="post-title h3" id="total_item">Total Item(s):
-                                {{ $keranjang != null ? count($keranjang) : 0 }}</h3>
+                            <h3 class="post-title h3" id="total_item">Jumlah Barang:
+                                {{ $keranjang != null ? $total_item : 0 }}</h3>
 
                             <hr class="dropdown-divider">
 
@@ -208,6 +208,27 @@
                     }
                 }
             })
+        }
+
+        function ubahCheckbox(id){
+            var rawID = id.replace(/[^0-9]/g, "");
+            var hargaBarang = document.getElementById("harga_barang" + rawID).value;
+            var jumlahBarang = parseInt(document.getElementById("jum_barang" + rawID).value);
+            var totalHarga = hargaBarang * jumlahBarang;
+
+            var totalItem = document.getElementById("total_item");
+            var totalBarang = parseInt(totalItem.innerHTML.replace(/[^0-9]/g, ""));
+
+            var totalPriceTag = document.getElementById("total_price");
+            var totalPrice = parseInt(totalPriceTag.innerHTML.replace(/[^0-9]/g, ""));
+
+            if(document.getElementById(id).checked){
+                totalPriceTag.innerHTML = (totalPrice+totalHarga).toLocaleString('id-ID');
+                totalItem.innerHTML = "Jumlah Barang: " +  (totalBarang + jumlahBarang).toString();
+            } else {
+                totalPriceTag.innerHTML = (totalPrice-totalHarga).toLocaleString('id-ID');
+                totalItem.innerHTML = "Jumlah Barang: " +  (totalBarang - jumlahBarang).toString();
+            }
         }
 
         function submitForm() {

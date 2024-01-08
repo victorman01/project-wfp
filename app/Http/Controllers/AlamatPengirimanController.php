@@ -122,7 +122,9 @@ class AlamatPengirimanController extends Controller
 
         //Set semua alamat pengiriman menjadi bukan alamat utama
         $alamatUtama = Auth::user()->alamatPengiriman()->where('alamat_utama', 1)->first();
-        $alamatUtama->update(['alamat_utama' => 0]);
+        if(isset($alamatUtama)){
+            $alamatUtama->update(['alamat_utama' => 0]);
+        }
 
         //Update alamat utama yang baru
         $alamatPengiriman->update($validation);

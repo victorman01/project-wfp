@@ -33,11 +33,11 @@
                             @foreach ($produk->jenisProduk as $jp)
                                 @if ($jp == $produk->jenisProduk->first())
                                     <button id="{{ $jp->id }}" class="col-2 m-2 btn btn-primary"
-                                        onclick="JenisProdukChange(this.id, '{{ $jp->spesifikasi }}', '{{ $jp->harga }}', '{{ $jp->stok }}', '{{ $jp->id }}')">{{ $jp->nama }}
+                                        onclick="JenisProdukChange(this.id, '{{ $jp->spesifikasi }}', '{{ number_format($jp->harga, 0, ',', '.') }}', '{{ $jp->stok }}', '{{ $jp->id }}')">{{ $jp->nama }}
                                     </button>
                                 @else
                                     <button id="{{ $jp->id }}" class="col-2 m-2 btn btn-outline-primary"
-                                        onclick="JenisProdukChange(this.id, '{{ $jp->spesifikasi }}', '{{ $jp->harga }}', '{{ $jp->stok }}', '{{ $jp->id }}')">{{ $jp->nama }}
+                                        onclick="JenisProdukChange(this.id, '{{ $jp->spesifikasi }}', '{{ number_format($jp->harga, 0, ',', '.') }}', '{{ $jp->stok }}', '{{ $jp->id }}')">{{ $jp->nama }}
                                     </button>
                                 @endif
                             @endforeach
@@ -47,8 +47,8 @@
 
                 <div class="card my-2 border-dark">
                     <div class="card-body">
-                        <p><b>Harga: Rp.</b> <span
-                                id="harga">{{ number_format($produk->jenisProduk[0]->harga) }}</span>
+                        <p><b>Harga: Rp</b><span
+                                id="harga">{{ number_format($produk->jenisProduk[0]->harga, 0, ',', '.') }}</span>
                         </p>
                         <p><b>Jumlah Stok:</b> <span class="text-success" id="stok">
                                 {{ $produk->jenisProduk[0]->stok }}</span></p>

@@ -84,7 +84,7 @@ class ProdukController extends Controller
 
     public function showByCategory($kategoriId)
     {
-        $produk = Produk::whereHas('kategori_produk', function ($query) use ($kategoriId) {
+        $produk = Produk::whereHas('kategoriProduk', function ($query) use ($kategoriId) {
             $query->where('kategori_id', $kategoriId);
         })->get();;
         $kategori = Kategori::find($kategoriId);
