@@ -46,6 +46,7 @@ Route::group(['middleware' => ['isguest']], function () {
             'brands' => Brand::all()
         ]);
     });
+});
 
 Route::get('/', function () {
     return view('home', [
