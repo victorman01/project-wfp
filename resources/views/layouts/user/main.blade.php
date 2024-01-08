@@ -24,7 +24,7 @@
                     <div class="navbar-brand w-100">
                         <a href="/" class="display-6 align-items-center">
                             <img src="{{ asset('sandbox360/img/eCommerceIcon.png') }}" style="width: 40px;"/>
-                            ACEZ
+                            HardwareBrand
                         </a>
                     </div>
                     <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
@@ -99,7 +99,7 @@
             <div class="row gy-6 gy-lg-0">
                 <div class="col-md-4 col-lg-3">
                     <div class="widget">
-                        <p class="display-6">ACEZ</p>
+                        <p class="display-6">HardwareBrand</p>
                         <img class="mb-4" src="{{ asset('sandbox360/img/logo-light.png') }}"
                             srcset="{{ asset('sandbox360/img/logo-light@2x.png') }} 2x" alt="">
                         <p class="mb-4">© 2022 E-commerce. <br class="d-none d-lg-block">All rights reserved.</p>

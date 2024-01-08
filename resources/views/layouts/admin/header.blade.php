@@ -4,7 +4,7 @@
                 <div class="navbar-brand w-100">
                     <a href="/admin" class="display-6 align-items-center">
                         <img src="{{ asset('sandbox360/img/admin-icon.png') }}" style="width: 40px;" />
-                        ACEZ ADMIN PAGE
+                        HardwareBrand ADMIN PAGE
                     </a>
                 </div>
                 <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
