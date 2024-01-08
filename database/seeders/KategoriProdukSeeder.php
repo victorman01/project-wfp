@@ -27,8 +27,16 @@ class KategoriProdukSeeder extends Seeder
             'nama' => 'Alat Tidur'
         ]);
 
+        Kategori::create([
+            'nama' => 'Alat Pembersih'
+        ]);
+
+        Kategori::create([
+            'nama' => 'Alat Elektronik'
+        ]);
+
         Produk::all()->each(function($produk){
-            $produk->kategoriProduk()->attach(1);
+            $produk->kategoriProduk()->attach(rand(1,5));
         });
     }
 }

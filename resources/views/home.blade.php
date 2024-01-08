@@ -41,6 +41,7 @@
                 data-items-xxl="3" data-items-xl="3" data-items-lg="3" data-items-md="3" data-items-xs="2">
                 <div class="swiper">
                     <div class="swiper-wrapper">
+                        {{-- DIV BRAND --}}
                         @foreach ($brands as $b)
                             <div class="swiper-slide px-5">
                                 <h2 class="text-center text-secondary display-2">{{ $b->nama }}</h2>
@@ -69,7 +70,6 @@
                 </div>
                 <!--/.row -->
                 <div class="row">
-
                     {{-- CARD PRODUK --}}
                     @foreach ($produk as $p)
                         <article class="col-4 my-2">
@@ -112,7 +112,6 @@
                                         </p>
                                     </div>
                                     <!-- /.post-content -->
-
                                     <div class="post-footer">
                                         <div class="d-flex justify-content-end">
                                             <a class="btn btn-primary "
@@ -139,18 +138,21 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-3">
-                    <div class="card h-100">
-                        <div class="card-body">
+                    <div class="card ">
+                        <div class="card-body ">
                             <h2 class="mt-2 mb-2 text-primary">Kategori</h2>
                             <hr class="hr p-0 m-0 mb-2">
-                            <ul>
-                                @foreach ($kategoris as $k)
-                                    <li>
-                                        <a href="{{ route('daftarProdukByKategori', ['kategoriId' => $k->id]) }}"
-                                            class="hover" rel="category">{{ $k->nama }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
+                            <div class="overflow-auto" style="max-height: 260px;">
+                                <ul>
+                                    @foreach ($kategoris as $k)
+                                        <li>
+                                            <a href="{{ route('daftarProdukByKategori', ['kategoriId' => $k->id]) }}"
+                                                class="hover" rel="category">{{ $k->nama }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -162,12 +164,12 @@
 
                             <div class="row">
                                 {{-- CARD PRODUK --}}
-                                @foreach ($produk as $p)
+                                @foreach ($display_produk as $p)
                                     <article class="col-3 my-2">
                                         <a href="{{ route('produk-detail', ['produkId' => $p->id]) }}">
                                             <div class="card">
                                                 <img class="card-img-top"
-                                                    src="{{ isset($p->gambar[0]) ? asset('storage/' . $p->gambar[0]->path) : '' }}"
+                                                    src="{{ isset($p->gambar[0]) ? asset('storage/' . $p->gambar[0]->path) : ''}}"
                                                     alt="" />
                                                 <div class="card-body p-3">
                                                     <h2 class="h4">{{ $p->nama }}
@@ -201,17 +203,13 @@
                                     <!-- /article -->
                                 @endforeach
                             </div>
-
                             <div class="text-end">
                                 <a href="{{ route('daftarProduk') }}" class="hover">Lihat Semua ></a>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-
-
             <!-- /.position-relative -->
         </div>
         <!-- /.container -->

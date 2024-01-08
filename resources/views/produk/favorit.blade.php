@@ -16,7 +16,7 @@
                 <div class="row mt-4 mb-6 justify-content-start">
                     {{-- CARD PRODUK --}}
                     @foreach ($favProducts as $p)
-                        <div class="col-4 my-2">
+                        <article class="col-4 my-2">
                             <div class="card">
                                 <figure class="card-img-top overlay overlay-1 hover-scale"><a
                                         href="{{ route('produk-detail', ['produkId' => $p->id]) }}">
@@ -29,19 +29,19 @@
                                 <div class="card-body">
                                     <div class="post-header ">
                                         <!-- /.post-category -->
-                                        <a href="#" class="hover"
-                                            rel="category">{{ isset($p->kategori[0]) ? $p->kategori[0]->nama : '' }}</a>
+                                        <a href="{{ route('daftarProdukByKategori', ['kategoriId' => $p->kategoriProduk[0]->id]) }}"
+                                            class="hover"
+                                            rel="category">{{ isset($p->kategoriProduk[0]) ? $p->kategoriProduk[0]->nama : '' }}</a>
                                         <h2 class="post-title h3 mt-1 mb-3">{{ $p->nama }}
                                         </h2>
                                     </div>
                                     <!-- /.post-header -->
                                     <div class="post-content">
                                         <p>{{ $p->spesifikasi }}</p>
-                                        <p><b>{{ 'Rp. ' . number_format($p->jenisProduk()->first()->harga, 0, ',', '.') }}
-                                            </b></p>
+                                        <p><b>{{ 'Rp' . number_format($p->jenisProduk()->first()->harga, 0, ',', '.') }}</b>
+                                        </p>
                                     </div>
                                     <!-- /.post-content -->
-
                                     <div class="post-footer">
                                         <div class="d-flex justify-content-end">
                                             <a class="btn btn-primary "
@@ -52,8 +52,8 @@
                                 <!--/.card-body -->
                             </div>
                             <!-- /.card -->
-                        </div>
-                        <!-- /div -->
+                        </article>
+                        <!-- /article -->
                     @endforeach
                 </div>
             @else
