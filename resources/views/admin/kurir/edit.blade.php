@@ -8,7 +8,7 @@
             @method('put')
             <div class="form-group">
                 <label for="nama">Nama Kurir</label>
-                <input type="text" class="form-control" id="nama" name="nama" value="{{ $kurir->nama }}" required>
+                <input type="text" class="form-control"  id="nama" name="nama" value="{{ $kurir->nama }}" required>
             </div>
             <button type="submit" class="btn btn-primary">Update Kurir</button>
         </form>

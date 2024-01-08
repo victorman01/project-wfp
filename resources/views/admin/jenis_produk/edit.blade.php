@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label for="produk_id">Produk</label>
-                <select name="produk_id" class="form-control" required>
+                <select name="produk_id" class="form-control form-control-sm" required>
                     @foreach ($produks as $p)
                         <option value="{{ $p->id }}" {{ $jp->produk->id == $p->id ? 'selected' : '' }}>
                             {{ $p->nama }}</option>

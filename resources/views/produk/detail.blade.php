@@ -8,12 +8,37 @@
     <div class="container">
         <div class="row my-15">
             <div class="col-md-4">
-                {{-- @foreach ($produk->gambar as $gambar)
-                    <img src="{{ asset('storage/' . $gambar->path) }}" alt="">
-                @endforeach --}}
-                <img src="{{ asset('storage/' . $produk->gambar[0]->path) }}" alt="Product Image"
-                    class="img-fluid rounded-4" /></a>
+                <div class="swiper-container swiper-thumbs-container dots-over" data-margin="10" data-dots="false"
+                    data-nav="true" data-thumbs="true">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            @foreach ($produk->gambar as $gambar)
+                                <div class="swiper-slide">
+                                    <img src="{{ asset('storage/' . $gambar->path) }}" alt="Product Image"
+                                        class="img-fluid rounded" /></a>
+                                </div>
+                            @endforeach
+                        </div>
+                        <!--/.swiper-wrapper -->
+                    </div>
+                    <!-- /.swiper -->
+                    <div class="swiper swiper-thumbs">
+                        <div class="swiper-wrapper">
+                            @foreach ($produk->gambar as $gambar)
+                                <div class="swiper-slide">
+                                    <img src="{{ asset('storage/' . $gambar->path) }}" alt="Product Image"
+                                        class="rounded" /></a>
+                                </div>
+                            @endforeach
+                        </div>
+                        <!--/.swiper-wrapper -->
+                    </div>
+                    <!-- /.swiper -->
+                </div>
+                <!-- /.swiper-container -->
+
             </div>
+
             <div class="col-md-8 product-container">
                 <h1>{{ $produk->nama }}</h1>
                 <div class="card my-2 border-dark">
@@ -26,7 +51,6 @@
 
                         <label for="brand"><b>Brand:</b></label>
                         <p id="brand"> {{ $produk->brand->nama }}</p>
-
 
                         <label for="brand"><b>Jenis Produk:</b></label>
 
