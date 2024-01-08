@@ -112,7 +112,7 @@ Route::group(['middleware' => ['ispelanggan']], function () {
     // Route::post('/alamat-insert', [UserController::class, 'insertAlamat'])->name('insertAlamat');
 
     Route::get('/checkout-form', [PelangganProdukController::class, 'checkoutIndex'])->name('checkoutIndex');
-    Route::post('/checkout/{alamPeng}/{produkDibeli}', [PelangganProdukController::class, 'checkoutKeranjang'])->name('checkoutItem');
+    Route::post('/checkout/{produkDibeli}', [PelangganProdukController::class, 'checkoutKeranjang'])->name('checkoutItem');
     
     //Ganti pake post
     Route::get('/histori-transaksi', [PelangganProdukController::class, 'historiTransaksi'])->name('historiTransaksi');

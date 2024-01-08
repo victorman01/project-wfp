@@ -101,12 +101,17 @@ class PelangganProdukController extends Controller
     public function checkoutIndex(Request $request)
     {
         $user = Auth::user();
-        $alamatPengiriman = AlamatPengiriman::where('user_id', $user->id)
-            ->where('alamat_utama', 1)
-            ->get();
+        $alamatPengirimans = AlamatPengiriman::where('user_id', $user->id)->get();
 
-        if (!isset($alamatPengiriman[0])) {
-            return redirect()->route('alamatPengiriman.index')->with('msg_failed', 'Pilih alamat utama terlebih dahulu');
+        // Cek keberadaan alamat utama
+        $checkAlamatUtama = false;
+        foreach ($alamatPengirimans as $alamat) {
+            if($alamat->alamat_utama == 1){
+                $checkAlamatUtama = true;
+            }
+        }
+        if (!$checkAlamatUtama) {
+            return back()->with('msg', 'Pilih alamat utama dari pengiriman terlebih dahulu');
         }
 
         $keranjang = [];
@@ -126,7 +131,7 @@ class PelangganProdukController extends Controller
         $jenisPengiriman = JenisPengiriman::all();
 
         return view('produk.checkout', [
-            'alamPeng' => $alamatPengiriman[0],
+            'alamatPengirimans' => $alamatPengirimans,
             'keranjang' => $keranjang,
             'metPem' => $metodePembayaran,
             'kurir' => $kurir,
@@ -136,11 +141,10 @@ class PelangganProdukController extends Controller
         ]);
     }
 
-    public function checkoutKeranjang(Request $request, AlamatPengiriman $alamPeng, $produkDibeli)
+    public function checkoutKeranjang(Request $request, $produkDibeli)
     {
         //CATATAN:
         //$request menyimpan id dari: metode_pembayaran, kurir, dan jenis_pengiriman
-        //$alamPeng menyimpan object alamat pengiriman
         //$produkDibeli menyimpan array id jenis_produks yang akan dibeli oleh user, dimana masih berbentuk json
 
         $produkDibeli = json_decode($produkDibeli, true);
@@ -196,7 +200,7 @@ class PelangganProdukController extends Controller
             'status_pembayaran' => 'Belum Dibayar',
             'user_id' => $user->id,
             'metode_pembayaran_id' => $request->metode_pembayaran,
-            'alamat_pengiriman_id' => $alamPeng->id,
+            'alamat_pengiriman_id' => $request->id_alamat_terpilih,
             'jenis_pengiriman_id' => $request->jenis_pengiriman,
             'created_at' => now(),
             'updated_at' => now()
@@ -204,7 +208,7 @@ class PelangganProdukController extends Controller
 
         //Jika berhasil membuat nota, buat detail transaksinya
         if ($createNota) {
-            $detailTransaksi = $createNota->detail_transaksi()->attach($keranjang);
+            // $detailTransaksi = $createNota->detail_transaksi()->attach($keranjang);
             foreach ($produkDibeli as $p) {
                 //Update stok dan detach m-n
                 $k = $user->keranjang()->find($p);
