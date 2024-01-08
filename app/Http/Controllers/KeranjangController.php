@@ -37,24 +37,10 @@ class KeranjangController extends Controller
                     ->where('periode_berakhir', '>=', now())
                     ->first();
                 if (isset($checkDiskon)) {
-                    $totalDiskon += $k->pivot->jumlah * $k->harga * (100 - $checkDiskon->diskon) / 100;
+                    $totalDiskon += $k->pivot->jumlah * $k->harga * $checkDiskon->diskon / 100;
                 }
             }
         }
-
-        // $totalDiskon = $user->keranjang->sum(function ($item) {
-        //     $checkDiskon = $item
-        //         ->diskonProduk()
-        //         ->where('jenis_produk_id', $item->id)
-        //         ->where('periode_mulai', '<=', now())
-        //         ->where('periode_berakhir', '>=', now())
-        //         ->first();
-        //     if (isset($checkDiskon)) {
-        //         return $item->pivot->jumlah * $item->harga * $checkDiskon[0];
-        //     } else {
-        //         return $item->pivot->jumlah * $item->harga;
-        //     }
-        // });
 
         // dd($keranjang);
         return view('produk.keranjang', [
@@ -178,6 +164,8 @@ class KeranjangController extends Controller
         $user = Auth::user();
         $update = $user->keranjang()->updateExistingPivot($request->idJenisProduk, ['jumlah' => $request->jumlah]);
 
+        $produkPilihan = $request->produkPilihan;
+
         //{ OLD }
         // $keranjang = User::where('id', $user->id)
         //     ->whereHas('keranjang', function ($query) use ($jenisProdukId) {
@@ -199,19 +187,21 @@ class KeranjangController extends Controller
             return $item->pivot->jumlah * $item->harga;
         });
 
-        // $totalDiskon = $user->keranjang->sum(function ($item) {
-        //     $checkDiskon = $item
-        //         ->diskonProduk()
-        //         ->where('jenis_produk_id', $item->id)
-        //         ->where('periode_mulai', '<=', now())
-        //         ->where('periode_berakhir', '>=', now())
-        //         ->first();
-        //     if(isset($checkDiskon)){
-        //         return $item->pivot->jumlah * $item->harga * $checkDiskon[0];
-        //     } else {
-        //         return $item->pivot->jumlah * $item->harga;
-        //     }
-        // });
+        $totalDiskon = 0;
+        $userID = $user->id;
+        foreach ($produkPilihan as $jenisProdukId) {
+            $jp = JenisProduk::find($jenisProdukId);
+            $checkDiskon = $jp
+                ->diskonProduk()
+                ->where('jenis_produk_id', $jp->id)
+                ->where('periode_mulai', '<=', now())
+                ->where('periode_berakhir', '>=', now())
+                ->first();
+            if (isset($checkDiskon)) {
+                $keranjang =$jp->keranjang()->select("*")->where('user_id', $user->id)->first();
+                $totalDiskon += $keranjang->jumlah * $jp->harga * $checkDiskon->diskon / 100;
+            }
+        }
 
         if ($update == 0) {
             return response()->json(
@@ -226,7 +216,7 @@ class KeranjangController extends Controller
                     'pesan' => 'Berhasil',
                     'jumlahBarang' => $jumlahBarang,
                     'totalHarga' => $totalHarga,
-                    // 'totalDiskon' => $totalDiskon
+                    'totalDiskon' => $totalDiskon
                 ),
                 200
             );

@@ -52,7 +52,7 @@
                                                             ->first();
                                                         if (isset($checkDiskon)) {
                                                             $hargaSetelahDisc = ($k->harga * (100 - $checkDiskon->diskon)) / 100;
-                                                            echo '<p id="harga_total' . $k->id . '"><b>Rp<span id="harga" style="text-decoration: line-through; color:red;">' . number_format($k->harga, 0, ',', '.') . '</b></span><span id="harga_diskon"><b> ' . number_format($hargaSetelahDisc, 0, ',', '.') . '</b></p>';
+                                                            echo '<p id="harga_total' . $k->id . '"><b>Rp<span id="harga" style="text-decoration: line-through; color:red;">' . number_format($k->harga, 0, ',', '.') . '</b></span><span id="harga_diskon' . $k->id . '"><b> ' . number_format($hargaSetelahDisc, 0, ',', '.') . '</b></p>';
                                                         } else {
                                                             echo '<p id="harga_total' . $k->id . '">Rp' . number_format($k->harga, 0, ',', '.') . '</p>';
                                                         }
@@ -133,6 +133,11 @@
             let jumBarang = $("#jum_barang" + rawID).val()
             let hargaBarang = $('#harga_barang' + rawID).val()
 
+            // Mendapatkan nilai checkbox yang dicentang
+            var produkPilihan = $("input[name='produk_pilihan[]']:checked").map(function() {
+                return $(this).val();
+            }).get();
+
             //Prevent Submit kalau kosong jumBarang nya
             if (jumBarang === "" || jumBarang === null || isNaN(jumBarang) || parseInt(jumBarang) <= 0) {
                 return
@@ -146,7 +151,8 @@
                 data: {
                     '_token': '<?php echo csrf_token(); ?>',
                     'idJenisProduk': rawID,
-                    'jumlah': jumBarang
+                    'jumlah': jumBarang,
+                    'produkPilihan': produkPilihan
                 },
                 success: function(data) {
                     if (data.pesan == 'Gagal') {
@@ -157,7 +163,8 @@
                         totalItem.innerHTML = "Jumlah Barang: " + data.jumlahBarang;
                         $("#total_price_val").val(data.totalHarga)
 
-                        $('#total_price').html(data.totalHarga.toLocaleString('id-ID') + ",-");
+                        $('#total_price').html(data.totalHarga.toLocaleString('id-ID'));
+                        $('#total_diskon').html(data.totalDiskon.toLocaleString('id-ID'));
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -188,7 +195,7 @@
                         var totalItemChange = document.getElementById("total_item");
                         totalItemChange.innerHTML = "Jumlah Barang: " + data.jumlahBarang;
                         $("#total_price_val").val(data.totalHarga)
-                        $('#total_price').html(data.totalHarga.toLocaleString('id-ID') + ",-");
+                        $('#total_price').html(data.totalHarga.toLocaleString('id-ID'));
 
                         //Hapus isi dari container yang bersangkutan
                         $('#container_produk' + idContainer).html('');
@@ -228,12 +235,27 @@
             var totalPriceTag = document.getElementById("total_price");
             var totalPrice = parseInt(totalPriceTag.innerHTML.replace(/[^0-9]/g, ""));
 
+            var totalDiskonTag = document.getElementById("total_diskon");
+            var totalDiskon = parseInt(totalDiskonTag.innerHTML.replace(/[^0-9]/g, ""));
+
+            var hargaDiskonTag = document.getElementById('harga_diskon' + rawID);
+
             if (document.getElementById(id).checked) {
+                if (hargaDiskonTag) {
+                    var hargaDiskon = parseInt(hargaDiskonTag.innerHTML.replace(/[^0-9]/g, ""));
+                    totalDiskonTag.innerHTML = totalDiskon + (jumlahBarang * (parseInt(hargaBarang) - hargaDiskon))
+                }
+
                 totalPriceTag.innerHTML = (totalPrice + totalHarga).toLocaleString('id-ID');
-                totalItem.innerHTML = "Jumlah Barang: " + (totalBarang + jumlahBarang).toString();
+                totalItem.innerHTML = "Jumlah Barang: " + (totalBarang + jumlahBarang).toString().toLocaleString('id-ID');
             } else {
+                if (hargaDiskonTag) {
+                    var hargaDiskon = parseInt(hargaDiskonTag.innerHTML.replace(/[^0-9]/g, ""));
+                    totalDiskonTag.innerHTML = totalDiskon - (jumlahBarang * (parseInt(hargaBarang) - hargaDiskon))
+                }
+
                 totalPriceTag.innerHTML = (totalPrice - totalHarga).toLocaleString('id-ID');
-                totalItem.innerHTML = "Jumlah Barang: " + (totalBarang - jumlahBarang).toString();
+                totalItem.innerHTML = "Jumlah Barang: " + (totalBarang - jumlahBarang).toString().toLocaleString('id-ID');
             }
         }
 

@@ -116,11 +116,24 @@ class PelangganProdukController extends Controller
 
         $keranjang = [];
         $totalHarga = 0;
+        $totalItem = 0;
+        $totalDiskon = 0;
         if ($request->produk_pilihan != null) {
             foreach ($request->produk_pilihan as $p) {
                 $k = $user->keranjang()->find($p);
                 $keranjang[] = $k;
                 $totalHarga += $k->harga * $k->pivot->jumlah;
+                $totalItem += $k->pivot->jumlah;
+
+                $checkDiskon = $k
+                    ->diskonProduk()
+                    ->where('jenis_produk_id', $k->id)
+                    ->where('periode_mulai', '<=', now())
+                    ->where('periode_berakhir', '>=', now())
+                    ->first();
+                if (isset($checkDiskon)) {
+                    $totalDiskon += $k->pivot->jumlah * $k->harga * $checkDiskon->diskon / 100;
+                }
             }
         } else {
             return back()->with('msg', 'Centang barang yang ingin dibeli terlebih dahulu!');
@@ -137,7 +150,9 @@ class PelangganProdukController extends Controller
             'kurir' => $kurir,
             'jenisPengiriman' => json_encode($jenisPengiriman),
             'produkPilihan' => $request->produk_pilihan,
-            'totalHarga' => $totalHarga
+            'totalHarga' => $totalHarga,
+            'totalDiskon' => $totalDiskon,
+            'totalItem' => $totalItem
         ]);
     }
 
