@@ -24,7 +24,7 @@
                             <div class="card-body p-2 px-8">
                                 <div class="row my-5" id="histori_transaksi">
                                     <div class="col-2 text-end">
-                                        <img src="{{ asset('sandbox360\img\photos\cf3.jpg') }}" alt="Product Image"
+                                        <img src="{{ isset($n->detailTransaksi[0]->produk->gambar[0]) ? asset('storage/' . $n->detailTransaksi[0]->produk->gambar[0]->path) : ''}}" alt="Product Image"
                                             class=" img rounded shadow" style="width:140px;height:140px;object-fit: cover;">
                                     </div>
 
@@ -36,12 +36,12 @@
                                             Rp{{ number_format($n->detailTransaksi[0]->pivot->sub_total / $n->detailTransaksi[0]->pivot->jumlah, 0, ',', '.') }}
                                         </p>
                                         <form action="{{ route('detailHistoriTransaksi') }}" method="post"
-                                            id="formDetailHistori">
+                                            id="formDetailHistori{{$n->id}}">
                                             @csrf
                                             <input type="hidden" name="id_nota" value="{{ $n->id }}">
                                             @isset($n->detailTransaksi[1])
                                                 <a id="harga_total" class="hover"
-                                                    onclick="document.getElementById('formDetailHistori').submit();">+1 produk
+                                                    onclick="document.getElementById('formDetailHistori{{$n->id}}').submit();"> +{{$n->detailTransaksi->sum('pivot.jumlah') - $n->detailTransaksi[0]->pivot->jumlah}} produk
                                                     Lainnya</a>
                                             @endisset
                                     </div>

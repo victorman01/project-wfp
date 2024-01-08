@@ -55,7 +55,7 @@ Route::get('/home', function () {
         'kategoris' => Kategori::all(),
         'brands' => Brand::all()
     ]);
-});
+})->name('home');
 
 //User: Product
 Route::get('/produk-detail/{produkId}', [PelangganProdukController::class, 'produkDetail'])->name('produk-detail');

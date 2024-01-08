@@ -67,7 +67,7 @@
                                 <div class="card-body p-2">
                                     <div class="row my-5" id="histori_transaksi">
                                         <div class="col-2 text-end">
-                                            <img src="{{ asset('sandbox360\img\photos\cf3.jpg') }}" alt="Product Image"
+                                            <img src="{{ isset($dt->produk->gambar[0]) ? asset('storage/' . $dt->produk->gambar[0]->path) : ''}}" alt="Product Image"
                                                 class=" img rounded shadow" style="width:120px;height:120px;object-fit: cover;">
                                         </div>
 

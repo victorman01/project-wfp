@@ -10,7 +10,7 @@
         content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
     <meta name="author" content="elemis">
     @yield('title')
-    <link rel="shortcut icon" href="{{ asset('sandbox360/img/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('sandbox360/img/eCommerceIcon.png') }}">
     <link rel="stylesheet" href="{{ asset('sandbox360/css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('sandbox360/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('sandbox360/css/colors/orange.css') }}">

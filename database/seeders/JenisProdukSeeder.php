@@ -16,9 +16,7 @@ class JenisProdukSeeder extends Seeder
     {
         JenisProduk::create([
             'nama' => "Biasa",
-            'spesifikasi' => 'Menuang air lebih mudah & praktis
-            Desain minimalis & modern
-            Praktis serta mudah digunakan',
+            'spesifikasi' => 'Menuang air lebih mudah & praktis Desain minimalis & modern Praktis serta mudah digunakan',
             'harga' => 79000,
             'stok' => 100,
             'produk_id' => 1
@@ -26,9 +24,7 @@ class JenisProdukSeeder extends Seeder
 
         JenisProduk::create([
             'nama' => "Super",
-            'spesifikasi' => 'Praktis serta mudah digunakan
-            Memompa hingga 100 liter
-            Dilengkapi lampu indikator penanda daya baterai rendah',
+            'spesifikasi' => 'Praktis serta mudah digunakan Memompa hingga 100 liter Dilengkapi lampu indikator penanda daya baterai rendah',
             'harga' => 900000,
             'stok' => 100,
             'produk_id' => 1
@@ -92,14 +88,14 @@ class JenisProdukSeeder extends Seeder
         
         JenisProduk::create([
             'nama' => "E27",
-            'spesifikasi' => 'Warna: Putih',
+            'spesifikasi' => 'Warna Putih',
             'harga' => 143000,
             'stok' => 100,
             'produk_id' => 7
         ]);
         JenisProduk::create([
             'nama' => "XL",
-            'spesifikasi' => 'Warna: Putih',
+            'spesifikasi' => 'Warna Putih',
             'harga' => 159000,
             'stok' => 100,
             'produk_id' => 8
