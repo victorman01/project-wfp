@@ -56,7 +56,6 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="shortcut icon" href="favicon.ico" />
 
     <style>
-        /* Custom styling for DataTable navigation buttons */
         .table.dataTable .dataTables_wrapper .dataTables_paginate .paginate_button {
             font-size: 14px;
             padding: 5px 10px;
@@ -64,14 +63,25 @@ License: You must have a valid license purchased only from themeforest(the above
         }
 
         .dataTables_length {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            width: 100%;
+            margin-top: 20px;
+            display: inline-block;
+            min-width: 25%;
         }
 
         .dataTables_length select {
-            margin-left: 5px;  /* Adjust this margin as needed */
+            display: inline-block;
+        }
+
+        .dataTables_length .form-select {
+            width: 60px;
+        }
+
+        .dataTables_wrapper .dataTables_paginate {
+            float: right;
+        }
+
+        .pagination .page-link {
+            width: 65px;
         }
 
         .dataTables_filter {
@@ -88,18 +98,15 @@ License: You must have a valid license purchased only from themeforest(the above
             margin-bottom: 0;
         }
 
-        /* Custom styles for DataTables elements */
-        .dataTables_length, .dataTables_filter {
-            margin-bottom: 10px; /* Add some spacing between elements */
-            text-align: right !important; /* Align elements to the right */
+        .dataTables_length,
+        .dataTables_filter {
+            margin-bottom: 10px;
+            text-align: right !important;
         }
 
-        /* Adjust styling for the search input */
         .dataTables_filter input {
-            width: 100% !important; /* Make the search input fill its container */
+            width: 100% !important;
         }
-
-
     </style>
 
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
