@@ -37,18 +37,21 @@ use App\Http\Controllers\AdminAlamatPengirimanController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware' => ['ispelanggan', 'guest']], function () {
+    Route::get('/', function () {
+        return view('home', [
+            'produk' => Produk::all(),
+            'kategoris' => Kategori::all(),
+            'brands' => Brand::all()
+        ]);
+    });
 
-Route::get('/', function () {
-    return view('home', [
-        'produk' => Produk::all(),
-        'kategoris' => Kategori::all(),
-        'brands' => Brand::all()
-    ]);
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 //User: Product
 Route::get('/produk-detail/{produkId}', [PelangganProdukController::class, 'produkDetail'])->name('produk-detail');
