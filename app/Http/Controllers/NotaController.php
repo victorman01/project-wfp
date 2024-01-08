@@ -117,10 +117,10 @@ class NotaController extends Controller
             'status_pengiriman' => 'required|in:Menunggu Pembayaran,Persiapan Barang,Siap Diantar,Pengiriman,Pesanan Diterima,Pesanan Selesai',
             'status_pembayaran' => 'required|in:Lunas,Belum Dibayar',
         ]);
-        if($validatedData['status_pembayaran'] =='Lunas'){
-            $validatedData['status_pengiriman']=='Persiapan Barang';
+        if($validatedData['status_pembayaran'] ==='Lunas'){
+            $validatedData['status_pengiriman']='Persiapan Barang';
         };
-        $nota = Nota::create($validatedData);
+        $nota->update($validatedData);
         return redirect('/admin/notas')->with('success', 'Nota has been updated!');
 
     }
