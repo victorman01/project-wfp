@@ -128,6 +128,20 @@
             </li>
             <li>
                 <a href="javascript:;">
+                    <i class="icon-puzzle"></i>
+                    <span class="title">Alamat Pengiriman</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="{{ route('alamat-pengirimans.index') }}">
+                            <i class="icon-anchor"></i>
+                            List Alamat Pengiriman</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
                     <i class="icon-briefcase"></i>
                     <span class="title">Metode Pembayaran</span>
                     <span class="arrow "></span>

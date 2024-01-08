@@ -31,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label for="jenis_kelamin">Jenis Kelamin</label>
-                <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
+                <select class="form-control form-control-sm" id="jenis_kelamin" name="jenis_kelamin">
                     <option value="L" @if ($admin->jenis_kelamin === 'L') selected @endif>Laki-laki</option>
                     <option value="P" @if ($admin->jenis_kelamin === 'P') selected @endif>Perempuan</option>
                 </select>
@@ -53,7 +53,7 @@
             </div>
             <div class="form-group">
                 <label for="role_id">Role</label>
-                <select name="role_id" class="form-control" required>
+                <select name="role_id" class="form-control form-control-sm" required>
                     @foreach ($roles as $role)
                         <option value="{{ $role->id }}" @if ($admin->role->id === $role->id) selected @endif>
                             {{ $role->nama }}

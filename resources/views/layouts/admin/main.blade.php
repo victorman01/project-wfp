@@ -62,6 +62,44 @@ License: You must have a valid license purchased only from themeforest(the above
             padding: 5px 10px;
             margin-right: 5px;
         }
+
+        .dataTables_length {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
+        }
+
+        .dataTables_length select {
+            margin-left: 5px;  /* Adjust this margin as needed */
+        }
+
+        .dataTables_filter {
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .dataTables_filter label {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-bottom: 0;
+        }
+
+        /* Custom styles for DataTables elements */
+        .dataTables_length, .dataTables_filter {
+            margin-bottom: 10px; /* Add some spacing between elements */
+            text-align: right !important; /* Align elements to the right */
+        }
+
+        /* Adjust styling for the search input */
+        .dataTables_filter input {
+            width: 100% !important; /* Make the search input fill its container */
+        }
+
+
     </style>
 
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
