@@ -17,7 +17,7 @@
                             <h4 class="float-end font-size-15">Invoice #{{ $nota->id }} <span
                                     class="badge bg-success font-size-12 ms-2">{{ $nota->status_pembayaran }}</span></h4>
                             <div class="mb-4">
-                                <h2 class="mb-1 text-muted">ACEZ</h2>
+                                <h2 class="mb-1 text-muted">HardwareBrand</h2>
                             </div>
                         </div>
 
