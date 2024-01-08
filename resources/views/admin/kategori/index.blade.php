@@ -30,14 +30,17 @@
                     <td>{{ $k->created_at }}</td>
                     <td>{{ $k->updated_at }}</td>
                     <td>
-                        <p><a class="btn btn-primary" href="/admin/kategoris/{{ $k->id }}/edit">Edit <i
-                                    class="fa fa-edit"></i></a></p>
-                        <form action="/admin/kategoris/{{ $k->id }}" method="POST" class='d-inline'>
-                            @method('DELETE')
-                            @csrf
-                            <button class="btn btn-danger" type="submit"
+                        <div class="btn-container">
+                            <p class="mb-0"><a class="btn btn-primary btn-sm" href="/admin/kategoris/{{ $k->id }}/edit">Edit <i
+                                class="fa fa-edit"></i></a></p>
+                            <form action="/admin/kategoris/{{ $k->id }}" method="POST" class='d-inline'>
+                                @method('DELETE')
+                                @csrf
+                                <button class="btn btn-danger btn-sm" type="submit" 
                                 onclick="return confirm('Are you sure?')">Delete</button>
-                        </form>
+                            </form>
+                            </p>
+                        </div>
                     </td>
                 </tr>
             @endforeach

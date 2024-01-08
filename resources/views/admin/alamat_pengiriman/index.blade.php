@@ -51,18 +51,21 @@
                         <td>{{ $alamat->user->nama }}</td>
                         <td>{{ $alamat->created_at }}</td>
                         <td>{{ $alamat->updated_at }}</td>
-                        <td>
-                            @can('owner')
-                                <p><a class="btn btn-primary" href="/admin/alamat-pengirimans/{{ $alamat->id }}/edit">Edit <i
-                                            class="fa fa-edit"></i></a></p>
-                                <form action="/admin/alamat-pengirimans/{{ $alamat->id }}" method="POST" class='d-inline'>
-                                    @method('DELETE')
-                                    @csrf
-                                    <button class="btn btn-danger" type="submit"
+                        @can('owner')
+                            <td>
+                                <div class="btn-container">
+                                    <p class="mb-0"><a class="btn btn-primary btn-sm" href="/admin/alamat-pengirimans/{{ $alamat->id }}/edit">Edit <i
+                                        class="fa fa-edit"></i></a></p>
+                                    <form action="/admin/alamat-pengirimans/{{ $alamat->id }}" method="POST" class='d-inline'>
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="btn btn-danger btn-sm" type="submit" 
                                         onclick="return confirm('Are you sure?')">Delete</button>
-                                </form>
-                            @endcan
-                        </td>
+                                    </form>
+                                    </p>
+                                </div>
+                            </td>
+                        @endcan
                     </tr>
                 @endforeach
             </tbody>

@@ -40,15 +40,17 @@
                         <td>{{ $jp->created_at->format('d M Y') }}</td>
                         <td>{{ $jp->updated_at->format('d M Y') }}</td>
                         <td>
-                            <p><a class="btn btn-primary" href="/admin/jenis-produks/{{ $jp->id }}/edit">Edit <i
-                                        class="fa fa-edit"></i></a>
-                            </p>
-                            <form action="/admin/jenis-produks/{{ $jp->id }}" method="POST" class='d-inline'>
-                                @method('DELETE')
-                                @csrf
-                                <button class="btn btn-danger" type="submit"
+                            <div class="btn-container">
+                                <p class="mb-0"><a class="btn btn-primary btn-sm" href="/admin/jenis-produks/{{ $jp->id }}/edit">Edit <i
+                                    class="fa fa-edit"></i></a></p>
+                                <form action="/admin/jenis-produks/{{ $jp->id }}" method="POST" class='d-inline'>
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-danger btn-sm" type="submit" 
                                     onclick="return confirm('Are you sure?')">Delete</button>
-                            </form>
+                                </form>
+                                </p>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

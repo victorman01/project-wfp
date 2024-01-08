@@ -43,6 +43,21 @@
                                     onclick="return confirm('Are you sure?')">Delete</button>
                             </form>
                         </td>
+
+                        <td>
+                            <div class="btn-container">
+                                <p class="mb-0"><a class="btn btn-primary btn-sm" href="/admin/metode-pembayarans/{{ $metode_pembayaran->id }}/edit">Edit <i
+                                    class="fa fa-edit"></i></a></p>
+                                <form action="/admin/metode-pembayarans/{{ $metode_pembayaran->id }}" method="POST"
+                                    class='d-inline'>
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-danger btn-sm" type="submit" 
+                                    onclick="return confirm('Are you sure?')">Delete</button>
+                                </form>
+                                </p>
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

@@ -24,7 +24,9 @@
                     <th scope="col">Nota ID</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Updated At</th>
-                    <th scope="col">Action</th>
+                    @can('owner')
+                        <th scope="col">Action</th>
+                    @endcan
                 </tr>
             </thead>
             <tbody>
@@ -37,20 +39,25 @@
                         <td>{{ $detailTransaksi->nota_id }}</td>
                         <td>{{ $detailTransaksi->created_at }}</td>
                         <td>{{ $detailTransaksi->updated_at }}</td>
-                        <td>
-                            @can('owner')
-                                <p><a class="btn btn-primary"
-                                        href="/admin/detail_transaksis/{{ $detailTransaksi->id }}/edit">Edit <i
-                                            class="fa fa-edit"></i></a></p>
-                                <form action="/admin/detail_transaksis/{{ $detailTransaksi->id }}" method="POST"
-                                    class='d-inline'>
-                                    @method('DELETE')
-                                    @csrf
-                                    <button class="btn btn-danger" type="submit"
+                        @can('owner')  
+                            <td>
+                                <div class="btn-container">
+                                    <p class="mb-0"><a class="btn btn-primary btn-sm" href="/admin/detail_transaksis/{{ $detailTransaksi->id }}/edit">Edit <i
+                                        class="fa fa-edit"></i></a></p>
+                                    <form action="/admin/detail_transaksis/{{ $detailTransaksi->id }}" method="POST"
+                                        class='d-inline'>
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="btn btn-danger btn-sm" type="submit" 
                                         onclick="return confirm('Are you sure?')">Delete</button>
-                                </form>
-                            @endcan
-                        </td>
+                                    </form>
+                                    </p>
+                                </div>
+                            </td>
+                        @endcan
+
+                        
+
                     </tr>
                 @endforeach
             </tbody>

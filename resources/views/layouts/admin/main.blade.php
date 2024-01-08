@@ -54,6 +54,16 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="stylesheet" href="{{ asset('sandbox360/css/colors/orange.css') }}">
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico" />
+
+    <style>
+        /* Custom styling for DataTable navigation buttons */
+        .table.dataTable .dataTables_wrapper .dataTables_paginate .paginate_button {
+            font-size: 14px; /* Adjust the font size as needed */
+            padding: 5px 10px; /* Adjust padding to add space around the button */
+            margin-right: 5px; /* Adjust margin to add space between buttons */
+        }
+    </style>
+
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css"> --}}
 </head>
@@ -81,14 +91,9 @@ License: You must have a valid license purchased only from themeforest(the above
     </div>
     <!-- END CONTAINER -->
     <!-- BEGIN FOOTER -->
-    <div class="footer">
+    <div class="footer" style="display: flex;align-items: center;justify-content: space-between;min-height: 50px;">
         <div class="footer-inner">
             2023 &copy; ACEZ.
-        </div>
-        <div class="footer-tools">
-            <span class="go-top">
-                <i class="fa fa-angle-up"></i>
-            </span>
         </div>
     </div>
     <!-- END FOOTER -->
@@ -156,17 +161,80 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <script>
         $(document).ready(function() {
-            $('table').DataTable();
-        })
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('.page-sidebar-menu li').click(function() {
-                $(this).find('ul.sub-menu').toggle();
+            $('table').DataTable({
+                "pagingType": "full_numbers",
+                "ordering": true,
+                "responsive": true
             });
         });
     </script>
+
+    <script>
+        $(document).ready(function(){
+            // Toggle sidebar on hamburger icon click
+            $('.sidebar-toggler').on('click', function(){
+                $('.page-sidebar').toggleClass('collapse');
+            });
+        });
+    </script>
+
+
+    <script>
+        $('.page-sidebar-menu li').on('click', function(event) {
+            var subMenu = $(this).find('ul.sub-menu');
+
+            // Check if the clicked item has a sub-menu
+            if (subMenu.length > 0) {
+                event.preventDefault();
+                subMenu.slideToggle();
+                event.stopPropagation();
+            } else {
+                // If there is no sub-menu, handle the regular link click
+                window.location.href = $(this).find('a').attr('href');
+            }
+
+            // Highlight active menu item
+            $('.page-sidebar-menu li').removeClass('active');
+            $(this).addClass('active');
+        });
+
+    </script>
+
+    {{-- <script>
+        $(document).ready(function() {
+            // Initialize DataTable
+            $('table').DataTable();
+
+            // Toggle sub-menus on sidebar item mousedown
+            $('.page-sidebar-menu li').on('click', function(event) {
+                // Check if the clicked item has a sub-menu
+                var subMenu = $(this).find('ul.sub-menu');
+                if (subMenu.length > 0) {
+                    // Prevent the default behavior of the anchor link
+                    event.preventDefault();
+
+                    // Toggle sub-menu visibility using slideToggle
+                    subMenu.slideToggle();
+
+                    // Stop event propagation to prevent the menu from closing immediately
+                    event.stopPropagation();
+
+                    console.log('Sub-menu clicked. Is visible:', subMenu.is(':visible'));
+                }
+
+                // Highlight active menu item
+                // Remove "active" class from all menu items
+                $('.page-sidebar-menu li').removeClass('active');
+
+                // Add "active" class to the clicked menu item
+                $(this).addClass('active');
+            });
+        });
+    </script> --}}
+
+
+
+    
     @yield('scripts')
     <!-- END JAVASCRIPTS -->
 </body>

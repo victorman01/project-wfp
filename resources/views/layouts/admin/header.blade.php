@@ -1,5 +1,5 @@
     <header class="wrapper bg-soft-primary">
-        <nav class="navbar navbar-expand-lg center-nav transparent navbar-light py-3">
+        <nav class="navbar navbar-expand-lg center-nav transparent navbar-light">
             <div class="container flex-lg-row flex-nowrap align-items-center">
                 <div class="navbar-brand w-100">
                     <a href="/admin" class="display-6 align-items-center">

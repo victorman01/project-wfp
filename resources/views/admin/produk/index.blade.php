@@ -25,10 +25,7 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Nama Produk</th>
-                    <th scope="col">Spesifikasi Produk</th>
                     <th scope="col">Informasi Produk</th>
-                    <th scope="col">Harga Produk</th>
-                    <th scope="col">Stok Produk</th>
                     <th scope="col">Brand Produk</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Updated At</th>
@@ -40,26 +37,24 @@
                     <tr>
                         <td>{{ $p->id }}</td>
                         <td>{{ $p->nama }}</td>
-                        <td>{{ $p->spesifikasi }}</td>
                         <td>{{ $p->informasi }}</td>
-                        <td>{{ $p->harga }}</td>
-                        <td>{{ $p->stok }}</td>
                         <td>{{ $p->brand_id }}</td>
                         <td>{{ $p->created_at }}</td>
                         <td>{{ $p->updated_at }}</td>
                         <td>
-                            <p><a class="btn btn-primary" href="/admin/produks/{{ $p->id }}/edit">Edit <i
-                                        class="fa fa-edit"></i></a></p>
-                            <form action="/admin/produks/{{ $p->id }}" method="POST" class='d-inline'>
-                                @method('DELETE')
-                                @csrf
-                                <button class="btn btn-danger" type="submit"
-                                    onclick="return confirm('Are you sure?')">Delete</button><br>
-                            </form>
-                            <a class="btn btn-info" href="#showphoto_{{ $p->id }}"
-                                data-toggle="modal">{{ $p->nama }}</a>
-                            <div class="modal fade" id="showphoto_{{ $p->id }}" tabindex="-1" role="basic"
-                                aria-hidden="true">
+                            <div class="btn-container">
+                                <p class="mb-0"><a class="btn btn-primary btn-sm" href="/admin/produks/{{ $p->id }}/edit">Edit <i
+                                            class="fa fa-edit"></i></a></p>
+                                <form action="/admin/produks/{{ $p->id }}" method="POST" class="d-inline">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                                </form>
+                                <p class="mb-0"><a class="btn btn-info btn-sm" href="#showphoto_{{ $p->id }}" data-toggle="modal">{{ $p->nama }}</a>
+                                </p>
+                            </div>
+                        
+                            <div class="modal fade" id="showphoto_{{ $p->id }}" tabindex="-1" role="basic" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -75,13 +70,13 @@
                                             @endforeach
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default"
-                                                data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </td>
+                        
                     </tr>
                 @endforeach
             </tbody>

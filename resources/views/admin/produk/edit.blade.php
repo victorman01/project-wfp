@@ -31,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label for="brand_id">Brand Produk</label>
-                <select name="brand_id" class="form-control">
+                <select name="brand_id" class="form-control" style="min-height: 45px;padding: 10px 15px;">
                     @foreach ($brands as $b)
                         <option value="{{ $b->id }}" {{ $produk->brand->id == $b->id ? 'selected' : '' }}>
                             {{ $b->nama }}</option>
@@ -47,7 +47,7 @@
                     <img class="img-preview" style='max-width:20%' />
                 @endif
                 <input class="form-control @error('image') is-invalid @enderror" type="file" id="image"
-                    name="image" onchange="previewImage()">
+                    name="image" onchange="previewImage()" style="min-height: 45px;padding: 10px 15px;">
                 @error('image')
                     <div class="invalid-feedback">
                         {{ $message }}

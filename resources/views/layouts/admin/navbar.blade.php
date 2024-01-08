@@ -3,11 +3,9 @@
         <!-- BEGIN SIDEBAR MENU -->
         <!-- DOC: for circle icon style menu apply page-sidebar-menu-circle-icons class right after sidebar-toggler-wrapper -->
         <ul class="page-sidebar-menu">
-            <li class="sidebar-toggler-wrapper" data-toggle="collapse" data-target=".page-sidebar">
+            <li class="sidebar-toggler-wrapper">
                 <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-                <div class="sidebar-toggler">
-                </div>
-                <div class="clearfix">
+                <div class="sidebar-toggler" data-toggle="collapse" data-target=".page-sidebar">
                 </div>
                 <!-- END SIDEBAR TOGGLER BUTTON -->
             </li>
@@ -63,6 +61,19 @@
                 <ul class="sub-menu">
                     <li>
                         <a href="{{ route('produks.index') }}">
+                            List Produk</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="icon-calendar"></i>
+                    <span class="title">Jenis Produk</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="{{ route('jenis-produks.index') }}">
                             List Produk</a>
                     </li>
                 </ul>
@@ -141,7 +152,7 @@
                 <ul class="sub-menu">
                     <li>
                         <a href="{{ route('diskon-produks.index') }}">
-                            List Nota</a>
+                            List Diskon Produk</a>
                     </li>
                 </ul>
             </li>
