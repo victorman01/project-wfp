@@ -76,7 +76,7 @@
                             <div class="card">
                                 <figure class="card-img-top overlay overlay-1 hover-scale"><a
                                         href="{{ route('produk-detail', ['produkId' => $p->id]) }}">
-                                        <img src="{{ isset($p->gambar[0]) ? asset($p->gambar[0]->path) : '' }}"
+                                        <img src="{{ isset($p->gambar[0]) ? asset('storage/' . $p->gambar[0]->path) : '' }}"
                                             alt="" /></a>
                                     <figcaption>
                                         <h5 class="from-top mb-0">Show More</h5>
@@ -153,7 +153,7 @@
                                         <a href="{{ route('produk-detail', ['produkId' => $p->id]) }}">
                                             <div class="card">
                                                 <img class="card-img-top"
-                                                    src="{{ isset($p->gambar[0]) ? asset($p->gambar[0]->path) : '' }}"
+                                                    src="{{ isset($p->gambar[0]) ? asset('storage/' . $p->gambar[0]->path) : '' }}"
                                                     alt="" />
                                                 <div class="card-body p-3">
                                                     <h2 class="h4">{{ $p->nama }}

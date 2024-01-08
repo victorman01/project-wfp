@@ -30,7 +30,7 @@
                                                     class="form-check-input border p-3" value="{{ $k->id }}" onchange="ubahCheckbox(this.id)" checked>
                                             </div>
 
-                                            <img src="{{ isset($k->produk->gambar[0]->path) ? asset($k->produk->gambar[0]->path) : '' }}"
+                                            <img src="{{ isset($k->produk->gambar[0]->path) ? asset('storage/' . $k->produk->gambar[0]->path) : '' }}"
                                                 alt="Product Image" class="img rounded shadow"
                                                 style="width:200px;height:200px;object-fit: cover;">
 
