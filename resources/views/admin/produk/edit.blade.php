@@ -16,7 +16,7 @@
             </div>
             <div class="form-group">
                 <label for="brand_id">Brand Produk</label>
-                <select name="brand_id" class="form-control" style="min-height: 45px;padding: 10px 15px;">
+                <select name="brand_id" class="form-control form-control-sm">
                     @foreach ($brands as $b)
                         <option value="{{ $b->id }}" {{ $produk->brand->id == $b->id ? 'selected' : '' }}>
                             {{ $b->nama }}</option>

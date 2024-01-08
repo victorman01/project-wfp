@@ -25,6 +25,28 @@
                     <span class="selected"></span>
                 </a>
             </li>
+            @can('owner')
+                <li>
+                    <a href="javascript:;">
+                        <i class="icon-puzzle"></i>
+                        <span class="title">Users</span>
+                        <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{{ route('admins.index') }}">
+                                <i class="icon-anchor"></i>
+                                List Admin</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('users.index') }}">
+                                <i class="icon-anchor"></i>
+                                List Pelanggan</a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
+            
             <li>
                 <a href="javascript:;">
                     <i class="icon-puzzle"></i>

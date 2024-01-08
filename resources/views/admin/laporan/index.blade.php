@@ -3,6 +3,20 @@
 @section('content')
     <div class="container">
         <h2>Laporan table</h2>
+        <!-- Sorting Filter Form -->
+        <form action="{{ route('admin.laporan') }}" method="get">
+            <label for="sort_by">Sort by:</label>
+            <select name="sort_by" id="sort_by" class="form-control form-control-sm">
+                <option value="total_keseluruhan">Total Keseluruhan</option>
+                <option value="total_pembayaran">Total Pembayaran</option>
+            </select>
+            <label for="sort_order">Order:</label>
+            <select name="sort_order" id="sort_order" class="form-control form-control-sm">
+                <option value="asc">Paling Sedikit</option>
+                <option value="desc">Paling Banyak</option>
+            </select>
+            <button class="btn btn-primary btn-sm" type="submit">Apply</button>
+        </form>
         <table class="table">
             <thead>
                 <tr>
@@ -41,7 +55,26 @@
                         @endif
                     @endforeach
                 @endforeach
+
+                @php
+                    $metodePembayaranCounts = collect($notas->pluck('metodePembayaran.nama'))->countBy();
+                    $mostUsedMetodePembayaran = $metodePembayaranCounts->max();
+                    
+                    $kurirCounts = collect($notas->pluck('kurir'))->countBy();
+                    $mostUsedKurir = $kurirCounts->max();
+
+                    $produkCounts = collect($detailTransaksis->pluck('produk_id'))->countBy();
+                    $mostSoldProduk = $produkCounts->max();
+                @endphp
+
             </tbody>
         </table>
+
+        <!-- Display additional information outside the table -->
+        <div>
+            <p>Produk Terjual Terbanyak: {{ $mostSoldProduk }} kali</p>
+            <p>Metode Pembayaran Terbanyak: {{ $mostUsedMetodePembayaran }} kali</p>
+            <p>Kurir Terbanyak: {{ $mostUsedKurir }} kali</p>
+        </div>
     </div>
 @endsection

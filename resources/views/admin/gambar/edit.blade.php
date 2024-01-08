@@ -13,7 +13,7 @@
             </div>
             <div class="form-group">
                 <label for="path">Image File</label>
-                <input class="form-control @error('path') is-invalid @enderror" type="file" id="path"
+                <input class="form-control @error('path') is-invalid @enderror" style="min-height: 45px;padding: 10px 15px;" type="file" id="path"
                     name="path">
                 @error('path')
                     <div class="invalid-feedback">
@@ -24,7 +24,7 @@
             <div class="form-group">
                 <label for="produk_id">Produk ID</label>
                 <input type="number" class="form-control" id="produk_id" name="produk_id"
-                    value="{{ $gambar_produk->produk_id }}" required>
+                    value="{{ $gambar_produk->produk_id }}" required >
             </div>
             <button type="submit" class="btn btn-primary">Update Gambar Produk</button>
         </form>
