@@ -168,9 +168,11 @@ License: You must have a valid license purchased only from themeforest(the above
 
             $('table').DataTable({
                 "pagingType": "full_numbers", // Specify the paging type you want
-                "ordering": false,  // Enable sorting
-                "order": [[1, 'asc']],  // Initial sorting by column index 1 in ascending order (can be overridden below)
-                "responsive": true,  // Enable responsiveness
+                "ordering": false, // Enable sorting
+                "order": [
+                    [1, 'asc']
+                ], // Initial sorting by column index 1 in ascending order (can be overridden below)
+                "responsive": true, // Enable responsiveness
             });
 
             // Apply the dynamic sorting based on the URL parameters
@@ -194,9 +196,9 @@ License: You must have a valid license purchased only from themeforest(the above
     </script>
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             // Toggle sidebar on hamburger icon click
-            $('.sidebar-toggler').on('click', function(){
+            $('.sidebar-toggler').on('click', function() {
                 $('.page-sidebar').toggleClass('collapse');
             });
         });
@@ -221,7 +223,6 @@ License: You must have a valid license purchased only from themeforest(the above
             $('.page-sidebar-menu li').removeClass('active');
             $(this).addClass('active');
         });
-
     </script>
 
     {{-- <script>
@@ -258,7 +259,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
 
-    
+
     @yield('scripts')
     <!-- END JAVASCRIPTS -->
 </body>

@@ -36,7 +36,8 @@
             </div>
             <div class="form-group">
                 <label for="status_pembayaran">Status Pembayaran</label>
-                <select class="form-control" id="status_pembayaran" name="status_pembayaran">
+                <select class="form-control" id="status_pembayaran" name="status_pembayaran"
+                    @if ($nota->statusPembayaran == 'Lunas' ? 'disabled' : '')  @endif>
                     <option value="Belum Dibayar" @if ($nota->statusPembayaran == 'Belum Dibayar' ? 'selected' : '')  @endif>Belum Dibayar</option>
                     <option value="Lunas" @if ($nota->statusPembayaran == 'Lunas' ? 'selected' : '')  @endif>Lunas</option>
                 </select>
@@ -45,9 +46,16 @@
                 <label for="status_pengiriman">Status Pengiriman</label>
                 <select name="status_pengiriman" class="form-control">
                     @foreach (['Menunggu Pembayaran', 'Persiapan Barang', 'Siap Diantar', 'Pengiriman', 'Pesanan Diterima', 'Pesanan Selesai'] as $status)
-                        <option value="{{ $status }}" {{ $nota->status_pengiriman == $status ? 'selected' : '' }}>
-                            {{ $status }}
-                        </option>
+                        @if ($nota->statusPembayaran == 'Lunas')
+                            <option value="{{ $status }}" disabled>
+                                {{ $status }}
+                            </option>
+                        @else
+                            <option value="{{ $status }}"
+                                {{ $nota->status_pengiriman == $status ? 'selected' : '' }}>
+                                {{ $status }}
+                            </option>
+                        @endif
                     @endforeach
                 </select>
             </div>
