@@ -168,6 +168,19 @@
             </li>
             <li>
                 <a href="javascript:;">
+                    <i class="icon-layers"></i>
+                    <span class="title">Detail Transaksi</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="{{ route('detail-transaksi.index') }}">
+                            List Detail Transaksi</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
                     <i class="icon-drop"></i>
                     <span class="title">Jenis Pengiriman</span>
                     <span class="arrow "></span>

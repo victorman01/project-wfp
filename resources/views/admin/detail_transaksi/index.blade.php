@@ -24,9 +24,6 @@
                     <th scope="col">Nota ID</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Updated At</th>
-                    @can('owner')
-                        <th scope="col">Action</th>
-                    @endcan
                 </tr>
             </thead>
             <tbody>
@@ -34,31 +31,11 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $detailTransaksi->jumlah }}</td>
-                        <td>{{ $detailTransaksi->sub_total }}</td>
-                        <td>{{ $detailTransaksi->produk_id }}</td>
-                        <td>{{ $detailTransaksi->nota_id }}</td>
+                        <td>Rp. {{ number_format($detailTransaksi->sub_total, 0, ',', '.') }}</td>
+                        <td>{{ $detailTransaksi->jenisProduk->nama }}</td>
+                        <td>{{ $detailTransaksi->nota->id }}</td>
                         <td>{{ $detailTransaksi->created_at->format('d M Y') }}</td>
                         <td>{{ $detailTransaksi->updated_at->format('d M Y') }}</td>
-                        @can('owner')
-                            <td>
-                                <div class="btn-container">
-                                    <p class="mb-0"><a class="btn btn-primary btn-sm"
-                                            href="/admin/detail_transaksis/{{ $detailTransaksi->id }}/edit">Edit <i
-                                                class="fa fa-edit"></i></a></p>
-                                    <form action="/admin/detail_transaksis/{{ $detailTransaksi->id }}" method="POST"
-                                        class='d-inline'>
-                                        @method('DELETE')
-                                        @csrf
-                                        <button class="btn btn-danger btn-sm" type="submit"
-                                            onclick="return confirm('Are you sure?')">Delete</button>
-                                    </form>
-                                    </p>
-                                </div>
-                            </td>
-                        @endcan
-
-
-
                     </tr>
                 @endforeach
             </tbody>

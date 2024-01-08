@@ -106,7 +106,8 @@ class AdminController extends Controller
     {
         return view('admin.admin.edit', [
             'admin' => $admin,
-            'roles'=>Role::whereIn('id',[1,2])->get()
+            'roles'=>Role::whereIn('id',[1,2])->get(),
+            'provinsis'=>Provinsi::all()
         ]);
     }
 
@@ -126,6 +127,7 @@ class AdminController extends Controller
             'provinsi' => 'string',
             'kota' => 'string',
             'kecamatan' => 'string',
+            'kelurahan' => 'string',
             'tgl_lahir' => 'required',
             'jenis_kelamin' => 'required|string',
             'role_id' => 'required|integer',
@@ -141,6 +143,7 @@ class AdminController extends Controller
 
         $kelurahan = explode('-', $validatedData['kelurahan']);
         $validatedData['kelurahan'] = ucwords(strtolower($kelurahan[0]));
+
         $validatedData['tanggal_lahir'] = $validatedData['tgl_lahir'];
         if($request->password){
             $validatedData['password'] = $request->password;
