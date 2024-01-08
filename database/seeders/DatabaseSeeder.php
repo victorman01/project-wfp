@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
         $this->call(JenisPengirimanSeeder::class);
 
         // PROVINSI
-        $csvFile = Storage::disk('local')->path('public\csv\provinces.csv');
+        $csvFile = url('csv\provinces.csv');
         $csvData = array_map('str_getcsv', file($csvFile));
 
         foreach ($csvData as $row) {
@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         // KOTA
-        $csvFile = Storage::disk('local')->path('public\csv\regencies.csv');
+        $csvFile = url('csv\regencies.csv');
         $csvData = array_map('str_getcsv', file($csvFile));
 
         foreach ($csvData as $row) {
@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         // KECAMATAN
-        $csvFile = Storage::disk('local')->path('public\csv\districts.csv');
+        $csvFile = url('csv\districts.csv');
         $csvData = array_map('str_getcsv', file($csvFile));
 
         foreach ($csvData as $row) {
@@ -81,7 +81,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         // KELURAHAN
-        $csvFile = Storage::disk('local')->path('public\csv\villages.csv');
+        $csvFile = url('csv\villages.csv');
         $csvData = array_map('str_getcsv', file($csvFile));
 
         foreach ($csvData as $row) {
