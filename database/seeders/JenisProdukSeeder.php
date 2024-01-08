@@ -15,35 +15,63 @@ class JenisProdukSeeder extends Seeder
     public function run()
     {
         JenisProduk::create([
-            'nama' => "Jenis Produk 1",
-            'spesifikasi'=> 'Bahan Bagus',
-            'harga'=>100000,
-            'stok'=>100,
+            'nama' => "Biasa",
+            'spesifikasi' => 'Menuang air lebih mudah & praktis
+            Desain minimalis & modern
+            Praktis serta mudah digunakan',
+            'harga' => 79000,
+            'stok' => 100,
             'produk_id' => 1
         ]);
 
         JenisProduk::create([
-            'nama' => "Jenis Produk 2",
-            'spesifikasi'=> 'Bahan Bagus',
-            'harga'=>100000,
-            'stok'=>100,
+            'nama' => "Super",
+            'spesifikasi' => 'Praktis serta mudah digunakan
+            Memompa hingga 100 liter
+            Dilengkapi lampu indikator penanda daya baterai rendah',
+            'harga' => 900000,
+            'stok' => 100,
+            'produk_id' => 1
+        ]);
+
+        JenisProduk::create([
+            'nama' => "Pendek",
+            'spesifikasi' => 'Rak penyimpanan 5 tingkat yang serbaguna',
+            'harga' => 50000,
+            'stok' => 100,
             'produk_id' => 2
         ]);
 
         JenisProduk::create([
-            'nama' => "Jenis Produk 3",
-            'spesifikasi'=> 'Bahan Bagus',
-            'harga'=>100000,
-            'stok'=>100,
+            'nama' => "Sedang",
+            'spesifikasi' => 'Cocok untuk kebutuhan rumah tangga, perkantoran, gudang, atau area lainnya',
+            'harga' => 70000,
+            'stok' => 100,
+            'produk_id' => 2
+        ]);
+
+        JenisProduk::create([
+            'nama' => "Tinggi",
+            'spesifikasi' => 'Ambalan adjustable',
+            'harga' => 90000,
+            'stok' => 100,
+            'produk_id' => 2
+        ]);
+
+        JenisProduk::create([
+            'nama' => "Original",
+            'spesifikasi' => 'Dilengkapi tombol reset untuk mengubah kode kombinasi',
+            'harga' => 300000,
+            'stok' => 100,
             'produk_id' => 3
         ]);
 
         JenisProduk::create([
-            'nama' => "Jenis Produk 4",
-            'spesifikasi'=> 'Bahan Bagus',
-            'harga'=>100000,
-            'stok'=>100,
-            'produk_id' => 2
+            'nama' => "Original",
+            'spesifikasi' => 'Dilengkapi tombol reset untuk mengubah kode kombinasi',
+            'harga' => 300000,
+            'stok' => 100,
+            'produk_id' => 4
         ]);
     }
 }

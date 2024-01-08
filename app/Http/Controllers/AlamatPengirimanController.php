@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\AlamatPengiriman;
 use App\Http\Controllers\Controller;
+use App\Models\Provinsi;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,7 +34,12 @@ class AlamatPengirimanController extends Controller
      */
     public function create()
     {
-        return view('user-insert-alamat');
+        return view('user-insert-alamat',[
+            'provinsis' => Provinsi::all(),
+            'kotas' => [],
+            'kecamatans' => [],
+            'kelurahans' => [],
+        ]);
     }
 
     /**
@@ -48,24 +55,24 @@ class AlamatPengirimanController extends Controller
             'alamat' => 'required|string',
             'nama_penerima' => 'required|string',
             'nomor_handphone' => 'required|numeric',
-            'provinsi_id' => 'required|integer',
-            'kota_id' => 'required|integer',
-            'kecamatan_id' => 'required|integer',
-            'kelurahan_id' => 'required|integer',
+            'provinsi' => 'required|string',
+            'kota' => 'required|string',
+            'kecamatan' => 'required|string',
+            'kelurahan' => 'required|string',
             'alamat_utama' => 'required'
         ]);
 
-        $provinsi = explode('-', $validatedData['provinsi']);
-        $validatedData['provinsi'] = ucwords(strtolower($provinsi[0]));
+        $provinsi = explode('-', $validation['provinsi']);
+        $validation['provinsi'] = ucwords(strtolower($provinsi[0]));
 
-        $kota = explode('-', $validatedData['kota']);
-        $validatedData['kota'] = ucwords(strtolower($kota[0]));
+        $kota = explode('-', $validation['kota']);
+        $validation['kota'] = ucwords(strtolower($kota[0]));
 
-        $kecamatan = explode('-', $validatedData['kecamatan']);
-        $validatedData['kecamatan'] = ucwords(strtolower($kecamatan[0]));
+        $kecamatan = explode('-',$validation['kecamatan']);
+        $validation['kecamatan'] = ucwords(strtolower($kecamatan[0]));
 
-        $kelurahan = explode('-', $validatedData['kelurahan']);
-        $validatedData['kelurahan'] = ucwords(strtolower($kelurahan[0]));
+        $kelurahan = explode('-', $validation['kelurahan']);
+        $validation['kelurahan'] = ucwords(strtolower($kelurahan[0]));
 
         if($request->alamat_utama == 1){
             $validation['alamat_utama'] = 1;
@@ -100,9 +107,15 @@ class AlamatPengirimanController extends Controller
      */
     public function edit(AlamatPengiriman $alamatPengiriman)
     {
-        return view('user-update-alamat', [
-            'alamatPengiriman' => $alamatPengiriman
-        ]);
+        return view('user-update-alamat', 
+        [            
+            'alamatPengiriman' => $alamatPengiriman,
+            'provinsis' => Provinsi::all(),
+            'kotas' => [],
+            'kecamatans' => [],
+            'kelurahans' => [],]
+        
+        );
     }
 
     /**
@@ -119,23 +132,23 @@ class AlamatPengirimanController extends Controller
             'alamat' => 'required|string',
             'nama_penerima' => 'required|string',
             'nomor_handphone' => 'required|numeric',
-            'provinsi_id' => 'required|integer',
-            'kota_id' => 'required|integer',
-            'kecamatan_id' => 'required|integer',
-            'kelurahan_kode_pos_id' => 'required|integer',
+            'provinsi' => 'required|string',
+            'kota' => 'required|string',
+            'kecamatan' => 'required|string',
+            'kelurahan' => 'required|string',
             'alamat_utama' => 'required'
         ]);
-        $provinsi = explode('-', $validatedData['provinsi']);
-        $validatedData['provinsi'] = ucwords(strtolower($provinsi[0]));
+        $provinsi = explode('-', $validation['provinsi']);
+        $validation['provinsi'] = ucwords(strtolower($provinsi[0]));
 
-        $kota = explode('-', $validatedData['kota']);
-        $validatedData['kota'] = ucwords(strtolower($kota[0]));
+        $kota = explode('-', $validation['kota']);
+        $validation['kota'] = ucwords(strtolower($kota[0]));
 
-        $kecamatan = explode('-', $validatedData['kecamatan']);
-        $validatedData['kecamatan'] = ucwords(strtolower($kecamatan[0]));
+        $kecamatan = explode('-', $validation['kecamatan']);
+        $validation['kecamatan'] = ucwords(strtolower($kecamatan[0]));
 
-        $kelurahan = explode('-', $validatedData['kelurahan']);
-        $validatedData['kelurahan'] = ucwords(strtolower($kelurahan[0]));
+        $kelurahan = explode('-', $validation['kelurahan']);
+        $validation['kelurahan'] = ucwords(strtolower($kelurahan[0]));
 
         if($request->alamat_utama == 1){
             $validation['alamat_utama'] = 1;

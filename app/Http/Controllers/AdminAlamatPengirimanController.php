@@ -157,7 +157,7 @@ class AdminAlamatPengirimanController extends Controller
      */
     public function destroy(AlamatPengiriman $alamatPengiriman)
     {
-        $this->authorize('owner');  
+        $this->authorize('owner');
         $alamatPengiriman->delete();
         return redirect('admin/alamat-pengirimans')->with('success', 'Alamat Pengiriman berhasil dihapus');
     }

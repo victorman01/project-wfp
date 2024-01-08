@@ -56,11 +56,56 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="shortcut icon" href="favicon.ico" />
 
     <style>
-        /* Custom styling for DataTable navigation buttons */
         .table.dataTable .dataTables_wrapper .dataTables_paginate .paginate_button {
             font-size: 14px;
             padding: 5px 10px;
             margin-right: 5px;
+        }
+
+        .dataTables_length {
+            margin-top: 20px;
+            display: inline-block;
+            min-width: 25%;
+        }
+
+        .dataTables_length select {
+            display: inline-block;
+        }
+
+        .dataTables_length .form-select {
+            width: 60px;
+        }
+
+        .dataTables_wrapper .dataTables_paginate {
+            float: right;
+        }
+
+        .pagination .page-link {
+            width: 65px;
+        }
+
+        .dataTables_filter {
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .dataTables_filter label {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-bottom: 0;
+        }
+
+        .dataTables_length,
+        .dataTables_filter {
+            margin-bottom: 10px;
+            text-align: right !important;
+        }
+
+        .dataTables_filter input {
+            width: 100% !important;
         }
     </style>
 

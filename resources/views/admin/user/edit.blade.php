@@ -36,7 +36,7 @@
             </div>
             <div class="form-group">
                 <label for="jenis_kelamin">Jenis Kelamin</label>
-                <select name="jenis_kelamin" class="form-control">
+                <select name="jenis_kelamin" class="form-control form-control-sm">
                     <option value="L" {{ $user->jenis_kelamin === 'L' ? 'selected' : '' }}>Laki-Laki</option>
                     <option value="P" {{ $user->jenis_kelamin === 'P' ? 'selected' : '' }}>Perempuan</option>
                 </select>

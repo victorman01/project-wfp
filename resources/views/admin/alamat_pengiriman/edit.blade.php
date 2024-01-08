@@ -50,14 +50,14 @@
             </div>
             <div class="form-group">
                 <label for="alamat_utama">Alamat Utama</label>
-                <select class="form-control" id="alamat_utama" name="alamat_utama">
+                <select class="form-control form-control-sm" id="alamat_utama" name="alamat_utama">
                     <option value="1" {{ $alamat_pengiriman->alamat_utama == 1 ? 'selected' : '' }}>Yes</option>
                     <option value="0" {{ $alamat_pengiriman->alamat_utama == 0 ? 'selected' : '' }}>No</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="user_id">User</label>
-                <select name="user_id" class="form-control">
+                <select name="user_id" class="form-control form-control-sm">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}" @if ($user->id == $alamat_pengiriman->user_id) selected @endif>
                             {{ $user->nama }}
