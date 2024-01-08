@@ -38,7 +38,7 @@
             <tbody>
                 @foreach ($alamatPengirimans as $alamat)
                     <tr>
-                        <td>{{ $alamat->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $alamat->nama }}</td>
                         <td>{{ $alamat->alamat }}</td>
                         <td>{{ $alamat->nama_penerima }}</td>
@@ -46,7 +46,7 @@
                         <td>{{ $alamat->provinsi }}</td>
                         <td>{{ $alamat->kota }}</td>
                         <td>{{ $alamat->kecamatan }}</td>
-                        <td>{{ $alamat->kelurahan_kode_pos }}</td>
+                        <td>{{ $alamat->kelurahan }}</td>
                         <td>{{ $alamat->alamat_utama == 1 ? 'Ya' : 'Tidak' }}</td>
                         <td>{{ $alamat->user->nama }}</td>
                         <td>{{ $alamat->created_at->format('d M Y') }}</td>

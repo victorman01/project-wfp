@@ -30,7 +30,7 @@
             <tbody>
                 @foreach ($diskonProduks as $diskonProduk)
                     <tr>
-                        <td>{{ $diskonProduk->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $diskonProduk->diskon }}</td>
                         <td>{{ \Carbon\Carbon::parse($diskonProduk->periode_mulai)->format('d M Y') }}</td>
                         <td>{{ \Carbon\Carbon::parse($diskonProduk->periode_berakhir)->format('d M Y') }}</td>

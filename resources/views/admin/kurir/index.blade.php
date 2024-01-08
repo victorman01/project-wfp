@@ -27,7 +27,7 @@
             <tbody>
                 @foreach ($kurirs as $kurir)
                     <tr>
-                        <td>{{ $kurir->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $kurir->nama }}</td>
                         <td>{{ $kurir->created_at->format('d M Y') }}</td>
                         <td>{{ $kurir->updated_at->format('d M Y') }}</td>

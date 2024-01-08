@@ -27,7 +27,7 @@
             <tbody>
                 @foreach ($metode_pembayarans as $metode_pembayaran)
                     <tr>
-                        <td>{{ $metode_pembayaran->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $metode_pembayaran->nama }}</td>
                         <td>{{ $metode_pembayaran->created_at->format('d M Y') }}</td>
                         <td>{{ $metode_pembayaran->updated_at->format('d M Y') }}</td>

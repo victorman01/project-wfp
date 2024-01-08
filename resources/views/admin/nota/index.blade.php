@@ -39,7 +39,7 @@
             <tbody>
                 @foreach ($notas as $nota)
                     <tr>
-                        <td>{{ $nota->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>Rp. {{ number_format($nota->total_pembayaran, 0, ',', '.') }}</td>
                         <td>Rp. {{ number_format($nota->total_diskon, 0, ',', '.') }}</td>
                         <td>Rp. {{ number_format($nota->total_pembayaran_diskon, 0, ',', '.') }}</td>

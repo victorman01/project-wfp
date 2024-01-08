@@ -79,6 +79,9 @@ Route::prefix('admin')->group(function () {
         Route::resource('detail-transaksi', DetailTransaksiController::class);
         Route::resource('alamat-pengirimans', AdminAlamatPengirimanController::class);
         Route::get('/laporan', [NotaController::class, 'laporan'])->name('admin.laporan');
+        Route::get('/get-kotas', [AdminAlamatPengirimanController::class,'getKotas'])->name('getKotas');
+        Route::get('/get-kecamatans', [AdminAlamatPengirimanController::class,'getKecamatans'])->name('getKecamatans');
+        Route::get('/get-kelurahans', [AdminAlamatPengirimanController::class,'getKelurahans'])->name('getKelurahans');
     });
 
 

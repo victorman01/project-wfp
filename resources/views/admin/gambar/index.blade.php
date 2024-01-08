@@ -28,7 +28,7 @@
             <tbody>
                 @foreach ($gambars as $gambar)
                     <tr>
-                        <td>{{ $gambar->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $gambar->nama }}</td>
                         <td>
                             @if ($gambar->path)

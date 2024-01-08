@@ -32,7 +32,7 @@
             <tbody>
                 @foreach ($detailTransaksis as $detailTransaksi)
                     <tr>
-                        <td>{{ $detailTransaksi->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $detailTransaksi->jumlah }}</td>
                         <td>{{ $detailTransaksi->sub_total }}</td>
                         <td>{{ $detailTransaksi->produk_id }}</td>

@@ -27,7 +27,7 @@
             <tbody>
                 @foreach ($brands as $b)
                     <tr>
-                        <td>{{ $b->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $b->nama }}</td>
                         <td>{{ $b->created_at->format('d M Y') }}</td>
                         <td>{{ $b->updated_at->format('d M Y') }}</td>

@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kota;
 use App\Models\User;
+use App\Models\Provinsi;
+use App\Models\Kecamatan;
+use App\Models\Kelurahan;
 use Illuminate\Http\Request;
 use App\Models\AlamatPengiriman;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class AdminAlamatPengirimanController extends Controller
@@ -30,7 +35,11 @@ class AdminAlamatPengirimanController extends Controller
     {
         $this->authorize('owner');
         return view('admin.alamat_pengiriman.add',[
-            'users'=>User::all()
+            'users'=>User::all(),
+            'provinsis' => Provinsi::all(),
+            'kotas' => [],
+            'kecamatans' => [],
+            'kelurahans' => [],
         ]);
     }
 
@@ -51,10 +60,23 @@ class AdminAlamatPengirimanController extends Controller
             'provinsi'=>'required|string',
             'kota'=>'required|string',
             'kecamatan'=>'required|string',
-            'kelurahan_kode_pos'=>'required|string',
+            'kelurahan'=>'required|string',
             'alamat_utama'=>'required|integer',
             'user_id'=>'required|integer',
         ]);
+
+        $provinsi = explode('-', $validatedData['provinsi']);
+        $validatedData['provinsi'] = ucwords(strtolower($provinsi[0]));
+
+        $kota = explode('-', $validatedData['kota']);
+        $validatedData['kota'] = ucwords(strtolower($kota[0]));
+
+        $kecamatan = explode('-', $validatedData['kecamatan']);
+        $validatedData['kecamatan'] = ucwords(strtolower($kecamatan[0]));
+
+        $kelurahan = explode('-', $validatedData['kelurahan']);
+        $validatedData['kelurahan'] = ucwords(strtolower($kelurahan[0]));
+
         AlamatPengiriman::create($validatedData);
         return redirect('admin/alamat-pengirimans')->with('success', 'Alamat Pengiriman berhasil ditambahkan');
     }
@@ -81,7 +103,11 @@ class AdminAlamatPengirimanController extends Controller
         $this->authorize('owner');
         return view('admin.alamat_pengiriman.edit',[
             'users'=>User::all(),
-            'alamat_pengiriman'=>$alamatPengiriman
+            'alamat_pengiriman'=>$alamatPengiriman,
+            'provinsis' => Provinsi::all(),
+            'kotas' => [],
+            'kecamatans' => [],
+            'kelurahans' => [],
         ]);
     }
 
@@ -107,6 +133,18 @@ class AdminAlamatPengirimanController extends Controller
             'alamat_utama'=>'required|integer',
             'user_id'=>'required|integer',
         ]);
+        $provinsi = explode('-', $validatedData['provinsi']);
+        $validatedData['provinsi'] = ucwords(strtolower($provinsi[0]));
+
+        $kota = explode('-', $validatedData['kota']);
+        $validatedData['kota'] = ucwords(strtolower($kota[0]));
+
+        $kecamatan = explode('-', $validatedData['kecamatan']);
+        $validatedData['kecamatan'] = ucwords(strtolower($kecamatan[0]));
+
+        $kelurahan = explode('-', $validatedData['kelurahan']);
+        $validatedData['kelurahan'] = ucwords(strtolower($kelurahan[0]));
+
         $alamatPengiriman->update($validatedData);
         return redirect('admin/alamat-pengirimans')->with('success', 'Alamat Pengiriman berhasil diedit');
     }
@@ -123,4 +161,58 @@ class AdminAlamatPengirimanController extends Controller
         $alamatPengiriman->delete();
         return redirect('admin/alamat-pengirimans')->with('success', 'Alamat Pengiriman berhasil dihapus');
     }
+    public function getKotas(Request $request)
+    {
+        $kotas = Kota::where('provinsi_id', $request->provinsi)->get();
+        if($kotas){
+            return response()->json(
+                array(
+                    'pesan'=>'Berhasil',
+                    'kotas'=>json_encode($kotas)
+                ),200
+            );
+        }
+        return response()->json(
+            array(
+                'pesan'=>'Gagal',
+            ),200
+        );
+    }
+
+    public function getKecamatans(Request $request)
+    {
+        $kecamatans = Kecamatan::where('kota_id',$request->kota)->get();
+        if($kecamatans){
+            return response()->json(
+                array(
+                    'pesan'=>'Berhasil',
+                    'kecamatans'=>json_encode($kecamatans)
+                ),200
+            );
+        }
+        return response()->json(
+            array(
+                'pesan'=>'Gagal',
+            ),200
+        );
+    }
+
+    public function getKelurahans(Request $request)
+    {
+        $kelurahans = Kelurahan::where('kecamatan_id',$request->kecamatan)->get();
+        if($kelurahans){
+            return response()->json(
+                array(
+                    'pesan'=>'Berhasil',
+                    'kelurahans'=>json_encode($kelurahans)
+                ),200
+            );
+        }
+        return response()->json(
+            array(
+                'pesan'=>'Gagal',
+            ),200
+        );
+    }
+
 }

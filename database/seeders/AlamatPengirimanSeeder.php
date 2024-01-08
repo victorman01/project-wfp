@@ -22,7 +22,7 @@ class AlamatPengirimanSeeder extends Seeder
             'provinsi' => 'Jawa Timur',
             'kota' => 'Malang',
             'kecamatan' => 'Simokerto',
-            'kelurahan_kode_pos' => 'Sidodadi 60145',
+            'kelurahan' => 'Sidodadi',
             'alamat_utama' => 1,
             'user_id' => 1
         ]);
@@ -35,7 +35,7 @@ class AlamatPengirimanSeeder extends Seeder
             'provinsi' => 'Jawa Timur',
             'kota' => 'Malang',
             'kecamatan' => 'Simokerto',
-            'kelurahan_kode_pos' => 'Sidodadi 60145',
+            'kelurahan' => 'Sidodadi',
             'alamat_utama' => 0,
             'user_id' => 1
         ]);
