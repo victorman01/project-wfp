@@ -5,17 +5,41 @@
         <h2>Add New Shipping Address</h2>
         <form method="post" action="/admin/alamat-pengirimans">
             @csrf
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="form-group">
                 <label for="nama">Nama Tempat</label>
                 <input type="text" class="form-control" id="nama" name="nama" required>
+                @error('nama')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="nama_penerima">Nama Penerima</label>
                 <input type="text" class="form-control" id="nama_penerima" name="nama_penerima" required>
+                @error('nama_penerima')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="nomor_handphone">Nomor Handphone</label>
                 <input type="text" class="form-control" id="nomor_handphone" name="nomor_handphone" required>
+                @error('nomor_handphone')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="provinsi">Provinsi</label>
@@ -62,6 +86,11 @@
             <div class="form-group">
                 <label for="alamat">Alamat</label>
                 <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
+                @error('alamat')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Add Shipping Address</button>
         </form>

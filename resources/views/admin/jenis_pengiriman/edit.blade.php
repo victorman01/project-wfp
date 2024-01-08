@@ -6,10 +6,24 @@
         <form method="post" action="/admin/jenis-pengirimans/{{ $jenis_pengiriman->id }}">
             @csrf
             @method('put')
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="form-group">
                 <label for="nama">Nama Jenis Pengiriman</label>
                 <input type="text" class="form-control" id="nama" name="nama" value="{{ $jenis_pengiriman->nama }}"
                     required>
+                @error('nama')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="kurir_id">Kurir</label>

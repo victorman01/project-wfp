@@ -5,25 +5,59 @@
         <h2>Add New Admin</h2>
         <form method="post" action="/admin/admins">
             @csrf
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="form-group">
                 <label for="nama">Nama</label>
                 <input type="text" class="form-control" id="nama" name="nama" required>
+                @error('nama')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email" required>
+                @error('email')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
+                @error('password')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="nomor_handphone">Nomor Handphone</label>
                 <input type="tel" class="form-control" id="nomor_handphone" name="nomor_handphone" required>
+                @error('nomor_handphone')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="tgl_lahir">Tanggal Lahir</label>
                 <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" required>
+                @error('tgl_lahir')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="jenis_kelamin">Jenis Kelamin</label>
@@ -40,24 +74,44 @@
                         <option value="{{ $pro->nama }}-{{ $pro->id }}">{{ $pro->nama }}</option>
                     @endforeach
                 </select>
+                @error('provinsi')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="kota">Kota/Kabupaten</label>
                 <select class="form-control form-control-sm" id="kota" name='kota'>
                     <option value="">PILIH KOTA/KABUPATEN</option>
                 </select>
+                @error('kota')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="kecamatan">Kecamatan</label>
                 <select class="form-control form-control-sm" id="kecamatan" name='kecamatan'>
                     <option value="">PILIH KECAMATAN</option>
                 </select>
+                @error('kecamatan')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="kelurahan_kode_pos">Kelurahan/Desa</label>
                 <select class="form-control form-control-sm" id="kelurahan" name='kelurahan'>
                     <option value="">PILIH KELURAHAN/DESA</option>
                 </select>
+                @error('kelurahan_kode_pos')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="role_id">Role</label>
@@ -66,10 +120,20 @@
                         <option value="{{ $role->id }}">{{ $role->nama }}</option>
                     @endforeach
                 </select>
+                @error('role_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="alamat">Alamat</label>
                 <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
+                @error('alamat')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Add Admin</button>
         </form>
