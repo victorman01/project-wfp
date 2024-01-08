@@ -43,7 +43,9 @@ class JenisPengirimanController extends Controller
     {
         $validatedData = $request->validate([
             'nama'=>'required|string',
-            'kurir_id'=>'required'
+            'kurir_id'=>'required',
+            'harga'=>'required',
+            'lama_pengiriman'=>'required'
         ]);
         JenisPengiriman::create($validatedData);
         return redirect('/admin/jenis-pengirimans')->with('success','Data jenis pengiriman telah disimpan!');
@@ -85,7 +87,9 @@ class JenisPengirimanController extends Controller
     {
         $validatedData = $request->validate([
             'nama'=>'required|string',
-            'kurir_id'=>'required'
+            'kurir_id'=>'required',
+            'harga'=>'required',
+            'lama_pengiriman'=>'required'
         ]);
         $jenisPengiriman->update($validatedData);
         return redirect('/admin/jenis-pengirimans')->with('success','Modifikasi data jenis pengiriman telah disimpan!');
@@ -99,7 +103,7 @@ class JenisPengirimanController extends Controller
      */
     public function destroy(JenisPengiriman $jenisPengiriman)
     {
-        if($jenisPengiriman->kurir||$jenisPengiriman->nota->count()>0){
+        if($jenisPengiriman->nota->count()>0){
             return redirect('/admin/jenis-pengirimans')->with('error','Data jenis pengiriman gagal terhapus!');
         }
         $jenisPengiriman->delete();

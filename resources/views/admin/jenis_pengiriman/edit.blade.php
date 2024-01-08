@@ -26,6 +26,26 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="harga">Harga</label>
+                <input type="number" class="form-control" id="harga" name="harga"
+                    value="{{ $jenis_pengiriman->harga }}" required>
+                @error('harga')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="lama_pengiriman">Lama Pengiriman</label>
+                <input type="text" class="form-control" id="lama_pengiriman" name="lama_pengiriman"
+                    value="{{ $jenis_pengiriman->lama_pengiriman }}" required>
+                @error('lama_pengiriman')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="kurir_id">Kurir</label>
                 <select name="kurir_id" class="form-control form-control-sm" style="min-height: 45px;padding: 10px 15px;">
                     @foreach ($kurirs as $kurir)

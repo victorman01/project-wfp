@@ -161,7 +161,7 @@ class AdminController extends Controller
      */
     public function destroy(User $admin)
     {
-        if($admin->keranjang->count()>0 || $admin->favorit->count()>0 || $admin->alamatPengiriman->count() > 0 || $admin->nota ||$admin->pelanggan ||$admin->admin || $admin->role){
+                if($admin->keranjang->count()>0 || $admin->favorit->count()>0 || $admin->alamatPengiriman->count() > 0 || $admin->nota ||$admin->pelanggan ||$admin->admin ){
             return redirect('/admin/admins')->with('error', 'Penghapusan data admin gagal!');
         }
         $admin->delete();

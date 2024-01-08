@@ -19,7 +19,8 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Nama</th>
-                    <th scope="col">Kurir ID</th>
+                    <th scope="col">Kurir</th>
+                    <th scope="col">Harga</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Updated At</th>
                     <th scope="col">Action</th>
@@ -31,6 +32,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $jenisPengiriman->nama }}</td>
                         <td>{{ $jenisPengiriman->kurir->nama }}</td>
+                        <td>Rp. {{ number_format($jenisPengiriman->harga, 0, ',', '.') }}</td>
                         <td>{{ $jenisPengiriman->created_at->format('d M Y') }}</td>
                         <td>{{ $jenisPengiriman->updated_at->format('d M Y') }}</td>
                         <td>

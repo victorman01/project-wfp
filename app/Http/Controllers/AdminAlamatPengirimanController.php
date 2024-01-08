@@ -129,7 +129,7 @@ class AdminAlamatPengirimanController extends Controller
             'provinsi'=>'required|string',
             'kota'=>'required|string',
             'kecamatan'=>'required|string',
-            'kelurahan_kode_pos'=>'required|string',
+            'kelurahan'=>'required|string',
             'alamat_utama'=>'required|integer',
             'user_id'=>'required|integer',
         ]);
@@ -157,7 +157,7 @@ class AdminAlamatPengirimanController extends Controller
      */
     public function destroy(AlamatPengiriman $alamatPengiriman)
     {
-        if ($alamatPengiriman->nota()->count() > 0 || $alamatPengiriman->user) {
+        if ($alamatPengiriman->nota()->count() > 0) {
             return redirect('admin/alamat-pengirimans')->with('error', 'Alamat Pengiriman gagal dihapus');
         }
         $this->authorize('owner');

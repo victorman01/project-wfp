@@ -60,7 +60,8 @@
             </div>
             <div class="form-group">
                 <label for="status_pengiriman">Status Pengiriman</label>
-                <select name="status_pengiriman" class="form-control form-control-sm">
+                <select name="status_pengiriman" class="form-control form-control-sm"
+                    {{ $nota->status_pengiriman === 'Pesanan Selesai' ? 'disabled' : '' }}>
                     @foreach (['Menunggu Pembayaran', 'Persiapan Barang', 'Siap Diantar', 'Pengiriman', 'Pesanan Diterima', 'Pesanan Selesai'] as $status)
                         @if ($nota->status_pembayaran === 'Lunas' && $status == 'Menunggu Pembayaran')
                             <option value="{{ $status }}" disabled>
@@ -79,6 +80,7 @@
                         {{ $message }}
                     </div>
                 @enderror
+                <input type="hidden" name="status_pengiriman" value="{{ $nota->status_pengiriman }}">
             </div>
             <button type="submit" class="btn btn-primary">Update Nota</button>
         </form>

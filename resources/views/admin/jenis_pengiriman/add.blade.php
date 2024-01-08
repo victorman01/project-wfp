@@ -15,9 +15,27 @@
                 </div>
             @endif
             <div class="form-group">
-                <label for="nama">Jenis Pengiriman Name</label>
+                <label for="nama">Nama Jenis Pengiriman</label>
                 <input type="text" class="form-control" id="nama" name="nama" required>
                 @error('nama')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="harga">Harga</label>
+                <input type="number" class="form-control" id="harga" name="harga" required>
+                @error('harga')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="lama_pengiriman">Lama Pengiriman</label>
+                <input type="text" class="form-control" id="lama_pengiriman" name="lama_pengiriman" required>
+                @error('lama_pengiriman')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
