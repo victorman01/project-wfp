@@ -77,7 +77,7 @@
 
                                 <button id="{{ $jp->id }}"
                                     class="col-2 m-2 btn {{ $jp == $produk->jenisProduk->first() ? 'btn-primary' : 'btn-outline-primary' }}"
-                                    onclick="JenisProdukChanges(this.id, '{{ json_encode($jp) }}', '{{ isset($checkDiskon) ? $produk->jenisProduk[0]->diskonProduk[0]->diskon : 0 }}')">{{ $jp->nama }}
+                                    onclick="JenisProdukChanges(this.id, '{{ json_encode($jp) }}', '{{ isset($checkDiskon) ? $checkDiskon->diskon : 0 }}')">{{ $jp->nama }}
                                 </button>
                             @endforeach
                         </div>
@@ -95,7 +95,7 @@
                                 ->first();
 
                             if (isset($checkDiskon)) {
-                                $hargaSetelahDisc = ($produk->jenisProduk[0]->harga * (100 - $produk->jenisProduk[0]->diskonProduk[0]->diskon)) / 100;
+                                $hargaSetelahDisc = ($produk->jenisProduk[0]->harga * (100 - $checkDiskon->diskon)) / 100;
                                 echo '<p id="tampilan"><b>Harga: Rp</b><span id="harga" style="text-decoration: line-through; color:red;">' . number_format($produk->jenisProduk[0]->harga, 0, ',', '.') . '</span><span id="harga_diskon"> ' . number_format($hargaSetelahDisc, 0, ',', '.') . '</span></p>';
                             } else {
                                 echo '<p id="tampilan"><b>Harga: Rp</b><span id="harga">' . number_format($produk->jenisProduk[0]->harga, 0, ',', '.') . '</span></p>';

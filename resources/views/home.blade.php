@@ -94,7 +94,21 @@
                                     <!-- /.post-header -->
                                     <div class="post-content">
                                         <p>{{ $p->spesifikasi }}</p>
-                                        <p><b>{{ 'Rp' . number_format($p->jenisProduk()->first()->harga, 0, ',', '.') }}</b>
+                                        @php
+                                            $checkDiskon = $p->jenisProduk[0]
+                                                ->diskonProduk()
+                                                ->where('jenis_produk_id', $p->jenisProduk[0]->id)
+                                                ->where('periode_mulai', '<=', now())
+                                                ->where('periode_berakhir', '>=', now())
+                                                ->first();
+                                            if (isset($checkDiskon)) {
+                                                $hargaSetelahDisc = ($p->jenisProduk[0]->harga * (100 - $checkDiskon->diskon)) / 100;
+                                                echo '<p id="tampilan"><b>Rp<span id="harga" style="text-decoration: line-through; color:red;">' . number_format($p->jenisProduk[0]->harga, 0, ',', '.') . '</b></span><span id="harga_diskon"><b> ' . number_format($hargaSetelahDisc, 0, ',', '.') . '</b></span></p>';
+                                            } else {
+                                                echo '<p id="tampilan"><b>Rp<span id="harga">' . number_format($p->jenisProduk[0]->harga, 0, ',', '.') . '</b></span></p>';
+                                            }
+                                        @endphp
+                                        {{-- <p><b>{{ 'Rp' . number_format($p->jenisProduk()->first()->harga, 0, ',', '.') }}</b> --}}
                                         </p>
                                     </div>
                                     <!-- /.post-content -->
@@ -160,8 +174,22 @@
                                                     </h2>
                                                     <p class="m-0">{{ $p->spesifikasi }}</p>
                                                     <p class="m-0 text-dark">
-                                                        <b>{{ 'Rp' . number_format($p->jenisProduk()->first()->harga, 0, ',', '.') }}
-                                                        </b>
+                                                        @php
+                                                            $checkDiskon = $p->jenisProduk[0]
+                                                                ->diskonProduk()
+                                                                ->where('jenis_produk_id', $p->jenisProduk[0]->id)
+                                                                ->where('periode_mulai', '<=', now())
+                                                                ->where('periode_berakhir', '>=', now())
+                                                                ->first();
+                                                            if (isset($checkDiskon)) {
+                                                                $hargaSetelahDisc = ($p->jenisProduk[0]->harga * (100 - $checkDiskon->diskon)) / 100;
+                                                                echo '<b>Rp<span id="harga" style="text-decoration: line-through; color:red;">' . number_format($p->jenisProduk[0]->harga, 0, ',', '.') . '</b></span><span id="harga_diskon"><b> ' . number_format($hargaSetelahDisc, 0, ',', '.') . '</b></span>';
+                                                            } else {
+                                                                echo '<b>Rp<span id="harga">' . number_format($p->jenisProduk[0]->harga, 0, ',', '.') . '</b></span>';
+                                                            }
+                                                        @endphp
+                                                        {{-- <b>{{ 'Rp' . number_format($p->jenisProduk()->first()->harga, 0, ',', '.') }}
+                                                        </b> --}}
                                                     </p>
                                                 </div>
                                                 <!--/.card-body -->

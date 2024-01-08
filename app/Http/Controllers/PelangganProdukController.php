@@ -199,7 +199,7 @@ class PelangganProdukController extends Controller
             'status_pengiriman' => 'Menunggu Pembayaran',
             'status_pembayaran' => 'Belum Dibayar',
             'user_id' => $user->id,
-            'metode_pembayaran_id' => $request->metode_pembayaran,
+            'metode_pembayaran_id' => $request->metode_pembayaran,  
             'alamat_pengiriman_id' => $request->id_alamat_terpilih,
             'jenis_pengiriman_id' => $request->jenis_pengiriman,
             'created_at' => now(),
@@ -208,7 +208,7 @@ class PelangganProdukController extends Controller
 
         //Jika berhasil membuat nota, buat detail transaksinya
         if ($createNota) {
-            // $detailTransaksi = $createNota->detail_transaksi()->attach($keranjang);
+            $createNota->detailTransaksi()->attach($keranjang);
             foreach ($produkDibeli as $p) {
                 //Update stok dan detach m-n
                 $k = $user->keranjang()->find($p);

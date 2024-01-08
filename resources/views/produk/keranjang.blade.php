@@ -26,8 +26,9 @@
 
                                             {{-- Pilih Barang Yang Akan Dibeli --}}
                                             <div class="me-2">
-                                                <input type="checkbox" name="produk_pilihan[]" id="checkbox{{ $k->id }}"
-                                                    class="form-check-input border p-3" value="{{ $k->id }}" onchange="ubahCheckbox(this.id)" checked>
+                                                <input type="checkbox" name="produk_pilihan[]"
+                                                    id="checkbox{{ $k->id }}" class="form-check-input border p-3"
+                                                    value="{{ $k->id }}" onchange="ubahCheckbox(this.id)" checked>
                                             </div>
 
                                             <img src="{{ isset($k->produk->gambar[0]->path) ? asset('storage/' . $k->produk->gambar[0]->path) : '' }}"
@@ -41,8 +42,21 @@
 
                                                     <h3 class="post-title h3">{{ $k->produk->nama }}</h3>
                                                     <p class="text-muted">Spesifikasi: {{ $k->spesifikasi }}</p>
-                                                    <p id="harga_total{{ $k->id }}">
-                                                        Rp{{ number_format($k->harga, 0, ',', '.') }},-</p>
+
+                                                    @php
+                                                        $checkDiskon = $k
+                                                            ->diskonProduk()
+                                                            ->where('jenis_produk_id', $k->id)
+                                                            ->where('periode_mulai', '<=', now())
+                                                            ->where('periode_berakhir', '>=', now())
+                                                            ->first();
+                                                        if (isset($checkDiskon)) {
+                                                            $hargaSetelahDisc = ($k->harga * (100 - $checkDiskon->diskon)) / 100;
+                                                            echo '<p id="harga_total' . $k->id . '"><b>Rp<span id="harga" style="text-decoration: line-through; color:red;">' . number_format($k->harga, 0, ',', '.') . '</b></span><span id="harga_diskon"><b> ' . number_format($hargaSetelahDisc, 0, ',', '.') . '</b></p>';
+                                                        } else {
+                                                            echo '<p id="harga_total' . $k->id . '">Rp' . number_format($k->harga, 0, ',', '.') . '</p>';
+                                                        }
+                                                    @endphp
                                                     <input type="hidden" id="harga_barang{{ $k->id }}"
                                                         value="{{ $k->harga }}">
                                                 </div>
@@ -54,8 +68,7 @@
                                                     onclick="hapusProduk('{{ $k->id }}')"><i
                                                         class="uil uil-trash"></i> </a>
                                                 <input class="form-control" id="jum_barang{{ $k->id }}"
-                                                    type="number" 
-                                                    oninput="setHargaProduk(this.id)"
+                                                    type="number" oninput="setHargaProduk(this.id)"
                                                     value="{{ $k->pivot->jumlah }}" min="1">
                                             </div>
                                         </div>
@@ -78,8 +91,11 @@
                     <div class="card card-border-end border-success">
                         <div class="card-body">
                             <input type="hidden" id="total_price_val" name="total_price_val" value="{{ $total_price }}">
-                            <h3 class="post-title h3">Total Harga: Rp. <span
-                                    id="total_price">{{ number_format($total_price, 0, ',', '.') }},-</span>
+                            <h3 class="post-title h3">Total Harga: Rp <span
+                                    id="total_price">{{ number_format($total_price, 0, ',', '.') }}</span>
+                            </h3>
+                            <h3 class="post-title h3">Total Diskon: -Rp <span
+                                    id="total_diskon">{{ number_format($total_diskon, 0, ',', '.') }}</span>
                             </h3>
 
                             <h3 class="post-title h3" id="total_item">Jumlah Barang:
@@ -118,7 +134,7 @@
             let hargaBarang = $('#harga_barang' + rawID).val()
 
             //Prevent Submit kalau kosong jumBarang nya
-            if(jumBarang === "" || jumBarang === null || isNaN(jumBarang) || parseInt(jumBarang) <= 0){
+            if (jumBarang === "" || jumBarang === null || isNaN(jumBarang) || parseInt(jumBarang) <= 0) {
                 return
             }
 
@@ -136,21 +152,9 @@
                     if (data.pesan == 'Gagal') {
                         alert("gagal update keranjang");
                     } else {
-                        //Update harga total
-                        // $('#harga_total' + rawID).html("Rp" + data.totalHarga + ",-");   
+                        //Update harga total  
                         var totalItem = document.getElementById("total_item");
-                        totalItem.innerHTML = "Jumlah Barang: " +  data.jumlahBarang;
-
-                        // Fungsi untuk mengambil harga keseluruhan
-                        // var inputElement = document.getElementById(idBarang);
-                        // var previousValue = inputElement.defaultValue;
-                        // var currentValue = inputElement.value;
-
-                        // inputElement.defaultValue = inputElement.value
-                        // let hargaTotalSebelumnya = 0
-                        // hargaTotalSebelumnya = hargaBarang * (previousValue)
-
-                        // let totalHarga = $("#total_price_val").val() - hargaTotalSebelumnya + hargaTotal
+                        totalItem.innerHTML = "Jumlah Barang: " + data.jumlahBarang;
                         $("#total_price_val").val(data.totalHarga)
 
                         $('#total_price').html(data.totalHarga.toLocaleString('id-ID') + ",-");
@@ -181,12 +185,8 @@
                         alert("gagal update keranjang");
                     } else {
                         //Update total harga dari seluruh produk
-                        // let hargaTotalDihapus = $("#harga_total" + idContainer).html().replace(/[^0-9]/g, "")
-                        // let totalHarga = $("#total_price_val").val() - parseInt(hargaTotalDihapus)
-                        // $("#total_price_val").val(totalHarga)
-                        // $('#total_price').html(totalHarga + ",-");
                         var totalItemChange = document.getElementById("total_item");
-                        totalItemChange.innerHTML = "Jumlah Barang: " +  data.jumlahBarang;
+                        totalItemChange.innerHTML = "Jumlah Barang: " + data.jumlahBarang;
                         $("#total_price_val").val(data.totalHarga)
                         $('#total_price').html(data.totalHarga.toLocaleString('id-ID') + ",-");
 
@@ -203,8 +203,6 @@
                                         src="{{ asset('sandbox360/img/illustrations/empty_chart.jpg') }}" />
                                 </div>`);
                         }
-
-                        // $("#total_item").html("Total Item(s): " + (parseInt(totalItem) - 1).toString())
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -218,7 +216,7 @@
             })
         }
 
-        function ubahCheckbox(id){
+        function ubahCheckbox(id) {
             var rawID = id.replace(/[^0-9]/g, "");
             var hargaBarang = document.getElementById("harga_barang" + rawID).value;
             var jumlahBarang = parseInt(document.getElementById("jum_barang" + rawID).value);
@@ -230,12 +228,12 @@
             var totalPriceTag = document.getElementById("total_price");
             var totalPrice = parseInt(totalPriceTag.innerHTML.replace(/[^0-9]/g, ""));
 
-            if(document.getElementById(id).checked){
-                totalPriceTag.innerHTML = (totalPrice+totalHarga).toLocaleString('id-ID');
-                totalItem.innerHTML = "Jumlah Barang: " +  (totalBarang + jumlahBarang).toString();
+            if (document.getElementById(id).checked) {
+                totalPriceTag.innerHTML = (totalPrice + totalHarga).toLocaleString('id-ID');
+                totalItem.innerHTML = "Jumlah Barang: " + (totalBarang + jumlahBarang).toString();
             } else {
-                totalPriceTag.innerHTML = (totalPrice-totalHarga).toLocaleString('id-ID');
-                totalItem.innerHTML = "Jumlah Barang: " +  (totalBarang - jumlahBarang).toString();
+                totalPriceTag.innerHTML = (totalPrice - totalHarga).toLocaleString('id-ID');
+                totalItem.innerHTML = "Jumlah Barang: " + (totalBarang - jumlahBarang).toString();
             }
         }
 

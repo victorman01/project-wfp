@@ -17,7 +17,7 @@
                         {{-- CARD INVOICE --}}
                         <div class="card my-1 h-100">
                         <div class="card-header">
-                                <h5 class="card-title">Status: <span class="badge bg-success rounded">Selesai</span>
+                                <h5 class="card-title">Status: <span class="badge bg-success rounded">{{ $nota->status_pengiriman }}</span>
                                 </h5>
                             </div>
                             <div class="card-body p-2 px-8">
