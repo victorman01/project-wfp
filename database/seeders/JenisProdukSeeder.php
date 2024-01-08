@@ -37,5 +37,13 @@ class JenisProdukSeeder extends Seeder
             'stok'=>100,
             'produk_id' => 3
         ]);
+
+        JenisProduk::create([
+            'nama' => "Jenis Produk 4",
+            'spesifikasi'=> 'Bahan Bagus',
+            'harga'=>100000,
+            'stok'=>100,
+            'produk_id' => 2
+        ]);
     }
 }

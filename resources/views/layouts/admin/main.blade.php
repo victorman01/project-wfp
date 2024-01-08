@@ -161,11 +161,35 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <script>
         $(document).ready(function() {
+            // Retrieve sort_by and sort_order parameters from the URL
+            var urlParams = new URLSearchParams(window.location.search);
+            var sort_by = urlParams.get('sort_by') || 'id'; // Default to sorting by ID if not provided
+            var sort_order = urlParams.get('sort_order') || 'asc'; // Default to ascending order if not provided
+
             $('table').DataTable({
-                "pagingType": "full_numbers",
-                "ordering": true,
-                "responsive": true
+                "pagingType": "full_numbers", // Specify the paging type you want
+                "ordering": false,  // Enable sorting
+                "order": [[1, 'asc']],  // Initial sorting by column index 1 in ascending order (can be overridden below)
+                "responsive": true,  // Enable responsiveness
             });
+
+            // Apply the dynamic sorting based on the URL parameters
+            var columnIndex = getColumnIndexByFieldName(sort_by); // You need to implement this function
+            $('table').DataTable().order([columnIndex, sort_order]).draw();
+
+            $('form').submit(function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Log the form data to the console
+                console.log('Form submitted with data:', $(this).serialize());
+
+                // Add any additional logic you may need for form submission
+
+                // Finally, submit the form
+                this.submit();
+            });
+
+
         });
     </script>
 

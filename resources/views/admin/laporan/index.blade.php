@@ -27,11 +27,10 @@
                     <th scope="col">Total PPN</th>
                     <th scope="col">Total Keseluruhan</th>
                     <th scope="col">User</th>
+                    <th scope="col">Produk</th>
                     <th scope="col">Metode Pembayaran</th>
-                    <th scope="col">Id Detail Transaksi</th>
                     <th scope="col">Jumlah</th>
                     <th scope="col">Sub Total</th>
-                    <th scope="col">Produk ID</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,17 +39,16 @@
                         @if ($nota->id == $detailTransaksi->nota_id)
                             <tr>
                                 <td>{{ $nota->id }}</td>
-                                <td>{{ $nota->total_pembayaran }}</td>
-                                <td>{{ $nota->total_diskon }}</td>
-                                <td>{{ $nota->total_pembayaran_diskon }}</td>
-                                <td>{{ $nota->total_ppn }}</td>
-                                <td>{{ $nota->total_keseluruhan }}</td>
+                                <td>Rp. {{ number_format($nota->total_pembayaran, 0, '.', ',') }}</td>
+                                <td>Rp. {{ number_format($nota->total_diskon, 0, '.', ',') }}</td>
+                                <td>Rp. {{ number_format($nota->total_pembayaran_diskon, 0, '.', ',') }}</td>
+                                <td>Rp. {{ number_format($nota->total_ppn, 0, '.', ',') }}</td>
+                                <td>Rp. {{ number_format($nota->total_keseluruhan, 0, '.', ',')  }}</td>
                                 <td>{{ $nota->user->nama }}</td>
+                                <td>{{ $detailTransaksi->jenisProduk->produk->nama }}</td>
                                 <td>{{ $nota->metodePembayaran->nama }}</td>
-                                <td>{{ $detailTransaksi->id }}</td>
                                 <td>{{ $detailTransaksi->jumlah }}</td>
-                                <td>{{ $detailTransaksi->sub_total }}</td>
-                                <td>{{ $detailTransaksi->produk_id }}</td>
+                                <td>Rp.{{ number_format($detailTransaksi->sub_total, 0, '.', ',') }}</td>
                             </tr>
                         @endif
                     @endforeach
@@ -59,22 +57,35 @@
                 @php
                     $metodePembayaranCounts = collect($notas->pluck('metodePembayaran.nama'))->countBy();
                     $mostUsedMetodePembayaran = $metodePembayaranCounts->max();
+                    $mostUsedMetodePembayaranName = $metodePembayaranCounts->keys()->first();
                     
                     $kurirCounts = collect($notas->pluck('kurir'))->countBy();
                     $mostUsedKurir = $kurirCounts->max();
+                    $mostUsedKurirName = $kurirCounts->keys()->first();
 
-                    $produkCounts = collect($detailTransaksis->pluck('produk_id'))->countBy();
-                    $mostSoldProduk = $produkCounts->max();
+                    $totalQuantities = [];
+
+                    foreach ($detailTransaksis as $detailTransaksi) {
+                        $produkId = $detailTransaksi->jenisProduk->produk_id;
+                        if (isset($totalQuantities[$produkId])) {
+                            $totalQuantities[$produkId] += $detailTransaksi->jumlah;
+                        } else {
+                            $totalQuantities[$produkId] = $detailTransaksi->jumlah;
+                        }
+                    }
+
+                    $mostSoldProdukId = collect($totalQuantities)->sortDesc()->keys()->first();
+
+                    $mostSoldProdukQuantity = $totalQuantities[$mostSoldProdukId] ?? 0;
+                    $mostSoldProdukName = \App\Models\Produk::find($mostSoldProdukId)->nama;
                 @endphp
-
             </tbody>
         </table>
 
-        <!-- Display additional information outside the table -->
         <div>
-            <p>Produk Terjual Terbanyak: {{ $mostSoldProduk }} kali</p>
-            <p>Metode Pembayaran Terbanyak: {{ $mostUsedMetodePembayaran }} kali</p>
-            <p>Kurir Terbanyak: {{ $mostUsedKurir }} kali</p>
+            <p>Produk Paling Banyak Terjual:<b>{{ $mostSoldProdukName }}</b> terjual sebanyak <b>{{ $mostSoldProdukQuantity }}</b> kali</p>
+            <p>Metode Pembayaran Paling Banyak Dipakai:<b> {{ $mostUsedMetodePembayaranName }}</b> dipakai sebanyak <b>{{ $mostUsedMetodePembayaran }}</b> kali</p>
+            <p>Kurir Paling Banyak Dipakai: <b>{{ $mostUsedKurirName }}</b> digunakan sebanyak <b>{{ $mostUsedKurir }}</b> kali</p>
         </div>
     </div>
 @endsection

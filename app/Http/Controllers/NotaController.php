@@ -27,9 +27,8 @@ class NotaController extends Controller
     }
 
     public function laporan(Request $request){
-        $sortBy = $request->input('sort_by', 'id'); // Default to sorting by total_keseluruhan
+        $sortBy = $request->input('sort_by', 'id');
         $sortOrder = $request->input('sort_order', 'asc'); // Default to ascending order
-
         // Fetch your data with the sorting order
         $notas = Nota::orderBy($sortBy, $sortOrder)->get();
         return view('admin.laporan.index', [
@@ -133,19 +132,6 @@ class NotaController extends Controller
     {
         $nota->delete();
         return redirect('/admin/notas')->with('success', 'Nota has been deleted!');
-    }
-
-    public function getLaporan(Request $request)
-    {
-        $sortBy = $request->input('sort_by', 'id'); // Default to sorting by total_keseluruhan
-        $sortOrder = $request->input('sort_order', 'asc'); // Default to ascending order
-
-        // Fetch your data with the sorting order
-        $notas = Nota::orderBy($sortBy, $sortOrder)->get();
-        return view('admin.laporan.index', [
-            'notas' => $notas,
-            'detailTransaksis'=>DetailTransaksi::all()
-        ]);
     }
 
 }
