@@ -77,7 +77,7 @@
 
                                 <button id="{{ $jp->id }}"
                                     class="col-2 m-2 btn {{ $jp == $produk->jenisProduk->first() ? 'btn-primary' : 'btn-outline-primary' }}"
-                                    onclick="JenisProdukChanges(this.id, '{{ json_encode($jp) }}', '{{ isset($checkDiskon) ? $produk->jenisProduk[0]->diskonProduk[0]->diskon : 0}}')">{{ $jp->nama }}
+                                    onclick="JenisProdukChanges(this.id, '{{ json_encode($jp) }}', '{{ isset($checkDiskon) ? $produk->jenisProduk[0]->diskonProduk[0]->diskon : 0 }}')">{{ $jp->nama }}
                                 </button>
                             @endforeach
                         </div>
@@ -107,13 +107,14 @@
                 </div>
 
                 <div class="row">
-                    <form action="{{ route('keranjang.store') }}" method="POST">
+                    <form action="{{ route('keranjang.store') }}" method="POST" id="form_submit">
                         @csrf
                         <div class="col">
                             <div class="d-flex align-items-center mt-2">
                                 <label for="quantity" class="me-2">Jumlah:</label>
                                 <input type="number" id="quantity" class="form-control" value="1" min="1"
-                                    name="quantity" max="{{ $produk->jenisProduk[0]->stok }}" oninput="checkJumlah(this.id, '{{ $produk->jenisProduk[0]->stok }}')">
+                                    name="quantity" max="{{ $produk->jenisProduk[0]->stok }}"
+                                    oninput="checkJumlah(this.id, '{{ $produk->jenisProduk[0]->stok }}')">
                                 <input type="hidden" name="jenisProdukID" id="jenisProdukID"
                                     value="{{ $produk->jenisProduk[0]->id }}">
                             </div>
@@ -125,7 +126,7 @@
                                 onclick="Fav({{ $produk->id }})" id="btn-fav">Favorit<i class="ms-2 uil uil-heart"></i>
                             </a>
 
-                            <button type="submit" class="btn btn-primary mt-2" id="btn-submit"
+                            <button type="submit" class="btn btn-primary mt-2" id="btn-submit" onclick="submitForm(this.event)"
                                 {{ $produk->jenisProduk[0]->stok == 0 ? 'disabled' : '' }}>{{ $produk->jenisProduk[0]->stok == 0 ? 'Stok Habis' : 'Tambahkan Ke Keranjang' }}</button>
                         </div>
                     </form>
@@ -192,9 +193,10 @@
             jenisProduk.value = jenisProdukJson['id'];
 
             var hargaAsli = jenisProdukJson['harga'].toLocaleString('id-ID');
-            var hargaSetelahDiskon = (jenisProdukJson['harga'] * (100-besarDiskon) / 100).toLocaleString('id-ID');
-            if(besarDiskon != 0){
-                $('#tampilan').html('<b>Harga: Rp</b><span id="harga" style="text-decoration: line-through; color:red;">' + hargaAsli  + '</span><span id="harga_diskon"> ' + hargaSetelahDiskon + '</span>');
+            var hargaSetelahDiskon = (jenisProdukJson['harga'] * (100 - besarDiskon) / 100).toLocaleString('id-ID');
+            if (besarDiskon != 0) {
+                $('#tampilan').html('<b>Harga: Rp</b><span id="harga" style="text-decoration: line-through; color:red;">' +
+                    hargaAsli + '</span><span id="harga_diskon"> ' + hargaSetelahDiskon + '</span>');
             } else {
                 $('#tampilan').html('<p id="tampilan"><b>Harga: Rp</b><span id="harga">' + hargaAsli + '</span></p>');
             }
@@ -215,10 +217,10 @@
             }
         }
 
-        function checkJumlah(idInput, stok){
+        function checkJumlah(idInput, stok) {
             var jumlahVal = document.getElementById(idInput);
 
-            if(parseInt(jumlahVal.value) > parseInt(stok)){
+            if (parseInt(jumlahVal.value) > parseInt(stok)) {
                 jumlahVal.value = stok;
             }
         }
@@ -250,6 +252,17 @@
                     }
                 }
             })
+        }
+
+        function submitForm() {
+            var quantity = document.getElementById('quantity').value;
+            if (quantity === "" || quantity === null || isNaN(quantity) || parseInt(quantity) <= 0) {
+                alert("Jumlah Tidak Boleh Kosong");
+                event.preventDefault();
+                return
+            }
+            var form = document.getElementById("form_submit");
+            form.submit();
         }
     </script>
 @endsection
