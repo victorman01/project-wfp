@@ -18,6 +18,7 @@ use Database\Seeders\KategoriProdukSeeder;
 use Database\Seeders\JenisPengirimanSeeder;
 use Database\Seeders\AlamatPengirimanSeeder;
 use Database\Seeders\MetodePembayaranSeeder;
+use Database\Seeders\LaporanSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -41,10 +42,13 @@ class DatabaseSeeder extends Seeder
         $this->call(MetodePembayaranSeeder::class);
         $this->call(AlamatPengirimanSeeder::class);
         $this->call(JenisPengirimanSeeder::class);
+        $this->call(NotaSeeder::class);
+        $this->call(DetailTransaksiSeeder::class);
 
         // // PROVINSI
         // $csvFile = url('csv\provinces.csv');
         // $csvData = array_map('str_getcsv', file($csvFile));
+
 
         // foreach ($csvData as $row) {
         //     DB::table('provinsis')->insert([
