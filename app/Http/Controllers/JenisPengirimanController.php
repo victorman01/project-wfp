@@ -70,7 +70,7 @@ class JenisPengirimanController extends Controller
     {
         return view('admin.jenis_pengiriman.edit',[
             'jenis_pengiriman'=>$jenisPengiriman,
-            'kurirs'=>$kurir
+            'kurirs'=>Kurir::all()
         ]);
     }
 

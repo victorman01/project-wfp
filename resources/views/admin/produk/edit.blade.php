@@ -11,23 +11,8 @@
                 <input type="text" class="form-control" id="nama" name="nama" value="{{ $produk->nama }}" required>
             </div>
             <div class="form-group">
-                <label for="spesifikasi">Spesifikasi Produk</label>
-                <input type="text" class="form-control" id="spesifikasi" name="spesifikasi"
-                    value="{{ $produk->spesifikasi }}" required>
-            </div>
-            <div class="form-group">
                 <label for="informasi">Informasi Produk</label>
                 <textarea class="form-control" id="informasi" name="informasi" rows="3" required>{{ $produk->informasi }}</textarea>
-            </div>
-            <div class="form-group">
-                <label for="harga">Harga Produk Rp.</label>
-                <input type="number" class="form-control" id="harga" name="harga" value="{{ $produk->harga }}"
-                    required>
-            </div>
-            <div class="form-group">
-                <label for="stok">Stok Produk</label>
-                <input type="number" class="form-control" id="stok" name="stok" value="{{ $produk->stok }}"
-                    required>
             </div>
             <div class="form-group">
                 <label for="brand_id">Brand Produk</label>

@@ -29,17 +29,18 @@
                     <tr>
                         <td>{{ $kurir->id }}</td>
                         <td>{{ $kurir->nama }}</td>
-                        <td>{{ $kurir->created_at }}</td>
-                        <td>{{ $kurir->updated_at }}</td>
+                        <td>{{ $kurir->created_at->format('d M Y') }}</td>
+                        <td>{{ $kurir->updated_at->format('d M Y') }}</td>
                         <td>
                             <div class="btn-container">
-                                <p class="mb-0"><a class="btn btn-primary btn-sm" href="/admin/kurirs/{{ $kurir->id }}/edit">Edit <i
-                                    class="fa fa-edit"></i></a></p>
+                                <p class="mb-0"><a class="btn btn-primary btn-sm"
+                                        href="/admin/kurirs/{{ $kurir->id }}/edit">Edit <i class="fa fa-edit"></i></a>
+                                </p>
                                 <form action="/admin/kurirs/{{ $kurir->id }}" method="POST" class='d-inline'>
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger btn-sm" type="submit" 
-                                    onclick="return confirm('Are you sure?')">Delete</button>
+                                    <button class="btn btn-danger btn-sm" type="submit"
+                                        onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
                                 </p>
                             </div>

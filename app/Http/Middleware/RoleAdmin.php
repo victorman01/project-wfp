@@ -21,6 +21,6 @@ class RoleAdmin
         if ($user->role_id == 1) {
             return $next($request);
         }
-        return abort(401);
+        return back();
     }
 }

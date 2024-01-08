@@ -39,17 +39,18 @@
                         <td>{{ $admin->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                         <td>{{ $admin->admin->alamat ?? '' }}</td>
                         <td>{{ $admin->role->nama }}</td>
-                        <td>{{ $admin->created_at }}</td>
-                        <td>{{ $admin->updated_at }}</td>
+                        <td>{{ $admin->created_at->format('d M Y') }}</td>
+                        <td>{{ $admin->updated_at->format('d M Y') }}</td>
                         <td>
                             <div class="btn-container">
-                                <p class="mb-0"><a class="btn btn-primary btn-sm" href="/admin/admins/{{ $admin->id }}/edit">Edit <i
-                                    class="fa fa-edit"></i></a></p>
+                                <p class="mb-0"><a class="btn btn-primary btn-sm"
+                                        href="/admin/admins/{{ $admin->id }}/edit">Edit <i class="fa fa-edit"></i></a>
+                                </p>
                                 <form action="/admin/admins/{{ $admin->id }}" method="POST" class='d-inline'>
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger btn-sm" type="submit" 
-                                    onclick="return confirm('Are you sure?')">Delete</button>
+                                    <button class="btn btn-danger btn-sm" type="submit"
+                                        onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
                                 </p>
                             </div>

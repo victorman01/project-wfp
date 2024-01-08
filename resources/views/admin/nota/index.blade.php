@@ -40,28 +40,29 @@
                 @foreach ($notas as $nota)
                     <tr>
                         <td>{{ $nota->id }}</td>
-                        <td>{{ $nota->total_pembayaran }}</td>
-                        <td>{{ $nota->total_diskon }}</td>
-                        <td>{{ $nota->total_pembayaran_diskon }}</td>
-                        <td>{{ $nota->total_ppn }}</td>
-                        <td>{{ $nota->total_keseluruhan }}</td>
+                        <td>Rp. {{ number_format($nota->total_pembayaran, 0, ',', '.') }}</td>
+                        <td>Rp. {{ number_format($nota->total_diskon, 0, ',', '.') }}</td>
+                        <td>Rp. {{ number_format($nota->total_pembayaran_diskon, 0, ',', '.') }}</td>
+                        <td>Rp. {{ number_format($nota->total_ppn, 0, ',', '.') }}</td>
+                        <td>Rp. {{ number_format($nota->total_keseluruhan, 0, ',', '.') }}</td>
                         <td>{{ $nota->user->nama }}</td>
                         <td>{{ $nota->metodePembayaran->nama }}</td>
                         <td>{{ $nota->alamatPengiriman->alamat }}</td>
                         <td>{{ $nota->jenisPengiriman->nama }}</td>
                         <td>{{ $nota->status_pembayaran }}</td>
                         <td>{{ $nota->status_pengiriman }}</td>
-                        <td>{{ $nota->created_at }}</td>
-                        <td>{{ $nota->updated_at }}</td>
+                        <td>{{ $nota->created_at->format('d M Y') }}</td>
+                        <td>{{ $nota->updated_at->format('d M Y') }}</td>
                         <td>
                             <div class="btn-container">
-                                <p class="mb-0"><a class="btn btn-primary btn-sm" href="/admin/notas/{{ $nota->id }}/edit">Edit <i
-                                    class="fa fa-edit"></i></a></p>
+                                <p class="mb-0"><a class="btn btn-primary btn-sm"
+                                        href="/admin/notas/{{ $nota->id }}/edit">Edit <i class="fa fa-edit"></i></a>
+                                </p>
                                 <form action="/admin/notas/{{ $nota->id }}" method="POST" class='d-inline'>
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger btn-sm" type="submit" 
-                                    onclick="return confirm('Are you sure?')">Delete</button>
+                                    <button class="btn btn-danger btn-sm" type="submit"
+                                        onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
                                 </p>
                             </div>

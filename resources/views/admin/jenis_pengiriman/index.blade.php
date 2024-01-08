@@ -30,19 +30,20 @@
                     <tr>
                         <td>{{ $jenisPengiriman->id }}</td>
                         <td>{{ $jenisPengiriman->nama }}</td>
-                        <td>{{ $jenisPengiriman->kurir_id }}</td>
-                        <td>{{ $jenisPengiriman->created_at }}</td>
-                        <td>{{ $jenisPengiriman->updated_at }}</td>
+                        <td>{{ $jenisPengiriman->kurir->nama }}</td>
+                        <td>{{ $jenisPengiriman->created_at->format('d M Y') }}</td>
+                        <td>{{ $jenisPengiriman->updated_at->format('d M Y') }}</td>
                         <td>
                             <div class="btn-container">
-                                <p class="mb-0"><a class="btn btn-primary btn-sm" href="/admin/jenis-pengirimans/{{ $jenisPengiriman->id }}/edit">Edit <i
-                                    class="fa fa-edit"></i></a></p>
+                                <p class="mb-0"><a class="btn btn-primary btn-sm"
+                                        href="/admin/jenis-pengirimans/{{ $jenisPengiriman->id }}/edit">Edit <i
+                                            class="fa fa-edit"></i></a></p>
                                 <form action="/admin/jenis-pengirimans/{{ $jenisPengiriman->id }}" method="POST"
                                     class='d-inline'>
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger btn-sm" type="submit" 
-                                    onclick="return confirm('Are you sure?')">Delete</button>
+                                    <button class="btn btn-danger btn-sm" type="submit"
+                                        onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
                                 </p>
                             </div>

@@ -46,10 +46,7 @@ class ProdukController extends Controller
     {
         $validatedData = $request->validate([
             'nama'=>'required',
-            'spesifikasi'=>'required',
             'informasi'=>'required',
-            'harga'=>'required|numeric',
-            'stok'=>'required|numeric',
             'brand_id'=>'required'
         ]);
         $produk = Produk::create($validatedData);
@@ -120,10 +117,7 @@ class ProdukController extends Controller
     {
         $validatedData = $request->validate([
             'nama'=>'required',
-            'spesifikasi'=>'required',
             'informasi'=>'required',
-            'harga'=>'required|numeric',
-            'stok'=>'required|numeric',
             'brand_id'=>'required'
         ]);
         $produk->update($validatedData);

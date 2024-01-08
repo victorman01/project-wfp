@@ -49,18 +49,20 @@
                         <td>{{ $alamat->kelurahan_kode_pos }}</td>
                         <td>{{ $alamat->alamat_utama == 1 ? 'Ya' : 'Tidak' }}</td>
                         <td>{{ $alamat->user->nama }}</td>
-                        <td>{{ $alamat->created_at }}</td>
-                        <td>{{ $alamat->updated_at }}</td>
+                        <td>{{ $alamat->created_at->format('d M Y') }}</td>
+                        <td>{{ $alamat->updated_at->format('d M Y') }}</td>
                         @can('owner')
                             <td>
                                 <div class="btn-container">
-                                    <p class="mb-0"><a class="btn btn-primary btn-sm" href="/admin/alamat-pengirimans/{{ $alamat->id }}/edit">Edit <i
-                                        class="fa fa-edit"></i></a></p>
-                                    <form action="/admin/alamat-pengirimans/{{ $alamat->id }}" method="POST" class='d-inline'>
+                                    <p class="mb-0"><a class="btn btn-primary btn-sm"
+                                            href="/admin/alamat-pengirimans/{{ $alamat->id }}/edit">Edit <i
+                                                class="fa fa-edit"></i></a></p>
+                                    <form action="/admin/alamat-pengirimans/{{ $alamat->id }}" method="POST"
+                                        class='d-inline'>
                                         @method('DELETE')
                                         @csrf
-                                        <button class="btn btn-danger btn-sm" type="submit" 
-                                        onclick="return confirm('Are you sure?')">Delete</button>
+                                        <button class="btn btn-danger btn-sm" type="submit"
+                                            onclick="return confirm('Are you sure?')">Delete</button>
                                     </form>
                                     </p>
                                 </div>

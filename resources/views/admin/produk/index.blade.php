@@ -38,23 +38,27 @@
                         <td>{{ $p->id }}</td>
                         <td>{{ $p->nama }}</td>
                         <td>{{ $p->informasi }}</td>
-                        <td>{{ $p->brand_id }}</td>
-                        <td>{{ $p->created_at }}</td>
-                        <td>{{ $p->updated_at }}</td>
+                        <td>{{ $p->brand->nama }}</td>
+                        <td>{{ $p->created_at->format('d M Y') }}</td>
+                        <td>{{ $p->updated_at->format('d M Y') }}</td>
                         <td>
                             <div class="btn-container">
-                                <p class="mb-0"><a class="btn btn-primary btn-sm" href="/admin/produks/{{ $p->id }}/edit">Edit <i
-                                            class="fa fa-edit"></i></a></p>
+                                <p class="mb-0"><a class="btn btn-primary btn-sm"
+                                        href="/admin/produks/{{ $p->id }}/edit">Edit <i class="fa fa-edit"></i></a>
+                                </p>
                                 <form action="/admin/produks/{{ $p->id }}" method="POST" class="d-inline">
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                                    <button class="btn btn-danger btn-sm" type="submit"
+                                        onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
-                                <p class="mb-0"><a class="btn btn-info btn-sm" href="#showphoto_{{ $p->id }}" data-toggle="modal">{{ $p->nama }}</a>
+                                <p class="mb-0"><a class="btn btn-info btn-sm" href="#showphoto_{{ $p->id }}"
+                                        data-toggle="modal">{{ $p->nama }}</a>
                                 </p>
                             </div>
-                        
-                            <div class="modal fade" id="showphoto_{{ $p->id }}" tabindex="-1" role="basic" aria-hidden="true">
+
+                            <div class="modal fade" id="showphoto_{{ $p->id }}" tabindex="-1" role="basic"
+                                aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -70,13 +74,14 @@
                                             @endforeach
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-default"
+                                                data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </td>
-                        
+
                     </tr>
                 @endforeach
             </tbody>

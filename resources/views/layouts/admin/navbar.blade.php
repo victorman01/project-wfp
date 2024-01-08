@@ -18,7 +18,7 @@
                     </div>
                 </form>
             </li>
-            <li class="start active ">
+            <li class="start">
                 <a href="/admin">
                     <i class="icon-home"></i>
                     <span class="title">Dashboard</span>

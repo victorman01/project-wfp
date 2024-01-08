@@ -21,7 +21,7 @@
                     <th scope="col">Diskon</th>
                     <th scope="col">Periode Mulai</th>
                     <th scope="col">Periode Berakhir</th>
-                    <th scope="col">Produk ID</th>
+                    <th scope="col">Produk</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Updated At</th>
                     <th scope="col">Action</th>
@@ -32,25 +32,27 @@
                     <tr>
                         <td>{{ $diskonProduk->id }}</td>
                         <td>{{ $diskonProduk->diskon }}</td>
-                        <td>{{ $diskonProduk->periode_mulai }}</td>
-                        <td>{{ $diskonProduk->periode_berakhir }}</td>
-                        <td>{{ $diskonProduk->produk_id }}</td>
-                        <td>{{ $diskonProduk->created_at }}</td>
-                        <td>{{ $diskonProduk->updated_at }}</td>
+                        <td>{{ \Carbon\Carbon::parse($diskonProduk->periode_mulai)->format('d M Y') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($diskonProduk->periode_berakhir)->format('d M Y') }}</td>
+                        <td>{{ $diskonProduk->jenisProduk->nama }}</td>
+                        <td>{{ $diskonProduk->created_at->format('d M Y') }}</td>
+                        <td>{{ $diskonProduk->updated_at->format('d M Y') }}</td>
                         <td>
                             <div class="btn-container">
-                                <p class="mb-0"><a class="btn btn-primary btn-sm" href="/admin/diskon-produks/{{ $diskonProduk->id }}/edit">Edit <i
-                                    class="fa fa-edit"></i></a></p>
-                                <form action="/admin/diskon-produks/{{ $diskonProduk->id }}" method="POST" class='d-inline'>
+                                <p class="mb-0"><a class="btn btn-primary btn-sm"
+                                        href="/admin/diskon-produks/{{ $diskonProduk->id }}/edit">Edit <i
+                                            class="fa fa-edit"></i></a></p>
+                                <form action="/admin/diskon-produks/{{ $diskonProduk->id }}" method="POST"
+                                    class='d-inline'>
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger btn-sm" type="submit" 
-                                    onclick="return confirm('Are you sure?')">Delete</button>
+                                    <button class="btn btn-danger btn-sm" type="submit"
+                                        onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
                                 </p>
                             </div>
                         </td>
-                        
+
                     </tr>
                 @endforeach
             </tbody>
